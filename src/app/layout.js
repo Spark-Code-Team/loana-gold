@@ -1,3 +1,5 @@
+import HomeLayout from "@/components/layout/homeLayout/HomeLayout";
+
 import "./globals.css";
 
 export const metadata = {
@@ -11,7 +13,9 @@ export default function RootLayout({ children }) {
       <body
         className={`antialiased`}
       >
-        {children}
+        <HomeLayout>
+         {children}
+        </HomeLayout>
       </body>
     </html>
   );
