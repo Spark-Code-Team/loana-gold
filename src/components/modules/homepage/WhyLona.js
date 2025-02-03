@@ -13,7 +13,7 @@ const WhyLona = () => {
             <div className="px-24 w-full h-56 flex justify-between">
                 {features.map(feature => (
                     <div key={feature.id} className="w-72 h-56 flex flex-col items-center justify-center">
-                        <Image src={feature.img} alt="" width={198} height={120} />
+                        <Image src={feature.img} alt="image" width={198} height={120} />
                         <p className="font-bold py-2">{feature.title}</p>
                         <p className="text-sm">{feature.desc}</p>
                     </div>

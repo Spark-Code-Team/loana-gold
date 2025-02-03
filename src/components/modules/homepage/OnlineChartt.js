@@ -11,7 +11,7 @@ const OnlineChartt = () => {
         ">
             <Image
             src="/images/chart.png"
-            alt=""
+            alt="image"
             width={600}
             height={412}
             className="

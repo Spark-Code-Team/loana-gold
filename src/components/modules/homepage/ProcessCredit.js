@@ -11,7 +11,7 @@ const ProcessCredit = () => {
     ">
       <Image
       src="/images/process.png"
-      alt=""
+      alt="image"
       width={1224}
       height={290}
       className="

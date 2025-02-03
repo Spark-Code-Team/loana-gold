@@ -42,7 +42,7 @@ const GoldDelivery = () => {
             ">
               <Image
               src="/images/map.png"
-              alt=""
+              alt="image"
               width={440}
               height={408}
               />

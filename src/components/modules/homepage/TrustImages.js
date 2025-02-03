@@ -15,7 +15,7 @@ const TrustImages = () => {
             <div className="px-24 w-full h-52 flex justify-between">
                 {images.map(image => (
                     <div key={image.id} className="my-auto w-40 h-40">
-                        <Image src={image.src} alt="" width={155} height={155} />
+                        <Image src={image.src} alt="image" width={155} height={155} />
                     </div>
                 ))}
             </div>

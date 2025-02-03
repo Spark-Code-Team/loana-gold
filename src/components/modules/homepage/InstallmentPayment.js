@@ -16,7 +16,7 @@ const InstallmentPayment = () =>
                 ">
                     <Image
                     src="/images/ring.png"
-                    alt=""
+                    alt="image"
                     width={613}
                     height={364}
                     />
