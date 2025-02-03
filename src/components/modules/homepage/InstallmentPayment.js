@@ -54,7 +54,7 @@ const InstallmentPayment = () =>
                     <button className="
                     w-32
                     h-12
-                    bg-[#D2AB67]
+                    bg-primary
                     rounded-xl
                     mt-8
                     " >

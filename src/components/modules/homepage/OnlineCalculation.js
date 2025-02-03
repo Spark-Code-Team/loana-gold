@@ -96,7 +96,7 @@ const OnlineCalculation = () => {
                 w-32
                 h-12
                 rounded-lg
-                bg-[#D2AB67]
+                bg-primary
                 
                 ">
                     خرید
