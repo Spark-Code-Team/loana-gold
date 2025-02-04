@@ -11,25 +11,30 @@ const faqs = [
     
     return ( 
     
-    <div className="p-6 grid grid-cols-2 gap-6 " > 
+    <div className="
+      md:p-6 
+      md:grid 
+      md:grid-cols-2 
+      md:gap-6
+      "> 
 
     <div>
-        <p2 className="font-bold text-base"> ثبت نام </p2>
+        <p2 className="md:font-bold md:text-base"> ثبت نام </p2>
         <FAQList faqs={faqs} /> 
     </div>
 
     <div>
-        <p2 className="font-bold text-base">  پرداخت اقساطی </p2>
+        <p2 className="md:font-bold md:text-base">  پرداخت اقساطی </p2>
         <FAQList faqs={faqs} /> 
     </div>
 
     <div>
-        <p2 className="font-bold text-base"> نحوه دریافت حضوری سفارش </p2>
+        <p2 className="md:font-bold md:text-base"> نحوه دریافت حضوری سفارش </p2>
         <FAQList faqs={faqs} /> 
     </div>
 
     <div>
-        <p2 className="font-bold text-base"> نحوه ثبت کالا </p2>
+        <p2 className="md:font-bold md:text-base"> نحوه ثبت کالا </p2>
         <FAQList faqs={faqs} /> 
     </div>
           

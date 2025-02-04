@@ -9,13 +9,27 @@ const features = [
 const WhyLona = () => {
     return (
         <>
-            <p className="mt-24 px-24 text-2xl font-bold">چرا لونا؟</p>
-            <div className="px-24 w-full h-56 flex justify-between">
+            <p className="
+              md:mt-24 
+              md:px-24 
+              md:text-2xl 
+              md:font-bold
+              ">
+                چرا لونا؟
+            </p>
+
+            <div className="
+              md:px-24 
+              md:w-full 
+              md:h-56 
+              md:flex 
+              md:justify-between
+              ">
                 {features.map(feature => (
-                    <div key={feature.id} className="w-72 h-56 flex flex-col items-center justify-center">
+                    <div key={feature.id} className="md:w-72 md:h-56 md:flex md:flex-col md:items-center md:justify-center">
                         <Image src={feature.img} alt="image" width={198} height={120} />
-                        <p className="font-bold py-2">{feature.title}</p>
-                        <p className="text-sm">{feature.desc}</p>
+                        <p className="md:font-bold md:py-2">{feature.title}</p>
+                        <p className="md:text-sm">{feature.desc}</p>
                     </div>
                 ))}
             </div>

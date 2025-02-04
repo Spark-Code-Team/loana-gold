@@ -5,9 +5,9 @@ const ProcessCredit = () => {
   return (
     
     <div className="
-    my-24
-    w-full
-    h-80
+    md:my-24
+    md:w-full
+    md:h-80
     ">
       <Image
       src="/images/process.png"
@@ -15,7 +15,7 @@ const ProcessCredit = () => {
       width={1224}
       height={290}
       className="
-      pr-24
+      md:pr-24
       "
       />
 

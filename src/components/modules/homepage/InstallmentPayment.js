@@ -5,42 +5,42 @@ const InstallmentPayment = () =>
         return(
             <div className="
             bg-[#FAF9F8]
-            w-full
-            h-[364px]
-            px-9
-            justify-around
-            flex
+            md:w-full
+            md:h-[364px]
+            md:px-9
+            md:justify-around
+            md:flex
             ">
                 <div className="
-                w-1/2
+                md:w-1/2
                 ">
                     <Image
                     src="/images/ring.png"
-                    alt="image"
+                    alt="imagemd:"
                     width={613}
                     height={364}
                     />
                 </div>
 
                 <div className="
-                w-1/2
+                md:w-1/2
                 ">
                     <p className="
-                    pt-10
-                    text-2xl
-                    font-bold
+                    md:pt-10
+                    md:text-2xl
+                    md:font-bold
                     ">
                     پرداخت قسطی، راحت و بدون سود!
                     </p>
 
                     <div className="
-                    w-[500px]
-                    h-32
+                    md:w-[500px]
+                    md:h-32
                     ">
 
                     <p className="
-                    pt-4
-                    leading-7
+                    md:pt-4
+                    md:leading-7
                     "
                     >
                     ما در لونا به عنوان اولین پلتفرم خرید و فروش طلای قسطی در ایران،
@@ -52,11 +52,11 @@ const InstallmentPayment = () =>
                     </div>
 
                     <button className="
-                    w-32
-                    h-12
+                    md:w-32
+                    md:h-12
                     bg-primary
-                    rounded-xl
-                    mt-8
+                    md:rounded-xl
+                    md:mt-8
                     " >
                         خرید قسطی
                     </button>

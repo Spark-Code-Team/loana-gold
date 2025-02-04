@@ -1,52 +1,51 @@
+
 const OnlineCalculation = () => {
     return(
-
-
     <div className="my-auto">
 
     <p className="
-    pb-10
-    text-[24px]
-    font-bold
+    md:pb-10
+    md:text-[24px]
+    md:font-bold
     ">
         لونا اولین پلتفرم خرید قسطی طلا آب شده
     </p>
 
         <div className="
-        w-[560px]
-        border-[1px]
-        border-[#E1E1E1]
-        rounded-xl
-        px-[32px]
-        pt-9
-        h-96
+        md:w-[560px]
+        md:border-[1px]
+        md:border-[#E1E1E1]
+        md:rounded-xl
+        md:px-[32px]
+        md:pt-9
+        md:h-96
         "
         >
             <div className="
-            w-[496px]
-            h-[224px]
-            flex
-            flex-col
-            justify-around
+            md:w-[496px]
+            md:h-[224px]
+            md:flex
+            md:flex-col
+            md:justify-around
             "
             >
 
                 <div>
                     <button className="
-                    w-[60px]
-                    h-8
-                    bg-[#DADADA]
-                    rounded-xl
+                    md:w-[60px]
+                    md:h-8
+                    md:bg-[#DADADA]
+                    md:rounded-xl
                     ">
                     خرید
                     </button>
 
                 <button className="
-                    w-[60px]
-                    h-8
-                    mr-4
-                    bg-[#F9F9F9]
-                    rounded-xl
+                    md:w-[60px]
+                    md:h-8
+                    md:mr-4
+                    md:bg-[#F9F9F9]
+                    md:rounded-xl
                     "> 
                     فروش
                 </button>
@@ -58,11 +57,11 @@ const OnlineCalculation = () => {
                      type="text"
                      placeholder="مقدار طلا به میلی گرم"
                      className="
-                     w-[496px]
-                     h-14
-                     rounded-xl
-                     border-[1px]
-                     border-[#E1E1E1]
+                     md:w-[496px]
+                     md:h-14
+                     md:rounded-xl
+                     md:border-[1px]
+                     md:border-[#E1E1E1]
                      "
                     />
                 </div>
@@ -72,11 +71,11 @@ const OnlineCalculation = () => {
                      type="text"
                      placeholder="مقدار طلا به میلی گرم"
                      className="
-                     w-[496px]
-                     h-14
-                     rounded-xl
-                     border-[1px]
-                     border-[#E1E1E1]
+                     md:w-[496px]
+                     md:h-14
+                     md:rounded-xl
+                     md:border-[1px]
+                     md:border-[#E1E1E1]
                      "
                     />
                 </div>
@@ -90,12 +89,12 @@ const OnlineCalculation = () => {
             </div>
 
             <div className="
-            pt-14
+            md:pt-14
             ">
                 <button className="
-                w-32
-                h-12
-                rounded-lg
+                md:w-32
+                md:h-12
+                md:rounded-lg
                 bg-primary
                 
                 ">

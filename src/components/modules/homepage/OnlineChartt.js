@@ -2,12 +2,12 @@ import Image from "next/image";
 
 const OnlineChartt = () => {
     return (
-        <div className="my-auto">
+        <div className="md:my-auto">
 
         <div className="
-        pt-10
-        w-[600px]
-        h-[408px]
+        md:pt-10
+        md:w-[600px]
+        md:h-[408px]
         ">
             <Image
             src="/images/chart.png"

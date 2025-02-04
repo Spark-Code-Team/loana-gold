@@ -5,32 +5,32 @@ const GoldDelivery = () => {
     return(
 
         <div className="
-        mt-24
-        px-24
-        w-full
-        h-[408px]
-        flex
-        justify-between        
+        md:mt-24
+        md:px-24
+        md:w-full
+        md:h-[408px]
+        md:flex
+        md:justify-between        
         ">
             <div className="
-            w-1/2
+            md:w-1/2
             ">
                 <p className="
-                pt-24
-                font-bold
+                md:pt-24
+                md:font-bold
                 ">
                 تحویل حضوری طلا
                 </p>
 
                 <p className="
-                pt-10
+                md:pt-10
                 ">
                     ما امکان تحویل حضوری طلا به سراسر ایران را فراهم کرده‌ایم تا
                      تجربه‌ای مطمئن و آسوده را برای مشتریان خود رقم بزنیم.
                 </p>
 
                 <p className="
-                pt-6
+                md:pt-6
                 text-[#AB8B53]
                 ">
                 فرایند دریافت حضوری طلا

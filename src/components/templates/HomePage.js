@@ -10,12 +10,13 @@ import WhyLona from "../modules/homepage/WhyLona";
 const HomePage = () => {
     return (
         <>
-        <div className="w-full
-        h-[471px]
-        mt-16 
-        px-16
-        flex
-        justify-between
+        <div className="
+        md:w-full
+        md:h-[471px]
+        md:mt-16 
+        md:px-16
+        md:flex
+        md:justify-between
         ">
         <OnlineCalculation/>
         <OnlineChartt/>

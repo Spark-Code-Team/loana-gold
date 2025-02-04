@@ -25,24 +25,54 @@ export default function AccordionQ() {
     };
 
     return (
-        <div className="w-full px-24 mt-24 mx-auto">
-            <h2 className="text-xl font-bold mb-4">سوالات شما</h2>
-            <div className="space-y-2">
+        <div className="
+          md:w-full 
+          md:px-24 
+          md:mt-24 
+          md:mx-auto
+          ">
+            <h2 className="
+               md:text-xl 
+               md:font-bold 
+               md:mb-4">
+                سوالات شما
+            </h2>
+
+            <div className="md:space-y-2">
                 {faqData.map((item, index) => (
-                    <div key={index} className="border rounded-lg overflow-hidden">
+                    <div key={index} className="
+                        md:border 
+                        md:rounded-lg 
+                        md:overflow-hidden
+                        ">
+
                         <button
                             onClick={() => handleToggle(index)}
-                            className="w-full flex justify-between items-center p-4 text-base font-normal bg-[#FBFBFB] hover:bg-[#FBFBFB] transition"
+                            className="
+                            md:w-full 
+                            md:flex 
+                            md:justify-between 
+                            md:items-center 
+                            md:p-4 text-base 
+                            md:font-normal 
+                            md:bg-[#FBFBFB] 
+                            md:hover:bg-[#FBFBFB] 
+                            md:transition"
                         >
                             {item.question}
-                            <span className={`transform transition ${openIndex === index ? "rotate-180" : ""}`}>⌄</span>
+                            <span className={`transform transition ${openIndex === index ? "rotate-180" : ""}`}>
+                            ⌄
+                            </span>
+
                         </button>
+
                         <div
                             className={`overflow-hidden transition-all duration-300 ${
                                 openIndex === index ? "max-h-40 p-4 bg-[#FBFBFB]" : "max-h-0"
                             }`}
                         >
                             {item.answer}
+
                         </div>
                     </div>
                 ))}

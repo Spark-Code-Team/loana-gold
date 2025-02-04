@@ -11,10 +11,26 @@ const images = [
 const TrustImages = () => {
     return (
         <>
-            <p className="px-24 mt-24 mb-10 text-2xl font-bold">اعتماد شما سرمایه ماست</p>
-            <div className="px-24 w-full h-52 flex justify-between">
+            <p className="
+              md:px-24 
+              md:mt-24 
+              md:mb-10 
+              md:text-2xl 
+              md:font-bold
+              ">
+                اعتماد شما سرمایه ماست
+            </p>
+
+            <div className="
+              md:px-24 
+              md:w-full 
+              md:h-52 
+              md:flex 
+              md:justify-between
+              ">
+                
                 {images.map(image => (
-                    <div key={image.id} className="my-auto w-40 h-40">
+                    <div key={image.id} className="md:my-auto md:w-40 md:h-40">
                         <Image src={image.src} alt="image" width={155} height={155} />
                     </div>
                 ))}
