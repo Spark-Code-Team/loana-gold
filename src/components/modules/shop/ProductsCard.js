@@ -50,6 +50,30 @@ const products = [
     price: "45,148,600 تومان",
     image: "/images/ringm.png",
   },
+  {
+    id: 7,
+    name: "انگشتر طرح گل نگین دار",
+    ayar: 21,
+    weight: "7.8 گرم",
+    price: "55,999,200 تومان",
+    image: "/images/ringm.png",
+  },
+  {
+    id: 8,
+    name: "انگشتر مردانه طلای سفید",
+    ayar: 18,
+    weight: "12.3 گرم",
+    price: "85,248,700 تومان",
+    image: "/images/ringm.png",
+  },
+  {
+    id: 9,
+    name: "حلقه ظریف طلای زرد",
+    ayar: 24,
+    weight: "5.5 گرم",
+    price: "45,148,600 تومان",
+    image: "/images/ringm.png",
+  },
 ];
 
 const ProductsCard = () => {
