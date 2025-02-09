@@ -18,13 +18,11 @@ export default function Sidebar() {
             flex 
             flex-col 
             w-72 
-            bg-white 
+            bg-white
             rounded-xl 
             p-4 
-            mr-6 
             mt-6 
             shadow-lg
-            gap-6
         ">
             <div className="
               flex 
@@ -273,3 +271,11 @@ export default function Sidebar() {
         </div>
     );
 }
+
+
+
+
+
+
+
+
