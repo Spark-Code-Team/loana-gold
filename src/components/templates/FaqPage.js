@@ -19,22 +19,22 @@ const faqs = [
       "> 
 
     <div>
-        <p2 className="md:font-bold md:text-base"> ثبت نام </p2>
+        <p className="md:font-bold md:text-base"> ثبت نام </p>
         <FAQList faqs={faqs} /> 
     </div>
 
     <div>
-        <p2 className="md:font-bold md:text-base">  پرداخت اقساطی </p2>
+        <p className="md:font-bold md:text-base">  پرداخت اقساطی </p>
         <FAQList faqs={faqs} /> 
     </div>
 
     <div>
-        <p2 className="md:font-bold md:text-base"> نحوه دریافت حضوری سفارش </p2>
+        <p className="md:font-bold md:text-base"> نحوه دریافت حضوری سفارش </p>
         <FAQList faqs={faqs} /> 
     </div>
 
     <div>
-        <p2 className="md:font-bold md:text-base"> نحوه ثبت کالا </p2>
+        <p className="md:font-bold md:text-base"> نحوه ثبت کالا </p>
         <FAQList faqs={faqs} /> 
     </div>
           

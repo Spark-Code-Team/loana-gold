@@ -1,4 +1,4 @@
-
+import Link from "next/link";
 import Image from "next/image";
 
 const products = [
@@ -86,6 +86,7 @@ const ProductsCard = () => {
      justify-between
      ">
       {products.map((product) => (
+        <Link key={product.id} href={`/product/${product.id}`} passHref>
         <div
           key={product.id}
           className="
@@ -128,6 +129,7 @@ const ProductsCard = () => {
             </div>
           </div>
         </div>
+        </Link>
       ))}
     </div>
   );

@@ -51,7 +51,7 @@ export default function Sidebar() {
               gap-4
               ">
                
-            <div className="p-2">
+            <div className="w-64">
               <div className="
                flex 
                items-center 
@@ -123,7 +123,7 @@ export default function Sidebar() {
                 </div>
 
 
-            <div className="p-2">
+            <div className="w-64">
               <div className="
                flex 
                items-center 
@@ -194,7 +194,7 @@ export default function Sidebar() {
 
                 </div>
 
-            <div className="p-2">
+            <div className="w-64">
               <div className="
                flex 
                items-center 
@@ -204,7 +204,7 @@ export default function Sidebar() {
                font-medium
                ">
                 <Pay className="w-6 h-6 ml-2" />
-                <h3>محدوده قیمت</h3>
+                <h3> نوع پرداخت</h3>
               </div>
             </div>
 
@@ -252,7 +252,7 @@ export default function Sidebar() {
 
                 </div>
 
-            <div className="p-2">
+            <div className="w-64">
               <div className="
                flex 
                items-center 
@@ -262,7 +262,7 @@ export default function Sidebar() {
                font-medium
                ">
                 <Send className="w-6 h-6 ml-2" />
-                <h3>محدوده قیمت</h3>
+                <h3> نحوه ارسال</h3>
               </div>
             </div>
 

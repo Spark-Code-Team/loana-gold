@@ -1,4 +1,4 @@
-
+import Link from "next/link";
 const HomeHeader = () =>{
     return(
 
@@ -8,16 +8,19 @@ const HomeHeader = () =>{
 
             <div className="flex flex-row items-center gap-8 w-1/2">
 
+            <Link href="/" className="text-black text-[18px]">
             <div className="text-[#D2AB67] font-bold text-[32px]">لوگو</div> 
+            </Link>
+
             
             <div> 
                 
                 <ul className="flex flex-row items-center space-x-7 space-x-reverse mr-8 pr-8"> 
                 
-                <li> <a href="#" className="text-black text-[18px]"> فروشگاه </a> </li> 
-                <li> <a href="#" className="text-black text-[18px]"> درباره لونا </a> </li> 
-                <li> <a href="#" className="text-black text-[18px]"> تماس با ما </a> </li> 
-                <li> <a href="#" className="text-black text-[18px]"> سوالات متداول </a> </li> 
+                <li> <Link href="/Shop" className="text-black text-[18px]">فروشگاه</Link> </li> 
+                <li> <Link href="/Shop" className="text-black text-[18px]">درباره لونا</Link> </li> 
+                <li> <Link href="/ContactUs" className="text-black text-[18px]">تماس باما</Link> </li> 
+                <li> <Link href="/FAQ" className="text-black text-[18px]">سوالات متداول</Link> </li> 
 
                 </ul> 
                 
