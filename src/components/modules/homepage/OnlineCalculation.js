@@ -1,3 +1,4 @@
+import Online from "../../../../public/icons/Online";
 
 const OnlineCalculation = () => {
     return(
@@ -80,7 +81,13 @@ const OnlineCalculation = () => {
                     />
                 </div>
 
-                <div>
+                <div className="
+                flex 
+                items-center 
+                space-x-2 
+                rtl:space-x-reverse
+                ">
+                    <Online className="w-6 h-6"/>
                     <p>
                     قیمت لحظه ای خرید هر گرم طلای 15 عیار: 5,340,000 تومان
                     </p>

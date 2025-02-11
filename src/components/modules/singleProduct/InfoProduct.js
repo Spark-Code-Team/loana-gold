@@ -13,6 +13,7 @@ const InfoProduct = () => {
               <p className="text-lg mt-2">   موجود در انبار - ارسال از 15 بهمن </p>
               <p className="text-lg mt-2">  </p>
             </div>
+            
 
             <div>
             <select className="
@@ -25,40 +26,72 @@ const InfoProduct = () => {
                border-[#E1E1E1] 
                p-2 
                rounded-xl 
-               mt-6
+               mt-6 
                ">
-                <option className="">رنگ را انتخاب کنید</option>
-                <option className="">طلایی</option>
-                <option className="">نقره‌ای</option>
+                <option className="
+                ">
+                رنگ را انتخاب کنید</option>
+                <option className="
+                ">طلایی</option>
+                <option className="
+                ">نقره‌ای</option>
               </select>
 
               <select className="
-              w-[600px] 
+               focus:outline-none 
+               focus:ring-0 
+               focus:border-gray-400
+               w-[600px] 
                h-14 
                border-[1px] 
                border-[#E1E1E1] 
                p-2 
                rounded-xl 
-               mt-4
-              ">
-                <option>سایز قابل انتخاب</option>
-                <option>8 گرم</option>
-                <option>10 گرم</option>
+               mt-6 
+               ">
+                <option className="
+                ">
+                سایز را انتخاب کنید
+                </option>
+
+                <option className="
+                ">10 
+                </option>
+
+                <option className="
+                ">10
+                </option>
+
               </select>
 
               <select className="
-              w-[600px] 
+               focus:outline-none 
+               focus:ring-0 
+               focus:border-gray-400
+               w-[600px] 
                h-14 
                border-[1px] 
                border-[#E1E1E1] 
                p-2 
                rounded-xl 
-               mt-4
-              ">
-                <option>وزن قابل انتخاب</option>
-                <option>8 گرم</option>
-                <option>10 گرم</option>
+               mt-6 
+               ">
+                <option className="
+                ">
+                 وزن طلا قابل انتخاب   
+                </option>
+
+                <option className="
+                ">10گرم
+                </option>
+
+                <option className="
+                ">20گرم
+                </option>
+
               </select>
+
+             
 
             </div>
               

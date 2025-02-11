@@ -1,5 +1,6 @@
 import AccordionQ from "../modules/homepage/AccordionQ";
 import GoldDelivery from "../modules/homepage/GoldDelivery";
+import HeaderShopOpen from "../modules/homepage/HeaderShopOpen";
 import InstallmentPayment from "../modules/homepage/InstallmentPayment";
 import OnlineCalculation from "../modules/homepage/OnlineCalculation";
 import OnlineChartt from "../modules/homepage/OnlineChartt";
@@ -35,7 +36,7 @@ const HomePage = () => {
         <AccordionQ/>
 
 
-        
+        {/* <HeaderShopOpen/> */}
 
 
         </>

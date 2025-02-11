@@ -1,8 +1,10 @@
 
 
 "use client";
-
 import { useState } from "react";
+import Coin from "../../../../public/icons/Coin";
+import Pay from "../../../../public/icons/Pay";
+import Send from "../../../../public/icons/Send";
 
 export default function Sidebar() {
 
@@ -48,13 +50,20 @@ export default function Sidebar() {
               flex-col 
               gap-4
               ">
-                    <h3 className="
-                     bg-[#F6EEE1]
-                     rounded-xl
-                     pr-5
-                     py-4
-                     font-medium
-                     ">محدوده قیمت</h3>
+               
+            <div className="p-2">
+              <div className="
+               flex 
+               items-center 
+               bg-[#F6EEE1] 
+               rounded-xl 
+               pr-5 py-4 
+               font-medium
+               ">
+                <Coin className="w-6 h-6 ml-2" />
+                <h3>محدوده قیمت</h3>
+              </div>
+            </div>
 
                 <div className="
                   bg-[#FAFAFA] 
@@ -114,13 +123,19 @@ export default function Sidebar() {
                 </div>
 
 
-                <h3 className="
-                     bg-[#F6EEE1]
-                     rounded-xl
-                     pr-5
-                     py-4
-                     font-medium
-                     ">محدوده وزن</h3>
+            <div className="p-2">
+              <div className="
+               flex 
+               items-center 
+               bg-[#F6EEE1] 
+               rounded-xl 
+               pr-5 py-4 
+               font-medium
+               ">
+                <Coin className="w-6 h-6 ml-2" />
+                <h3>محدوده وزن</h3>
+              </div>
+            </div>
 
                 <div className="
                   bg-[#FAFAFA] 
@@ -179,15 +194,19 @@ export default function Sidebar() {
 
                 </div>
 
-                <h3 className="
-                     bg-[#F6EEE1]
-                     rounded-xl
-                     pr-5
-                     py-4
-                     font-medium
-                     "> 
-                     نوع پرداخت
-                </h3>
+            <div className="p-2">
+              <div className="
+               flex 
+               items-center 
+               bg-[#F6EEE1] 
+               rounded-xl 
+               pr-5 py-4 
+               font-medium
+               ">
+                <Pay className="w-6 h-6 ml-2" />
+                <h3>محدوده قیمت</h3>
+              </div>
+            </div>
 
                 <div className="
                 bg-[#FAFAFA] 
@@ -232,15 +251,20 @@ export default function Sidebar() {
                     </label>
 
                 </div>
-                <h3 className="
-                     bg-[#F6EEE1]
-                     rounded-xl
-                     pr-5
-                     py-4
-                     font-medium
-                     "> 
-                     نحوه ارسال 
-                     </h3>
+
+            <div className="p-2">
+              <div className="
+               flex 
+               items-center 
+               bg-[#F6EEE1] 
+               rounded-xl 
+               pr-5 py-4 
+               font-medium
+               ">
+                <Send className="w-6 h-6 ml-2" />
+                <h3>محدوده قیمت</h3>
+              </div>
+            </div>
 
                 <div className="
                 bg-[#FAFAFA] 
