@@ -34,11 +34,15 @@ const HomeHeader = () =>{
                 text-[18px] text-[#AB8B53] px-4 py-3 mx-7 rounded-[8px]">
                      درخواست اعتبار خرید 
                 </button> 
-                
+
+
+                <Link href="/Login">
                 <button className="bg-[#AB8B53] text-black font-bold 
                 text-[18px] px-4 py-3 rounded-[8px]">
-                     ورود / ثبت‌نام 
+                     ورود / ثبت‌ نام 
                 </button> 
+                </Link>
+
             
                 </div> 
                 
