@@ -1,89 +1,101 @@
-import Facebook from "../../../../public/icons/Facebook";
-import Instagram from "../../../../public/icons/Instagram";
-import Linkedin from "../../../../public/icons/Linkedin";
-import Twitter from "../../../../public/icons/Twitter";
+import Image from "next/image";
+import Link from "next/link";
 
 const HomeFooter = () =>{
     return(
-        
 
-    <footer className="w-full h-[400px] border-t-2 border-primary mt-12 ">
+        <div className="md:w-full bg-white md:pt-1 pt-1 lg:pr-0 lg:pl-0 pr-3 pl-3 mt-12 border-t-2 border-t-[#D2AB67]">
 
-        <div className="container px-14 mx-auto h-[400px] my-auto  ">
+            <div className="md:w-[85%] m-auto mt-10 w-full">
 
-            <div className="h-[104px] flex items-center">
+                <div className="w-full md:flex md:items-center">
 
-                <div className="w-1/2">
-                <h3 className="text-xl mb-2"> ایمیل خود را ثبت کنید تا با ما در ارتباط باشید و این حرفا </h3> 
+                    <div className="md:w-1/2 w-full md:mt-0 mt-10 md:text-right text-center">
+                        <p>ایمیل خود را ثبت کنید تا با ما در ارتباط باشید و این حرفا</p>
+                    </div>
+
+                    <div className="md:w-1/2 md:flex md:justify-end gap-x-3 w-full md:mt-0 mt-7 flex justify-between">
+
+                        <button className="md:w-[91px] md:h-[40px] w-[30%] bg-[#D2AB67] rounded-xl text-sm">ثبت ایمیل</button>
+                        <input type="email" name="" className="md:w-[305px] h-[40px] border-2 border-[#E1E1E1] rounded-xl" placeholder="ایمیل خود را وارد کنید"/>
+
+                    </div>
+
                 </div>
 
-                <div className="w-1/2 pr-36">
-                    <button className="w-24 h-10 bg-primary rounded-xl ml-4">ثبت ایمیل</button>
 
-                    <input type="text" placeholder=" ایمیل خود را وارد کنید " 
-                    className="w-80 h-10 border-[1px] border-[#E1E1E1] rounded-xl 
-                    focus:border-primary
-                    "/>
+
+
+                <div className="w-full m-auto mt-10 md:flex md:justify-around md:flex-wrap flex flex-wrap">
+
+                    <div className="md:w-[304px] w-full">
+
+                        <div className="w-full text-[18px] md:text-right text-center text-[#D2AB67]">لوگو</div>
+
+                        <div className="w-full mt-5 w-full md:text-right text-center">لونا اولین پلتفرم معاملات طلا در ایران است که به کاربران امکان می‌دهد تا به صورت مستقیم و به شیوۀ "Customer to Customer (C2C)" به معامله طلا پرداخته و از پروژه ایجاد یک پلتفرم امن، شفاف و سریع برای معامله طلا میان کاربران بهره‌مند شوند.</div>
+
+                        <div className="w-full mt-5 md:flex md:justify-start md:gap-x-3 flex justify-around">
+
+                            <Image src="/images/logo-instagram.png" alt="" width={24} height={24}/>
+                            <Image src="/images/logo-twitter.png" alt="" width={24} height={24}/>
+                            <Image src="/images/logo-linkedin.png" alt="" width={24} height={24}/>
+                            <Image src="/images/logo-facebook.png" alt="" width={24} height={24}/>
+
+                        </div>
+
+                    </div>
+
+                    <div className="md:w-[373px] w-full lg:mt-0 mt-5">
+
+                        <div className="w-full md:text-right text-center text-[18px] text-[#D2AB67]">اطلاعات تماس</div>
+
+                        <div className="w-full m-auto mt-5 md:text-right text-center">تلفن پشتیبانی : ۰۲۱۷۰۷۰۹۷۹۷</div>
+                        <div className="w-full m-auto mt-5 md:text-right text-center">آدرس دفتر مرکزی : تهران، سعادت آباد، خیابان کاج، پلاک ۱۶</div>
+                        <div className="w-full m-auto mt-5 md:text-right text-center">آدرس ایمیل : Drik@gmail.com</div>
+
+                    </div>
+
+                    <div className="md:w-[128px] w-1/2 lg:mt-0 mt-5 md:text-right text-center">
+
+                        <div className="w-full md:text-right text-[18px] text-[#D2AB67]">دسترسی سریع</div>
+
+                        <div className="w-full m-auto mt-5">
+                            <Link href="#">صفحه اصلی</Link>
+                        </div>
+
+                        <div className="w-full m-auto mt-5">
+                            <Link href="#">محصولات</Link>
+                        </div>
+
+                        <div className="w-full m-auto mt-5">
+                            <Link href="#">سوالات متداول</Link>
+                        </div>
+
+                    </div>
+
+                    <div className="md:w-[103px] w-1/2 lg:mt-0 mt-5 md:text-right text-center">
+
+                        <div className="w-full md:text-right text-[18px] text-[#D2AB67]">درباره لونا</div>
+
+                        <div className="w-full m-auto mt-5">
+                            <Link href="#">درباره لونا</Link>
+                        </div>
+
+                        <div className="w-full m-auto mt-5">
+                            <Link href="#">تماس با ما</Link>
+                        </div>
+
+                    </div>
+
                 </div>
 
             </div>
 
-        <div className="flex flex-row
-             h-[206px] justify-between my-4">
 
-            <div className="w-[392px]">
-            <h3 className="text-lg pb-4 text-primary font-semibold mb-2 w-[208px]"> لوگو </h3>
-            <p className="text-sm">
-            لونا اولین پلتفرم معاملات طلا در ایران است که به
-             کاربران امکان می‌دهد تا به صورت مستقیم و به شیوۀ "Customer to Customer (C2C)" 
-            به معامله طلا پرداخته و از پروژه ایجاد یک پلتفرم
-             امن، شفاف و سریع برای معامله طلا میان کاربران بهره‌مند شوند.
-            </p> 
-            </div>
-
-
-            <div className="">
-            <h3 className="text-lg pb-4 text-primary font-semibold mb-2 w-[208px]">اطلاعات تماس</h3>
-            <p className="text-sm">آدرس دفتر مرکزی: سعادت آباد، خیابان کاج، پلاک 16</p> 
-            <p className="text-sm py-6">تلفن: 021-12345678</p> 
-            <p className="text-sm">ایمیل: Drik@gmail.com</p>
-            </div>
-           
-            <div className="">
-            <h3 className="text-lg pb-4 text-primary font-semibold mb-2">دسترسی سریع</h3>
-            <ul className="space-y-2"> <li><a href="#" className="text-black hover:underline">صفحه اصلی</a></li>
-            <li><a href="#" className="text-black hover:underline">محصولات</a></li> 
-            <li><a href="#" className="text-black hover:underline">سؤالات متداول</a></li> 
-            <li><a href="#" className="text-black hover:underline"> </a></li> </ul>
-            </div> 
-
-
-            <div className="">
-            <h3 className="text-lg pb-4 text-primary font-semibold mb-2"> درباره لونا </h3>
-            <ul className="space-y-2"> <li><a href="#" className="text-black hover:underline">صفحه اصلی</a></li>
-            <li><a href="#" className="text-black hover:underline">درباره لونا</a></li> 
-            <li><a href="#" className="text-black hover:underline"> تماس باما </a></li> 
-            </ul>
-            </div>
-  
-        </div>
-
-            <div className="h-[50px] w-36 justify-between flex">
-                <Instagram/>
-                <Twitter/>
-                <Linkedin/>
-                <Facebook/>
-            </div>  
+            <div className="w-full md:mt-12 mt-12 text-center p-2 text-white bg-[#D2AB67]">تمامی حقوق این وبگاه محفوظ و مربوط به لونا است.</div>
 
         </div>
 
-        <div className="w-full h-11 bg-[#D2AB67] flex justify-center items-center">
-            <p className="text-white">
-            تمامی حقوق این وبگاه محفوظ و مربوط به لونا است.
-            </p>
-        </div> 
-
-    </footer>
     )
 }
 export default HomeFooter;
