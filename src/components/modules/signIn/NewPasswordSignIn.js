@@ -1,12 +1,12 @@
-import Link from "next/link";
-import PhoneLogin from "../../../../public/icons/PhoneLogin";
-import AuthPageStruct from "./AuthPageStruct";
 
-const SignInPhone =({ setLoginState }) =>{
+import PasswordIconSignin from "../../../../public/icons/PasswordIconSignin";
+import AuthPageStruct from "./AuthPageStruct";
+const NewPasswordSignIn = () => {
     return(
+
     <AuthPageStruct>
 
-     <div className="
+            <div className="
      gap-y-5
      flex
      flex-col
@@ -22,14 +22,14 @@ const SignInPhone =({ setLoginState }) =>{
         text-2xl
         font-bold
         ">
-            ورود
+            فراموشی رمز عبور
         </p>
 
         <p className="
         mt-4
         text-[#A6A6A6]
         ">
-        لطفا اطلاعات زیر را تکمیل کنید
+        رمز عبور جدید را وارد کنید.
         </p>
         </div>
   
@@ -45,7 +45,7 @@ const SignInPhone =({ setLoginState }) =>{
                 <span className="
                 mr-3
                 ">
-                    <PhoneLogin/>
+                    <PasswordIconSignin/>
                 </span>
 
                 <input
@@ -57,11 +57,41 @@ const SignInPhone =({ setLoginState }) =>{
                 focus:boredr-transparent
                 w-[616px]
                 "
-                placeholder=" شماره موبایل* "
+                placeholder=" رمز عبور جدید را وارد کنید "
                 type="text"
                 name="firstname"
                 />
-                </div>
+            </div>
+
+            <div className="
+                flex
+                items-center
+                w-[616px]
+                h-12
+                rounded-xl
+                border-[1px]
+                boredr-[#E1E1E1]"
+                >
+                <span className="
+                mr-3
+                ">
+                    <PasswordIconSignin/>
+                </span>
+
+                <input
+                className="
+                rounded-xl
+                border-none
+                focus:outline-none
+                focus:ring-0
+                focus:boredr-transparent
+                w-[616px]
+                "
+                placeholder=" رمز عبور جدید را وارد کنید "
+                type="text"
+                name="firstname"
+                />
+            </div>
 
         <div>
             <button className="
@@ -72,45 +102,14 @@ const SignInPhone =({ setLoginState }) =>{
                  bg-[#EDEDED] 
                  rounded-xl 
                  text-[#7A7A7A]
-                 "
-                 onClick={() => setLoginState("verification")}
-                 >
-                    ارسال کد
+                 ">
+                     تایید و ادامه
             </button>
         </div>
-
-
-        <div  className="
-        w-[616px]
-        leading-9
-        ">
-             <button
-            onClick={() => setLoginState("forgetPassword")}
-            >
-            فراموشی رمزعبور
-            </button>
-
-            <div className="flex">
-            ثبت نام نکرده اید؟  
-
-            <button
-            onClick={() => setLoginState(0)}
-            >
-             <Link href="/Login">
-             <p className="mr-1 text-primary">
-                ثبت نام
-            </p>  
-             </Link>
-            </button>
           
-            </div>
-
-        </div>
-        
      </div>
 
-     </AuthPageStruct>
-
+    </AuthPageStruct>
     )
 }
-export default SignInPhone;
+export default NewPasswordSignIn;

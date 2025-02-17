@@ -1,43 +1,30 @@
-import Image from "next/image";
+"use client"
+
+import { useState } from "react";
 import SignInPhone from "../modules/signIn/SignInPhone";
+import VerificationCodeSignIn from "../modules/signIn/VerificationCodeSignIn";
+import PasswordSignIn from "../modules/signIn/PasswordSignIn";
+import ForgetPasswordSignIn from "../modules/signIn/ForgetPasswordSignIn";
+import ResendPasswordSignIn from "../modules/signIn/ResendPasswordSignIn";
+import NewPasswordSignIn from "../modules/signIn/NewPasswordSignIn";
 
 const SignInPage = () => {
+    const [loginState, setLoginState] = useState("phone");
+
     return(
+
         <>
-        <div className="
-        flex
-        justify-evenly
-        mt-10
-        ">
-            <div className="
-            w-[664px]
-            h-[561px]
-            rounded-xl
-            border-[1px]
-            border-[#E1E1E1]
-            shadow-lg
-            ">
-                <SignInPhone/>
-
-            </div>
-
-            <div className="
-            w-[520px]
-            h-[561px]
-            rounded-xl
-            ">
-                <Image
-                src="/images/shemshaks.png"
-                alt="shemsh"
-                width={520}
-                height={561}
-                />
-
-            </div>
-
-        </div>
-
+        {loginState === "phone" && <SignInPhone setLoginState={setLoginState} />}
+        {loginState === "verification" && <VerificationCodeSignIn setLoginState={setLoginState} />}
+        {loginState === "password" && <PasswordSignIn setLoginState={setLoginState} />}
+        {loginState === "forgetPassword" && <ForgetPasswordSignIn setLoginState={setLoginState} />}
+        {loginState === "resendCode" && <ResendPasswordSignIn setLoginState={setLoginState} />}
+        {loginState === "newPassword" && <NewPasswordSignIn setLoginState={setLoginState} />}
         </>
+
+
+
+      
     )
 }
 export default SignInPage;

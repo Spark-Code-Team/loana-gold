@@ -1,4 +1,8 @@
-const VerificationCode = () => {
+"use client"
+
+import Link from "next/link";
+
+const VerificationCode = ({ setloginRegisterState }) => {
     return(
       <div className="
        md:flex 
@@ -72,7 +76,7 @@ const VerificationCode = () => {
                 rounded-xl
                 w-[320px]
                 "
-                placeholder="نام"
+                placeholder=""
                 type="text"
                 name="firstname"
                 />
@@ -89,7 +93,11 @@ const VerificationCode = () => {
                  bg-[#EDEDED] 
                  rounded-xl 
                  text-black
-                 ">
+                 hover:bg-primary
+                 hover:text-black
+                 "
+                 onClick={() => setloginRegisterState(0)}
+                 >
                     تایید و ادامه
                 </button>
             </div>
@@ -98,8 +106,15 @@ const VerificationCode = () => {
              mt-3 
              text-sm
              w-[600px]
+             flex
              ">
-            حساب کاربری دارید؟ ورود
+            حساب کاربری دارید؟
+            <Link href="/Sign-in">
+             <p className="mr-1 text-primary">
+                ورود
+            </p>  
+             </Link> 
+            
             </div>
 
             </div>

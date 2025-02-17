@@ -1,20 +1,18 @@
-import Link from "next/link";
-import PhoneLogin from "../../../../public/icons/PhoneLogin";
 import AuthPageStruct from "./AuthPageStruct";
-
-const SignInPhone =({ setLoginState }) =>{
+const VerificationCodeSignIn = ({ setLoginState }) => {
     return(
+        
     <AuthPageStruct>
 
-     <div className="
-     gap-y-5
-     flex
-     flex-col
-     mt-16
-     justify-center
-     items-center
-     ">
         <div className="
+        gap-y-5
+        flex
+        flex-col
+        mt-16
+        justify-center
+        items-center
+        ">
+            <div className="
         w-[616px]
         leading-10
         ">
@@ -22,21 +20,21 @@ const SignInPhone =({ setLoginState }) =>{
         text-2xl
         font-bold
         ">
-            ورود
+            کد تایید وارد کنید
         </p>
 
         <p className="
         mt-4
         text-[#A6A6A6]
         ">
-        لطفا اطلاعات زیر را تکمیل کنید
+        کد 5 رقمی به شماره تلفن 09127695103 ارسال شد
         </p>
         </div>
-  
+
         <div className="
                 flex
                 items-center
-                w-[616px]
+                w-[317px]
                 h-12
                 rounded-xl
                 border-[1px]
@@ -45,7 +43,6 @@ const SignInPhone =({ setLoginState }) =>{
                 <span className="
                 mr-3
                 ">
-                    <PhoneLogin/>
                 </span>
 
                 <input
@@ -55,14 +52,26 @@ const SignInPhone =({ setLoginState }) =>{
                 focus:outline-none
                 focus:ring-0
                 focus:boredr-transparent
-                w-[616px]
+                w-[317px]
                 "
-                placeholder=" شماره موبایل* "
+                placeholder="  "
                 type="text"
                 name="firstname"
                 />
                 </div>
 
+                <button
+                onClick={() => setLoginState("resendCode")}
+                >
+
+                <p className="text-[#A6A6A6]">
+                ۱:۲۰ تا ارسال مجدد کد
+                </p>
+
+                </button>
+
+
+                
         <div>
             <button className="
                 hover:bg-primary
@@ -73,44 +82,14 @@ const SignInPhone =({ setLoginState }) =>{
                  rounded-xl 
                  text-[#7A7A7A]
                  "
-                 onClick={() => setLoginState("verification")}
+                 onClick={() => setLoginState("password")}
                  >
-                    ارسال کد
+                     تایید و ادامه
             </button>
         </div>
 
-
-        <div  className="
-        w-[616px]
-        leading-9
-        ">
-             <button
-            onClick={() => setLoginState("forgetPassword")}
-            >
-            فراموشی رمزعبور
-            </button>
-
-            <div className="flex">
-            ثبت نام نکرده اید؟  
-
-            <button
-            onClick={() => setLoginState(0)}
-            >
-             <Link href="/Login">
-             <p className="mr-1 text-primary">
-                ثبت نام
-            </p>  
-             </Link>
-            </button>
-          
-            </div>
-
         </div>
-        
-     </div>
-
-     </AuthPageStruct>
-
+    </AuthPageStruct>
     )
 }
-export default SignInPhone;
+export default VerificationCodeSignIn;

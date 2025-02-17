@@ -1,12 +1,11 @@
-import Link from "next/link";
-import PhoneLogin from "../../../../public/icons/PhoneLogin";
 import AuthPageStruct from "./AuthPageStruct";
-
-const SignInPhone =({ setLoginState }) =>{
+import PhoneLogin from "../../../../public/icons/PhoneLogin";
+import Link from "next/link";
+const PasswordSignIn = ({ setLoginState }) => {
     return(
     <AuthPageStruct>
 
-     <div className="
+    <div className="
      gap-y-5
      flex
      flex-col
@@ -57,7 +56,7 @@ const SignInPhone =({ setLoginState }) =>{
                 focus:boredr-transparent
                 w-[616px]
                 "
-                placeholder=" شماره موبایل* "
+                placeholder="  رمزعبور "
                 type="text"
                 name="firstname"
                 />
@@ -65,7 +64,7 @@ const SignInPhone =({ setLoginState }) =>{
 
         <div>
             <button className="
-                hover:bg-primary
+              hover:bg-primary
                 hover:text-black
                  w-[616px] 
                  h-12 
@@ -73,7 +72,7 @@ const SignInPhone =({ setLoginState }) =>{
                  rounded-xl 
                  text-[#7A7A7A]
                  "
-                 onClick={() => setLoginState("verification")}
+                 onClick={() => setLoginState("forgetPassword")}
                  >
                     ارسال کد
             </button>
@@ -84,7 +83,7 @@ const SignInPhone =({ setLoginState }) =>{
         w-[616px]
         leading-9
         ">
-             <button
+            <button
             onClick={() => setLoginState("forgetPassword")}
             >
             فراموشی رمزعبور
@@ -92,25 +91,18 @@ const SignInPhone =({ setLoginState }) =>{
 
             <div className="flex">
             ثبت نام نکرده اید؟  
-
-            <button
-            onClick={() => setLoginState(0)}
-            >
-             <Link href="/Login">
+            <Link href="/Login">
              <p className="mr-1 text-primary">
                 ثبت نام
             </p>  
              </Link>
-            </button>
-          
             </div>
 
         </div>
         
      </div>
 
-     </AuthPageStruct>
-
+    </AuthPageStruct>
     )
 }
-export default SignInPhone;
+export default PasswordSignIn;

@@ -1,12 +1,12 @@
-import Link from "next/link";
-import PhoneLogin from "../../../../public/icons/PhoneLogin";
 import AuthPageStruct from "./AuthPageStruct";
+import PhoneLogin from "../../../../public/icons/PhoneLogin";
+import Link from "next/link";
 
-const SignInPhone =({ setLoginState }) =>{
-    return(
+const ForgetPasswordSignIn = ()=> {
+    return (
     <AuthPageStruct>
 
-     <div className="
+    <div className="
      gap-y-5
      flex
      flex-col
@@ -22,14 +22,14 @@ const SignInPhone =({ setLoginState }) =>{
         text-2xl
         font-bold
         ">
-            ورود
+            فراموشی رمز عبور
         </p>
 
         <p className="
         mt-4
         text-[#A6A6A6]
         ">
-        لطفا اطلاعات زیر را تکمیل کنید
+        برای بازیابی رمز عبور شماره تماس خود را وارد کنید.
         </p>
         </div>
   
@@ -57,7 +57,7 @@ const SignInPhone =({ setLoginState }) =>{
                 focus:boredr-transparent
                 w-[616px]
                 "
-                placeholder=" شماره موبایل* "
+                placeholder=" شماره تماس "
                 type="text"
                 name="firstname"
                 />
@@ -72,10 +72,8 @@ const SignInPhone =({ setLoginState }) =>{
                  bg-[#EDEDED] 
                  rounded-xl 
                  text-[#7A7A7A]
-                 "
-                 onClick={() => setLoginState("verification")}
-                 >
-                    ارسال کد
+                 ">
+                     تایید و ادامه
             </button>
         </div>
 
@@ -84,33 +82,24 @@ const SignInPhone =({ setLoginState }) =>{
         w-[616px]
         leading-9
         ">
-             <button
-            onClick={() => setLoginState("forgetPassword")}
-            >
-            فراموشی رمزعبور
-            </button>
 
             <div className="flex">
-            ثبت نام نکرده اید؟  
-
-            <button
-            onClick={() => setLoginState(0)}
-            >
+            ثبت نام نکرده اید؟ 
              <Link href="/Login">
              <p className="mr-1 text-primary">
                 ثبت نام
             </p>  
              </Link>
-            </button>
-          
+            
+            
+           
             </div>
 
         </div>
         
      </div>
 
-     </AuthPageStruct>
-
+    </AuthPageStruct>
     )
 }
-export default SignInPhone;
+export default ForgetPasswordSignIn;

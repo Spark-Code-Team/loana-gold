@@ -1,8 +1,11 @@
+"use client"
+
+import Link from "next/link";
 import EmailLogin from "../../../../public/icons/EmailLogin";
 import PersonName from "../../../../public/icons/PersonName";
 import PhoneLogin from "../../../../public/icons/PhoneLogin";
 
-const RegisterLogin = () =>{
+const RegisterLogin = ({ setloginRegisterState }) =>{
     return(
         <div 
       className="
@@ -232,13 +235,28 @@ const RegisterLogin = () =>{
                  bg-[#EDEDED] 
                  rounded-xl 
                  text-black
-                 ">
+                 hover:bg-primary
+                 hover:text-black
+                 "
+                 onClick={() => setloginRegisterState(1)}
+                 >
                     تایید و ادامه
                 </button>
             </div>
 
-            <div className="mt-3 text-sm">
-            حساب کاربری دارید؟ ورود
+            <div className="
+             mt-3 
+             text-sm
+             w-[600px]
+             flex
+             ">
+            حساب کاربری دارید؟
+            <Link href="/Sign-in">
+             <p className="mr-1 text-primary">
+                ورود
+            </p>  
+             </Link> 
+            
             </div>
 
         </div>
