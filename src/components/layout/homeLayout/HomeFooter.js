@@ -6,7 +6,7 @@ const HomeFooter = () =>{
 
         <div className="md:w-full bg-white md:pt-1 pt-1 lg:pr-0 lg:pl-0 pr-3 pl-3 mt-12 border-t-2 border-t-[#D2AB67]">
 
-            <div className="md:w-[85%] m-auto mt-10 w-full">
+            <div className="md:w-[90%] m-auto mt-10 w-full">
 
                 <div className="w-full md:flex md:items-center">
 
