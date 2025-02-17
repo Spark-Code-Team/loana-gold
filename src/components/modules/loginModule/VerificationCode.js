@@ -13,7 +13,7 @@ const VerificationCode = ({ setloginRegisterState }) => {
        bg-no-repeat
        md:bg-contain 
        lg:bg-cover
-       bg-[url('/images/userdashboard.png')]
+       md:bg-[url('/images/userdashboard.png')]
       ">
         <div className="
          bg-white 
@@ -31,10 +31,11 @@ const VerificationCode = ({ setloginRegisterState }) => {
              items-start
              ">
                 <h2 className="
-              text-xl 
+              text-2xl 
               font-bold 
               mb-4 
               text-center
+              md:text-base
               ">
                 ثبت نام
             </h2>
@@ -48,12 +49,19 @@ const VerificationCode = ({ setloginRegisterState }) => {
             flex-col
             items-center
             gap-y-5
+            
             ">
-                <p>
+                <p className="
+                  text-2xl
+                  md:text-base
+                ">
                 کد تایید وارد کنید
                 </p>
 
-                <p className="text-[#A6A6A6]">
+                <p className="
+                  text-xl
+                  md:text-base
+                text-[#A6A6A6]">
                 کد تایید به شماره تلفن 09127695103 ارسال شد.
                 </p>
 
@@ -82,7 +90,10 @@ const VerificationCode = ({ setloginRegisterState }) => {
                 />
                 </div>
 
-                <p className="text-[#A6A6A6]">
+                <p className="
+                  text-xl
+                  md:text-base
+                text-[#A6A6A6]">
                 ۱:۲۰ تا ارسال مجدد کد
                 </p>
 
@@ -95,6 +106,8 @@ const VerificationCode = ({ setloginRegisterState }) => {
                  text-black
                  hover:bg-primary
                  hover:text-black
+                 text-xl
+                 md:text-base
                  "
                  onClick={() => setloginRegisterState(0)}
                  >
@@ -104,9 +117,10 @@ const VerificationCode = ({ setloginRegisterState }) => {
 
             <div className="
              mt-3 
-             text-sm
              w-[600px]
              flex
+             text-xl
+             md:text-base
              ">
             حساب کاربری دارید؟
             <Link href="/Sign-in">

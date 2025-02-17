@@ -4,8 +4,8 @@ export default function AuthPageStruct ({children}) {
     return (
         <>
         <div className="
-        flex
-        justify-evenly
+        md:flex
+        md:justify-evenly
         mt-10
         ">
             <div className="
@@ -17,12 +17,12 @@ export default function AuthPageStruct ({children}) {
             shadow-lg
             ">
                 {children}
-                
+
             </div>
 
             <div className="
-            w-[520px]
-            h-[561px]
+            md:w-[520px] w-full
+            md:h-[561px] 
             rounded-xl
             ">
                 <Image
@@ -30,6 +30,7 @@ export default function AuthPageStruct ({children}) {
                 alt="shemsh"
                 width={520}
                 height={561}
+                className="hidden sm:block"
                 />
 
             </div>

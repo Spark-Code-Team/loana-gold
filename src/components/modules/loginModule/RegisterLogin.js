@@ -17,12 +17,12 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
        bg-no-repeat
        md:bg-contain 
        lg:bg-cover
-       bg-[url('/images/userdashboard.png')]
+       md:bg-[url('/images/userdashboard.png')]
        " 
     >
 
         <div className="
-         bg-white 
+       bg-white 
          w-[664px] 
          h-[590px] 
          p-8 
@@ -37,7 +37,7 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
              ">
 
             <h2 className="
-              text-xl 
+              md:text-xl text-2xl
               font-bold 
               mb-4 
               text-center
@@ -46,7 +46,7 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
             </h2>
 
             <p className="
-              text-[16px] 
+                text-[16px]
               text-[#A6A6A6]
               ">
                  لطفا اطلاعات زیر را تکمیل کنید 
@@ -79,10 +79,12 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
                 <input
                 className="
                 border-none
-                 focus:outline-none
+                focus:outline-none
                 focus:ring-0
                 focus:boredr-transparent
                 w-[250px]
+                text-xl
+                md:text-base
                 "
                 placeholder="نام"
                 type="text"
@@ -106,10 +108,12 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
                 <input
                 className="
                 border-none
-                 focus:outline-none
+                focus:outline-none
                 focus:ring-0
                 focus:boredr-transparent
                 w-[250px]
+                text-xl
+                md:text-base
                 "
                 placeholder="نام خانوادگی"
                 type="text"
@@ -138,6 +142,7 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
                 focus:boredr-transparent
                 w-[250px]
                 text-sm
+                md:text-base
                 "
                 placeholder=" شماره موبایل (ثبت شده با کد ملی) "
                 type="text"
@@ -165,6 +170,8 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
                 focus:ring-0
                 focus:boredr-transparent
                 w-[250px]
+                text-xl
+                md:text-base
                 "
                 placeholder="کدملی"
                 type="text"
@@ -192,6 +199,8 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
                 focus:ring-0
                 focus:boredr-transparent
                 w-[250px]
+                text-xl
+                md:text-base
                 "
                 placeholder="شماره شبا"
                 type="text"
@@ -219,6 +228,8 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
                 focus:ring-0
                 focus:boredr-transparent
                 w-[250px]
+                text-xl
+                md:text-base
                 "
                 placeholder="نام بانک"
                 type="text"
@@ -230,14 +241,16 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
 
             <div>
                 <button className="
-                 w-[600px] 
-                 h-12 
-                 bg-[#EDEDED] 
-                 rounded-xl 
-                 text-black
-                 hover:bg-primary
-                 hover:text-black
-                 "
+                w-[600px] 
+                h-12 
+                bg-[#EDEDED] 
+                rounded-xl 
+                text-black
+                hover:bg-primary
+                hover:text-black
+                text-xl
+                md:text-base
+                "
                  onClick={() => setloginRegisterState(1)}
                  >
                     تایید و ادامه
@@ -245,14 +258,20 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
             </div>
 
             <div className="
-             mt-3 
-             text-sm
-             w-[600px]
-             flex
-             ">
+            mt-3 
+            w-[600px]
+            flex
+            text-xl
+            md:text-base
+            ">
             حساب کاربری دارید؟
             <Link href="/Sign-in">
-             <p className="mr-1 text-primary">
+             <p className="
+            mr-1 
+          text-primary
+            text-xl
+            md:text-base
+              ">
                 ورود
             </p>  
              </Link> 
@@ -260,7 +279,6 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
             </div>
 
         </div>
-
 
         </div>
     )

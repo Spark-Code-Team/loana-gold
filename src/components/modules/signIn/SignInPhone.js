@@ -21,6 +21,7 @@ const SignInPhone =({ setLoginState }) =>{
         <p className="
         text-2xl
         font-bold
+        md:text-base
         ">
             ورود
         </p>
@@ -28,6 +29,8 @@ const SignInPhone =({ setLoginState }) =>{
         <p className="
         mt-4
         text-[#A6A6A6]
+        text-xl
+        md:text-base
         ">
         لطفا اطلاعات زیر را تکمیل کنید
         </p>
@@ -56,6 +59,8 @@ const SignInPhone =({ setLoginState }) =>{
                 focus:ring-0
                 focus:boredr-transparent
                 w-[616px]
+                text-xl
+                md:text-base
                 "
                 placeholder=" شماره موبایل* "
                 type="text"
@@ -72,6 +77,8 @@ const SignInPhone =({ setLoginState }) =>{
                  bg-[#EDEDED] 
                  rounded-xl 
                  text-[#7A7A7A]
+                 text-2xl
+                 md:text-base
                  "
                  onClick={() => setLoginState("verification")}
                  >
@@ -82,15 +89,23 @@ const SignInPhone =({ setLoginState }) =>{
 
         <div  className="
         w-[616px]
-        leading-9
+        md:leading-9
+        leading-10
         ">
              <button
+             className="
+            text-xl
+            md:text-base
+             "
             onClick={() => setLoginState("forgetPassword")}
             >
             فراموشی رمزعبور
             </button>
 
-            <div className="flex">
+            <div className="
+            text-xl
+            md:text-base
+            flex">
             ثبت نام نکرده اید؟  
 
             <button

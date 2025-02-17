@@ -19,7 +19,8 @@ const ForgetPasswordSignIn = ()=> {
         leading-10
         ">
         <p className="
-        text-2xl
+        md:text-2xl
+        text-xl
         font-bold
         ">
             فراموشی رمز عبور
@@ -28,6 +29,8 @@ const ForgetPasswordSignIn = ()=> {
         <p className="
         mt-4
         text-[#A6A6A6]
+        md:text-base
+        text-lg
         ">
         برای بازیابی رمز عبور شماره تماس خود را وارد کنید.
         </p>
@@ -56,6 +59,9 @@ const ForgetPasswordSignIn = ()=> {
                 focus:ring-0
                 focus:boredr-transparent
                 w-[616px]
+                md:text-base
+                text-xl
+                
                 "
                 placeholder=" شماره تماس "
                 type="text"
@@ -72,6 +78,8 @@ const ForgetPasswordSignIn = ()=> {
                  bg-[#EDEDED] 
                  rounded-xl 
                  text-[#7A7A7A]
+                 md:text-base
+                 text-xl
                  ">
                      تایید و ادامه
             </button>
@@ -83,7 +91,10 @@ const ForgetPasswordSignIn = ()=> {
         leading-9
         ">
 
-            <div className="flex">
+            <div className="
+            md:text-base
+            text-xl
+            flex">
             ثبت نام نکرده اید؟ 
              <Link href="/Login">
              <p className="mr-1 text-primary">
@@ -91,8 +102,6 @@ const ForgetPasswordSignIn = ()=> {
             </p>  
              </Link>
             
-            
-           
             </div>
 
         </div>
