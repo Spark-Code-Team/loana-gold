@@ -12,10 +12,10 @@ const faqs = [
     return ( 
     
     <div className="
-      md:p-6 
-      md:grid 
+      p-6
+      grid 
       md:grid-cols-2 
-      md:gap-6
+      gap-6
       "> 
 
     <div>
