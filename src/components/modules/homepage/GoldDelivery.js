@@ -4,56 +4,34 @@ const GoldDelivery = () => {
 
     return(
 
-        <div className="
-        md:mt-24
-        md:px-24
-        md:w-full
-        md:h-[408px]
-        md:flex
-        md:justify-between        
-        ">
-            <div className="
-            md:w-1/2
-            ">
-                <p className="
-                md:pt-24
-                md:font-bold
-                ">
-                تحویل حضوری طلا
-                </p>
+        <div className="w-full md:mt-24 mt-20">
 
-                <p className="
-                md:pt-10
-                ">
-                    ما امکان تحویل حضوری طلا به سراسر ایران را فراهم کرده‌ایم تا
-                     تجربه‌ای مطمئن و آسوده را برای مشتریان خود رقم بزنیم.
-                </p>
+            <div className="md:w-[85%] w-full md:m-auto">
 
-                <p className="
-                md:pt-6
-                text-[#AB8B53]
-                ">
-                فرایند دریافت حضوری طلا
-                </p>
+                <div className="w-full md:flex">
+
+                    <div className="md:w-1/2 w-full">
+
+                        <div className="w-full md:mt-28 text-[24px] font-bold md:pr-0 pr-10">تحویل حضوری طلا</div>
+
+                        <div className="w-full md:pl-20 pl-5 md:mt-10 mt-5 md:pr-0 pr-10">ما امکان تحویل حضوری طلا به سراسر ایران را فراهم کرده‌ایم تا تجربه‌ای مطمئن و آسوده را برای مشتریان خود رقم بزنیم.</div>
+
+                        <div className="w-full m-auto md:mt-10 mt-5 text-[#AB8B53] md:pr-0 pr-10">فرایند دریافت حضوری طلا</div>
+
+                    </div>
+
+                    <div className="md:w-1/2 w-full md:flex md:justify-center md:items-center md:mt-0 mt-10">
+
+                        <Image src="/images/gold-map.png" alt="" width={439} height={409}/>
+
+                    </div>
+
+                </div>
 
             </div>
-
-            <div className="
-            ">
-              <Image
-              src="/images/map.png"
-              alt="image"
-              width={440}
-              height={408}
-              />
-
-
-            </div>
-
-
-
 
         </div>
+
     )
 }
 

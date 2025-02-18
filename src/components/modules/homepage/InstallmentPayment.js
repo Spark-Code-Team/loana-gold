@@ -10,6 +10,7 @@ const InstallmentPayment = () =>
             md:px-9
             md:justify-around
             md:flex
+            hidden
             ">
                 <div className="
                 md:w-1/2

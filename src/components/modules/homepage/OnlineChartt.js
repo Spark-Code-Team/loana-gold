@@ -2,28 +2,21 @@ import Image from "next/image";
 
 const OnlineChartt = () => {
     return (
-        <div className="md:my-auto">
 
-        <div className="
-        md:pt-10
-        md:w-[600px]
-        md:h-[408px]
-        ">
-            <Image
-            src="/images/chart.png"
-            alt="image"
-            width={600}
-            height={412}
-            className="
-            bg-white
-            "
-            />
+        <>
 
-        </div>
-        
+            <div className="md:w-1/2 w-full flex justify-center items-center lg:mt-20 mt-10">
 
-        </div>
-        
+                <div className="md:w-[90%] w-full m-auto md:pr-0 md:pl-0 pr-10 pl-10">
+
+                    <Image src="/images/chart.png" alt="" width={600} height={412} layout="responsive"/>
+
+                </div>
+
+            </div>
+
+        </>
+
     )
 }
 

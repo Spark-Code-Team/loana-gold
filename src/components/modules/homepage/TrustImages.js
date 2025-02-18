@@ -1,40 +1,41 @@
 import Image from "next/image";
 
-const images = [
-    { id: 1, src: "/images/sabz11.png" },
-    { id: 2, src: "/images/abi2.png" },
-    { id: 3, src: "/images/vasat.png" },
-    { id: 4, src: "/images/abi4.png" },
-    { id: 5, src: "/images/aks5.png" }
+const items = [
+    { id: 1, img: "/images/sabz11.png" },
+    { id: 2, img: "/images/abi2.png" },
+    { id: 3, img: "/images/vasat.png" },
+    { id: 4, img: "/images/abi4.png" },
+    { id: 5, img: "/images/aks5.png" }
 ];
 
 const TrustImages = () => {
     return (
         <>
-            <p className="
-              md:px-24 
-              md:mt-24 
-              md:mb-10 
-              md:text-2xl 
-              md:font-bold
-              ">
-                اعتماد شما سرمایه ماست
-            </p>
 
-            <div className="
-              md:px-24 
-              md:w-full 
-              md:h-52 
-              md:flex 
-              md:justify-between
-              ">
-                
-                {images.map(image => (
-                    <div key={image.id} className="md:my-auto md:w-40 md:h-40">
-                        <Image src={image.src} alt="image" width={155} height={155} />
+            <div className="md:w-full w-full">
+
+                <div className="md:w-[85%] w-full m-auto md:mt-20">
+
+                    <div className="w-full text-[24px] font-bold md:text-right text-center">اعتبار شما سرمایه ماست</div>
+
+                    <div className="w-full md:mt-12 md:flex md:flex-nowrap md:justify-around flex flex-wrap md:pr-0 md:pl-0">
+
+                        {
+                            items.map((item , index )=>(
+
+                                <div key={index} className="md:w-[160px] md:h-[160px] w-1/2 flex md:m-0 md:mt-0 mt-10">
+                                    <Image src={item.img} alt="" width={160} height={160} className="block m-auto"/>
+                                </div>
+
+                            ))
+                        }
+
                     </div>
-                ))}
+
+                </div>
+
             </div>
+
         </>
     );
 };
