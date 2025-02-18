@@ -8,7 +8,7 @@ const ContactUsPage = () => {
         <>
         
         <div className="
-        md:w-full
+        md:w-full w-full
         md:h-[535px]
         md:mt-16 
         md:px-16

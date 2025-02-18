@@ -4,18 +4,29 @@ import PhoneIcon from "../../../../public/icons/PhoneIcon";
 import LocationIcon from "../../../../public/icons/LocationIcon";
 const ContactUsMap = () => {
     return(
-        <div className="w-[600px] h-[462px] bg-white border-l-2 border-[#EDEDED] my-auto">
+        <div className="
+         md:w-[600px] w-full
+         md:h-[462px] 
+         bg-white 
+         border-l-2 
+         border-[#EDEDED] 
+         my-auto
+         p-2
+         md:p-0
+         ">
 
             <h1 className="text-base font-bold pb-8">  راه های ارتباط با ما  </h1>
 
             <div className="
                 flex 
-                items-center 
-                space-x-2 
-                rtl:space-x-reverse
+                md:items-center 
+                md:space-x-2 
+                md:rtl:space-x-reverse
             ">
                 <PhoneIcon/>
-                <p className="pb-3"> شماره تماس:۰۲۱-۱۲۳۴۵۶۷۸ </p>
+                <p className="pb-3">
+                 شماره تماس:۰۲۱-۱۲۳۴۵۶۷۸ 
+                </p>
             </div>
 
             <div className="
