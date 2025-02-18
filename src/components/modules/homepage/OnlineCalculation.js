@@ -4,11 +4,7 @@ const OnlineCalculation = () => {
     return(
     <div className="my-auto">
 
-    <p className="
-    md:pb-10
-    md:text-[24px]
-    md:font-bold
-    ">
+    <p className="md:pb-10 md:text-[24px] md:font-bold">
         لونا اولین پلتفرم خرید قسطی طلا آب شده
     </p>
 
