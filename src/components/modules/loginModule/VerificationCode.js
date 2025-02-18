@@ -5,23 +5,25 @@ import Link from "next/link";
 const VerificationCode = ({ setloginRegisterState }) => {
     return(
       <div className="
-       md:flex 
-       md:justify-center 
-       md:items-center 
+       flex 
+       justify-center 
+       items-center 
        md:h-screen 
        md:bg-center
        bg-no-repeat
+       p-3
+       md:p-0
        md:bg-contain 
        lg:bg-cover
        md:bg-[url('/images/userdashboard.png')]
       ">
         <div className="
          bg-white 
-         w-[664px] 
-         h-[590px] 
-         p-8 
+         md:w-[664px] 
+         md:h-[590px] 
+         md:p-8 
          rounded-xl 
-         shadow-lg
+         md:shadow-lg
          ">
             <div className="
             mt-16
@@ -30,12 +32,12 @@ const VerificationCode = ({ setloginRegisterState }) => {
              flex-col 
              items-start
              ">
-                <h2 className="
-              text-2xl 
+            <h2 className="
+              text-xl 
               font-bold 
               mb-4 
               text-center
-              md:text-base
+              md:text-2xl
               ">
                 ثبت نام
             </h2>
@@ -99,16 +101,16 @@ const VerificationCode = ({ setloginRegisterState }) => {
 
             <div>
                 <button className="
-                 w-[600px] 
-                 h-12 
-                 bg-[#EDEDED] 
-                 rounded-xl 
-                 text-black
-                 hover:bg-primary
-                 hover:text-black
-                 text-xl
-                 md:text-base
-                 "
+                md:w-[600px] w-[375px]
+                h-12 
+                bg-[#EDEDED] 
+                rounded-xl 
+                text-black
+                hover:bg-primary
+                hover:text-black
+                text-xl
+                md:text-base
+                "
                  onClick={() => setloginRegisterState(0)}
                  >
                     تایید و ادامه
@@ -117,7 +119,7 @@ const VerificationCode = ({ setloginRegisterState }) => {
 
             <div className="
              mt-3 
-             w-[600px]
+             md:w-[600px] w-[370px]
              flex
              text-xl
              md:text-base

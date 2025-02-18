@@ -9,25 +9,32 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
     return(
         <div 
       className="
-       md:flex 
+       md:flex flex flex-col
        md:justify-center 
        md:items-center 
-       md:h-screen 
+       md:h-screen
        md:bg-center
-       bg-no-repeat
+       bg-no-repeat 
        md:bg-contain 
        lg:bg-cover
        md:bg-[url('/images/userdashboard.png')]
+       mt-4
+       md:mt-0
+       p-3
+       md:p-0
        " 
     >
 
         <div className="
-       bg-white 
-         w-[664px] 
-         h-[590px] 
-         p-8 
+       bg-white
+         md:w-[664px] w-full
+         md:h-[590px] h-screen
+         md:p-8 p-3
          rounded-xl 
-         shadow-lg
+         md:shadow-lg
+         flex
+         flex-col
+         justify-between
          ">
             <div className="
              h-16 
@@ -55,17 +62,17 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
             </div>
 
             <div className="
-             h-[325px] 
-             grid 
-             grid-cols-2 
-             gap-4 
-             mt-10
+             md:h-[325px] 
+             md:grid 
+             md:grid-cols-2 
+             md:gap-4 
+             md:mt-10
             ">
 
                 <div className="
                 flex
                 items-center
-                w-[292px]
+                md:w-[292px]
                 h-12
                 rounded-xl
                 border-[1px]
@@ -82,7 +89,7 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
                 focus:outline-none
                 focus:ring-0
                 focus:boredr-transparent
-                w-[250px]
+                md:w-[250px] w-80
                 text-xl
                 md:text-base
                 "
@@ -95,11 +102,14 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
                 <div className="
                 flex
                 items-center
-                w-[292px]
+                md:w-[292px]
                 h-12
                 rounded-xl
                 border-[1px]
-                boredr-[#E1E1E1]"
+                boredr-[#E1E1E1]
+                md:mt-0
+                mt-4
+                "
                 >
                 <span className="mr-4">
                 <EmailLogin/>
@@ -111,7 +121,7 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
                 focus:outline-none
                 focus:ring-0
                 focus:boredr-transparent
-                w-[250px]
+                md:w-[250px] w-80
                 text-xl
                 md:text-base
                 "
@@ -124,11 +134,14 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
                 <div className="
                 flex
                 items-center
-                w-[292px]
+                md:w-[292px]
                 h-12
                 rounded-xl
                 border-[1px]
-                boredr-[#E1E1E1]"
+                boredr-[#E1E1E1]
+                md:mt-0
+                mt-4
+                "
                 >
                 <span className="mr-4">
                 <PhoneLogin/>
@@ -137,12 +150,11 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
                 <input
                 className="
                 border-none
-                 focus:outline-none
+                focus:outline-none
                 focus:ring-0
                 focus:boredr-transparent
-                w-[250px]
+                md:w-[250px] w-80
                 text-sm
-                md:text-base
                 "
                 placeholder=" شماره موبایل (ثبت شده با کد ملی) "
                 type="text"
@@ -153,11 +165,14 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
                 <div className="
                 flex
                 items-center
-                w-[292px]
+                md:w-[292px]
                 h-12
                 rounded-xl
                 border-[1px]
-                boredr-[#E1E1E1]"
+                boredr-[#E1E1E1]
+                md:mt-0
+                mt-4
+                "
                 >
                 <span className="mr-4">
                 <PhoneLogin/>
@@ -169,7 +184,7 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
                  focus:outline-none
                 focus:ring-0
                 focus:boredr-transparent
-                w-[250px]
+                md:w-[250px] w-80
                 text-xl
                 md:text-base
                 "
@@ -182,11 +197,14 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
                 <div className="
                 flex
                 items-center
-                w-[292px]
+                md:w-[292px]
                 h-12
                 rounded-xl
                 border-[1px]
-                boredr-[#E1E1E1]"
+                boredr-[#E1E1E1]
+                md:mt-0
+                mt-4
+                "
                 >
                 <span className="mr-4">
                 <PhoneLogin/>
@@ -198,7 +216,7 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
                  focus:outline-none
                 focus:ring-0
                 focus:boredr-transparent
-                w-[250px]
+                md:w-[250px] w-80
                 text-xl
                 md:text-base
                 "
@@ -211,11 +229,14 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
                 <div className="
                 flex
                 items-center
-                w-[292px]
+                md:w-[292px]
                 h-12
                 rounded-xl
                 border-[1px]
-                boredr-[#E1E1E1]"
+                boredr-[#E1E1E1]
+                md:mt-0
+                mt-4
+                "
                 >
                 <span className="mr-4">
                 <PhoneLogin/>
@@ -227,7 +248,7 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
                  focus:outline-none
                 focus:ring-0
                 focus:boredr-transparent
-                w-[250px]
+                md:w-[250px] w-80
                 text-xl
                 md:text-base
                 "
@@ -241,7 +262,7 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
 
             <div>
                 <button className="
-                w-[600px] 
+                md:w-[600px] w-full
                 h-12 
                 bg-[#EDEDED] 
                 rounded-xl 

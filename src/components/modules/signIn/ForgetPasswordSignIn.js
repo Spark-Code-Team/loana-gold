@@ -7,15 +7,16 @@ const ForgetPasswordSignIn = ()=> {
     <AuthPageStruct>
 
     <div className="
-     gap-y-5
+     md:gap-y-5
+     gap-y-8
      flex
      flex-col
      mt-16
-     justify-center
-     items-center
+     md:justify-center
+     md:items-center
      ">
         <div className="
-        w-[616px]
+        md:w-[616px] w-full
         leading-10
         ">
         <p className="
@@ -39,7 +40,7 @@ const ForgetPasswordSignIn = ()=> {
         <div className="
                 flex
                 items-center
-                w-[616px]
+                md:w-[616px] w-full
                 h-12
                 rounded-xl
                 border-[1px]
@@ -58,7 +59,7 @@ const ForgetPasswordSignIn = ()=> {
                 focus:outline-none
                 focus:ring-0
                 focus:boredr-transparent
-                w-[616px]
+                md:w-[616px] w-full
                 md:text-base
                 text-xl
                 
@@ -73,7 +74,7 @@ const ForgetPasswordSignIn = ()=> {
             <button className="
                 hover:bg-primary
                 hover:text-black
-                 w-[616px] 
+                 md:w-[616px] w-full 
                  h-12 
                  bg-[#EDEDED] 
                  rounded-xl 
@@ -87,7 +88,7 @@ const ForgetPasswordSignIn = ()=> {
 
 
         <div  className="
-        w-[616px]
+        md:w-[616px] w-full
         leading-9
         ">
 
