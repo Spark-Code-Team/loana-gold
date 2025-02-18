@@ -1,114 +1,37 @@
-import Online from "../../../../public/icons/Online";
+import Image from "next/image";
 
 const OnlineCalculation = () => {
     return(
-    <div className="my-auto">
 
-    <p className="md:pb-10 md:text-[24px] md:font-bold">
-        لونا اولین پلتفرم خرید قسطی طلا آب شده
-    </p>
+        <div className="md:w-1/2 w-full">
 
-        <div className="
-        md:w-[560px]
-        md:border-[1px]
-        md:border-[#E1E1E1]
-        md:rounded-xl
-        md:px-[32px]
-        md:pt-9
-        md:h-96
-        "
-        >
-            <div className="
-            md:w-[496px]
-            md:h-[224px]
-            md:flex
-            md:flex-col
-            md:justify-around
-            "
-            >
+            <div className="md:w-[90%] w-[90%] m-auto mt-10 pt-8 pb-8 pr-4 pl-4 border-[1.5px] border-[#E1E1E1] rounded-xl">
 
-                <div>
-                    <button className="
-                    md:w-[60px]
-                    md:h-8
-                    md:bg-[#DADADA]
-                    md:rounded-xl
-                    ">
-                    خرید
-                    </button>
+                <div className="md:w-full md:m-auto font-bold md:text-right text-center">لونا اولین پلتفرم خرید قسطی طلا آب شده</div>
 
-                <button className="
-                    md:w-[60px]
-                    md:h-8
-                    md:mr-4
-                    md:bg-[#F9F9F9]
-                    md:rounded-xl
-                    "> 
-                    فروش
-                </button>
-
+                <div className="w-full md:m-auto md:mt-6 mt-6 flex justify-start gap-x-4 text-sm">
+                    <button className="md:w-[60px] h-[32px] bg-[#DADADA] rounded-xl w-[20%]">خرید</button>
+                    <button className="md:w-[60px] h-[32px] bg-[#F9F9F9] rounded-xl w-[20%]">فروش</button>
                 </div>
 
-                <div>
-                    <input
-                     type="text"
-                     placeholder="مقدار طلا به میلی گرم"
-                     className="
-                     md:w-[496px]
-                     md:h-14
-                     md:rounded-xl
-                     md:border-[1px]
-                     md:border-[#E1E1E1]
-                     "
-                    />
-                </div>
+                <div className="w-full m-auto md:mt-2 mt-3">
 
-                <div>
-                <input
-                     type="text"
-                     placeholder="مقدار طلا به میلی گرم"
-                     className="
-                     md:w-[496px]
-                     md:h-14
-                     md:rounded-xl
-                     md:border-[1px]
-                     md:border-[#E1E1E1]
-                     "
-                    />
-                </div>
+                    <input type="text" name="" className="w-full md:h-[56px] rounded-xl border-[1.5px] border-[#E1E1E1] mt-4" placeholder="مقدار طلا به سوت"/>
+                    <input type="text" name="" className="w-full md:h-[56px] rounded-xl border-[1.5px] border-[#E1E1E1] mt-4" placeholder="مقدار طلا به سوت"/>
 
-                <div className="
-                flex 
-                items-center 
-                space-x-2 
-                rtl:space-x-reverse
-                ">
-                    <Online className="w-6 h-6"/>
-                    <p>
-                    قیمت لحظه ای خرید هر گرم طلای 15 عیار: 5,340,000 تومان
-                    </p>
+                    <div className="w-full flex gap-x-3 items-center mt-6 md:text-base text-sm">
+                        <Image src="/images/vector.png" alt="" width={26} height={18}/>
+                        <p>قیمت لحظه ای خرید هر گرم طلای 15 عیار: 5,340,000 تومان</p>
+                    </div>
+
+                    <div className="md:w-full md:mt-14 w-full mt-12">
+                        <button className="md:w-[131px] h-[48px] w-[29%] bg-[#D2AB67] rounded-xl">خرید</button>
+                    </div>
+
                 </div>
 
             </div>
 
-            <div className="
-            md:pt-14
-            ">
-                <button className="
-                md:w-32
-                md:h-12
-                md:rounded-lg
-                bg-primary
-                
-                ">
-                    خرید
-
-                </button>
-
-            </div>
-
-        </div>
-    
         </div>
     
     )
