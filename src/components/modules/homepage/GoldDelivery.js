@@ -12,15 +12,55 @@ const GoldDelivery = () => {
 
                     <div className="md:w-1/2 w-full">
 
-                        <div className="w-full md:mt-28 text-[24px] font-bold md:pr-0 pr-10">تحویل حضوری طلا</div>
+                        <div className="
+                        w-full 
+                        md:mt-28 
+                        text-[24px] 
+                        font-bold 
+                        md:pr-0 
+                        pr-10
+                        ">
+                            تحویل حضوری طلا
+                        </div>
 
-                        <div className="w-full md:pl-20 pl-5 md:mt-10 mt-5 md:pr-0 pr-10">ما امکان تحویل حضوری طلا به سراسر ایران را فراهم کرده‌ایم تا تجربه‌ای مطمئن و آسوده را برای مشتریان خود رقم بزنیم.</div>
+                        <div className="
+                        w-full 
+                        md:pl-20 
+                        pl-5 
+                        md:mt-10 
+                        mt-5 
+                        md:pr-0 
+                        pr-10
+                        ">
+                            ما امکان تحویل حضوری طلا به سراسر ایران را فراهم کرده‌ایم تا
+                             تجربه‌ای مطمئن و آسوده را برای مشتریان خود رقم بزنیم.
+                        </div>
 
-                        <div className="w-full m-auto md:mt-10 mt-5 text-[#AB8B53] md:pr-0 pr-10">فرایند دریافت حضوری طلا</div>
+                        <div className="
+                        w-full 
+                        m-auto 
+                        md:mt-10 
+                        mt-5 
+                        text-[#AB8B53] 
+                        md:pr-0 
+                        pr-10
+                        ">
+                            فرایند دریافت حضوری طلا
+                        </div>
 
                     </div>
 
-                    <div className="md:w-1/2 w-full md:flex md:justify-center md:items-center md:mt-0 mt-10">
+                    <div className="
+                    md:w-1/2 
+                    w-full 
+                    px-5 
+                    md:px-0 
+                    md:flex 
+                    md:justify-center 
+                    md:items-center 
+                    md:mt-0 
+                    mt-10
+                    ">
 
                         <Image src="/images/gold-map.png" alt="" width={439} height={409}/>
 

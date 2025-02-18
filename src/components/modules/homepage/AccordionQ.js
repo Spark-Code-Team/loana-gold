@@ -26,20 +26,31 @@ const AccordionQ = ()=>{
                     <div key={index} className="mb-2">
                         <button
                             onClick={() => toggleAccordion(index)}
-                            className={`w-full flex justify-between items-center text-right p-4 transition-all duration-300 shadow-md ${
-                                openIndex === index ? 'bg-gray-100' : 'bg-white'
+                            className={`
+                                w-full 
+                                rounded-lg 
+                                flex 
+                                justify-between 
+                                items-center 
+                                text-right 
+                                p-4 
+                                transition-all 
+                                duration-300 
+                                bg-gray-100
+                                ${
+                                openIndex === index ? '' : 'bg-[#FBFBFB]'
                             }`}
                         >
                             <span className="text-gray-800 font-medium">{faq.question}</span>
                             {openIndex === index ? (
                                 <IoIosArrowDown className="w-5 h-5 text-gold-500" />
                             ) : (
-                                <IoIosArrowDown className="w-5 h-5 text-gray-500" />
+                                <IoIosArrowDown className="w-5 h-5" />
                             )}
                         </button>
                         <div
-                            className={`overflow-hidden transition-all duration-300 bg-gray-100 ${
-                                openIndex === index ? 'max-h-40 p-4 text-gray-600' : 'max-h-0'
+                            className={`overflow-hidden transition-all duration-300 bg-gray-100 rounded-lg ${
+                                openIndex === index ? 'max-h-40 p-4 ' : 'max-h-0'
                             }`}
                         >
                             {faq.answer}
