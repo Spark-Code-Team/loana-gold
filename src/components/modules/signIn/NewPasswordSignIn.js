@@ -6,23 +6,24 @@ const NewPasswordSignIn = () => {
 
     <AuthPageStruct>
 
-            <div className="
-     gap-y-5
+    <div className="
+     md:gap-y-5
+     gap-y-8
      flex
      flex-col
      mt-16
-     justify-center
-     items-center
+     md:justify-center
+     md:items-center
      ">
         <div className="
-        w-[616px]
+        md:w-[616px] w-full
         leading-10
         ">
         <p className="
         text-2xl
         font-bold
         ">
-            فراموشی رمز عبور
+            فراموشی رمز عبور nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
         </p>
 
         <p className="
@@ -36,7 +37,7 @@ const NewPasswordSignIn = () => {
         <div className="
                 flex
                 items-center
-                w-[616px]
+                md:w-[616px] w-full
                 h-12
                 rounded-xl
                 border-[1px]
@@ -55,7 +56,7 @@ const NewPasswordSignIn = () => {
                 focus:outline-none
                 focus:ring-0
                 focus:boredr-transparent
-                w-[616px]
+                md:w-[616px] w-full
                 "
                 placeholder=" رمز عبور جدید را وارد کنید "
                 type="text"
@@ -66,7 +67,7 @@ const NewPasswordSignIn = () => {
             <div className="
                 flex
                 items-center
-                w-[616px]
+                md:w-[616px] w-full
                 h-12
                 rounded-xl
                 border-[1px]
@@ -85,7 +86,7 @@ const NewPasswordSignIn = () => {
                 focus:outline-none
                 focus:ring-0
                 focus:boredr-transparent
-                w-[616px]
+                md:w-[616px] w-full
                 "
                 placeholder=" رمز عبور جدید را وارد کنید "
                 type="text"
@@ -97,7 +98,7 @@ const NewPasswordSignIn = () => {
             <button className="
                 hover:bg-primary
                 hover:text-black
-                 w-[616px] 
+                 md:w-[616px] w-full
                  h-12 
                  bg-[#EDEDED] 
                  rounded-xl 
@@ -107,7 +108,7 @@ const NewPasswordSignIn = () => {
             </button>
         </div>
           
-     </div>
+    </div>
 
     </AuthPageStruct>
     )

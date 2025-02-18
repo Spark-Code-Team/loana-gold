@@ -7,15 +7,16 @@ const SignInPhone =({ setLoginState }) =>{
     <AuthPageStruct>
 
      <div className="
-     gap-y-5
+     gap-y-8
+     md:gap-y-5
      flex
      flex-col
      mt-16
-     justify-center
-     items-center
+     md:justify-center
+     md:items-center
      ">
         <div className="
-        w-[616px]
+        md:w-[616px]
         leading-10
         ">
         <p className="
@@ -39,7 +40,7 @@ const SignInPhone =({ setLoginState }) =>{
         <div className="
                 flex
                 items-center
-                w-[616px]
+                md:w-[616px] w-full
                 h-12
                 rounded-xl
                 border-[1px]
@@ -58,7 +59,7 @@ const SignInPhone =({ setLoginState }) =>{
                 focus:outline-none
                 focus:ring-0
                 focus:boredr-transparent
-                w-[616px]
+                md:w-[616px] w-full
                 text-xl
                 md:text-base
                 "
@@ -72,12 +73,12 @@ const SignInPhone =({ setLoginState }) =>{
             <button className="
                 hover:bg-primary
                 hover:text-black
-                 w-[616px] 
+                 md:w-[616px] w-full
                  h-12 
                  bg-[#EDEDED] 
                  rounded-xl 
                  text-[#7A7A7A]
-                 text-2xl
+                 text-xl
                  md:text-base
                  "
                  onClick={() => setLoginState("verification")}

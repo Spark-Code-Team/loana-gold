@@ -7,14 +7,16 @@ export default function AuthPageStruct ({children}) {
         md:flex
         md:justify-evenly
         mt-10
+        p-3
+        md:p-0
         ">
             <div className="
-            w-[664px]
+            md:w-[664px] w-full
             h-[561px]
             rounded-xl
-            border-[1px]
-            border-[#E1E1E1]
-            shadow-lg
+            md:border-[1px]
+            md:border-[#E1E1E1]
+            md:shadow-lg
             ">
                 {children}
 
