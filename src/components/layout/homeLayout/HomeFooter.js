@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import {useState} from "react";
+import {log} from "next/dist/server/typescript/utils";
 
 const HomeFooter = () =>{
 
@@ -10,59 +11,7 @@ const HomeFooter = () =>{
     return(
 
         <>
-                    <div className={`${login ? "" : "hidden"} absolute bottom-0 w-full flex justify-between mt-10`}>
-
-                        <div className="w-1/5 flex flex-wrap items-center">
-
-                            <div className="w-full flex justify-center">
-                                <Image src="/images/user.png" alt="" width={24} height={24}/>
-                            </div>
-
-                            <div className="w-full text-[10px] text-center">حساب کاربری</div>
-
-                        </div>
-
-                        <div className="w-1/5 flex flex-wrap items-center">
-
-                            <div className="w-full flex justify-center">
-                                <Image src="/images/hand.png" alt="" width={24} height={24}/>
-                            </div>
-
-                            <div className="w-full text-[10px] text-center">درخواست اعتبار</div>
-
-                        </div>
-
-                        <div className="w-1/5 flex justify-center flex-wrap items-center">
-
-                            <div className="w-[45px] h-[45px] bg-[#D2AB67] flex justify-center items-center rounded-full">
-                                <Image src="/images/home.png" alt="" width={24} height={24}/>
-                            </div>
-
-                        </div>
-
-                        <div className="w-1/5 flex flex-wrap items-center">
-
-                            <div className="w-full flex justify-center">
-                                <Image src="/images/phone.png" alt="" width={24} height={24}/>
-                            </div>
-
-                            <div className="w-full text-[10px] text-center">تماس با ما</div>
-
-                        </div>
-
-                        <div className="w-1/5 flex flex-wrap items-center">
-
-                            <div className="w-full flex justify-center">
-                                <Image src="/images/question.png" alt="" width={24} height={24}/>
-                            </div>
-
-                            <div className="w-full text-[10px] text-center">سوالات متداول</div>
-
-                        </div>
-
-                    </div>
-
-                    <div className={` ${login ? "hidden" : ""} md:w-full bg-white md:pt-1 pt-1 lg:pr-0 lg:pl-0 pr-3 pl-3 mt-12 border-t-2 border-t-[#D2AB67]`}>
+                    <div className="md:w-full bg-white md:pt-1 pt-1 lg:pr-0 lg:pl-0 pr-3 pl-3 mt-12 mb-14 border-t-2 border-t-[#D2AB67]">
 
                         <div className="md:w-[90%] m-auto mt-10 w-full">
 
@@ -80,9 +29,6 @@ const HomeFooter = () =>{
                                 </div>
 
                             </div>
-
-
-
 
                             <div className="w-full m-auto mt-10 md:flex md:justify-around md:flex-wrap flex flex-wrap">
 
@@ -153,6 +99,67 @@ const HomeFooter = () =>{
                         <div className="w-full md:mt-12 mt-12 text-center p-2 text-white bg-[#D2AB67]">تمامی حقوق این وبگاه محفوظ و مربوط به لونا است.</div>
 
                     </div>
+
+
+            {
+                login && (
+                    <>
+
+                        <div className="md:hidden block w-full flex justify-between mt-10 bg-yellow-300 fixed bottom-0 pt-2 pb-2">
+
+                            <div className="w-1/5 flex flex-wrap items-center">
+
+                                <div className="w-full flex justify-center">
+                                    <Image src="/images/user.png" alt="" width={24} height={24}/>
+                                </div>
+
+                                <div className="w-full text-[10px] text-center">حساب کاربری</div>
+
+                            </div>
+
+                            <div className="w-1/5 flex flex-wrap items-center">
+
+                                <div className="w-full flex justify-center">
+                                    <Image src="/images/hand.png" alt="" width={24} height={24}/>
+                                </div>
+
+                                <div className="w-full text-[10px] text-center">درخواست اعتبار</div>
+
+                            </div>
+
+                            <div className="w-1/5 flex justify-center flex-wrap items-center">
+
+                                <div className="w-[45px] h-[45px] bg-[#D2AB67] flex justify-center items-center rounded-full">
+                                    <Image src="/images/home.png" alt="" width={24} height={24}/>
+                                </div>
+
+                            </div>
+
+                            <div className="w-1/5 flex flex-wrap items-center">
+
+                                <div className="w-full flex justify-center">
+                                    <Image src="/images/phone.png" alt="" width={24} height={24}/>
+                                </div>
+
+                                <div className="w-full text-[10px] text-center">تماس با ما</div>
+
+                            </div>
+
+                            <div className="w-1/5 flex flex-wrap items-center">
+
+                                <div className="w-full flex justify-center">
+                                    <Image src="/images/question.png" alt="" width={24} height={24}/>
+                                </div>
+
+                                <div className="w-full text-[10px] text-center">سوالات متداول</div>
+
+                            </div>
+
+                        </div>
+
+                    </>
+                )
+            }
 
 
         </>
