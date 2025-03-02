@@ -19,7 +19,7 @@ const HomeHeader = () => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [login , setLogin] = useState(true);
+    const [login , setLogin] = useState(false);
     const [openSidebar , setOpenSidebar] = useState(false);
 
     const openModal = () => {

@@ -65,7 +65,7 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
              md:h-[325px] 
              md:grid 
              md:grid-cols-2 
-             md:gap-4 
+             md:gap-4
              md:mt-10
             ">
 
