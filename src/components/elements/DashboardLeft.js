@@ -1,4 +1,4 @@
-const DashboardLeft = () => {
+const DashboardLeft = ({ title }) => {
     return(
         <div className="
         w-[911px]
@@ -13,7 +13,7 @@ const DashboardLeft = () => {
             text-2xl
             pr-5
             ">
-                اطلاعات
+                { title }
             </p>
 
         </div>

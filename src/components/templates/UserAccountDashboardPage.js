@@ -17,7 +17,9 @@ const UserAccountDashboardPage = () => {
          border-[#CBCED7]
          ">
             
-            <DashboardLeft/>
+            <DashboardLeft
+                title="اطلاعات"
+            />
 
             <div className="
             grid
