@@ -10,7 +10,6 @@ import SubmitDashboard from "../../../../public/icons/SubmitDashboard";
 import OrderDashboard from "../../../../public/icons/OrdersDashboard";
 import TicketDashboard from "../../../../public/icons/TicketDashboard";
 import ErrorDashboard from "../../../../public/icons/ErrorDashboard";
-import IsOpen from "../../../../public/icons/IsOpen";
 import ArrowDashboard from "../../../../public/icons/ArrowDashboard";
 const SidebarDashboard = () => {
   const [openMenu, setOpenMenu] = useState(null);
@@ -33,7 +32,6 @@ const SidebarDashboard = () => {
                flex
                justify-evenly
                items-center
-            
                "
       >
         <Image
@@ -73,7 +71,6 @@ const SidebarDashboard = () => {
     rounded-xl 
     h-screen 
     shadow-md
-    
     "
       >
         <ul
@@ -85,15 +82,16 @@ const SidebarDashboard = () => {
         >
           <li className="
            p-2 
-           hover:bg-gray-100 
            rounded-lg 
            cursor-pointer
+            hover:text-primary
            ">
             <div
               className="
-            flex"
+            flex
+            "
             >
-              <UserAccountDashboard />
+              <UserAccountDashboard/>
               <p className="pr-2">حساب کاربری</p>
             </div>
           </li>
@@ -104,7 +102,6 @@ const SidebarDashboard = () => {
                w-full 
                text-left 
                p-2 
-               hover:bg-gray-100 
                rounded-lg 
                flex 
                justify-between 
@@ -114,31 +111,53 @@ const SidebarDashboard = () => {
             >
               <div className="flex">
                 <WalletDashboard />
-                <p className="pr-2">کیف پول</p>
+                <p className="
+                pr-2 
+                hover:text-primary
+                 ">کیف پول</p>
               </div>
 
               <span>{openMenu === "wallet" ? <ArrowDashboard/> : <ArrowDashboard/>}</span>
             </button>
             {openMenu === "wallet" && (
               <ul className="ml-4 mt-2 space-y-2">
-                <li className="p-2 hover:bg-gray-100 rounded-lg">
-                  <a href="/dashboard/wallet/balance">🔹 موجودی</a>
+                <li className="
+                p-2  
+                hover:text-primary 
+                rounded-lg
+                ">
+                  <a href="/dashboard/wallet/balance"> موجودی</a>
                 </li>
-                <li className="p-2 hover:bg-gray-100 rounded-lg">
-                  <a href="/dashboard/wallet/transactions">🔹 تراکنش‌ها</a>
+
+                <li className="
+                p-2  
+                hover:text-primary 
+                rounded-lg
+                ">
+                  <a href="/dashboard/wallet/transactions"> تراکنش‌ها</a>
                 </li>
               </ul>
             )}
           </li>
 
-          <li className="p-2 hover:bg-gray-100 rounded-lg cursor-pointer">
+          <li className="
+          p-2 
+          rounded-lg 
+          cursor-pointer
+        hover:text-primary
+          ">
             <div className="flex">
               <InstallmentDashboard />
               <p className="pr-2">اقساط</p>
             </div>
           </li>
 
-          <li className="p-2 hover:bg-gray-100 rounded-lg cursor-pointer">
+          <li className="
+          p-2  
+          hover:text-primary 
+          rounded-lg 
+          cursor-pointer
+          ">
             <a href="/dashboard/history">
               <div className="flex">
                 <GoldDashboard />
@@ -147,14 +166,22 @@ const SidebarDashboard = () => {
             </a>
           </li>
 
-          <li className="p-2 hover:bg-gray-100 rounded-lg cursor-pointer">
+          <li className="
+          p-2
+        hover:text-primary
+          cursor-pointer
+          ">
             <div className="flex">
               <HistoryDashboard />
               <p className="pr-2">تاریخچه اعتبارسنجی</p>
             </div>
           </li>
 
-          <li className="p-2 hover:bg-gray-100 rounded-lg cursor-pointer">
+          <li className="
+          p-2  
+          hover:text-primary 
+          cursor-pointer
+          ">
             <a href="/dashboard/support">
               <div className="flex">
                 <SubmitDashboard />
@@ -163,7 +190,11 @@ const SidebarDashboard = () => {
             </a>
           </li>
 
-          <li className="p-2 hover:bg-red-100 rounded-lg cursor-pointer">
+          <li className="
+          p-2 
+          cursor-pointer
+          hover:text-primary
+          ">
             <a href="/logout">
               <div className="flex">
                 <OrderDashboard />
@@ -172,7 +203,11 @@ const SidebarDashboard = () => {
             </a>
           </li>
 
-          <li className="p-2 hover:bg-red-100 rounded-lg cursor-pointer">
+          <li className="
+          p-2
+          cursor-pointer
+          hover:text-primary
+          ">
             <a href="/logout">
               <div className="flex">
                 <TicketDashboard />
@@ -181,7 +216,11 @@ const SidebarDashboard = () => {
             </a>
           </li>
 
-          <li className="p-2 hover:bg-red-100 rounded-lg cursor-pointer">
+          <li className="
+          p-2 
+          cursor-pointer
+          hover:text-primary
+          ">
             <a href="/logout">
               <div className="flex">
                 <ErrorDashboard />

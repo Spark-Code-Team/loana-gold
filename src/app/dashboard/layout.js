@@ -1,9 +1,12 @@
-import UserPanelLayout from "@/components/layout/DashboardLayout/UserPanelLayout";
+import DashboardLayout from "@/components/layout/DashboardLayout/DashboardLayout";
 
-export default function DashboardLayoutUser(){
+
+export default function DashboardLayoutUser({ children }){
     return(
         <>
-            <UserPanelLayout/>
+            <DashboardLayout>
+                { children }
+            </DashboardLayout>
         </>
     )
 }
