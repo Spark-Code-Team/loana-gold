@@ -27,19 +27,19 @@ const OrdersDashboardPage = () => {
                 <ul className="
                 flex
                 flex-row
-                gap-x-4
+                gap-x-8
                 ">
                     <li className="font-bold">
                         مرتب سازی
                     </li>
                     <li>
-                        مرتب سازی
+                        سفارش های اخیر 
                     </li>
                     <li>
-                        مرتب سازی
+                        طلا اب شده 
                     </li>
                     <li>
-                        مرتب سازی
+                        طلا ساخته شده 
                     </li>
                 </ul>
 
@@ -166,10 +166,10 @@ const OrdersDashboardPage = () => {
                      font-bold
                      text-[#3B3B3B]
                      ">
-                     قطعه طلا آب شده 10.1 گرم
+                     انگشتر طلا نگین دار 7 میلی متری
                      </p>
                      <p>
-                        24 عیار
+                        18 عیار
                      </p>
                      <p>
                      وزن: 10.1 گرم
@@ -205,7 +205,10 @@ const OrdersDashboardPage = () => {
                         تاریخ ثبت سفارش: 1403/04/10 _ 15:23
                      </p>
                      <p>
-                        وضعیت: در انتظار تایید توسط فروشگاه
+                        وضعیت: 
+                        <span className="text-base pr-1 text-[#2FA766]">
+                        ثبت شده
+                        </span>
                      </p>
                     
                      </div>
@@ -250,7 +253,7 @@ const OrdersDashboardPage = () => {
                      font-bold
                      text-[#3B3B3B]
                      ">
-                     قطعه طلا آب شده 10.1 گرم
+                     انگشتر طلا نگین دار 7 میلی متری
                      </p>
                      <p>
                         24 عیار
@@ -289,7 +292,10 @@ const OrdersDashboardPage = () => {
                         تاریخ ثبت سفارش: 1403/04/10 _ 15:23
                      </p>
                      <p>
-                        وضعیت: در انتظار تایید توسط فروشگاه
+                        وضعیت: 
+                        <span className="text-base pr-1 text-[#E90000]">
+                        لغو شده
+                        </span>
                      </p>
                     
                      </div>
