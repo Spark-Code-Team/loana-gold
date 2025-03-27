@@ -11,6 +11,7 @@ import OrderDashboard from "../../../../public/icons/OrdersDashboard";
 import TicketDashboard from "../../../../public/icons/TicketDashboard";
 import ErrorDashboard from "../../../../public/icons/ErrorDashboard";
 import ArrowDashboard from "../../../../public/icons/ArrowDashboard";
+import Link from "next/link";
 const SidebarDashboard = () => {
   const [openMenu, setOpenMenu] = useState(null);
 
@@ -80,6 +81,7 @@ const SidebarDashboard = () => {
       space-y-6
       "
         >
+          
           <li className="
            p-2 
            rounded-lg 
@@ -92,9 +94,13 @@ const SidebarDashboard = () => {
             "
             >
               <UserAccountDashboard/>
+              <Link href="/dashboard/user-account-dashboard">
               <p className="pr-2">حساب کاربری</p>
+              </Link>
             </div>
           </li>
+          
+          
 
           <li>
             <button
@@ -126,7 +132,7 @@ const SidebarDashboard = () => {
                 hover:text-primary 
                 rounded-lg
                 ">
-                  <a href="/dashboard/wallet/balance"> موجودی</a>
+                  <a href="/dashboard/wallet-dashboard"> موجودی</a>
                 </li>
 
                 <li className="
@@ -134,12 +140,14 @@ const SidebarDashboard = () => {
                 hover:text-primary 
                 rounded-lg
                 ">
-                  <a href="/dashboard/wallet/transactions"> تراکنش‌ها</a>
+                  <a href="/dashboard/Transaction-dashboard"> تراکنش‌ها</a>
                 </li>
+
               </ul>
             )}
           </li>
 
+          
           <li className="
           p-2 
           rounded-lg 
@@ -148,10 +156,14 @@ const SidebarDashboard = () => {
           ">
             <div className="flex">
               <InstallmentDashboard />
+              <Link href="/dashboard/installments">
               <p className="pr-2">اقساط</p>
+              </Link>
             </div>
           </li>
+          
 
+          
           <li className="
           p-2  
           hover:text-primary 
@@ -161,7 +173,9 @@ const SidebarDashboard = () => {
             <a href="/dashboard/history">
               <div className="flex">
                 <GoldDashboard />
+                <Link href="/dashboard/goldStorage-dashboard">
                 <p className="pr-2">معامله طلا</p>
+                </Link>
               </div>
             </a>
           </li>
@@ -198,7 +212,9 @@ const SidebarDashboard = () => {
             <a href="/logout">
               <div className="flex">
                 <OrderDashboard />
+                <Link href="/dashboard/orders-dashboard">
                 <p className="pr-2">سفارش ها</p>
+                </Link>
               </div>
             </a>
           </li>
@@ -211,7 +227,9 @@ const SidebarDashboard = () => {
             <a href="/logout">
               <div className="flex">
                 <TicketDashboard />
+                <Link href="/dashboard/ticket-dashboard">
                 <p className="pr-2">ارسال تیکت پشتیبانی</p>
+                </Link>
               </div>
             </a>
           </li>
