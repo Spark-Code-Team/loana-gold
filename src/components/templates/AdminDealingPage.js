@@ -1,18 +1,110 @@
+"use client"
+import { useState } from "react";
+import Pagination from "../elements/Pagination";
+
 const AdminDealingPage = () =>{
 
     const users = [
-        { 
+    { 
         id: 1,
         name: "مهدی جعفرپور", 
         typeOfDealing: " شارژ کیف پول ", 
         gold: "واریز",
         cost: " 300/000/000 تومان ",
         date: "14/12/11",
-     }, 
+    }, 
+    { 
+        id: 2,
+        name: "مهدی جعفرپور", 
+        typeOfDealing: " شارژ کیف پول ", 
+        gold: "واریز",
+        cost: " 300/000/000 تومان ",
+        date: "14/12/11",
+    },
+    { 
+        id: 3,
+        name: "مهدی جعفرپور", 
+        typeOfDealing: " شارژ کیف پول ", 
+        gold: "واریز",
+        cost: " 300/000/000 تومان ",
+        date: "14/12/11",
+    },
+    { 
+        id: 4,
+        name: "مهدی جعفرپور", 
+        typeOfDealing: " شارژ کیف پول ", 
+        gold: "واریز",
+        cost: " 300/000/000 تومان ",
+        date: "14/12/11",
+    },
+    { 
+        id: 5,
+        name: "مهدی جعفرپور", 
+        typeOfDealing: " شارژ کیف پول ", 
+        gold: "واریز",
+        cost: " 300/000/000 تومان ",
+        date: "14/12/11",
+    },
+    { 
+        id: 6,
+        name: "مهدی جعفرپور", 
+        typeOfDealing: " شارژ کیف پول ", 
+        gold: "واریز",
+        cost: " 300/000/000 تومان ",
+        date: "14/12/11",
+    },
+    { 
+        id: 7,
+        name: "مهدی جعفرپور", 
+        typeOfDealing: " شارژ کیف پول ", 
+        gold: "واریز",
+        cost: " 300/000/000 تومان ",
+        date: "14/12/11",
+    },
+    { 
+        id: 8,
+        name: "مهدی جعفرپور", 
+        typeOfDealing: " شارژ کیف پول ", 
+        gold: "واریز",
+        cost: " 300/000/000 تومان ",
+        date: "14/12/11",
+    },
+    { 
+        id: 9,
+        name: "مهدی جعفرپور", 
+        typeOfDealing: " شارژ کیف پول ", 
+        gold: "واریز",
+        cost: " 300/000/000 تومان ",
+        date: "14/12/11",
+    },
+    { 
+        id: 10,
+        name: "مهدی جعفرپور", 
+        typeOfDealing: " شارژ کیف پول ", 
+        gold: "واریز",
+        cost: " 300/000/000 تومان ",
+        date: "14/12/11",
+    },
+    { 
+        id: 11,
+        name: "مهدی جعفرپور", 
+        typeOfDealing: " شارژ کیف پول ", 
+        gold: "واریز",
+        cost: " 300/000/000 تومان ",
+        date: "14/12/11",
+    },
      
       ];
 
+    
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 5;
 
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+  const totalPages = Math.ceil(users.length / usersPerPage);
+    
     return(
         
         <div className="
@@ -29,9 +121,8 @@ const AdminDealingPage = () =>{
             border-[1px]
             rounded-xl
             items-center
-            
             ">
-                <div className="">فیلترها</div>
+            <div className="">فیلترها</div>
 
                 <div className="
                 border-[1px] 
@@ -53,16 +144,16 @@ const AdminDealingPage = () =>{
                 items-center
                 "> تاریخ معامله </div>
 
-                <div className="text-[#E90000]">حدف همه فیلترها</div>
+            <div className="text-[#E90000]">حدف همه فیلترها</div>
             </div>
 
 
-            <div className="
+        <div className="
         w-[1016px]
-         mt-6 
-         overflow-hidden 
-         rounded-xl
-         border-[1px]
+        mt-6 
+        overflow-hidden 
+        rounded-xl
+        border-[1px]
         ">
 
            <table className="w-full">
@@ -78,7 +169,7 @@ const AdminDealingPage = () =>{
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-300">
-                        {users.map((user, index) => (
+                        {currentUsers.map((user, index) => (
                             <tr key={user.id} className="text-center hover:bg-gray-100">
                                 <td className="p-3">{index + 1}</td>
                                 <td className="p-3 border-x-[1px]">{user.name}</td>
@@ -93,6 +184,12 @@ const AdminDealingPage = () =>{
                 </table>
 
         </div>
+       
+        <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={(page) => setCurrentPage(page)}
+      />
       
         </div>
     )

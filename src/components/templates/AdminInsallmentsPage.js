@@ -1,4 +1,6 @@
 "use client"
+import { useState } from "react";
+import Pagination from "../elements/Pagination";
 const AdminInsallmentsPage = () =>{
 
     const users = [
@@ -42,7 +44,98 @@ const AdminInsallmentsPage = () =>{
         dateInsallments: "موفق",
         penalty: "جریمه"
      }, 
+
+     { 
+        id: 5,
+        name: "مهدی جعفرپور", 
+        title: " شارژ کیف پول ", 
+        settlesInsallments: "واریز",
+        unSettlesInsallments: " 300/000/000 تومان ",
+        constInsallments: "14/12/11",
+        dateInsallments: "موفق",
+        penalty: "جریمه"
+     }, 
+     { 
+        id: 6,
+        name: "مهدی جعفرپور", 
+        title: " شارژ کیف پول ", 
+        settlesInsallments: "واریز",
+        unSettlesInsallments: " 300/000/000 تومان ",
+        constInsallments: "14/12/11",
+        dateInsallments: "موفق",
+        penalty: "جریمه"
+     }, 
+     { 
+        id: 7,
+        name: "مهدی جعفرپور", 
+        title: " شارژ کیف پول ", 
+        settlesInsallments: "واریز",
+        unSettlesInsallments: " 300/000/000 تومان ",
+        constInsallments: "14/12/11",
+        dateInsallments: "موفق",
+        penalty: "جریمه"
+     }, 
+     { 
+        id: 8,
+        name: "مهدی جعفرپور", 
+        title: " شارژ کیف پول ", 
+        settlesInsallments: "واریز",
+        unSettlesInsallments: " 300/000/000 تومان ",
+        constInsallments: "14/12/11",
+        dateInsallments: "موفق",
+        penalty: "جریمه"
+     },
+     
+     { 
+        id: 9,
+        name: "مهدی جعفرپور", 
+        title: " شارژ کیف پول ", 
+        settlesInsallments: "واریز",
+        unSettlesInsallments: " 300/000/000 تومان ",
+        constInsallments: "14/12/11",
+        dateInsallments: "موفق",
+        penalty: "جریمه"
+     }, 
+     { 
+        id: 10,
+        name: "مهدی جعفرپور", 
+        title: " شارژ کیف پول ", 
+        settlesInsallments: "واریز",
+        unSettlesInsallments: " 300/000/000 تومان ",
+        constInsallments: "14/12/11",
+        dateInsallments: "موفق",
+        penalty: "جریمه"
+     }, 
+     { 
+        id: 11,
+        name: "مهدی جعفرپور", 
+        title: " شارژ کیف پول ", 
+        settlesInsallments: "واریز",
+        unSettlesInsallments: " 300/000/000 تومان ",
+        constInsallments: "14/12/11",
+        dateInsallments: "موفق",
+        penalty: "جریمه"
+     }, 
+     { 
+        id: 12,
+        name: "مهدی جعفرپور", 
+        title: " شارژ کیف پول ", 
+        settlesInsallments: "واریز",
+        unSettlesInsallments: " 300/000/000 تومان ",
+        constInsallments: "14/12/11",
+        dateInsallments: "موفق",
+        penalty: "جریمه"
+     }, 
       ];
+
+
+      const [currentPage, setCurrentPage] = useState(1);
+      const usersPerPage = 5;
+    
+      const indexOfLastUser = currentPage * usersPerPage;
+      const indexOfFirstUser = indexOfLastUser - usersPerPage;
+      const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+      const totalPages = Math.ceil(users.length / usersPerPage);
 
     return (
         <div className="
@@ -87,12 +180,12 @@ const AdminInsallmentsPage = () =>{
             </div>
 
 
-            <div className="
+        <div className="
         w-[1016px]
-         mt-6 
-         overflow-hidden 
-         rounded-xl
-         border-[1px]
+        mt-6 
+        overflow-hidden 
+        rounded-xl
+        border-[1px]
         ">
 
            <table className="w-full">
@@ -108,7 +201,7 @@ const AdminInsallmentsPage = () =>{
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-300">
-                        {users.map((user, index) => (
+                        {currentUsers.map((user, index) => (
                             <tr key={user.id} className="text-center hover:bg-gray-100">
                                 <td className="p-3">{index + 1}</td>
                                 <td className="p-3 border-x-[1px]">{user.name}</td>
@@ -121,9 +214,15 @@ const AdminInsallmentsPage = () =>{
                             </tr>
                         ))}
                     </tbody>
-                </table>
+            </table>
 
         </div>
+
+        <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={(page) => setCurrentPage(page)}
+        />
       
         </div>
     )
