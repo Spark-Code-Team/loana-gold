@@ -17,7 +17,10 @@ const SidebarAdminLayout = () =>{
 
     return (
         <>
-    <div className="">
+    <div className="
+    hidden
+    md:block
+    ">
       
     <aside className="
     w-[184px]
@@ -52,7 +55,7 @@ const SidebarAdminLayout = () =>{
             "
             >
               <UserAccountDashboard/>
-              <Link href="/dashboard/user-account-dashboard">
+              <Link href="">
               <p className="pr-2"> پنل </p>
               </Link>
             </div>
@@ -68,10 +71,12 @@ const SidebarAdminLayout = () =>{
             items-center
             ">
                 <UserAccountDashboard />
+                <Link href="/admin/User-Account">
                 <p className="
                 pr-2 
                 hover:text-primary
                  "> حساب کاربری </p>
+                 </Link>
             </div>
         </li>
 
@@ -83,10 +88,12 @@ const SidebarAdminLayout = () =>{
             items-center
             ">
                 <UserAccountDashboard />
+                <Link href="/admin/User-Management">
                 <p className="
                 pr-2 
                 hover:text-primary
                  ">  مدیریت کاربران </p>
+                 </Link>
             </div>
         </li>
 
@@ -104,7 +111,7 @@ const SidebarAdminLayout = () =>{
             items-center
             ">
               <InstallmentDashboard />
-              <Link href="/dashboard/installments">
+              <Link href="/admin/insallments-ad">
               <p className="pr-2">اقساط</p>
               </Link>
             </div>
@@ -122,7 +129,9 @@ const SidebarAdminLayout = () =>{
             items-center
             ">
               <HistoryDashboard />
+              <Link href="/admin/Dealing-ad">
               <p className="pr-2"> تاریخچه معاملات</p>
+              </Link>
             </div>
           </li>
           
@@ -142,7 +151,7 @@ const SidebarAdminLayout = () =>{
             items-center
               ">
                 <GoldDashboard />
-                <Link href="/dashboard/goldStorage-dashboard">
+                <Link href="/admin/transactions">
                 <p className="pr-2"> تراکنش ها </p>
                 </Link>
             </div>
@@ -162,7 +171,7 @@ const SidebarAdminLayout = () =>{
             items-center
             ">
                 <TicketDashboard />
-                <Link href="/dashboard/ticket-dashboard">
+                <Link href="/admin/tickets">
                 <p className="pr-2"> تیکت ها </p>
                 </Link>
               </div>

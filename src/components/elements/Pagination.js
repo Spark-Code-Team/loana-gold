@@ -20,7 +20,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
             border-[1px]
             border-primary
             text-primary 
-            ${page === currentPage ? " text-primary" : "bg-white "}
+            ${page == currentPage ? " text-primary" : "bg-white "}
           `}
         >
           {page}

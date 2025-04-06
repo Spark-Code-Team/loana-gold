@@ -9,11 +9,11 @@ const AdminUserAccountPage = () =>{
         <div>
         
         <div className="
-         w-[912px] 
-         h-[400px]
+         md:w-[1016px] w-[440px]
+         md:h-[400px] h-[542px]
          bg-white
-         border-[1px]
-         rounded-xl        
+         md:border-[1px]
+         md:rounded-xl        
          border-[#CBCED7]
          ">
             
@@ -23,12 +23,13 @@ const AdminUserAccountPage = () =>{
 
             <div className="
             grid
-            grid-cols-2
+            md:grid-cols-2
             gap-4
             pt-6
             pb-6
-            place-items-center
-            px-6
+            md:place-items-center
+            md:px-6
+            px-2
             ">
 
             <div className="flex flex-col">
@@ -44,7 +45,7 @@ const AdminUserAccountPage = () =>{
             <div className="
                 flex
                 items-center
-                md:w-[392px]
+                md:w-[392px] w-[375px]
                 h-[56px]
                 rounded-xl 
                 border-[1px] 
@@ -61,7 +62,7 @@ const AdminUserAccountPage = () =>{
              type="text" 
              placeholder="فرهاد" 
              className="
-                w-[350px]
+                md:w-[350px] 
                 border-none
                 focus:outline-none
                 focus:ring-0
@@ -85,7 +86,7 @@ const AdminUserAccountPage = () =>{
             <div className="
                 flex
                 items-center
-                md:w-[392px]
+                md:w-[392px] w-[375px]
                 h-[56px]
                 rounded-xl 
                 border-[1px] 
@@ -102,7 +103,7 @@ const AdminUserAccountPage = () =>{
              type="text" 
              placeholder="محمدی" 
              className="
-                w-[350px]
+                md:w-[350px]
                 border-none
                 focus:outline-none
                 focus:ring-0
@@ -126,7 +127,7 @@ const AdminUserAccountPage = () =>{
             <div className="
                 flex
                 items-center
-                md:w-[392px]
+                md:w-[392px] w-[375px]
                 h-[56px]
                 rounded-xl 
                 border-[1px] 
@@ -143,7 +144,7 @@ const AdminUserAccountPage = () =>{
              type="text" 
              placeholder="09125648523" 
              className="
-                w-[350px]
+                md:w-[350px]
                 border-none
                 focus:outline-none
                 focus:ring-0
@@ -167,7 +168,7 @@ const AdminUserAccountPage = () =>{
             <div className="
                 flex
                 items-center
-                md:w-[392px]
+                md:w-[392px] w-[375px]
                 h-[56px]
                 rounded-xl 
                 border-[1px] 
@@ -183,7 +184,7 @@ const AdminUserAccountPage = () =>{
              type="text" 
              placeholder="001265969" 
              className="
-                w-[350px]
+                md:w-[350px]
                 border-none
                 focus:outline-none
                 focus:ring-0
@@ -207,7 +208,7 @@ const AdminUserAccountPage = () =>{
             <div className="
                 flex
                 items-center
-                md:w-[392px]
+                md:w-[392px] w-[375px]
                 h-[56px]
                 rounded-xl 
                 border-[1px] 
@@ -224,7 +225,7 @@ const AdminUserAccountPage = () =>{
              type="text" 
              placeholder="021556320241565223" 
              className="
-                w-[350px]
+                md:w-[350px]
                 border-none
                 focus:outline-none
                 focus:ring-0
@@ -248,7 +249,7 @@ const AdminUserAccountPage = () =>{
             <div className="
                 flex
                 items-center
-                md:w-[392px]
+                md:w-[392px] w-[375px]
                 h-[56px]
                 rounded-xl 
                 border-[1px] 
@@ -265,7 +266,7 @@ const AdminUserAccountPage = () =>{
              type="text" 
              placeholder="اقتصاد نوین" 
              className="
-                w-[350px]
+                md:w-[350px]
                 border-none
                 focus:outline-none
                 focus:ring-0
@@ -280,15 +281,15 @@ const AdminUserAccountPage = () =>{
         </div>
 
         <div className="
-        w-[912px]
-        h-[370px]
+        md:w-[1016px]
+        md:h-[370px]
          bg-white
-         border-[1px]
-         rounded-xl        
+         md:border-[1px]
+         md:rounded-xl        
          border-[#CBCED7]
          mt-32
         ">
-            <div className="pr-6">
+            <div className="md:pr-6 pr-2">
             <p className="
             pt-6
             text-2xl
@@ -297,14 +298,14 @@ const AdminUserAccountPage = () =>{
                 رمزعبور
             </p>
 
-            <p className="py-6">
+            <p className="py-6 md:w-[968px] w-[365px] text-base">
             برای سهولت در ورودهای بعدی، لطفا برای حساب کاربری خود یک رمز عبور قرار دهید.
             </p>
 
             <div className="
                 flex
                 items-center
-                md:w-[392px]
+                md:w-[392px] w-[375px]
                 h-[56px]
                 rounded-xl 
                 border-[1px] 
@@ -339,7 +340,7 @@ const AdminUserAccountPage = () =>{
             <div className="
                 flex
                 items-center
-                md:w-[392px]
+                md:w-[392px] w-[375px]
                 h-[56px]
                 rounded-xl 
                 border-[1px] 

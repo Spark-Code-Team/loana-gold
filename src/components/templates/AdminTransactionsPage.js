@@ -42,15 +42,16 @@ const AdminTransactions = () => {
     rounded-xl
     ">
 
-<div className="
+    <div className="
             w-[1016px]
             h-[56px]
-            flex
+            md:flex
             flex-row
             justify-around
             border-[1px]
             rounded-xl
             items-center
+            hidden
             ">
             <div className="
             w-[155px] 
@@ -98,16 +99,18 @@ const AdminTransactions = () => {
                 >  وضعیت تراکنش </div>
 
             <div className="text-[#E90000]">حدف همه فیلترها</div>
-            </div>
+    </div>
 
 
 
-        <div className="
+    <div className="
         w-[1016px]
         mt-6 
         overflow-hidden 
         rounded-xl
         border-[1px]
+        md:block
+        hidden
         ">
 
         <table className="w-full">
@@ -138,6 +141,113 @@ const AdminTransactions = () => {
       </table>
 
     </div>
+
+    <div className="
+    md:hidden
+    w-[375px]
+    mr-2
+    ">
+
+    <p className="font-bold">تراکنش ها</p>
+
+    <div>
+    <div className="space-y-2">
+     <p>
+     برداشت از کیف پول نقدی
+     </p>
+
+    <p>
+    9,000,000,000 تومان
+    </p>
+
+    <p>
+    نوع تراکنش: برداشت
+    </p>
+
+    </div>
+      
+      <div className="
+      flex 
+      flex-row 
+      justify-between 
+      mt-2 
+      border-b-[1px] 
+      border-[#E1E1E1] 
+      pb-3
+      ">
+        <p> وضعیت: موفق</p>
+        <p> 14:21    1403/27/5   </p>
+      </div>
+
+    </div>
+
+    <div>
+    <div className="space-y-2">
+     <p>
+     برداشت از کیف پول نقدی
+     </p>
+
+    <p>
+    9,000,000,000 تومان
+    </p>
+
+    <p>
+    نوع تراکنش: برداشت
+    </p>
+
+    </div>
+      
+      <div className="
+      flex 
+      flex-row 
+      justify-between 
+      mt-2 
+      border-b-[1px] 
+      border-[#E1E1E1] 
+      pb-3
+      ">
+        <p> وضعیت: موفق</p>
+        <p> 14:21    1403/27/5   </p>
+      </div>
+
+    </div>
+
+    <div>
+    <div className="space-y-2">
+     <p>
+     برداشت از کیف پول نقدی
+     </p>
+
+    <p>
+    9,000,000,000 تومان
+    </p>
+
+    <p>
+    نوع تراکنش: برداشت
+    </p>
+
+    </div>
+      
+      <div className="
+      flex 
+      flex-row 
+      justify-between 
+      mt-2 
+      border-b-[1px] 
+      border-[#E1E1E1] 
+      pb-3
+      ">
+        <p> وضعیت: موفق</p>
+        <p> 14:21    1403/27/5   </p>
+      </div>
+
+    </div>
+
+   
+
+    </div>
+
+   
 
     <Pagination
         currentPage={currentPage}
