@@ -55,7 +55,7 @@ const SidebarAdminLayout = () =>{
             "
             >
               <UserAccountDashboard/>
-              <Link href="">
+              <Link href="/admin/panel-ad">
               <p className="pr-2"> پنل </p>
               </Link>
             </div>
