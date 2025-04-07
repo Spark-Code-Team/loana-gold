@@ -16,6 +16,7 @@ const AdminUserManagementPage = () => {
         { id: 9, name: "سازان قانعی منفرد", balance: "۳.۲۵ گرم", phone: "09157896543" },
         { id: 10, name: "حمید محمدی", balance: "۴ گرم", phone: "09151237654" },
       ];
+
       const [selectedUser, setSelectedUser] = useState(null);
       const [currentPage, setCurrentPage] = useState(1);
       const usersPerPage = 5;
@@ -120,9 +121,6 @@ const AdminUserManagementPage = () => {
                     </tbody>
                 </table>
 
-   
-
-
     <div className="flex">
       <div
         className={`
@@ -187,197 +185,37 @@ const AdminUserManagementPage = () => {
         />
     </div>
 
-       
-      <div>
-        <div
-          className="
-            md:hidden
-            w-[375px]
-            h-[144px]
-            mr-2
-            mt-6
-            border-b-[1px]
-            border-[#CBCED7]
-          "
-        >
-          <div className="flex flex-row justify-between">
-            <p>مهدی جعفر پور</p>
-            <div>
-              <button className="w-12 h-12 rounded-xl border-[1px] border-[#E1E1E1]"> 1 </button>
-              <button className="w-12 h-12 rounded-xl border-[1px] border-[#E1E1E1] mr-4"> 2 </button>
-            </div>
-          </div>
-
-            <p>
-            09125981035
-            </p>
-
-            <p className="mt-6">
-            موجودی طلا: 8 گرم
-            </p>
-          
+      
+  <div>
+  {users.map((user, index) => (
+    <div
+      key={index}
+      className="
+        md:hidden
+        w-[375px]
+        h-[144px]
+        mr-2
+        mt-6
+        border-b-[1px]
+        border-[#CBCED7]
+      "
+    >
+      <div className="flex flex-row justify-between">
+        <p>{user.name}</p>
+        <div>
+          <button className="w-12 h-12 rounded-xl border-[1px] border-[#E1E1E1]">1</button>
+          <button className="w-12 h-12 rounded-xl border-[1px] border-[#E1E1E1] mr-4">2</button>
         </div>
-
-        <div
-          className="
-            md:hidden
-            w-[375px]
-            h-[144px]
-            mr-2
-            mt-6
-            border-b-[1px]
-            border-[#CBCED7]
-          "
-        >
-          <div className="flex flex-row justify-between">
-            <p>مهدی جعفر پور</p>
-            <div>
-              <button className="w-12 h-12 rounded-xl border-[1px] border-[#E1E1E1]"> 1 </button>
-              <button className="w-12 h-12 rounded-xl border-[1px] border-[#E1E1E1] mr-4"> 2 </button>
-            </div>
-          </div>
-
-            <p>
-            09125981035
-            </p>
-
-            <p className="mt-6">
-            موجودی طلا: 8 گرم
-            </p>
-          
-        </div>
-
-        <div
-          className="
-            md:hidden
-            w-[375px]
-            h-[144px]
-            mr-2
-            mt-6
-            border-b-[1px]
-            border-[#CBCED7]
-          "
-        >
-          <div className="flex flex-row justify-between">
-            <p>مهدی جعفر پور</p>
-            <div>
-              <button className="w-12 h-12 rounded-xl border-[1px] border-[#E1E1E1]"> 1 </button>
-              <button className="w-12 h-12 rounded-xl border-[1px] border-[#E1E1E1] mr-4"> 2 </button>
-            </div>
-          </div>
-
-            <p>
-            09125981035
-            </p>
-
-            <p className="mt-6">
-            موجودی طلا: 8 گرم
-            </p>
-          
-        </div>
-
-        <div
-          className="
-            md:hidden
-            w-[375px]
-            h-[144px]
-            mr-2
-            mt-6
-            border-b-[1px]
-            border-[#CBCED7]
-          "
-        >
-          <div className="flex flex-row justify-between">
-            <p>مهدی جعفر پور</p>
-            <div>
-              <button className="w-12 h-12 rounded-xl border-[1px] border-[#E1E1E1]"> 1 </button>
-              <button className="w-12 h-12 rounded-xl border-[1px] border-[#E1E1E1] mr-4"> 2 </button>
-            </div>
-          </div>
-
-            <p>
-            09125981035
-            </p>
-
-            <p className="mt-6">
-            موجودی طلا: 8 گرم
-            </p>
-          
-        </div>
-
-        <div
-          className="
-            md:hidden
-            w-[375px]
-            h-[144px]
-            mr-2
-            mt-6
-            border-b-[1px]
-            border-[#CBCED7]
-          "
-        >
-          <div className="flex flex-row justify-between">
-            <p>مهدی جعفر پور</p>
-            <div>
-              <button className="
-              w-12 
-              h-12 
-              rounded-xl 
-              border-[1px] 
-              border-[#E1E1E1]
-              "> 1 </button>
-              <button className="
-              w-12 
-              h-12 
-              rounded-xl 
-              border-[1px] 
-              border-[#E1E1E1] 
-              mr-4
-              "> 2 </button>
-            </div>
-          </div>
-
-            <p>
-            09125981035
-            </p>
-
-            <p className="mt-6">
-            موجودی طلا: 8 گرم
-            </p>
-          
-        </div>
-
-        <div
-          className="
-            md:hidden
-            w-[375px]
-            h-[144px]
-            mr-2
-            mt-6
-          "
-        >
-          <div className="flex flex-row justify-between">
-            <p>مهدی جعفر پور</p>
-            <div>
-              <button className="w-12 h-12 rounded-xl border-[1px] border-[#E1E1E1]"> 1 </button>
-              <button className="w-12 h-12 rounded-xl border-[1px] border-[#E1E1E1] mr-4"> 2 </button>
-            </div>
-          </div>
-
-            <p>
-            09125981035
-            </p>
-
-            <p className="mt-6">
-            موجودی طلا: 8 گرم
-            </p>
-          
-        </div>
-
       </div>
-       
 
+      <p>{user.phone}</p>
+
+      <p className="mt-6">موجودی طلا: {user.balance}</p>
     </div>
+  ))}
+</div>
+
+</div>
     )
 }
 export default AdminUserManagementPage;

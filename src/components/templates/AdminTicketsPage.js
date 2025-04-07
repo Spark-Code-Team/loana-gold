@@ -9,7 +9,7 @@ const AdminTicketPage = () =>{
         id: 1,
         problem: "  1 مشکلات فنی ", 
         date: " 1403/12/1", 
-        description: "سلام، می‌خواهم به شما اطلاع دهم که در حین استفاده از سرویس شما، با چند مسئله فنی مواجه شده‌ام که برای من مشکلاتی ایجاد کرده است. اما با این حال، می‌دانم که د. ",
+        description: "سلام، می‌خواهم به شما اطلاع دهم که در حین استفاده از سرویس شما، با چند مسئله فنی مواجه شده‌ام که برای من مشکلاتی ایجاد کرده است. اما با این حال، بببببببببببببببببببببببببببببببببببببببببببببببببببب می‌دانم که د. ",
         situation: " در انتطار پاسخ",
      },
 
@@ -76,6 +76,7 @@ const AdminTicketPage = () =>{
             items-center
             hidden
             ">
+                
                 <div className="">فیلترها</div>
 
                 <div className="
@@ -110,6 +111,19 @@ const AdminTicketPage = () =>{
         md:mt-6
         ">
 
+       <div className="
+       md:hidden 
+       flex 
+       mb-6 
+       w-[375px] 
+       mr-2 
+       flex-row 
+       justify-between
+       ">
+        <p className="font-bold">تیکت های پشتیبانی</p>
+        <p>فیلترها</p>
+        </div>
+
         <div className="
          md:flex
          ">
@@ -120,7 +134,15 @@ const AdminTicketPage = () =>{
                                 <td className="p-2 hidden">{index + 1}</td>
                                 <td className="p-2 ">{user.problem}</td>
                                 <td className="p-2">{user.date}</td>
-                                <td className="p-2">{user.description}</td>
+                                <td className="
+                                p-2 
+                                md:max-w-[900px] 
+                                max-w-[350px] 
+                                truncate 
+                                overflow-hidden 
+                                whitespace-nowrap 
+                                cursor-pointer
+                                ">{user.description}</td>
                                 <td className="p-2 ">{user.situation}</td>
                             </tr>
                         ))}

@@ -3,13 +3,13 @@ import { useState } from "react";
 import Pagination from "../elements/Pagination";
 
 const AdminDealingPage = () =>{
-
-    const users = [
-    { 
+    
+    const userss=[
+        { 
         id: 1,
         name: "مهدی جعفرپور", 
         typeOfDealing: " شارژ کیف پول ", 
-        gold: "واریز",
+        gold: "1 گرم",
         cost: " 300/000/000 تومان ",
         date: "14/12/11",
     }, 
@@ -17,7 +17,41 @@ const AdminDealingPage = () =>{
         id: 2,
         name: "مهدی جعفرپور", 
         typeOfDealing: " شارژ کیف پول ", 
-        gold: "واریز",
+        gold: "1 گرم",
+        cost: " 300/000/000 تومان ",
+        date: "14/12/11",
+    },
+    { 
+        id: 1,
+        name: "مهدی جعفرپور", 
+        typeOfDealing: " شارژ کیف پول ", 
+        gold: "1 گرم",
+        cost: " 300/000/000 تومان ",
+        date: "14/12/11",
+    }, 
+    { 
+        id: 2,
+        name: "مهدی جعفرپور", 
+        typeOfDealing: " شارژ کیف پول ", 
+        gold: "1 گرم",
+        cost: " 300/000/000 تومان ",
+        date: "14/12/11",
+    },
+    ]
+    const users = [
+    { 
+        id: 1,
+        name: "مهدی جعفرپور", 
+        typeOfDealing: " شارژ کیف پول ", 
+        gold: "1 گرم",
+        cost: " 300/000/000 تومان ",
+        date: "14/12/11",
+    }, 
+    { 
+        id: 2,
+        name: "مهدی جعفرپور", 
+        typeOfDealing: " شارژ کیف پول ", 
+        gold: "1 گرم",
         cost: " 300/000/000 تومان ",
         date: "14/12/11",
     },
@@ -25,7 +59,7 @@ const AdminDealingPage = () =>{
         id: 3,
         name: "مهدی جعفرپور", 
         typeOfDealing: " شارژ کیف پول ", 
-        gold: "واریز",
+        gold: "2گرم",
         cost: " 300/000/000 تومان ",
         date: "14/12/11",
     },
@@ -33,7 +67,7 @@ const AdminDealingPage = () =>{
         id: 4,
         name: "مهدی جعفرپور", 
         typeOfDealing: " شارژ کیف پول ", 
-        gold: "واریز",
+        gold: "3گرم",
         cost: " 300/000/000 تومان ",
         date: "14/12/11",
     },
@@ -41,7 +75,7 @@ const AdminDealingPage = () =>{
         id: 5,
         name: "مهدی جعفرپور", 
         typeOfDealing: " شارژ کیف پول ", 
-        gold: "واریز",
+        gold: "5گرم",
         cost: " 300/000/000 تومان ",
         date: "14/12/11",
     },
@@ -49,7 +83,7 @@ const AdminDealingPage = () =>{
         id: 6,
         name: "مهدی جعفرپور", 
         typeOfDealing: " شارژ کیف پول ", 
-        gold: "واریز",
+        gold: "8گرم",
         cost: " 300/000/000 تومان ",
         date: "14/12/11",
     },
@@ -115,12 +149,13 @@ const AdminDealingPage = () =>{
             <div className="
             w-[843px]
             h-[56px]
-            flex
+            md:flex
             flex-row
             justify-around
             border-[1px]
             rounded-xl
             items-center
+            hidden
             ">
             <div className="">فیلترها</div>
 
@@ -154,6 +189,8 @@ const AdminDealingPage = () =>{
         overflow-hidden 
         rounded-xl
         border-[1px]
+        hidden
+        md:block
         ">
 
            <table className="w-full">
@@ -185,11 +222,41 @@ const AdminDealingPage = () =>{
 
         </div>
        
-        <Pagination
+       <div className="
+       hidden
+       md:block
+       ">
+       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={(page) => setCurrentPage(page)}
       />
+       </div>
+
+       <div className="
+       md:hidden
+       w-[375px]
+       h-[720px]
+       mr-2
+       "> 
+        <p className="font-bold text-xl">
+        تاریخچه معاملات
+        </p>
+
+      {userss.map((item, index) => (
+      <div key={index} className="border-b-[1px] pb-2">
+      <div>
+      <p>{item.name}</p>
+      </div>
+      <p>  نوع معامله:  {item.typeOfDealing} تومان</p>
+      <p> مقدار طلا: {item.gold}</p>
+      <p>  مبلغ:: {item.cost}</p>
+      <p>  تاریخ معامله: {item.date}</p>
+      </div>
+      ))}
+
+       </div>
+        
       
         </div>
     )

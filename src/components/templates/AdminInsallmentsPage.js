@@ -128,6 +128,41 @@ const AdminInsallmentsPage = () =>{
      }, 
       ];
 
+      const installments = [
+         {
+           name: "محسن پورپاک",
+           amount: "900,0000,00000",
+           date: "1401/2/1",
+           paid: 3,
+           unpaid: 1,
+           penalty: "ندارد",
+         },
+         {
+           name: "محسن پورپاک",
+           amount: "900,0000,00000",
+           date: "1401/2/1",
+           paid: 3,
+           unpaid: 1,
+           penalty: "ندارد",
+         },
+         {
+           name: "محسن پورپاک",
+           amount: "900,0000,00000",
+           date: "1401/2/1",
+           paid: 3,
+           unpaid: 1,
+           penalty: "ندارد",
+         },
+         {
+            name: "محسن پورپاک",
+            amount: "900,0000,00000",
+            date: "1401/2/1",
+            paid: 3,
+            unpaid: 1,
+            penalty: "ندارد",
+          },
+       ];
+
 
       const [currentPage, setCurrentPage] = useState(1);
       const usersPerPage = 5;
@@ -139,20 +174,20 @@ const AdminInsallmentsPage = () =>{
 
     return (
         <div className="
-        w-[1016px] 
-        h-[1000]
-        rounded-xl
+        md:w-[1016px] 
+        md:h-[1000]
+        md:rounded-xl
         ">
             <div className="
             w-[843px]
             h-[56px]
-            flex
+            md:flex
             flex-row
             justify-around
             border-[1px]
             rounded-xl
             items-center
-            
+            hidden
             ">
                 <div className="">فیلترها</div>
 
@@ -186,6 +221,8 @@ const AdminInsallmentsPage = () =>{
         overflow-hidden 
         rounded-xl
         border-[1px]
+        hidden
+        md:block
         ">
 
            <table className="w-full">
@@ -218,12 +255,42 @@ const AdminInsallmentsPage = () =>{
 
         </div>
 
-        <Pagination
+        <div className="
+        hidden
+        md:block
+        ">
+         <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={(page) => setCurrentPage(page)}
         />
-      
+        </div>
+
+        <div className="
+        md:hidden
+        w-[375px]
+        h-[839px]
+        mr-2
+        ">
+         <p className="font-bold text-xl">
+            اقساط
+         </p>
+
+      {installments.map((item, index) => (
+      <div key={index} className="border-b-[1px] pb-2">
+      <div>
+      <p>{item.name}</p>
+      </div>
+      <p>مبلغ قسط این ماه: {item.amount} تومان</p>
+      <p>موعد پرداخت: {item.date}</p>
+      <p>اقساط پرداخت شده: {item.paid}</p>
+      <p>اقساط پرداخت نشده: {item.unpaid}</p>
+      <p>جریمه: {item.penalty}</p>
+      </div>
+      ))}
+
+      </div>
+
         </div>
     )
 }

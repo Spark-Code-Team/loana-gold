@@ -27,6 +27,41 @@ const AdminTransactions = () => {
 
   ];
 
+  const transactions = [
+    {
+      title: "برداشت از کیف پول نقدی",
+      amount: "9,000,000,000 تومان",
+      type: "برداشت",
+      status: "موفق",
+      time: "14:21",
+      date: "1403/27/5",
+    },
+    {
+      title: "برداشت از کیف پول نقدی",
+      amount: "9,000,000,000 تومان",
+      type: "برداشت",
+      status: "موفق",
+      time: "14:21",
+      date: "1403/27/5",
+    },
+    {
+      title: "برداشت از کیف پول نقدی",
+      amount: "9,000,000,000 تومان",
+      type: "برداشت",
+      status: "موفق",
+      time: "14:21",
+      date: "1403/27/5",
+    },
+    {
+      title: "برداشت از کیف پول نقدی",
+      amount: "9,000,000,000 تومان",
+      type: "برداشت",
+      status: "موفق",
+      time: "14:21",
+      date: "1403/27/5",
+    },
+  ];
+
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 5;
 
@@ -101,8 +136,6 @@ const AdminTransactions = () => {
             <div className="text-[#E90000]">حدف همه فیلترها</div>
     </div>
 
-
-
     <div className="
         w-[1016px]
         mt-6 
@@ -142,110 +175,36 @@ const AdminTransactions = () => {
 
     </div>
 
-    <div className="
-    md:hidden
-    w-[375px]
-    mr-2
-    ">
 
-    <p className="font-bold">تراکنش ها</p>
+<div className="md:hidden w-[375px] mr-2">
 
-    <div>
-    <div className="space-y-2">
-     <p>
-     برداشت از کیف پول نقدی
-     </p>
+  <p className="font-bold">تراکنش ها</p>
 
-    <p>
-    9,000,000,000 تومان
-    </p>
+  {transactions.map((tx, index) => (
+    <div key={index}>
+      <div className="space-y-2">
+        <p>{tx.title}</p>
+        <p>{tx.amount}</p>
+        <p>نوع تراکنش: {tx.type}</p>
+      </div>
 
-    <p>
-    نوع تراکنش: برداشت
-    </p>
-
-    </div>
-      
       <div className="
       flex 
       flex-row 
       justify-between 
       mt-2 
-      border-b-[1px] 
+      border-b-[1px]
       border-[#E1E1E1] 
       pb-3
       ">
-        <p> وضعیت: موفق</p>
-        <p> 14:21    1403/27/5   </p>
+        <p>وضعیت: {tx.status}</p>
+        <p>
+          {tx.time} {tx.date}
+        </p>
       </div>
-
     </div>
-
-    <div>
-    <div className="space-y-2">
-     <p>
-     برداشت از کیف پول نقدی
-     </p>
-
-    <p>
-    9,000,000,000 تومان
-    </p>
-
-    <p>
-    نوع تراکنش: برداشت
-    </p>
-
-    </div>
-      
-      <div className="
-      flex 
-      flex-row 
-      justify-between 
-      mt-2 
-      border-b-[1px] 
-      border-[#E1E1E1] 
-      pb-3
-      ">
-        <p> وضعیت: موفق</p>
-        <p> 14:21    1403/27/5   </p>
-      </div>
-
-    </div>
-
-    <div>
-    <div className="space-y-2">
-     <p>
-     برداشت از کیف پول نقدی
-     </p>
-
-    <p>
-    9,000,000,000 تومان
-    </p>
-
-    <p>
-    نوع تراکنش: برداشت
-    </p>
-
-    </div>
-      
-      <div className="
-      flex 
-      flex-row 
-      justify-between 
-      mt-2 
-      border-b-[1px] 
-      border-[#E1E1E1] 
-      pb-3
-      ">
-        <p> وضعیت: موفق</p>
-        <p> 14:21    1403/27/5   </p>
-      </div>
-
-    </div>
-
-   
-
-    </div>
+  ))}
+</div>
 
    
 
