@@ -67,7 +67,7 @@ const SignInPhone =({ setLoginState }) =>{
                 type="text"
                 name="firstname"
                 />
-                </div>
+        </div>
 
         <div>
             <button className="

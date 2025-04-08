@@ -1,6 +1,12 @@
 "use client"
 import { useState } from "react";
 import Pagination from "../elements/Pagination";
+import Image from "next/image";
+import OrderSuccess from "../modules/buying/OrderSu";
+import OrderUns from "../modules/buying/OrderUns";
+import Sana from "../modules/receivingCredit/Sana";
+import PhoneSana from "../modules/receivingCredit/PhoneSana";
+import SanaRes from "../modules/receivingCredit/SanaRes";
 
 const AdminTicketPage = () =>{
 
@@ -161,7 +167,8 @@ const AdminTicketPage = () =>{
        
 
 
-            </div>
+        </div>
+    
         </div>
         
     )
