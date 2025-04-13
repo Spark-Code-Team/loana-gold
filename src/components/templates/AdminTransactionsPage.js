@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import Pagination from "../elements/Pagination"; 
+import EditPrifile from "../modules/userDashboard/EditProfile";
+import EditProfileNoPic from "../modules/userDashboard/EditProfileNoPic";
 
 const AdminTransactions = () => {
   const users = [
@@ -71,6 +73,8 @@ const AdminTransactions = () => {
   const totalPages = Math.ceil(users.length / usersPerPage);
 
   return (
+   
+    
     <div className="
     w-[1016px] 
     h-[1000]
@@ -215,6 +219,7 @@ const AdminTransactions = () => {
       />
 
     </div>
+
   );
 };
 
