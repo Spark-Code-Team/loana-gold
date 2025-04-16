@@ -12,7 +12,7 @@ export const api = axios.create({
     request => {
         const token = getCookie("accessToken")
 
-        if(accessToken) {
+        if(token) {
             request.headers["Authorization"] = `Bearer ${token}`
         }
 
