@@ -9,6 +9,7 @@ import { Bounce, toast } from "react-toastify";
 import { registerForm } from "@/constant/auth";
 
 
+
 const RegisterLogin = ({setloginRegisterState }) =>{
       const [formData, setFormData] = useState({ 
         firstName: '',  
