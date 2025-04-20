@@ -3,9 +3,9 @@ import { getCookie } from "@/utils/cookies";
 
 export const api = axios.create({  
     baseURL:process.env.NEXT_PUBLIC_API_URL, 
-    headers:{
-        'Content-Types':'application/json'
-    }
+    // headers:{
+    //     'Content-Types':'application/json'
+    // }
   }); 
 
   api.interceptors.request.use(

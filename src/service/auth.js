@@ -1,11 +1,10 @@
 import Api, { api } from "@/config/api";
 
-export const loginOtp = async (phone_number) => {
+export const login = async (phone_number) => {
 
     try {
-        const response = await api.post("/auth/login/", {
-            phone_number: "09301737876"
-           
+        const response = await api.post("/users/auth/login/", {
+            phone_number
         })
 
         return { response }
@@ -14,26 +13,22 @@ export const loginOtp = async (phone_number) => {
     }
 }
 
-export const register = async (
-    phone_number,
-    password,
-    first_name,
-    last_name,
-    national_code,
-    email,
-    sheba
-    ) => {
+// export const otp = async () => {
+
+// }
+
+export const register = async (formData) => {
         try{
-            const response = await api.post('/auth/register/',{    
-                phone_number:'',
-                password,
-                first_name,
-                last_name,
-                national_code:'8783710418',
-                email:'fateme@gmail.com',
-                sheba:'0540106830100821229609'
+            const response = await api.post('/users/auth/register/',{    
+                phone_number: formData.mobileNumber,
+                national_code:formData.nationalCode ,
+                first_name: formData.firstName,
+                last_name: formData.lastName,
+                sheba: formData.shebaNumber,
+                bank_name: formData.bankName
             }
         )
+            
             return {response}
         }catch(error){
             return {error}

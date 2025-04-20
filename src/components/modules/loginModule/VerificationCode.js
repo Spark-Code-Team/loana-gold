@@ -1,8 +1,53 @@
 "use client"
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { getCookie } from "@/utils/cookies";
 
-const VerificationCode = ({ setloginRegisterState }) => {
+import { loginOtp } from "@/service/auth";
+
+const VerificationCode = ({dynamicPhoneNumber , setloginRegisterState }) => {
+      const [otpCode, setOtpCode] = useState("");  
+      const [expired, setExpired] = useState(false);
+      const [remainingTime, setRemainingTime] = useState(0); 
+
+      useEffect(() => {
+        const inputTime = getCookie('expire_time');
+        const expirationDate = new Date(inputTime);
+        const now = new Date();
+        let diffMs = expirationDate - now;
+        const totalSeconds = Math.floor(diffMs / 1000);
+    
+        if (totalSeconds <= 0) {
+          setExpired(true);
+          setRemainingTime(0);
+          return;
+        }
+        setRemainingTime(totalSeconds);
+
+        const timer = setInterval(() => {
+          setRemainingTime((prev) => {
+            console.log(prev)
+
+            if (prev <= 1) {
+              clearInterval(timer);
+              setExpired(true);
+              return 0;
+            }
+            return prev - 1;
+          });
+        }, 1000);
+    
+        return () => clearInterval(timer); 
+      }, []);
+
+      
+      const handleSendData = () => {
+        console.log(otpCode)
+        // محل قرار دادن تابع  api برای تست بررسی otp
+        // loginOtp(otpCode)
+      }
+
     return(
       <div className="
        flex 
@@ -64,7 +109,7 @@ const VerificationCode = ({ setloginRegisterState }) => {
                   text-xl
                   md:text-base
                 text-[#A6A6A6]">
-                کد تایید به شماره تلفن 09127695103 ارسال شد.
+                کد تایید به شماره تلفن {dynamicPhoneNumber} ارسال شد.
                 </p>
 
                 <div className="
@@ -80,7 +125,7 @@ const VerificationCode = ({ setloginRegisterState }) => {
                 <input
                 className="
                 border-none
-                 focus:outline-none
+                focus:outline-none
                 focus:ring-0
                 focus:boredr-transparent
                 rounded-xl
@@ -88,7 +133,10 @@ const VerificationCode = ({ setloginRegisterState }) => {
                 "
                 placeholder=""
                 type="text"
-                name="firstname"
+                name="otp"  
+                value={otpCode} 
+                onChange={(e) => setOtpCode(e.target.value)}
+                
                 />
                 </div>
 
@@ -96,7 +144,7 @@ const VerificationCode = ({ setloginRegisterState }) => {
                   text-xl
                   md:text-base
                 text-[#A6A6A6]">
-                ۱:۲۰ تا ارسال مجدد کد
+                {remainingTime} تا ارسال مجدد کد
                 </p>
 
             <div>
@@ -111,7 +159,10 @@ const VerificationCode = ({ setloginRegisterState }) => {
                 text-xl
                 md:text-base
                 "
-                 onClick={() => setloginRegisterState(0)}
+                 onClick={() => {
+                  setloginRegisterState(0)
+                  handleSendData()
+                  }}
                  >
                     تایید و ادامه
                 </button>

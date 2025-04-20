@@ -1,11 +1,54 @@
 "use client"
 
 import Link from "next/link";
+import { register } from "@/service/auth";
+import { useState } from "react";
 import EmailLogin from "../../../../public/icons/EmailLogin";
 import PersonName from "../../../../public/icons/PersonName";
-import PhoneLogin from "../../../../public/icons/PhoneLogin";
+import { Bounce, toast } from "react-toastify";
+import { registerForm } from "@/constant/auth";
 
-const RegisterLogin = ({ setloginRegisterState }) =>{
+
+const RegisterLogin = ({setloginRegisterState }) =>{
+      const [formData, setFormData] = useState({ 
+        firstName: '',  
+        lastName: '',  
+        mobileNumber: '',  
+        nationalCode: '',  
+        shebaNumber: '',  
+        bankName: ''  
+    });
+
+    const handleChange = (e) => {  
+      const { name, value } = e.target;  
+      setFormData((prevData) => ({  
+          ...prevData,  
+          [name]: value  
+      }));  
+    }; 
+
+    const handleSendData = async () => {  
+      const { response, error } = await register(formData)
+      if (response){
+        document.cookie = `expire_time=${response.data.code_expires_at}; max-age=${2*60}`;
+        console.log(formData.mobileNumber)
+        setloginRegisterState({state: 1, phone: formData.mobileNumber})
+
+      } else {
+        toast.error(error.response.data.error, { 
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+              }
+            ) 
+      }
+
+    }; 
+
     return(
         <div 
       className="
@@ -69,194 +112,42 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
              md:mt-10
             ">
 
-                <div className="
-                flex
-                items-center
-                md:w-[292px]
-                h-12
-                rounded-xl
-                border-[1px]
-                boredr-[#E1E1E1]
-                "
-                >
-                <span className="mr-4">
-                <PersonName/>
-                </span>
-                
-                <input
-                className="
-                border-none
-                focus:outline-none
-                focus:ring-0
-                focus:boredr-transparent
-                md:w-[250px] w-80
-                text-xl
-                md:text-base
-                "
-                placeholder="نام"
-                type="text"
-                name="firstname"
-                />
-                </div>
-
-                <div className="
-                flex
-                items-center
-                md:w-[292px]
-                h-12
-                rounded-xl
-                border-[1px]
-                boredr-[#E1E1E1]
-                md:mt-0
-                mt-4
-                "
-                >
-                <span className="mr-4">
-                <EmailLogin/>
-                </span>
-                
-                <input
-                className="
-                border-none
-                focus:outline-none
-                focus:ring-0
-                focus:boredr-transparent
-                md:w-[250px] w-80
-                text-xl
-                md:text-base
-                "
-                placeholder="نام خانوادگی"
-                type="text"
-                name="firstname"
-                />
-                </div>
-
-                <div className="
-                flex
-                items-center
-                md:w-[292px]
-                h-12
-                rounded-xl
-                border-[1px]
-                boredr-[#E1E1E1]
-                md:mt-0
-                mt-4
-                "
-                >
-                <span className="mr-4">
-                <PhoneLogin/>
-                </span>
-                
-                <input
-                className="
-                border-none
-                focus:outline-none
-                focus:ring-0
-                focus:boredr-transparent
-                md:w-[250px] w-80
-                text-sm
-                "
-                placeholder=" شماره موبایل (ثبت شده با کد ملی) "
-                type="text"
-                name="firstname"
-                />
-                </div>
-
-                <div className="
-                flex
-                items-center
-                md:w-[292px]
-                h-12
-                rounded-xl
-                border-[1px]
-                boredr-[#E1E1E1]
-                md:mt-0
-                mt-4
-                "
-                >
-                <span className="mr-4">
-                <PhoneLogin/>
-                </span>
-                
-                <input
-                className="
-                border-none
-                 focus:outline-none
-                focus:ring-0
-                focus:boredr-transparent
-                md:w-[250px] w-80
-                text-xl
-                md:text-base
-                "
-                placeholder="کدملی"
-                type="text"
-                name="firstname"
-                />
-                </div>
-
-                <div className="
-                flex
-                items-center
-                md:w-[292px]
-                h-12
-                rounded-xl
-                border-[1px]
-                boredr-[#E1E1E1]
-                md:mt-0
-                mt-4
-                "
-                >
-                <span className="mr-4">
-                <PhoneLogin/>
-                </span>
-                
-                <input
-                className="
-                border-none
-                 focus:outline-none
-                focus:ring-0
-                focus:boredr-transparent
-                md:w-[250px] w-80
-                text-xl
-                md:text-base
-                "
-                placeholder="شماره شبا"
-                type="text"
-                name="firstname"
-                />
-                </div>
-
-                <div className="
-                flex
-                items-center
-                md:w-[292px]
-                h-12
-                rounded-xl
-                border-[1px]
-                boredr-[#E1E1E1]
-                md:mt-0
-                mt-4
-                "
-                >
-                <span className="mr-4">
-                <PhoneLogin/>
-                </span>
-                
-                <input
-                className="
-                border-none
-                 focus:outline-none
-                focus:ring-0
-                focus:boredr-transparent
-                md:w-[250px] w-80
-                text-xl
-                md:text-base
-                "
-                placeholder="نام بانک"
-                type="text"
-                name="firstname"
-                />
-                </div>
+              {registerForm.map((p) => {
+                return(<>
+                  <div className="
+                                flex
+                                items-center
+                                md:w-[292px]
+                                h-12
+                                rounded-xl
+                                border-[1px]
+                                boredr-[#E1E1E1]
+                                "
+                                >
+                                <span className="mr-4">
+                                <PersonName/>
+                                </span>
+                                
+                                <input
+                                className="
+                                border-none
+                                focus:outline-none
+                                focus:ring-0
+                                focus:boredr-transparent
+                                md:w-[250px] w-80
+                                text-xl
+                                md:text-base
+                                "
+                                placeholder={p.placeholder}
+                                type={p.type}
+                                name= {p.name} 
+                                value={formData[p.name]}  
+                                onChange={handleChange} 
+                                />
+                                </div>
+                </>)
+                                
+              })}
 
             </div>
 
@@ -272,11 +163,11 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
                 text-xl
                 md:text-base
                 "
-                 onClick={() => setloginRegisterState(1)}
+                onClick={() => handleSendData()}
                  >
                     تایید و ادامه
                 </button>
-            </div>
+            </div> 
 
             <div className="
             mt-3 
@@ -287,15 +178,15 @@ const RegisterLogin = ({ setloginRegisterState }) =>{
             ">
             حساب کاربری دارید؟
             <Link href="/Sign-in">
-             <p className="
-            mr-1 
-          text-primary
-            text-xl
-            md:text-base
-              ">
-                ورود
-            </p>  
-             </Link> 
+              <p className="
+                  mr-1 
+                text-primary
+                  text-xl
+                  md:text-base
+                ">
+                  ورود
+              </p>  
+            </Link> 
             
             </div>
 

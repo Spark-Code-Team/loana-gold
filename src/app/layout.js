@@ -1,4 +1,7 @@
 import HomeLayout from "@/components/layout/homeLayout/HomeLayout";
+import { ToastContainer, toast , Bounce } from 'react-toastify';  
+import 'react-toastify/dist/ReactToastify.css';  
+
 
 import "./globals.css";
 
@@ -16,6 +19,17 @@ export default function RootLayout({ children }) {
         <HomeLayout>
          {children}
         </HomeLayout>
+        <ToastContainer 
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick={false}
+          rtl={false}
+          pauseOnFocusLoss
+          theme="light"
+          transition={Bounce}
+        />
       </body>
     </html>
   );

@@ -1,8 +1,17 @@
 import Link from "next/link";
 import PhoneLogin from "../../../../public/icons/PhoneLogin";
 import AuthPageStruct from "./AuthPageStruct";
-
+import { useState } from "react";
+import { otp } from "@/service/auth";
 const SignInPhone =({ setLoginState }) =>{
+
+    const [phoneNumber, setPhoneNumber] = useState()
+
+    const handleSendData = () => {
+        console.log(phoneNumber)
+        loginOtp(phoneNumber)
+    }
+
     return(
     <AuthPageStruct>
 
@@ -66,6 +75,7 @@ const SignInPhone =({ setLoginState }) =>{
                 placeholder=" شماره موبایل* "
                 type="text"
                 name="firstname"
+                onChange={(e) => {setPhoneNumber(e.target.value)}}
                 />
         </div>
 
@@ -81,7 +91,10 @@ const SignInPhone =({ setLoginState }) =>{
                  text-xl
                  md:text-base
                  "
-                 onClick={() => setLoginState("verification")}
+                 onClick={() => {
+                    setLoginState("verification")
+                    handleSendData()
+                 }}
                  >
                     ارسال کد
             </button>

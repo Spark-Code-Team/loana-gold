@@ -1,17 +1,25 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RegisterLogin from "../modules/loginModule/RegisterLogin";
 import VerificationCode from "../modules/loginModule/VerificationCode";
 
 const LoginPage = () => {
-    const [loginRegisterState, setloginRegisterState] = useState (0)
+    const [loginRegisterState, setloginRegisterState] = useState ({
+        state: 0,
+        phone: ''
+    })
+
+
+    useEffect(()=>{
+        console.log(loginRegisterState)
+    })
 
     return(
         <>
-        {loginRegisterState === 0 ? (
+        {loginRegisterState.state === 0 ? (
             <RegisterLogin setloginRegisterState={setloginRegisterState} />
-        ) : loginRegisterState === 1 ? (
-            <VerificationCode setloginRegisterState={setloginRegisterState} />
+        ) : loginRegisterState.state === 1 ? (
+            <VerificationCode dynamicPhoneNumber={loginRegisterState.phone} setloginRegisterState={setloginRegisterState} />
         ) : (
             <SignInPhone setloginRegisterState={setloginRegisterState} />
         )}
