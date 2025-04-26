@@ -2,14 +2,31 @@ import Link from "next/link";
 import PhoneLogin from "../../../../public/icons/PhoneLogin";
 import AuthPageStruct from "./AuthPageStruct";
 import { useState } from "react";
+import { login } from "@/service/auth";
 import { otp } from "@/service/auth";
-const SignInPhone =({ setLoginState }) =>{
+import { setCookie } from "@/utils/cookies";
+const SignInPhone =({ loginState, setLoginState }) =>{
 
     const [phoneNumber, setPhoneNumber] = useState()
 
-    const handleSendData = () => {
-        console.log(phoneNumber)
-        loginOtp(phoneNumber)
+    const handleSendData = async () => {
+        const {response , error} = await login(phoneNumber)    
+        if (response) {
+            document.cookie = `expire_time=${response.data.code_expires_at}; max-age=${2*60}`;
+            setLoginState({state:"verification", phoneNumber:phoneNumber, is_2fa:response.data.is_2fa})
+        }
+        else if (error){
+            toast.error(error.response.data.error, { 
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                  }
+                )         
+            }
     }
 
     return(
@@ -92,8 +109,8 @@ const SignInPhone =({ setLoginState }) =>{
                  md:text-base
                  "
                  onClick={() => {
-                    setLoginState("verification")
                     handleSendData()
+                    
                  }}
                  >
                     ارسال کد
@@ -111,7 +128,7 @@ const SignInPhone =({ setLoginState }) =>{
             text-xl
             md:text-base
              "
-            onClick={() => setLoginState("forgetPassword")}
+            onClick={() => setLoginState({state:"forgetPassword", phoneNumber:phoneNumber, is_2fa:loginState.is_2fa})}
             >
             فراموشی رمزعبور
             </button>
@@ -123,7 +140,7 @@ const SignInPhone =({ setLoginState }) =>{
             ثبت نام نکرده اید؟  
 
             <button
-            onClick={() => setLoginState(0)}
+            onClick={() => setLoginState({state:0, phoneNumber:phoneNumber, is_2fa:loginState.is_2fa})}
             >
              <Link href="/Login">
              <p className="mr-1 text-primary">

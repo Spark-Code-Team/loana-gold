@@ -9,17 +9,21 @@ import ResendPasswordSignIn from "../modules/signIn/ResendPasswordSignIn";
 import NewPasswordSignIn from "../modules/signIn/NewPasswordSignIn";
 
 const SignInPage = () => {
-    const [loginState, setLoginState] = useState("phone");
+    const [loginState, setLoginState] = useState({
+        state: "phone",
+        phoneNumber: 0,
+        is_2fa: false,
+    });
 
     return(
 
         <>
-        {loginState === "phone" && <SignInPhone setLoginState={setLoginState} />}
-        {loginState === "verification" && <VerificationCodeSignIn setLoginState={setLoginState} />}
-        {loginState === "password" && <PasswordSignIn setLoginState={setLoginState} />}
-        {loginState === "forgetPassword" && <ForgetPasswordSignIn setLoginState={setLoginState} />}
-        {loginState === "resendCode" && <ResendPasswordSignIn setLoginState={setLoginState} />}
-        {loginState === "newPassword" && <NewPasswordSignIn setLoginState={setLoginState} />}
+        {loginState.state === "phone" && <SignInPhone loginState={loginState} setLoginState={setLoginState} />}
+        {loginState.state === "verification" && <VerificationCodeSignIn loginState={loginState} setLoginState={setLoginState} />}
+        {loginState.state === "password" && <PasswordSignIn setLoginState={setLoginState} />}
+        {loginState.state === "forgetPassword" && <ForgetPasswordSignIn setLoginState={setLoginState} />}
+        {loginState.state === "resendCode" && <ResendPasswordSignIn setLoginState={setLoginState} />}
+        {loginState.state === "newPassword" && <NewPasswordSignIn setLoginState={setLoginState} />}
         </>
 
 

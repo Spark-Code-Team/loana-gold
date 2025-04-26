@@ -2,17 +2,13 @@
 import { useEffect, useState } from "react";
 import RegisterLogin from "../modules/loginModule/RegisterLogin";
 import VerificationCode from "../modules/loginModule/VerificationCode";
-
+import SignInPhone from "../modules/signIn/SignInPhone";
 const LoginPage = () => {
     const [loginRegisterState, setloginRegisterState] = useState ({
         state: 0,
-        phone: ''
+        phone: '',
     })
 
-
-    useEffect(()=>{
-        console.log(loginRegisterState)
-    })
 
     return(
         <>

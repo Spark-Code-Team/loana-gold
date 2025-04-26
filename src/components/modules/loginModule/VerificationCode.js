@@ -2,14 +2,18 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { getCookie } from "@/utils/cookies";
-
 import { loginOtp } from "@/service/auth";
+import { setCookie } from "@/utils/cookies";
+import { Bounce, toast } from "react-toastify";
 
-const VerificationCode = ({dynamicPhoneNumber , setloginRegisterState }) => {
-      const [otpCode, setOtpCode] = useState("");  
+const VerificationCode = ({dynamicPhoneNumber , handleSendRegisterData , nigger }) => {
+      const [otpObj, setOtpObj] = useState({phoneNumber: dynamicPhoneNumber, otp: ''  });  
       const [expired, setExpired] = useState(false);
       const [remainingTime, setRemainingTime] = useState(0); 
+
+      const router = useRouter()
 
       useEffect(() => {
         const inputTime = getCookie('expire_time');
@@ -27,8 +31,6 @@ const VerificationCode = ({dynamicPhoneNumber , setloginRegisterState }) => {
 
         const timer = setInterval(() => {
           setRemainingTime((prev) => {
-            console.log(prev)
-
             if (prev <= 1) {
               clearInterval(timer);
               setExpired(true);
@@ -41,11 +43,30 @@ const VerificationCode = ({dynamicPhoneNumber , setloginRegisterState }) => {
         return () => clearInterval(timer); 
       }, []);
 
+
+      const handleOtpChange = (e) => {  
+        const value = e.target.value; 
+        setOtpObj(prevState => ({ ...prevState, otp: value })); 
+      };
       
-      const handleSendData = () => {
-        console.log(otpCode)
-        // محل قرار دادن تابع  api برای تست بررسی otp
-        // loginOtp(otpCode)
+      const handleSendData = async () => {
+        const {response , error} = await loginOtp(otpObj)
+        if (response){
+          setCookie(response.data)
+          router.push('/')
+
+        }else if(error) {
+          toast.error(error.response.data.detail, { 
+                  position: "bottom-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  progress: undefined,
+                  theme: "light",
+                  transition: Bounce,
+                }
+              ) 
+        }
       }
 
     return(
@@ -134,8 +155,8 @@ const VerificationCode = ({dynamicPhoneNumber , setloginRegisterState }) => {
                 placeholder=""
                 type="text"
                 name="otp"  
-                value={otpCode} 
-                onChange={(e) => setOtpCode(e.target.value)}
+                value={otpObj.otp} 
+                onChange={handleOtpChange}
                 
                 />
                 </div>
@@ -144,10 +165,11 @@ const VerificationCode = ({dynamicPhoneNumber , setloginRegisterState }) => {
                   text-xl
                   md:text-base
                 text-[#A6A6A6]">
-                {remainingTime} تا ارسال مجدد کد
+                {remainingTime} ارسال مجدد کد
                 </p>
 
             <div>
+              {expired ?                               
                 <button className="
                 md:w-[600px] w-[375px]
                 h-12 
@@ -160,12 +182,28 @@ const VerificationCode = ({dynamicPhoneNumber , setloginRegisterState }) => {
                 md:text-base
                 "
                  onClick={() => {
-                  setloginRegisterState(0)
+                  handleSendRegisterData()
+                }}
+                 >
+                    ارسال مجدد کد
+                </button>:<button className="
+                md:w-[600px] w-[375px]
+                h-12 
+                bg-[#EDEDED] 
+                rounded-xl 
+                text-black
+                hover:bg-primary
+                hover:text-black
+                text-xl
+                md:text-base
+                "
+                 onClick={() => {
                   handleSendData()
                   }}
                  >
                     تایید و ادامه
-                </button>
+                </button>}
+
             </div>
 
             <div className="

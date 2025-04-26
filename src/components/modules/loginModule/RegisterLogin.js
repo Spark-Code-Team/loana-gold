@@ -32,10 +32,9 @@ const RegisterLogin = ({setloginRegisterState }) =>{
       const { response, error } = await register(formData)
       if (response){
         document.cookie = `expire_time=${response.data.code_expires_at}; max-age=${2*60}`;
-        console.log(formData.mobileNumber)
         setloginRegisterState({state: 1, phone: formData.mobileNumber})
 
-      } else {
+      } else if(error) {
         toast.error(error.response.data.error, { 
                 position: "bottom-right",
                 autoClose: 5000,
@@ -113,42 +112,40 @@ const RegisterLogin = ({setloginRegisterState }) =>{
              md:mt-10
             ">
 
-              {registerForm.map((p) => {
-                return(<>
-                  <div className="
-                                flex
-                                items-center
-                                md:w-[292px]
-                                h-12
-                                rounded-xl
-                                border-[1px]
-                                boredr-[#E1E1E1]
-                                "
-                                >
-                                <span className="mr-4">
-                                <PersonName/>
-                                </span>
-                                
-                                <input
-                                className="
-                                border-none
-                                focus:outline-none
-                                focus:ring-0
-                                focus:boredr-transparent
-                                md:w-[250px] w-80
-                                text-xl
-                                md:text-base
-                                "
-                                placeholder={p.placeholder}
-                                type={p.type}
-                                name= {p.name} 
-                                value={formData[p.name]}  
-                                onChange={handleChange} 
-                                />
-                                </div>
-                </>)
-                                
-              })}
+              {registerForm.map((p) => {  
+                  return (  
+                      <div key={p.id} className="  
+                          flex  
+                          items-center  
+                          md:w-[292px]  
+                          h-12  
+                          rounded-xl  
+                          border-[1px]  
+                          border-[#E1E1E1]  
+                      ">  
+                          <span className="mr-4">  
+                              <PersonName />  
+                          </span>  
+                          
+                          <input  
+                              className="  
+                                  border-none  
+                                  focus:outline-none  
+                                  focus:ring-0  
+                                  focus:border-transparent  
+                                  md:w-[250px] w-80  
+                                  text-xl  
+                                  md:text-base  
+                              "  
+                              placeholder={p.placeholder}  
+                              type={p.type}  
+                              name={p.name}   
+                              value={formData[p.name]}  
+                              onChange={handleChange}   
+                          />  
+                      </div>  
+                  );  
+              })}               
 
             </div>
 
