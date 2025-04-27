@@ -3,6 +3,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { IoMdClose } from "react-icons/io";
 import Image from "next/image";
+import { getCookie } from "@/utils/cookies";
+import {Profile} from "@/service/profile";
 
 const HomeHeader = () => {
 
@@ -70,11 +72,18 @@ const HomeHeader = () => {
                                 >
                                     درخواست اعتبار خرید
                                 </button>
-                                <Link href="/Login">
+                                {
+                                    getCookie('refreshToken')&&getCookie('accessToken')
+                                    ?<Link href="/dashboard/user-account-dashboard">
+                                    <button onClick={Profile} className="bg-[#AB8B53] text-black font-bold text-[18px] px-4 py-3 rounded-[8px]">
+                                        پنل کاربری
+                                    </button>
+                                </Link>:<Link href="/Login">
                                     <button className="bg-[#AB8B53] text-black font-bold text-[18px] px-4 py-3 rounded-[8px]">
                                         ورود / ثبت‌ نام
                                     </button>
                                 </Link>
+                                }
                             </>
                         )}
                     </div>

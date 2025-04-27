@@ -1,13 +1,42 @@
+"use client"
+
+import { useEffect } from "react";
 import EmailDashboard from "../../../public/icons/EmailDashboard";
-import EmailIcon from "../../../public/icons/EmailIcon";
 import PersonDashboard from "../../../public/icons/PersonDashboard";
-import PhoneDashboard from "../../../public/icons/PhoneDashboard";
 import DashboardLeft from "../elements/DashboardLeft";
+import { Profile } from "@/service/profile";
+import { UserProfile } from "@/stores/profileStore";
+import { getProfile } from "@/constant/profile";
 
 const UserAccountDashboardPage = () => {
+
+    const profileStore = UserProfile()
+
+    const profile = getProfile(); 
+
+
+    useEffect (  ()=>{
+        const fetchProfile = async () => {
+        const {response , error} = await Profile()
+        if (response){
+            const userData = response.data.user;  
+            const profileImage = response.data.profile_img;  
+
+
+            profileStore.setProfile({  
+                user: userData,  
+                profile_img: profileImage
+            }); 
+
+        }
+        else if (error){
+            console.log(error)
+        }}
+        fetchProfile()
+    }, []) 
+
     return(
         <div>
-        
         <div className="
          w-[912px] 
          h-[400px]
@@ -31,250 +60,50 @@ const UserAccountDashboardPage = () => {
             px-6
             ">
 
-            <div className="flex flex-col">
-            <label className="
-            text-black
-             text-[14px] 
-             font-normal
-             pr-4
-            ">
-                نام 
-            </label>
-            
-            <div className="
-                flex
-                items-center
-                md:w-[392px]
-                h-[56px]
-                rounded-xl 
-                border-[1px] 
-                border-[#7A7A7A]
-                bg-[#EDEDED]
-            ">
 
-             
-             <span className="mr-4">
-                <PersonDashboard/>
-                </span>
-
-            <input 
-             type="text" 
-             placeholder="فرهاد" 
-             className="
-                w-[350px]
-                border-none
-                focus:outline-none
-                focus:ring-0
-                focus:boredr-transparent 
-                bg-[#EDEDED]
-              "/>
-             
-            </div>            
-            </div>
-            
-            <div className="flex flex-col">
-            <label className="
-            text-black
-             text-[14px] 
-             font-normal
-             pr-4
-            ">
-                 نام خانوادگی 
-            </label>
-            
-            <div className="
-                flex
-                items-center
-                md:w-[392px]
-                h-[56px]
-                rounded-xl 
-                border-[1px] 
-                border-[#7A7A7A]
-                bg-[#EDEDED]
-            ">
-
-             
-             <span className="mr-4">
-                <PersonDashboard/>
-                </span>
-
-            <input 
-             type="text" 
-             placeholder="محمدی" 
-             className="
-                w-[350px]
-                border-none
-                focus:outline-none
-                focus:ring-0
-                focus:boredr-transparent 
-                bg-[#EDEDED]
-              "/>
-             
-            </div>            
-            </div>
-
-            <div className="flex flex-col">
-            <label className="
-            text-black
-             text-[14px] 
-             font-normal
-             pr-4
-            ">
-                شماره موبایل 
-            </label>
-            
-            <div className="
-                flex
-                items-center
-                md:w-[392px]
-                h-[56px]
-                rounded-xl 
-                border-[1px] 
-                border-[#7A7A7A]
-                bg-[#EDEDED]
-            ">
-
-             
-             <span className="mr-4">
-                <EmailDashboard/>
-                </span>
-
-            <input 
-             type="text" 
-             placeholder="09125648523" 
-             className="
-                w-[350px]
-                border-none
-                focus:outline-none
-                focus:ring-0
-                focus:boredr-transparent 
-                bg-[#EDEDED]
-              "/>
-             
-            </div>            
-            </div>
-
-            <div className="flex flex-col">
-            <label className="
-            text-black
-             text-[14px] 
-             font-normal
-             pr-4
-            ">
-                 کدملی 
-            </label>
-            
-            <div className="
-                flex
-                items-center
-                md:w-[392px]
-                h-[56px]
-                rounded-xl 
-                border-[1px] 
-                border-[#7A7A7A]
-                bg-[#EDEDED]
-            ">
-
-             <span className="mr-4">
-                <PhoneDashboard/>
-                </span>
-
-            <input 
-             type="text" 
-             placeholder="001265969" 
-             className="
-                w-[350px]
-                border-none
-                focus:outline-none
-                focus:ring-0
-                focus:boredr-transparent 
-                bg-[#EDEDED]
-              "/>
-             
-            </div>            
-            </div>
-
-            <div className="flex flex-col">
-            <label className="
-            text-black
-             text-[14px] 
-             font-normal
-             pr-4
-            ">
-                شماره شبا 
-            </label>
-            
-            <div className="
-                flex
-                items-center
-                md:w-[392px]
-                h-[56px]
-                rounded-xl 
-                border-[1px] 
-                border-[#7A7A7A]
-                bg-[#EDEDED]
-            ">
-
-             
-             <span className="mr-4">
-                <EmailDashboard/>
-                </span>
-
-            <input 
-             type="text" 
-             placeholder="021556320241565223" 
-             className="
-                w-[350px]
-                border-none
-                focus:outline-none
-                focus:ring-0
-                focus:boredr-transparent 
-                bg-[#EDEDED]
-              "/>
-             
-            </div>            
-            </div>
-
-            <div className="flex flex-col">
-            <label className="
-            text-black
-             text-[14px] 
-             font-normal
-             pr-4
-            ">
-                نام بانک 
-            </label>
-            
-            <div className="
-                flex
-                items-center
-                md:w-[392px]
-                h-[56px]
-                rounded-xl 
-                border-[1px] 
-                border-[#7A7A7A]
-                bg-[#EDEDED]
-            ">
-
-             
-             <span className="mr-4">
-                <PhoneDashboard/>
-                </span>
-
-            <input 
-             type="text" 
-             placeholder="اقتصاد نوین" 
-             className="
-                w-[350px]
-                border-none
-                focus:outline-none
-                focus:ring-0
-                focus:boredr-transparent 
-                bg-[#EDEDED]
-              "/>
-             
-            </div>            
-            </div>
+            {
+                profile.map(p=>(<div key={p.id} className="flex flex-col">
+                    <label className="
+                    text-black
+                     text-[14px] 
+                     font-normal
+                     pr-4
+                    ">
+                        {p.field_name} 
+                    </label>
+                    
+                    <div className="
+                        flex
+                        items-center
+                        md:w-[392px]
+                        h-[56px]
+                        rounded-xl 
+                        border-[1px] 
+                        border-[#7A7A7A]
+                        bg-[#EDEDED]
+                    ">
+        
+                     
+                     <span className="mr-4">
+                        {p.logo}
+                        </span>
+        
+                    <input 
+                    
+                     type="text" 
+                     placeholder= {p.content}  
+                     className="
+                        w-[350px]
+                        border-none
+                        focus:outline-none
+                        focus:ring-0
+                        focus:boredr-transparent 
+                        bg-[#EDEDED]
+                      "/>
+                     
+                    </div>            
+                    </div>))
+            }
 
             </div>
         </div>
@@ -350,7 +179,7 @@ const UserAccountDashboardPage = () => {
              
              <span className="mr-4">
                 <PersonDashboard/>
-                </span>
+            </span>
 
             <input 
              type="text" 

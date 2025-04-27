@@ -3,7 +3,7 @@ import { api } from "@/config/api";
 export const login = async (phone_number) => {
 
     try {
-        const response = await api.post("/users/auth/login/", {
+        const response = await api.post("/users/auth/login-send-otp/", {
             phone_number
         })
 
@@ -17,7 +17,7 @@ export const login = async (phone_number) => {
 
 export const loginOtp = async (checkOtp) => {
     try{
-        const response = await api.post('/users/auth/check-otp/', {
+        const response = await api.post('/users/auth/login-check-otp/', {
                 phone_number: checkOtp.phoneNumber,
                 otp_code: checkOtp.otp
         })
