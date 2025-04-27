@@ -1,55 +1,55 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getCookie } from "@/utils/cookies";
-
 import { loginOtp } from "@/service/auth";
 
-const VerificationCode = ({dynamicPhoneNumber , setloginRegisterState }) => {
-      const [otpCode, setOtpCode] = useState("");  
-      const [expired, setExpired] = useState(false);
-      const [remainingTime, setRemainingTime] = useState(0); 
+const VerificationCode = ({ dynamicPhoneNumber, setloginRegisterState }) => {
+  const [otpCode, setOtpCode] = useState("");
+  const [expired, setExpired] = useState(false);
+  const [name, setName] = useState("");
+  const [remainingTime, setRemainingTime] = useState(0);
 
-      useEffect(() => {
-        const inputTime = getCookie('expire_time');
-        const expirationDate = new Date(inputTime);
-        const now = new Date();
-        let diffMs = expirationDate - now;
-        const totalSeconds = Math.floor(diffMs / 1000);
-    
-        if (totalSeconds <= 0) {
+  useEffect(() => {
+    const inputTime = getCookie("expire_time");
+    const expirationDate = new Date(inputTime);
+    const now = new Date();
+    let diffMs = expirationDate - now;
+    const totalSeconds = Math.floor(diffMs / 1000);
+
+    if (totalSeconds <= 0) {
+      setExpired(true);
+      setRemainingTime(0);
+      return;
+    }
+    setRemainingTime(totalSeconds);
+
+    const timer = setInterval(() => {
+      setRemainingTime((prev) => {
+        console.log(prev);
+
+        if (prev <= 1) {
+          clearInterval(timer);
           setExpired(true);
-          setRemainingTime(0);
-          return;
+          return 0;
         }
-        setRemainingTime(totalSeconds);
+        return prev - 1;
+      });
+    }, 1000);
 
-        const timer = setInterval(() => {
-          setRemainingTime((prev) => {
-            console.log(prev)
+    return () => clearInterval(timer);
+  }, []);
 
-            if (prev <= 1) {
-              clearInterval(timer);
-              setExpired(true);
-              return 0;
-            }
-            return prev - 1;
-          });
-        }, 1000);
-    
-        return () => clearInterval(timer); 
-      }, []);
+  const handleSendData = () => {
+    console.log(otpCode);
+    // محل قرار دادن تابع  api برای تست بررسی otp
+    // loginOtp(otpCode)
+  };
 
-      
-      const handleSendData = () => {
-        console.log(otpCode)
-        // محل قرار دادن تابع  api برای تست بررسی otp
-        // loginOtp(otpCode)
-      }
-
-    return(
-      <div className="
+  return (
+    <div
+      className="
        flex 
        justify-center 
        items-center 
@@ -61,34 +61,42 @@ const VerificationCode = ({dynamicPhoneNumber , setloginRegisterState }) => {
        md:bg-contain 
        lg:bg-cover
        md:bg-[url('/images/userdashboard.png')]
-      ">
-        <div className="
+      "
+    >
+      <div
+        className="
          bg-white 
          md:w-[664px] 
          md:h-[590px] 
          md:p-8 
          rounded-xl 
          md:shadow-lg
-         ">
-            <div className="
+         "
+      >
+        <div
+          className="
             mt-16
              h-16 
              flex 
              flex-col 
              items-start
-             ">
-            <h2 className="
+             "
+        >
+          <h2
+            className="
               text-xl 
               font-bold 
               mb-4 
               text-center
               md:text-2xl
-              ">
-                ثبت نام
-            </h2>
-            </div>
+              "
+          >
+            ثبت نام
+          </h2>
+        </div>
 
-            <div className="
+        <div
+          className="
             w-[600px]
             h-[270px]
             justify-center
@@ -97,22 +105,28 @@ const VerificationCode = ({dynamicPhoneNumber , setloginRegisterState }) => {
             items-center
             gap-y-5
             
-            ">
-                <p className="
+            "
+        >
+          <p
+            className="
                   text-2xl
                   md:text-base
-                ">
-                کد تایید وارد کنید
-                </p>
+                "
+          >
+            کد تایید وارد کنید
+          </p>
 
-                <p className="
+          <p
+            className="
                   text-xl
                   md:text-base
-                text-[#A6A6A6]">
-                کد تایید به شماره تلفن {dynamicPhoneNumber} ارسال شد.
-                </p>
+                text-[#A6A6A6]"
+          >
+            کد تایید به شماره تلفن {dynamicPhoneNumber} ارسال شد.
+          </p>
 
-                <div className="
+          <div
+            className="
                 flex
                 items-center
                 w-[320px]
@@ -121,9 +135,9 @@ const VerificationCode = ({dynamicPhoneNumber , setloginRegisterState }) => {
                 border-[1px]
                 boredr-[#E1E1E1]
                 "
-                >
-                <input
-                className="
+          >
+            <input
+              className="
                 border-none
                 focus:outline-none
                 focus:ring-0
@@ -131,24 +145,26 @@ const VerificationCode = ({dynamicPhoneNumber , setloginRegisterState }) => {
                 rounded-xl
                 w-[320px]
                 "
-                placeholder=""
-                type="text"
-                name="otp"  
-                value={otpCode} 
-                onChange={(e) => setOtpCode(e.target.value)}
-                
-                />
-                </div>
+              placeholder=""
+              type="text"
+              name="otp"
+              value={otpCode}
+              onChange={(e) => setOtpCode(e.target.value)}
+            />
+          </div>
 
-                <p className="
+          <p
+            className="
                   text-xl
                   md:text-base
-                text-[#A6A6A6]">
-                {remainingTime} تا ارسال مجدد کد
-                </p>
+                text-[#A6A6A6]"
+          >
+            {remainingTime} تا ارسال مجدد کد
+          </p>
 
-            <div>
-                <button className="
+          <div>
+            <button
+              className="
                 md:w-[600px] w-[375px]
                 h-12 
                 bg-[#EDEDED] 
@@ -159,37 +175,32 @@ const VerificationCode = ({dynamicPhoneNumber , setloginRegisterState }) => {
                 text-xl
                 md:text-base
                 "
-                 onClick={() => {
-                  setloginRegisterState(0)
-                  handleSendData()
-                  }}
-                 >
-                    تایید و ادامه
-                </button>
-            </div>
+              onClick={() => {
+                setloginRegisterState(0);
+                handleSendData();
+              }}
+            >
+              تایید و ادامه
+            </button>
+          </div>
 
-            <div className="
+          <div
+            className="
              mt-3 
              md:w-[600px] w-[370px]
              flex
              text-xl
              md:text-base
-             ">
+             "
+          >
             حساب کاربری دارید؟
             <Link href="/Sign-in">
-             <p className="mr-1 text-primary">
-                ورود
-            </p>  
-             </Link> 
-            
-            </div>
-
-            </div>
-
-
+              <p className="mr-1 text-primary">ورود</p>
+            </Link>
+          </div>
         </div>
-
       </div>
-    )
-}
+    </div>
+  );
+};
 export default VerificationCode;

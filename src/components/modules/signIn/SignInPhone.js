@@ -3,13 +3,31 @@ import PhoneLogin from "../../../../public/icons/PhoneLogin";
 import AuthPageStruct from "./AuthPageStruct";
 import { useState } from "react";
 import { otp } from "@/service/auth";
+import axios from "axios";
 const SignInPhone =({ setLoginState }) =>{
 
     const [phoneNumber, setPhoneNumber] = useState()
+    const [okay, setOkay] = useState(false)
 
     const handleSendData = () => {
         console.log(phoneNumber)
         loginOtp(phoneNumber)
+    }
+
+    const SendPhoneNumber = async () =>{
+      try {
+        let phoneNumber = document.getElementById("phoneNumber").value;
+        const response = await axios.post("https://api.example.com/send-phone-number",
+        {phoneNumber: phoneNumber},
+        {headers: {"Content-Type": "application/json",Authorization: `Bearer ${localStorage.getItem("accessToken")}`,},});
+        const data = await response.json();
+        console.log(data);
+        setOkay(data.okay);
+        
+      } catch (error) {
+        
+      }
+    
     }
 
     return(
@@ -33,6 +51,7 @@ const SignInPhone =({ setLoginState }) =>{
         font-bold
         md:text-base
         ">
+
             ورود
         </p>
 
@@ -62,6 +81,7 @@ const SignInPhone =({ setLoginState }) =>{
                 </span>
 
                 <input
+                id="phoneNumber"
                 className="
                 rounded-xl
                 border-none
@@ -72,6 +92,8 @@ const SignInPhone =({ setLoginState }) =>{
                 text-xl
                 md:text-base
                 "
+               
+                
                 placeholder=" شماره موبایل* "
                 type="text"
                 name="firstname"
@@ -92,6 +114,7 @@ const SignInPhone =({ setLoginState }) =>{
                  md:text-base
                  "
                  onClick={() => {
+                    SendPhoneNumber()
                     setLoginState("verification")
                     handleSendData()
                  }}

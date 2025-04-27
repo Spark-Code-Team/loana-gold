@@ -1,6 +1,17 @@
 import Api, { api } from "@/config/api";
 
+export const loginOtp = async (code, phone_number) => {
+    try {
+        const response = await api.post("/users/auth/loginOtp/", {
+            code,
+            phone_number
+        });
 
+        return { response };
+    } catch (error) {
+        return { error };
+    }
+};
 
 export const login = async (phone_number) => {
 
@@ -30,7 +41,7 @@ export const register = async (formData) => {
                 bank_name: formData.bankName
             }
         )
-            
+            console.log(response)
             return {response}
         }catch(error){
             return {error}

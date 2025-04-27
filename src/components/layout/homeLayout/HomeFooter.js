@@ -3,10 +3,25 @@ import Image from "next/image";
 import Link from "next/link";
 import {useState} from "react";
 import {log} from "next/dist/server/typescript/utils";
+import axios from "axios";
 
 const HomeFooter = () =>{
 
     const [login , setLogin] = useState(true);
+     
+    const SubmitEmail = async () => {
+        try {
+            const email = document.getElementById("footerEmailInput").value;
+            const response = await axios.post("https://api.example.com/submit-email", {email:email},{})
+            const data = await response.json();
+            console.log(data);
+            if (data.success) {
+                alert("ایمیل شما با موفقیت ثبت شد");
+            } else {
+                alert("خطا در ثبت ایمیل");
+            }            
+        } catch (error) {console.log(error);}
+    }
 
     return(
 
@@ -23,8 +38,8 @@ const HomeFooter = () =>{
 
                                 <div className="md:w-1/2 md:flex md:justify-end gap-x-3 w-full md:mt-0 mt-7 flex justify-between">
 
-                                    <button className="md:w-[91px] md:h-[40px] w-[30%] bg-[#D2AB67] rounded-xl text-sm">ثبت ایمیل</button>
-                                    <input type="email" name="" className="md:w-[305px] h-[40px] border-2 border-[#E1E1E1] rounded-xl" placeholder="ایمیل خود را وارد کنید"/>
+                                    <button onClick={()=>SubmitEmail} className="md:w-[91px] md:h-[40px] w-[30%] bg-[#D2AB67] rounded-xl text-sm">ثبت ایمیل</button>
+                                    <input id="footerEmailInput" type="email" name="" className="md:w-[305px] h-[40px] border-2 border-[#E1E1E1] rounded-xl" placeholder="ایمیل خود را وارد کنید"/>
 
                                 </div>
 

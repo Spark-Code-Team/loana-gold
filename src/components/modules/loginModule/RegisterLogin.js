@@ -7,6 +7,7 @@ import EmailLogin from "../../../../public/icons/EmailLogin";
 import PersonName from "../../../../public/icons/PersonName";
 import { Bounce, toast } from "react-toastify";
 import { registerForm } from "@/constant/auth";
+import { login } from "@/service/auth";
 
 
 
@@ -49,6 +50,20 @@ const RegisterLogin = ({setloginRegisterState }) =>{
       }
 
     }; 
+
+   
+
+const handleLogin = async () => {
+  const { response, error } = await login(formData.mobileNumber);
+  
+  if (response) {
+    document.cookie = `expire_time=${response.data.code_expires_at}; max-age=${2 * 60}`;
+    setloginRegisterState({ state: 1, phone: formData.mobileNumber });
+  } else {
+    toast.error(error.response?.data?.error || "خطایی رخ داده است");
+  }
+};
+
 
     return(
         <div 
