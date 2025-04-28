@@ -51,7 +51,7 @@ const HomeFooter = () =>{
 
                                     <div className="w-full text-[18px] md:text-right text-center text-[#D2AB67]">لوگو</div>
 
-                                    <div className="w-full mt-5 w-full md:text-right text-center">لونا اولین پلتفرم معاملات طلا در ایران است که به کاربران امکان می‌دهد تا به صورت مستقیم و به شیوۀ "Customer to Customer (C2C)" به معامله طلا پرداخته و از پروژه ایجاد یک پلتفرم امن، شفاف و سریع برای معامله طلا میان کاربران بهره‌مند شوند.</div>
+                                    <div className="w-full mt-5 md:text-right text-center">لونا اولین پلتفرم معاملات طلا در ایران است که به کاربران امکان می‌دهد تا به صورت مستقیم و به شیوۀ "Customer to Customer (C2C)" به معامله طلا پرداخته و از پروژه ایجاد یک پلتفرم امن، شفاف و سریع برای معامله طلا میان کاربران بهره‌مند شوند.</div>
 
                                     <div className="w-full mt-5 md:flex md:justify-start md:gap-x-3 flex justify-around">
 
@@ -120,7 +120,7 @@ const HomeFooter = () =>{
                 login && (
                     <>
 
-                        <div className="md:hidden block w-full flex justify-between mt-10 bg-yellow-300 fixed bottom-0 pt-2 pb-2">
+                        <div className="md:hidden w-full flex justify-between mt-10 bg-yellow-300 fixed bottom-0 pt-2 pb-2">
 
                             <div className="w-1/5 flex flex-wrap items-center">
 

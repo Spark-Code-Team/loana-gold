@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 
 const OnlineCalculation = () => {
     const [param1, setParam1] = useState(0);
+    
   /*const [dailyPrice, setDailyPrice] = useState(0);
   useEffect(() => {
     getDailyPrice();
