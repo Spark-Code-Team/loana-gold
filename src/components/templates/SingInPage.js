@@ -20,7 +20,7 @@ const SignInPage = () => {
         <>
         {loginState.state === "phone" && <SignInPhone loginState={loginState} setLoginState={setLoginState} />}
         {loginState.state === "verification" && <VerificationCodeSignIn loginState={loginState} setLoginState={setLoginState} />}
-        {loginState.state === "password" && <PasswordSignIn setLoginState={setLoginState} />}
+        {loginState.state === "password" && <PasswordSignIn loginState={loginState} setLoginState={setLoginState} />}
         {loginState.state === "forgetPassword" && <ForgetPasswordSignIn setLoginState={setLoginState} />}
         {loginState.state === "resendCode" && <ResendPasswordSignIn setLoginState={setLoginState} />}
         {loginState.state === "newPassword" && <NewPasswordSignIn setLoginState={setLoginState} />}

@@ -1,10 +1,11 @@
 "use client";
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import Link from "next/link";
 import { IoMdClose } from "react-icons/io";
 import Image from "next/image";
 import { getCookie } from "@/utils/cookies";
 import {Profile} from "@/service/profile";
+import { UserProfile } from "@/stores/profileStore";
 
 const HomeHeader = () => {
 
@@ -18,6 +19,12 @@ const HomeHeader = () => {
         {id:1 , title:"سفارش ها" , image:"/images/tarakonesh.png"},
         {id:1 , title:"تراکنش ها" , image:"/images/help.png"},
     ]
+
+    const profile = UserProfile()
+
+    useEffect(()=>{
+        console.log('this is profile1111111111111111111111111111111111111111111111111111111111')
+    },[])
 
     const [isOpen, setIsOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);

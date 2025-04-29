@@ -9,12 +9,16 @@ import { Bounce, toast } from "react-toastify";
 import { loginOtp } from "@/service/auth";
 import { login } from "@/service/auth"; 
 import { useRouter } from "next/navigation";
+import { Profile } from "@/service/profile";
+import { UserProfile } from "@/stores/profileStore";
 
 const VerificationCodeSignIn = ({ setLoginState , loginState }) => {
           const [otpObj, setOtpObj] = useState({phoneNumber: loginState.phoneNumber, otp: ''  });  
           const [expired, setExpired] = useState(false);
           const [remainingTime, setRemainingTime] = useState(0);  
           const router = useRouter()
+          const profileStore = UserProfile()
+          
 
       useEffect(() => {
         const inputTime = getCookie('expire_time');
@@ -82,8 +86,26 @@ const VerificationCodeSignIn = ({ setLoginState , loginState }) => {
                 setLoginState({state:"password" , phoneNumber:loginState.phoneNumber,  is_2fa:loginState.is_2fa})
             }
             else if (!loginState.is_2fa){
+                        const fetchProfile = async () => {
+                                const {response , error} = await Profile()
+                                if (response){
+                                    const userData = response.data.user;  
+                                    const profileImage = response.data.profile_img;  
+                        
+                        
+                                    profileStore.setProfile({  
+                                        user: userData,  
+                                        profile_img: profileImage
+                                    }); 
+                        
+                                }
+                                else if (error){
+                                }}
+                          fetchProfile()
                 router.push('/')
             }
+
+            
 
 
         }else if(error) {
@@ -168,7 +190,7 @@ const VerificationCodeSignIn = ({ setLoginState , loginState }) => {
                 >
 
                 <p className="text-[#A6A6A6]">
-                {remainingTime} تا ارسال مجدد کد
+                {remainingTime} ثانیه تا ارسال مجدد کد
                 </p>
 
                 </button>

@@ -8,14 +8,25 @@ const LoginPage = () => {
         state: 0,
         phone: '',
     })
+    
+
+    const [formData, setFormData] = useState({ 
+        firstName: '',  
+        lastName: '',  
+        mobileNumber: '',  
+        nationalCode: '',  
+        shebaNumber: '',  
+        bankName: '' ,
+        otp: '' 
+    });
 
 
     return(
         <>
         {loginRegisterState.state === 0 ? (
-            <RegisterLogin setloginRegisterState={setloginRegisterState} />
+            <RegisterLogin setFormData={setFormData} formData={formData} setloginRegisterState={setloginRegisterState} />
         ) : loginRegisterState.state === 1 ? (
-            <VerificationCode dynamicPhoneNumber={loginRegisterState.phone} setloginRegisterState={setloginRegisterState} />
+            <VerificationCode setFormData={setFormData} formData={formData} dynamicPhoneNumber={loginRegisterState.phone} setloginRegisterState={setloginRegisterState} />
         ) : (
             <SignInPhone setloginRegisterState={setloginRegisterState} />
         )}

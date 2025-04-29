@@ -4,16 +4,20 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getCookie } from "@/utils/cookies";
-import { loginOtp } from "@/service/auth";
+import { loginOtp, register, sendOtp } from "@/service/auth";
 import { setCookie } from "@/utils/cookies";
 import { Bounce, toast } from "react-toastify";
+import { Profile } from "@/service/profile";
+import { UserProfile } from "@/stores/profileStore";
 
-const VerificationCode = ({dynamicPhoneNumber , handleSendRegisterData , nigger }) => {
+
+const VerificationCode = ({dynamicPhoneNumber , setLoginState , loginState, setFormData , formData }) => {
       const [otpObj, setOtpObj] = useState({phoneNumber: dynamicPhoneNumber, otp: ''  });  
       const [expired, setExpired] = useState(false);
       const [remainingTime, setRemainingTime] = useState(0); 
 
       const router = useRouter()
+      const profileStore = UserProfile()
 
       useEffect(() => {
         const inputTime = getCookie('expire_time');
@@ -41,18 +45,66 @@ const VerificationCode = ({dynamicPhoneNumber , handleSendRegisterData , nigger 
         }, 1000);
     
         return () => clearInterval(timer); 
-      }, []);
+      });
 
 
       const handleOtpChange = (e) => {  
         const value = e.target.value; 
-        setOtpObj(prevState => ({ ...prevState, otp: value })); 
+        setOtpObj(prevState => ({ ...prevState, otp: value }));
       };
+
+
+            const handleSendOtpAgain = async ()=>{
+              if (expired){
+              const { response, error } = await sendOtp({ mobileNumber: otpObj.phoneNumber });
+                    if (response) {
+                          document.cookie = `expire_time=${response.data.code_expires_at}; max-age=${2*60}`;
+                          setExpired(false)
+                      }
+                      else if (error){
+                          toast.error(error.response.data.error, { 
+                                  position: "bottom-right",
+                                  autoClose: 5000,
+                                  hideProgressBar: false,
+                                  closeOnClick: true,
+                                  progress: undefined,
+                                  theme: "light",
+                                  transition: Bounce,
+                              }
+                              )         
+                          }
+              }
+              
+            }
       
-      const handleSendData = async () => {
-        const {response , error} = await loginOtp(otpObj)
+
+      const handleSendData = async () =>{
+        const newFormdata = {
+          ...formData,
+          otp:otpObj.otp,
+        };
+        
+        setFormData(newFormdata)
+
+        const {response , error} = await register(newFormdata)
         if (response){
           setCookie(response.data)
+          const fetchProfile = async () => {
+                  const {response , error} = await Profile()
+                  if (response){
+                      const userData = response.data.user;  
+                      const profileImage = response.data.profile_img;  
+          
+          
+                      profileStore.setProfile({  
+                          user: userData,  
+                          profile_img: profileImage
+                      }); 
+          
+                  }
+                  else if (error){
+                  }}
+                  fetchProfile()
           router.push('/')
 
         }else if(error) {
@@ -66,8 +118,8 @@ const VerificationCode = ({dynamicPhoneNumber , handleSendRegisterData , nigger 
                   transition: Bounce,
                 }
               ) 
-        }
-      }
+      }}
+ 
 
     return(
       <div className="
@@ -165,7 +217,7 @@ const VerificationCode = ({dynamicPhoneNumber , handleSendRegisterData , nigger 
                   text-xl
                   md:text-base
                 text-[#A6A6A6]">
-                {remainingTime} ارسال مجدد کد
+                {remainingTime} ثانیه تا ارسال مجدد کد
                 </p>
 
             <div>
@@ -182,7 +234,7 @@ const VerificationCode = ({dynamicPhoneNumber , handleSendRegisterData , nigger 
                 md:text-base
                 "
                  onClick={() => {
-                  handleSendRegisterData()
+                  handleSendOtpAgain()
                 }}
                  >
                     ارسال مجدد کد

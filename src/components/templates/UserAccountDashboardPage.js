@@ -1,10 +1,12 @@
 "use client"
 
-import { useEffect } from "react";
+
+import { useEffect, useState } from "react";
 import EmailDashboard from "../../../public/icons/EmailDashboard";
 import PersonDashboard from "../../../public/icons/PersonDashboard";
 import DashboardLeft from "../elements/DashboardLeft";
 import { Profile } from "@/service/profile";
+import { setEmailPass } from "@/service/auth";
 import { UserProfile } from "@/stores/profileStore";
 import { getProfile } from "@/constant/profile";
 
@@ -13,6 +15,25 @@ const UserAccountDashboardPage = () => {
     const profileStore = UserProfile()
 
     const profile = getProfile(); 
+
+        const [emailAndPassword, setEmailAndPassword] = useState({  
+            email: '',  
+            password: '',  
+            confirm_password: ''  
+        });  
+    
+        const handleChange = (e) => {  
+            setEmailAndPassword({  
+                ...emailAndPassword,  
+                [e.target.name]: e.target.value  
+            });  
+        };
+
+        const handleSubmit = (e) => {  
+            e.preventDefault();  
+            setEmailPass(emailAndPassword)
+        };  
+    
 
 
     useEffect (  ()=>{
@@ -30,7 +51,6 @@ const UserAccountDashboardPage = () => {
 
         }
         else if (error){
-            console.log(error)
         }}
         fetchProfile()
     }, []) 
@@ -117,6 +137,10 @@ const UserAccountDashboardPage = () => {
          border-[#CBCED7]
          mt-32
         ">
+
+
+            
+
             <div className="pr-6">
             <p className="
             pt-6
@@ -148,6 +172,9 @@ const UserAccountDashboardPage = () => {
             <input 
              type="text" 
              placeholder="ایمیل" 
+             onChange={handleChange}
+             value={emailAndPassword.email}  
+             name="email"  
              className="
                 w-[350px]
                 border-none
@@ -183,7 +210,10 @@ const UserAccountDashboardPage = () => {
 
             <input 
              type="text" 
-             placeholder="رمزعبور" 
+             placeholder="رمزعبور"
+             onChange={handleChange} 
+             value={emailAndPassword.password}  
+             name="password"  
              className="
                 w-[350px]
                 border-none
@@ -215,6 +245,9 @@ const UserAccountDashboardPage = () => {
             <input 
              type="text" 
              placeholder="تکرار رمزعبور" 
+             onChange={handleChange}
+             value={emailAndPassword.confirm_password}  
+             name="confirm_password"  
              className="
                 w-[350px]
                 border-none
@@ -230,12 +263,14 @@ const UserAccountDashboardPage = () => {
             </div>
 
             <div className="pt-6">
-                <button className="
-                w-[108px]
-                h-12
-                bg-primary
-                rounded-xl
-                ">
+                <button 
+                    onClick={handleSubmit}
+                    className="
+                    w-[108px]
+                    h-12
+                    bg-primary
+                    rounded-xl
+                    ">
                     ثبت ایمیل
                 </button>
 

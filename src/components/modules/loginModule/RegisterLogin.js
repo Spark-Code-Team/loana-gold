@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link";
-import { register } from "@/service/auth";
+import { register, sendOtp } from "@/service/auth";
 import { useState } from "react";
 import EmailLogin from "../../../../public/icons/EmailLogin";
 import PersonName from "../../../../public/icons/PersonName";
@@ -10,15 +10,8 @@ import { registerForm } from "@/constant/auth";
 
 
 
-const RegisterLogin = ({setloginRegisterState }) =>{
-      const [formData, setFormData] = useState({ 
-        firstName: '',  
-        lastName: '',  
-        mobileNumber: '',  
-        nationalCode: '',  
-        shebaNumber: '',  
-        bankName: ''  
-    });
+const RegisterLogin = ({setFormData ,formData ,setloginRegisterState }) =>{
+
 
     const handleChange = (e) => {  
       const { name, value } = e.target;  
@@ -29,7 +22,7 @@ const RegisterLogin = ({setloginRegisterState }) =>{
     }; 
 
     const handleSendData = async () => {  
-      const { response, error } = await register(formData)
+      const { response, error } = await sendOtp(formData)
       if (response){
         document.cookie = `expire_time=${response.data.code_expires_at}; max-age=${2*60}`;
         setloginRegisterState({state: 1, phone: formData.mobileNumber})
