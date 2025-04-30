@@ -62,13 +62,13 @@ const PasswordSignIn = ({ setLoginState , loginState }) => {
 
             
                     }
-                    else if (error){
+                    else{
                     }}
             fetchProfile()
 // rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
             router.push('/dashboard/user-account-dashboard')
         }
-        else if (error){
+        else{
             toast.error(error.response.data.error, { 
                 position: "bottom-right",
                 autoClose: 5000,

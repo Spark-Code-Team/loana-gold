@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import RegisterLogin from "../modules/loginModule/RegisterLogin";
 import VerificationCode from "../modules/loginModule/VerificationCode";
 import SignInPhone from "../modules/signIn/SignInPhone";
@@ -17,7 +17,8 @@ const LoginPage = () => {
         nationalCode: '',  
         shebaNumber: '',  
         bankName: '' ,
-        otp: '' 
+        otp: '' ,
+        otp_for: ''
     });
 
 

@@ -3,7 +3,6 @@ import { useState , useEffect} from "react";
 import Link from "next/link";
 import { IoMdClose } from "react-icons/io";
 import Image from "next/image";
-import { getCookie } from "@/utils/cookies";
 import {Profile} from "@/service/profile";
 import { UserProfile } from "@/stores/profileStore";
 
@@ -24,15 +23,13 @@ const HomeHeader = () => {
 
     useEffect(() => {  
         if(profile.data.user.role){
-            console.log(profile, '777777777777777777777777777777777777')
             setLogin(true)
             setRole(profile.data.user.role)
         }
-        else if(!profile.data.user.role){
+        else{
             setLogin(false)
         }
-        console.log(profile.data.user.role)
-    });  
+    }, [profile.data.user.role]);  
 
     const [isOpen, setIsOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -43,8 +40,7 @@ const HomeHeader = () => {
     const openModal = () => {
         setIsOpen(false); // بستن منوی همبرگری در موبایل
         setIsModalOpen(true);
-    };
-
+    };    
 
     return (
 
@@ -60,7 +56,7 @@ const HomeHeader = () => {
                     {/* دکمه‌ی همبرگری در موبایل (اگر کاربر لاگین نکرده باشد) یا آیکون پنل کاربری */}
                     <div className="md:hidden">
                         {login ? (
-                            <img onClick={Profile} src={profile.data.profile_img} className="w-[49px] h-[49px] rounded-full"></img>
+                            <Image alt="profile" onClick={() => Profile()} width={500} height={500} src={profile.data.profile_img ? profile.data.profile_img : "/"} className="w-[49px] h-[49px] rounded-full"/>
                         ) : (
                             <button className="text-black" onClick={() => setIsOpen(!isOpen)}>
                                 {isOpen ? "✖️" : "☰"}
@@ -80,7 +76,7 @@ const HomeHeader = () => {
                     <div className="hidden md:flex items-center">
                         {login ? (
                             <Link href="/dashboard/user-account-dashboard">
-                                <img onClick={Profile} src={profile.data.profile_img} className="w-[49px] h-[49px] rounded-full"/>
+                                <Image alt="profile" onClick={() => Profile()} width={500} height={500} src={profile.data.profile_img ? profile.data.profile_img : "/"} className="w-[49px] h-[49px] rounded-full"/>
                             </Link>
                         ) : (
                             <>

@@ -62,7 +62,7 @@ const UserAccountDashboardPage = () => {
     
 
 
-    useEffect (  ()=>{
+    useEffect ( ()=>{
         const fetchProfile = async () => {
         const {response , error} = await Profile()
         if (response){
@@ -76,7 +76,7 @@ const UserAccountDashboardPage = () => {
             }); 
 
         }
-        else if (error){
+        else{
         }}
         fetchProfile()
     }, []) 
@@ -226,22 +226,23 @@ const UserAccountDashboardPage = () => {
                         
                         <span className="mr-4">
                             <PersonDashboard/>
-                            </span>
+                        </span>
 
                         <input 
-                        type="text" 
-                        placeholder="رمز عبور جدید" 
-                        onChange={handleChangePass}
-                        value={changePass.password}  
-                        name="password"  
-                        className="
-                            w-[350px]
-                            border-none
-                            focus:outline-none
-                            focus:ring-0
-                            focus:boredr-transparent 
-                            text-[#979797]
-                        "/>
+                            type="text" 
+                            placeholder="رمز عبور جدید" 
+                            onChange={handleChangePass}
+                            value={changePass.password}  
+                            name="password"  
+                            className="
+                                w-[350px]
+                                border-none
+                                focus:outline-none
+                                focus:ring-0
+                                focus:boredr-transparent 
+                                text-[#979797]
+                            "
+                        />
                         
                         </div>
 
@@ -259,7 +260,7 @@ const UserAccountDashboardPage = () => {
                         
                         <span className="mr-4">
                             <PersonDashboard/>
-                            </span>
+                        </span>
 
                         <input 
                         type="text" 
@@ -278,7 +279,12 @@ const UserAccountDashboardPage = () => {
                         
                         </div>
 
-                        <div className="pt-6">
+                        <div className="
+                                pt-6
+                                pb-[16px]
+                                mb-24 
+                            "
+                        >
                             <button 
                                 onClick={handleSubmitChangePass}
                                 className="
@@ -287,7 +293,7 @@ const UserAccountDashboardPage = () => {
                                 bg-primary
                                 rounded-xl
                                 ">
-                                ثبت ایمیل
+                                تغییر رمز عبور
                             </button>
 
                         </div>

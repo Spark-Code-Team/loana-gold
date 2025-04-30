@@ -27,7 +27,7 @@ const RegisterLogin = ({setFormData ,formData ,setloginRegisterState }) =>{
         document.cookie = `expire_time=${response.data.code_expires_at}; max-age=${2*60}`;
         setloginRegisterState({state: 1, phone: formData.mobileNumber})
 
-      } else if(error) {
+      } else  {
         toast.error(error.response.data.error, { 
                 position: "bottom-right",
                 autoClose: 5000,

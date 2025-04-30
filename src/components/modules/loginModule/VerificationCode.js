@@ -9,29 +9,28 @@ import { setCookie } from "@/utils/cookies";
 import { Bounce, toast } from "react-toastify";
 import { Profile } from "@/service/profile";
 import { UserProfile } from "@/stores/profileStore";
+import { setTime } from "@/utils/setTime";
 
 
 const VerificationCode = ({dynamicPhoneNumber , setLoginState , loginState, setFormData , formData }) => {
-      const [otpObj, setOtpObj] = useState({phoneNumber: dynamicPhoneNumber, otp: ''  });  
+      const [otpObj, setOtpObj] = useState({phoneNumber: dynamicPhoneNumber, otp: ''  ,otp_for: 'Register'});  
       const [expired, setExpired] = useState(false);
       const [remainingTime, setRemainingTime] = useState(0); 
-
       const router = useRouter()
       const profileStore = UserProfile()
 
       useEffect(() => {
         const inputTime = getCookie('expire_time');
-        const expirationDate = new Date(inputTime);
-        const now = new Date();
-        let diffMs = expirationDate - now;
-        const totalSeconds = Math.floor(diffMs / 1000);
-    
+        
+        const totalSeconds = setTime(inputTime)
+
+        setRemainingTime(totalSeconds);
+
         if (totalSeconds <= 0) {
           setExpired(true);
           setRemainingTime(0);
           return;
         }
-        setRemainingTime(totalSeconds);
 
         const timer = setInterval(() => {
           setRemainingTime((prev) => {
@@ -45,7 +44,17 @@ const VerificationCode = ({dynamicPhoneNumber , setLoginState , loginState, setF
         }, 1000);
     
         return () => clearInterval(timer); 
-      });
+      },[ remainingTime , expired ]);
+
+      const turnToMinuets = (remainingTime) => {
+        let minuet ;
+        let seconds ; 
+
+        minuet = Math.floor(remainingTime / 60)
+        seconds = Math.floor(remainingTime % 60)
+
+        return {minuet , seconds}
+      }
 
 
       const handleOtpChange = (e) => {  
@@ -56,12 +65,13 @@ const VerificationCode = ({dynamicPhoneNumber , setLoginState , loginState, setF
 
             const handleSendOtpAgain = async ()=>{
               if (expired){
-              const { response, error } = await sendOtp({ mobileNumber: otpObj.phoneNumber });
+                const { response, error } = await sendOtp({ mobileNumber: otpObj.phoneNumber });
                     if (response) {
                           document.cookie = `expire_time=${response.data.code_expires_at}; max-age=${2*60}`;
+                          setTime(response.data.code_expires_at) 
                           setExpired(false)
                       }
-                      else if (error){
+                      else{
                           toast.error(error.response.data.error, { 
                                   position: "bottom-right",
                                   autoClose: 5000,
@@ -82,6 +92,7 @@ const VerificationCode = ({dynamicPhoneNumber , setLoginState , loginState, setF
         const newFormdata = {
           ...formData,
           otp:otpObj.otp,
+          otp_for:otpObj.otp_for
         };
         
         setFormData(newFormdata)
@@ -102,12 +113,12 @@ const VerificationCode = ({dynamicPhoneNumber , setLoginState , loginState, setF
                       }); 
           
                   }
-                  else if (error){
+                  else{
                   }}
                   fetchProfile()
           router.push('/')
 
-        }else if(error) {
+        }else{
           toast.error(error.response.data.detail, { 
                   position: "bottom-right",
                   autoClose: 5000,
@@ -217,7 +228,7 @@ const VerificationCode = ({dynamicPhoneNumber , setLoginState , loginState, setF
                   text-xl
                   md:text-base
                 text-[#A6A6A6]">
-                {remainingTime} ثانیه تا ارسال مجدد کد
+                {turnToMinuets(remainingTime).minuet}:{turnToMinuets(remainingTime).seconds} تا ارسال مجدد کد
                 </p>
 
             <div>

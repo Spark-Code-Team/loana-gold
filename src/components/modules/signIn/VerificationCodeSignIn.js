@@ -11,6 +11,7 @@ import { login } from "@/service/auth";
 import { useRouter } from "next/navigation";
 import { Profile } from "@/service/profile";
 import { UserProfile } from "@/stores/profileStore";
+import { setTime } from "@/utils/setTime";
 
 const VerificationCodeSignIn = ({ setLoginState , loginState }) => {
           const [otpObj, setOtpObj] = useState({phoneNumber: loginState.phoneNumber, otp: ''  });  
@@ -22,10 +23,8 @@ const VerificationCodeSignIn = ({ setLoginState , loginState }) => {
 
       useEffect(() => {
         const inputTime = getCookie('expire_time');
-        const expirationDate = new Date(inputTime);
-        const now = new Date();
-        let diffMs = expirationDate - now;
-        const totalSeconds = Math.floor(diffMs / 1000);
+        
+        const totalSeconds = setTime(inputTime)
     
         if (totalSeconds <= 0) {
           setExpired(true);
@@ -46,17 +45,29 @@ const VerificationCodeSignIn = ({ setLoginState , loginState }) => {
         }, 1000);
     
         return () => clearInterval(timer); 
-      });
+      },[remainingTime]);
+
+      const turnToMinuets = (remainingTime) => {
+        let minuet ;
+        let seconds ; 
+
+        minuet = Math.floor(remainingTime/60)
+        seconds = Math.floor(remainingTime%60)
+
+        return {minuet , seconds}
+      }
 
       const handleSendLoginAgain = async ()=>{
         if (expired){
                 const {response , error} = await login(loginState.phoneNumber)    
                 if (response) {
                     document.cookie = `expire_time=${response.data.code_expires_at}; max-age=${2*60}`;
+                    console.log(response.data.code_expires_at);
+                    setRemainingTime(setTime(response.data.code_expires_at))
                     setLoginState({state:"verification", phoneNumber:loginState.phoneNumber, is_2fa:loginState.is_2fa})
                     setExpired(false)
                 }
-                else if (error){
+                else{
                     toast.error(error.response.data.error, { 
                             position: "bottom-right",
                             autoClose: 5000,
@@ -85,21 +96,19 @@ const VerificationCodeSignIn = ({ setLoginState , loginState }) => {
             if(loginState.is_2fa){
                 setLoginState({state:"password" , phoneNumber:loginState.phoneNumber,  is_2fa:loginState.is_2fa})
             }
-            else if (!loginState.is_2fa){
+            else{
                         const fetchProfile = async () => {
                                 const {response , error} = await Profile()
                                 if (response){
                                     const userData = response.data.user;  
                                     const profileImage = response.data.profile_img;  
-                        
-                        
                                     profileStore.setProfile({  
                                         user: userData,  
                                         profile_img: profileImage
                                     }); 
                         
                                 }
-                                else if (error){
+                                else{
                                 }}
                           fetchProfile()
                 router.push('/')
@@ -108,7 +117,7 @@ const VerificationCodeSignIn = ({ setLoginState , loginState }) => {
             
 
 
-        }else if(error) {
+        }else{
           toast.error(error.response.data.detail, { 
                   position: "bottom-right",
                   autoClose: 5000,
@@ -150,7 +159,7 @@ const VerificationCodeSignIn = ({ setLoginState , loginState }) => {
         mt-4
         text-[#A6A6A6]
         ">
-        کد 5 رقمی به شماره تلفن {loginState.phoneNumber} ارسال شد
+        کد 6 رقمی به شماره تلفن {loginState.phoneNumber} ارسال شد
         </p>
         </div>
 
@@ -190,7 +199,7 @@ const VerificationCodeSignIn = ({ setLoginState , loginState }) => {
                 >
 
                 <p className="text-[#A6A6A6]">
-                {remainingTime} ثانیه تا ارسال مجدد کد
+                {turnToMinuets(remainingTime).minuet}:{turnToMinuets(remainingTime).seconds} تا ارسال مجدد کد
                 </p>
 
                 </button>

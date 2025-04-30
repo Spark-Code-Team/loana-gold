@@ -62,7 +62,6 @@ export const checkPassword = async (phonePass) =>{
     }
 }
 
-
 export const sendOtp = async (formData) => {
     try{
         const response = await api.post('/users/auth/send-otp/', {
@@ -77,12 +76,9 @@ export const sendOtp = async (formData) => {
     }
 }
 
-
-
 export const register = async (formData) => {
         try{
 
-            console.log(formData,'لاگ جدید')
             const response = await api.post('/users/auth/register/',{    
                 phone_number: formData.mobileNumber,
                 national_code:formData.nationalCode ,
@@ -90,7 +86,8 @@ export const register = async (formData) => {
                 last_name: formData.lastName,
                 sheba: formData.shebaNumber,
                 bank_name: formData.bankName,
-                otp_code: formData.otp
+                otp_code: formData.otp,
+                otp_for: formData.otp_for
             }
 
             

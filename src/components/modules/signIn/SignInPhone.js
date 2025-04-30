@@ -5,6 +5,8 @@ import { useState } from "react";
 import { login } from "@/service/auth";
 import { otp } from "@/service/auth";
 import { setCookie } from "@/utils/cookies";
+import { Bounce, toast } from "react-toastify";
+
 const SignInPhone =({ loginState, setLoginState }) =>{
 
     const [phoneNumber, setPhoneNumber] = useState()
@@ -15,8 +17,10 @@ const SignInPhone =({ loginState, setLoginState }) =>{
             document.cookie = `expire_time=${response.data.code_expires_at}; max-age=${2*60}`;
             setLoginState({state:"verification", phoneNumber:phoneNumber, is_2fa:response.data.is_2fa})
         }
-        else if (error){
-            toast.error(error.response.data.error, { 
+        else{
+            console.log("44444444444444444",error);
+            
+            toast.error(error.response?.data.error || "مشکلی پیش آمده", { 
                     position: "bottom-right",
                     autoClose: 5000,
                     hideProgressBar: false,
