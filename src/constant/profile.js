@@ -43,11 +43,11 @@ export const getProfile = () => {
         logo:<EmailDashboard/>
 
     },
-    // {
-    //     id:6,
-    //     field_name:'نام بانک',
-    //     componentName: bank_name,
-    //     logo:<PhoneDashboard/>
+    {
+        id:6,
+        field_name:'نام بانک',
+        content: profileStore.data.user.bank_name,
+        logo:<PhoneDashboard/>
 
-    // },
+    },
 ]}

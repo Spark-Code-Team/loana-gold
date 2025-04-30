@@ -9,18 +9,40 @@ import { Profile } from "@/service/profile";
 import { setEmailPass } from "@/service/auth";
 import { UserProfile } from "@/stores/profileStore";
 import { getProfile } from "@/constant/profile";
+import { useRouter } from "next/navigation";
 
 const UserAccountDashboardPage = () => {
 
     const profileStore = UserProfile()
-
+    const router = useRouter()
     const profile = getProfile(); 
+    const [modalOpen , setModalOpen] = useState(false)
 
         const [emailAndPassword, setEmailAndPassword] = useState({  
             email: '',  
             password: '',  
             confirm_password: ''  
-        });  
+        });
+        
+        const [changePass , setChangePass] = useState({
+            email:'',
+            code:'',
+            current_password:'',
+            password:'',
+            password_repeat:''
+        })
+
+        const handleChangePass = (e) => {
+            setChangePass({  
+                ...changePass,  
+                [e.target.name]: e.target.value  
+            }); 
+        };
+
+        const handleSubmitChangePass = () => {
+            setModalOpen(true)
+            console.log(changePass)
+        }
     
         const handleChange = (e) => {  
             setEmailAndPassword({  
@@ -31,7 +53,11 @@ const UserAccountDashboardPage = () => {
 
         const handleSubmit = (e) => {  
             e.preventDefault();  
+            console.log(emailAndPassword)
+            profileStore.setProfileToNull()
             setEmailPass(emailAndPassword)
+            router.push('/')
+
         };  
     
 
@@ -139,144 +165,272 @@ const UserAccountDashboardPage = () => {
         ">
 
 
-            
 
-            <div className="pr-6">
-            <p className="
-            pt-6
-            text-2xl
-            font-bold
-            ">
-                رمزعبور
-            </p>
 
-            <p className="py-6">
-            برای سهولت در ورودهای بعدی، لطفا برای حساب کاربری خود یک رمز عبور قرار دهید.
-            </p>
+{profileStore.data.user.is_2fa?
+                <div className="pr-6">
+                        <p className="
+                        pt-6
+                        text-2xl
+                        font-bold
+                        mb-[16px]
+                        ">
+                            تغییر رمز عبور
+                        </p>
 
-            <div className="
-                flex
-                items-center
-                md:w-[392px]
-                h-[56px]
-                rounded-xl 
-                border-[1px] 
-                border-[#E1E1E1]
-            ">
 
-             
-             <span className="mr-4">
-                <PersonDashboard/>
-                </span>
+                        <div className="
+                            flex
+                            items-center
+                            md:w-[392px]
+                            h-[56px]
+                            rounded-xl 
+                            border-[1px] 
+                            mb-[16px]
+                            border-[#E1E1E1]
+                        ">
 
-            <input 
-             type="text" 
-             placeholder="ایمیل" 
-             onChange={handleChange}
-             value={emailAndPassword.email}  
-             name="email"  
-             className="
-                w-[350px]
-                border-none
-                focus:outline-none
-                focus:ring-0
-                focus:boredr-transparent 
-                text-[#979797]
-              "/>
-             
-            </div>
+                        
+                        <span className="mr-4">
+                            <EmailDashboard/>
+                        </span>
 
-            <div className="
-            flex 
-            flex-row
-            pt-6
-            gap-4
-            ">
-            <div className="
-                flex
-                items-center
-                md:w-[392px]
-                h-[56px]
-                rounded-xl 
-                border-[1px] 
-                border-[#E1E1E1]
-                bg-[#EDEDED]
-            ">
+                        <input 
+                        type="text" 
+                        placeholder="رمز عبور فعلی را وارد کنید" 
+                        onChange={handleChangePass}
+                        value={changePass.current_password}  
+                        name="current_password"  
+                        className="
+                            w-[350px]
+                            border-none
+                            focus:outline-none
+                            focus:ring-0
+                            focus:boredr-transparent 
+                            text-[#979797]
+                        "/>
+                        
+                        </div>
 
-             
-             <span className="mr-4">
-                <PersonDashboard/>
-            </span>
+                        <div className="
+                            flex
+                            items-center
+                            md:w-[392px]
+                            h-[56px]
+                            rounded-xl 
+                            mb-[16px]
+                            border-[1px] 
+                            border-[#E1E1E1]
+                        ">
 
-            <input 
-             type="text" 
-             placeholder="رمزعبور"
-             onChange={handleChange} 
-             value={emailAndPassword.password}  
-             name="password"  
-             className="
-                w-[350px]
-                border-none
-                focus:outline-none
-                focus:ring-0
-                focus:boredr-transparent 
-                text-[#979797]
-                bg-[#EDEDED]
-              "/>
-             
-            </div>
+                        
+                        <span className="mr-4">
+                            <PersonDashboard/>
+                            </span>
 
-            <div className="
-                flex
-                items-center
-                md:w-[392px]
-                h-[56px]
-                rounded-xl 
-                border-[1px] 
-                border-[#E1E1E1]
-                bg-[#EDEDED]
-            ">
+                        <input 
+                        type="text" 
+                        placeholder="رمز عبور جدید" 
+                        onChange={handleChangePass}
+                        value={changePass.password}  
+                        name="password"  
+                        className="
+                            w-[350px]
+                            border-none
+                            focus:outline-none
+                            focus:ring-0
+                            focus:boredr-transparent 
+                            text-[#979797]
+                        "/>
+                        
+                        </div>
 
-             
-             <span className="mr-4">
-                <EmailDashboard/>
-                </span>
+                        <div className="
+                            flex
+                            items-center
+                            md:w-[392px]
+                            h-[56px]
+                            rounded-xl 
+                            mb-[16px]
+                            border-[1px] 
+                            border-[#E1E1E1]
+                        ">
 
-            <input 
-             type="text" 
-             placeholder="تکرار رمزعبور" 
-             onChange={handleChange}
-             value={emailAndPassword.confirm_password}  
-             name="confirm_password"  
-             className="
-                w-[350px]
-                border-none
-                focus:outline-none
-                focus:ring-0
-                focus:boredr-transparent 
-                text-[#979797]
-                bg-[#EDEDED]
-              "/>
-             
-            </div>
+                        
+                        <span className="mr-4">
+                            <PersonDashboard/>
+                            </span>
 
-            </div>
+                        <input 
+                        type="text" 
+                        placeholder="تکرار رمز عبور" 
+                        onChange={handleChangePass}
+                        value={changePass.password_repeat}  
+                        name="password_repeat"  
+                        className="
+                            w-[350px]
+                            border-none
+                            focus:outline-none
+                            focus:ring-0
+                            focus:boredr-transparent 
+                            text-[#979797]
+                        "/>
+                        
+                        </div>
 
-            <div className="pt-6">
-                <button 
-                    onClick={handleSubmit}
-                    className="
-                    w-[108px]
-                    h-12
-                    bg-primary
-                    rounded-xl
-                    ">
-                    ثبت ایمیل
-                </button>
+                        <div className="pt-6">
+                            <button 
+                                onClick={handleSubmitChangePass}
+                                className="
+                                w-[108px]
+                                h-12
+                                bg-primary
+                                rounded-xl
+                                ">
+                                ثبت ایمیل
+                            </button>
 
-            </div>
+                        </div>
 
-            </div>
+                        </div>
+                        :
+                        <div className="pr-6">
+                        <p className="
+                        pt-6
+                        text-2xl
+                        font-bold
+                        ">
+                            رمزعبور
+                        </p>
+
+                        <p className="py-6">
+                        برای سهولت در ورودهای بعدی، لطفا برای حساب کاربری خود یک رمز عبور قرار دهید.
+                        </p>
+
+                        <div className="
+                            flex
+                            items-center
+                            md:w-[392px]
+                            h-[56px]
+                            rounded-xl 
+                            border-[1px] 
+                            border-[#E1E1E1]
+                        ">
+
+                        
+                        <span className="mr-4">
+                            <PersonDashboard/>
+                            </span>
+
+                        <input 
+                        type="text" 
+                        placeholder="ایمیل" 
+                        onChange={handleChange}
+                        value={emailAndPassword.email}  
+                        name="email"  
+                        className="
+                            w-[350px]
+                            border-none
+                            focus:outline-none
+                            focus:ring-0
+                            focus:boredr-transparent 
+                            text-[#979797]
+                        "/>
+                        
+                        </div>
+
+                        <div className="
+                        flex 
+                        flex-row
+                        pt-6
+                        gap-4
+                        ">
+                        <div className="
+                            flex
+                            items-center
+                            md:w-[392px]
+                            h-[56px]
+                            rounded-xl 
+                            border-[1px] 
+                            border-[#E1E1E1]
+                            bg-[#EDEDED]
+                        ">
+
+                        
+                        <span className="mr-4">
+                            <PersonDashboard/>
+                        </span>
+
+                        <input 
+                        type="text" 
+                        placeholder="رمزعبور"
+                        onChange={handleChange} 
+                        value={emailAndPassword.password}  
+                        name="password"  
+                        className="
+                            w-[350px]
+                            border-none
+                            focus:outline-none
+                            focus:ring-0
+                            focus:boredr-transparent 
+                            text-[#979797]
+                            bg-[#EDEDED]
+                        "/>
+                        
+                        </div>
+
+                        <div className="
+                            flex
+                            items-center
+                            md:w-[392px]
+                            h-[56px]
+                            rounded-xl 
+                            border-[1px] 
+                            border-[#E1E1E1]
+                            bg-[#EDEDED]
+                        ">
+
+                        
+                        <span className="mr-4">
+                            <EmailDashboard/>
+                            </span>
+
+                        <input 
+                        type="text" 
+                        placeholder="تکرار رمزعبور" 
+                        onChange={handleChange}
+                        value={emailAndPassword.confirm_password}  
+                        name="confirm_password"  
+                        className="
+                            w-[350px]
+                            border-none
+                            focus:outline-none
+                            focus:ring-0
+                            focus:boredr-transparent 
+                            text-[#979797]
+                            bg-[#EDEDED]
+                        "/>
+                        
+                        </div>
+
+                        </div>
+
+                        <div className="pt-6">
+                            <button 
+                                onClick={handleSubmit}
+                                className="
+                                w-[108px]
+                                h-12
+                                bg-primary
+                                rounded-xl
+                                ">
+                                ثبت ایمیل
+                            </button>
+
+                        </div>
+
+                        </div>
+}
 
            
           

@@ -59,14 +59,14 @@ const PasswordSignIn = ({ setLoginState , loginState }) => {
                             user: userData,  
                             profile_img: profileImage
                         }); 
+
             
                     }
                     else if (error){
                     }}
             fetchProfile()
 // rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
-            
-            router.push('/')
+            router.push('/dashboard/user-account-dashboard')
         }
         else if (error){
             toast.error(error.response.data.error, { 

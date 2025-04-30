@@ -22,14 +22,23 @@ const HomeHeader = () => {
 
     const profile = UserProfile()
 
-    useEffect(()=>{
-        console.log('this is profile1111111111111111111111111111111111111111111111111111111111')
-    },[])
+    useEffect(() => {  
+        if(profile.data.user.role){
+            console.log(profile, '777777777777777777777777777777777777')
+            setLogin(true)
+            setRole(profile.data.user.role)
+        }
+        else if(!profile.data.user.role){
+            setLogin(false)
+        }
+        console.log(profile.data.user.role)
+    });  
 
     const [isOpen, setIsOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [login , setLogin] = useState(false);
     const [openSidebar , setOpenSidebar] = useState(false);
+    const [role , setRole] = useState()
 
     const openModal = () => {
         setIsOpen(false); // بستن منوی همبرگری در موبایل
@@ -51,7 +60,7 @@ const HomeHeader = () => {
                     {/* دکمه‌ی همبرگری در موبایل (اگر کاربر لاگین نکرده باشد) یا آیکون پنل کاربری */}
                     <div className="md:hidden">
                         {login ? (
-                            <div className="w-[49px] h-[49px] bg-red-400 rounded-full"></div>
+                            <img onClick={Profile} src={profile.data.profile_img} className="w-[49px] h-[49px] rounded-full"></img>
                         ) : (
                             <button className="text-black" onClick={() => setIsOpen(!isOpen)}>
                                 {isOpen ? "✖️" : "☰"}
@@ -70,7 +79,9 @@ const HomeHeader = () => {
                     {/* دکمه‌های ورود و ثبت نام */}
                     <div className="hidden md:flex items-center">
                         {login ? (
-                            <div className="w-[49px] h-[49px] bg-red-400 rounded-full"></div>
+                            <Link href="/dashboard/user-account-dashboard">
+                                <img onClick={Profile} src={profile.data.profile_img} className="w-[49px] h-[49px] rounded-full"/>
+                            </Link>
                         ) : (
                             <>
                                 <button
@@ -79,18 +90,12 @@ const HomeHeader = () => {
                                 >
                                     درخواست اعتبار خرید
                                 </button>
-                                {
-                                    getCookie('refreshToken')&&getCookie('accessToken')
-                                    ?<Link href="/dashboard/user-account-dashboard">
-                                    <button onClick={Profile} className="bg-[#AB8B53] text-black font-bold text-[18px] px-4 py-3 rounded-[8px]">
-                                        پنل کاربری
-                                    </button>
-                                </Link>:<Link href="/Login">
+                                <Link href="/Login">
                                     <button className="bg-[#AB8B53] text-black font-bold text-[18px] px-4 py-3 rounded-[8px]">
                                         ورود / ثبت‌ نام
                                     </button>
                                 </Link>
-                                }
+                                
                             </>
                         )}
                     </div>
