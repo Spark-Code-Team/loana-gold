@@ -18,7 +18,7 @@ const LoginPage = () => {
         shebaNumber: '',  
         bankName: '' ,
         otp: '' ,
-        otp_for: ''
+        // otp_for: ''
     });
 
 
@@ -29,7 +29,7 @@ const LoginPage = () => {
         ) : loginRegisterState.state === 1 ? (
             <VerificationCode setFormData={setFormData} formData={formData} dynamicPhoneNumber={loginRegisterState.phone} setloginRegisterState={setloginRegisterState} />
         ) : (
-            <SignInPhone setloginRegisterState={setloginRegisterState} />
+            <SignInPhone />
         )}
     </>
     )

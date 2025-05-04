@@ -8,6 +8,12 @@ import { UserProfile } from "@/stores/profileStore";
 
 const HomeHeader = () => {
 
+    const [isOpen, setIsOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [login , setLogin] = useState(false);
+    const [openSidebar , setOpenSidebar] = useState(false);
+    const [role , setRole] = useState()
+
     const itemsSidebar = [
         {id:1 , title:"حساب کاربری" , image:"/images/user-sidebar.png"},
         {id:1 , title:"کیف پول" , image:"/images/kif-pul.png"},
@@ -30,12 +36,6 @@ const HomeHeader = () => {
             setLogin(false)
         }
     }, [profile.data.user.role]);  
-
-    const [isOpen, setIsOpen] = useState(false);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [login , setLogin] = useState(false);
-    const [openSidebar , setOpenSidebar] = useState(false);
-    const [role , setRole] = useState()
 
     const openModal = () => {
         setIsOpen(false); // بستن منوی همبرگری در موبایل

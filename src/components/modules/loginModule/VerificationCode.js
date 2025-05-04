@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getCookie } from "@/utils/cookies";
-import { loginOtp, register, sendOtp } from "@/service/auth";
+import { register, sendOtp } from "@/service/auth";
 import { setCookie } from "@/utils/cookies";
 import { Bounce, toast } from "react-toastify";
 import { Profile } from "@/service/profile";
@@ -12,8 +12,8 @@ import { UserProfile } from "@/stores/profileStore";
 import { setTime } from "@/utils/setTime";
 
 
-const VerificationCode = ({dynamicPhoneNumber , setLoginState , loginState, setFormData , formData }) => {
-      const [otpObj, setOtpObj] = useState({phoneNumber: dynamicPhoneNumber, otp: ''  ,otp_for: 'Register'});  
+const VerificationCode = ({dynamicPhoneNumber , setFormData , formData }) => {
+      const [otpObj, setOtpObj] = useState({phoneNumber: dynamicPhoneNumber, otp: '' });  
       const [expired, setExpired] = useState(false);
       const [remainingTime, setRemainingTime] = useState(0); 
       const router = useRouter()
@@ -58,7 +58,7 @@ const VerificationCode = ({dynamicPhoneNumber , setLoginState , loginState, setF
 
 
       const handleOtpChange = (e) => {  
-        const value = e.target.value; 
+        const value = e.target.value;
         setOtpObj(prevState => ({ ...prevState, otp: value }));
       };
 

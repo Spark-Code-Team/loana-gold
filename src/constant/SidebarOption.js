@@ -1,6 +1,4 @@
 
-
-
 export const sidebarOptions =[
     {
         title: "داشبورد",

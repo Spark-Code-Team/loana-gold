@@ -1,5 +1,6 @@
 import { api } from "@/config/api";
 
+
 export const login = async (phone_number) => {
 
     try {
@@ -15,6 +16,10 @@ export const login = async (phone_number) => {
     }
 }
 
+
+
+
+
 export const loginOtp = async (checkOtp) => {
     try{
         const response = await api.post('/users/auth/login-check-otp/', {
@@ -29,6 +34,10 @@ export const loginOtp = async (checkOtp) => {
         return{error}
     }
 }
+
+
+
+
 
 export const setEmailPass = async (emailPass) => {
     try{
@@ -46,6 +55,10 @@ export const setEmailPass = async (emailPass) => {
     }
 }
 
+
+
+
+
 export const checkPassword = async (phonePass) =>{
     try {
         const response = await api.post('/users/auth/2fa-login/',{
@@ -62,10 +75,15 @@ export const checkPassword = async (phonePass) =>{
     }
 }
 
+
+
+
+
+
 export const sendOtp = async (formData) => {
     try{
         const response = await api.post('/users/auth/send-otp/', {
-                phone_number: formData.mobileNumber
+                phone_number: formData.mobileNumber,
         })
 
         console.log('//////////////->', response)    
@@ -75,6 +93,10 @@ export const sendOtp = async (formData) => {
         return{error}
     }
 }
+
+
+
+
 
 export const register = async (formData) => {
         try{

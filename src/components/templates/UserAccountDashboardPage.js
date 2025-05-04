@@ -53,7 +53,6 @@ const UserAccountDashboardPage = () => {
 
         const handleSubmit = (e) => {  
             e.preventDefault();  
-            console.log(emailAndPassword)
             profileStore.setProfileToNull()
             setEmailPass(emailAndPassword)
             router.push('/')

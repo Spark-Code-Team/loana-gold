@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { register, sendOtp } from "@/service/auth";
-import { useState } from "react";
-import EmailLogin from "../../../../public/icons/EmailLogin";
+// import { useState } from "react";
+// import EmailLogin from "../../../../public/icons/EmailLogin";
 import PersonName from "../../../../public/icons/PersonName";
 import { Bounce, toast } from "react-toastify";
 import { registerForm } from "@/constant/auth";
@@ -22,6 +22,11 @@ const RegisterLogin = ({setFormData ,formData ,setloginRegisterState }) =>{
     }; 
 
     const handleSendData = async () => {  
+      // setFormData(prevData => ({
+      //   ...prevData,
+      //   otp_code:"Register"  
+      // }));      
+      
       const { response, error } = await sendOtp(formData)
       if (response){
         document.cookie = `expire_time=${response.data.code_expires_at}; max-age=${2*60}`;

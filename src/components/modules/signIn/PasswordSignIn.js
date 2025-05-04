@@ -5,7 +5,7 @@ import PhoneLogin from "../../../../public/icons/PhoneLogin";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { checkPassword } from "@/service/auth";
-import { getCookie, setCookie } from "@/utils/cookies";
+import { setCookie } from "@/utils/cookies";
 import { useRouter } from "next/navigation";
 import { Bounce, toast } from "react-toastify";
 import { UserProfile } from "@/stores/profileStore";
