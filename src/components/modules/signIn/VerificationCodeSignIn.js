@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { getCookie } from "@/utils/cookies";
 import { setCookie } from "@/utils/cookies";
 import { Bounce, toast } from "react-toastify";
-import { loginOtp } from "@/service/auth";
+import { loginOtp, sendOtp } from "@/service/auth";
 import { login } from "@/service/auth"; 
 import { useRouter } from "next/navigation";
 import { Profile } from "@/service/profile";
@@ -22,16 +22,18 @@ const VerificationCodeSignIn = ({ setLoginState , loginState }) => {
           
 
       useEffect(() => {
-        const inputTime = getCookie('expire_time');
-        
+        const inputTime = getCookie('expire_time');   
+
         const totalSeconds = setTime(inputTime)
+
+        setRemainingTime(totalSeconds);
+
     
         if (totalSeconds <= 0) {
           setExpired(true);
           setRemainingTime(0);
           return;
         }
-        setRemainingTime(totalSeconds);
 
         const timer = setInterval(() => {
           setRemainingTime((prev) => {
@@ -45,7 +47,7 @@ const VerificationCodeSignIn = ({ setLoginState , loginState }) => {
         }, 1000);
     
         return () => clearInterval(timer); 
-      },[remainingTime]);
+      },[remainingTime , , expired]);
 
       const turnToMinuets = (remainingTime) => {
         let minuet ;
@@ -59,12 +61,10 @@ const VerificationCodeSignIn = ({ setLoginState , loginState }) => {
 
       const handleSendLoginAgain = async ()=>{
         if (expired){
-                const {response , error} = await login(loginState.phoneNumber)    
-                if (response) {
+          const { response, error } = await sendOtp({ mobileNumber: otpObj.phoneNumber });
+              if (response) {
                     document.cookie = `expire_time=${response.data.code_expires_at}; max-age=${2*60}`;
-                    console.log(response.data.code_expires_at);
-                    setRemainingTime(setTime(response.data.code_expires_at))
-                    setLoginState({state:"verification", phoneNumber:loginState.phoneNumber, is_2fa:loginState.is_2fa})
+                    setTime(response.data.code_expires_at) 
                     setExpired(false)
                 }
                 else{
@@ -92,20 +92,21 @@ const VerificationCodeSignIn = ({ setLoginState , loginState }) => {
       const handleSendData = async () => {
         const {response , error} = await loginOtp(otpObj)
         if (response){
-          setCookie(response.data)
-            if(loginState.is_2fa){
-                setLoginState({state:"password" , phoneNumber:loginState.phoneNumber,  is_2fa:loginState.is_2fa})
+            if (getCookie('refreshToken')||getCookie('accessToken')){
+                setCookie(response.data)
+            }
+            else{
+                setCookie(response.data)
+            }
+            
+            if(response.data.is_2fa){
+                setLoginState({state:"password" , phoneNumber:loginState.phoneNumber,  is_2fa:response.data.is_2fa})
             }
             else{
                         const fetchProfile = async () => {
                                 const {response , error} = await Profile()
-                                if (response){
-                                    const userData = response.data.user;  
-                                    const profileImage = response.data.profile_img;  
-                                    profileStore.setProfile({  
-                                        user: userData,  
-                                        profile_img: profileImage
-                                    }); 
+                                if (response){ 
+                                    profileStore.setProfile(response.data); 
                         
                                 }
                                 else{
@@ -159,7 +160,7 @@ const VerificationCodeSignIn = ({ setLoginState , loginState }) => {
         mt-4
         text-[#A6A6A6]
         ">
-        کد 6 رقمی به شماره تلفن {loginState.phoneNumber} ارسال شد
+        کد 8 رقمی به شماره تلفن {loginState.phoneNumber} ارسال شد
         </p>
         </div>
 

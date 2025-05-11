@@ -1,19 +1,31 @@
+import Close from "../../../../public/icons/close";
 import PhoneLogin from "../../../../public/icons/PhoneLogin";
 import Image from "next/image";
-const SanaRes = () =>{
+const SanaRes = ({setIsModalOpen}) =>{
     return(
+
         <div className="
         mt-5
-        w-[648px]
-        h-[480px]
+        w-[535px]
         rounded-xl
+        p-[24px]
         flex
         flex-col
         justify-center
-        items-center
+        items-right
         space-y-4
-        bg-red-400
+        bg-white
+        z-50
         ">
+
+            <button 
+                onClick = { () => setIsModalOpen(false) } 
+            >
+                <Close/>
+                
+            </button>
+
+
 
             <Image
             src="/images/ticksabz.png"
@@ -35,6 +47,22 @@ const SanaRes = () =>{
             <p className="text-[#3B3B3B]">
             نتیجه اعتبار سنجی به زودی از طریق پیامک ارسال میشود
             </p>
+
+            <button
+                className="
+                    w-[100%]
+                    p-[12px]
+                    border
+                    border-gray-500
+                    rounded-lg
+                    justify-center
+                    flex
+                "
+
+                onClick={()=>setIsModalOpen(false)}
+            >
+                بستن
+            </button>
 
  </div>
     )

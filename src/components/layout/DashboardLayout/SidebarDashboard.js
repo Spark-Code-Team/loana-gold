@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import UserAccountDashboard from "../../../../public/icons/UserAccountDashboard";
 import WalletDashboard from "../../../../public/icons/WalletDashboard";
@@ -12,6 +12,7 @@ import TicketDashboard from "../../../../public/icons/TicketDashboard";
 import ErrorDashboard from "../../../../public/icons/ErrorDashboard";
 import ArrowDashboard from "../../../../public/icons/ArrowDashboard";
 import Link from "next/link";
+import { UserProfile } from "@/stores/profileStore";
 
 const SidebarDashboard = () => {
   const [openMenu, setOpenMenu] = useState(null);
@@ -19,6 +20,9 @@ const SidebarDashboard = () => {
   const toggleMenu = (menu) => {
     setOpenMenu(openMenu === menu ? null : menu);
   };
+
+  const profileStore = UserProfile()
+
 
   return (
     <div className="">
@@ -34,7 +38,7 @@ const SidebarDashboard = () => {
                flex
                justify-evenly
                items-center
-               "
+          "
       >
         <Image
           src="/images/ashkan.png"
@@ -50,7 +54,7 @@ const SidebarDashboard = () => {
           mb-2
           "
           >
-            کیوروش صناعی
+            {profileStore.data.first_name} {profileStore.data.last_name}
           </h2>
 
           <p
@@ -59,7 +63,7 @@ const SidebarDashboard = () => {
           text-sm
           "
           >
-            0916******
+            {profileStore.data.phone_number}
           </p>
         </div>
       </div>
@@ -188,7 +192,9 @@ const SidebarDashboard = () => {
           ">
             <div className="flex">
               <HistoryDashboard />
-              <p className="pr-2">تاریخچه اعتبارسنجی</p>
+              <Link href="/dashboard/Validation-history">
+                <p className="pr-2">تاریخچه اعتبارسنجی</p>
+              </Link>
             </div>
           </li>
 

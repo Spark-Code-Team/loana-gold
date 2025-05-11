@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link";
-import { register, sendOtp } from "@/service/auth";
+import { sendOtp } from "@/service/auth";
 // import { useState } from "react";
 // import EmailLogin from "../../../../public/icons/EmailLogin";
 import PersonName from "../../../../public/icons/PersonName";
@@ -21,19 +21,16 @@ const RegisterLogin = ({setFormData ,formData ,setloginRegisterState }) =>{
       }));  
     }; 
 
-    const handleSendData = async () => {  
-      // setFormData(prevData => ({
-      //   ...prevData,
-      //   otp_code:"Register"  
-      // }));      
+    const handleSendData = async () => {       
       
       const { response, error } = await sendOtp(formData)
+
       if (response){
         document.cookie = `expire_time=${response.data.code_expires_at}; max-age=${2*60}`;
         setloginRegisterState({state: 1, phone: formData.mobileNumber})
-
+        
       } else  {
-        toast.error(error.response.data.error, { 
+        toast.error(error.response?.data.error, { 
                 position: "bottom-right",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -49,22 +46,22 @@ const RegisterLogin = ({setFormData ,formData ,setloginRegisterState }) =>{
 
     return(
         <div 
-      className="
-       md:flex flex flex-col
-       md:justify-center 
-       md:items-center 
-       md:h-screen
-       md:bg-center
-       bg-no-repeat 
-       md:bg-contain 
-       lg:bg-cover
-       md:bg-[url('/images/userdashboard.png')]
-       mt-4
-       md:mt-0
-       p-3
-       md:p-0
-       " 
-    >
+          className="
+          md:flex flex flex-col
+          md:justify-center 
+          md:items-center 
+          md:h-screen
+          md:bg-center
+          bg-no-repeat 
+          md:bg-contain 
+          lg:bg-cover
+          md:bg-[url('/images/userdashboard.png')]
+          mt-4
+          md:mt-0
+          p-3
+          md:p-0
+          " 
+        >
 
         <div className="
        bg-white

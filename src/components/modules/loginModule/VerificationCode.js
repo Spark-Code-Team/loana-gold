@@ -3,9 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { getCookie } from "@/utils/cookies";
+import { getCookie , setCookie } from "@/utils/cookies";
 import { register, sendOtp } from "@/service/auth";
-import { setCookie } from "@/utils/cookies";
 import { Bounce, toast } from "react-toastify";
 import { Profile } from "@/service/profile";
 import { UserProfile } from "@/stores/profileStore";
@@ -25,6 +24,7 @@ const VerificationCode = ({dynamicPhoneNumber , setFormData , formData }) => {
         const totalSeconds = setTime(inputTime)
 
         setRemainingTime(totalSeconds);
+        
 
         if (totalSeconds <= 0) {
           setExpired(true);
@@ -99,24 +99,21 @@ const VerificationCode = ({dynamicPhoneNumber , setFormData , formData }) => {
 
         const {response , error} = await register(newFormdata)
         if (response){
-          setCookie(response.data)
-          const fetchProfile = async () => {
-                  const {response , error} = await Profile()
-                  if (response){
-                      const userData = response.data.user;  
-                      const profileImage = response.data.profile_img;  
-          
-          
-                      profileStore.setProfile({  
-                          user: userData,  
-                          profile_img: profileImage
-                      }); 
-          
-                  }
-                  else{
-                  }}
-                  fetchProfile()
-          router.push('/')
+              if (getCookie('refreshToken')||getCookie('accessToken')){
+                  setCookie(response.data)
+              }
+              else{
+                  setCookie(response.data)
+              }
+              const fetchProfile = async () => {
+              const {response , error} = await Profile()
+              if (response){
+                  profileStore.setProfile(response.data); 
+              }
+              else{
+              }}
+              fetchProfile()
+              router.push('/')
 
         }else{
           toast.error(error.response.data.detail, { 

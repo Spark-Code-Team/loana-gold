@@ -1,11 +1,11 @@
 import axios from "axios";
 import { getCookie } from "@/utils/cookies";
 
-export const api = axios.create({  
+const api = axios.create({  
     baseURL:process.env.NEXT_PUBLIC_API_URL, 
-    // headers:{
-    //     'Content-Types':'application/json'
-    // }
+    headers:{
+        'Content-Type':'application/json'
+    }
   }); 
 
   api.interceptors.request.use(
@@ -24,3 +24,4 @@ export const api = axios.create({
     }
 )
 
+export default api

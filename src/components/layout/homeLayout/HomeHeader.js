@@ -1,18 +1,21 @@
 "use client";
 import { useState , useEffect} from "react";
 import Link from "next/link";
-import { IoMdClose } from "react-icons/io";
+// import { IoMdClose } from "react-icons/io";
+import { Bounce, toast } from "react-toastify";
 import Image from "next/image";
 import {Profile} from "@/service/profile";
 import { UserProfile } from "@/stores/profileStore";
+import { useRouter } from "next/navigation";
+import ModalPage from "@/components/elements/Modals";
+import SanaRes from "@/components/modules/receivingCredit/SanaRes";
+import { purchaseRequest } from "@/service/RequestForPurchaseCredit";
 
 const HomeHeader = () => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [login , setLogin] = useState(false);
     const [openSidebar , setOpenSidebar] = useState(false);
-    const [role , setRole] = useState()
 
     const itemsSidebar = [
         {id:1 , title:"حساب کاربری" , image:"/images/user-sidebar.png"},
@@ -26,22 +29,52 @@ const HomeHeader = () => {
     ]
 
     const profile = UserProfile()
+    const router = useRouter()
 
     useEffect(() => {  
-        if(profile.data.user.role){
-            setLogin(true)
-            setRole(profile.data.user.role)
+        if(!profile.data.role){
+            const fetchProfile = async () => {
+            const {response , error} = await Profile()
+            if (response){
+                profile.setProfile(response.data); 
+            } else {
+                router.push('/Login')
+            }
         }
-        else{
-            setLogin(false)
+
+            fetchProfile()
         }
-    }, [profile.data.user.role]);  
+
+
+    }, [profile.data.role]);  
 
     const openModal = () => {
         setIsOpen(false); // بستن منوی همبرگری در موبایل
         setIsModalOpen(true);
     };    
 
+
+    const sendCreditRequest = async () => {
+
+        const {response , error} = await purchaseRequest()
+        if (response){
+            openModal()
+        }
+        else{
+            toast.error(error.response?.data.non_field_errors[0] || "مشکلی پیش آمده", { 
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+              }
+            ) 
+        }
+
+    }
+ 
     return (
 
         <>
@@ -55,8 +88,8 @@ const HomeHeader = () => {
 
                     {/* دکمه‌ی همبرگری در موبایل (اگر کاربر لاگین نکرده باشد) یا آیکون پنل کاربری */}
                     <div className="md:hidden">
-                        {login ? (
-                            <Image alt="profile" onClick={() => Profile()} width={500} height={500} src={profile.data.profile_img ? profile.data.profile_img : "/"} className="w-[49px] h-[49px] rounded-full"/>
+                        {profile.data.role ? (
+                            <Image alt="profile" onClick={() => Profile()} width={500} height={500} src="/" className="w-[49px] h-[49px] rounded-full"/>
                         ) : (
                             <button className="text-black" onClick={() => setIsOpen(!isOpen)}>
                                 {isOpen ? "✖️" : "☰"}
@@ -74,18 +107,29 @@ const HomeHeader = () => {
 
                     {/* دکمه‌های ورود و ثبت نام */}
                     <div className="hidden md:flex items-center">
-                        {login ? (
-                            <Link href="/dashboard/user-account-dashboard">
-                                <Image alt="profile" onClick={() => Profile()} width={500} height={500} src={profile.data.profile_img ? profile.data.profile_img : "/"} className="w-[49px] h-[49px] rounded-full"/>
-                            </Link>
-                        ) : (
+                        {profile.data.role ? (
                             <>
                                 <button
                                     className="border-[1px] border-[#AB8B53] font-bold text-[18px] text-[#AB8B53] px-4 py-3 mx-7 rounded-[8px]"
-                                    onClick={openModal}
+                                    onClick={()=>{
+                                        sendCreditRequest()
+                                    }}
                                 >
                                     درخواست اعتبار خرید
                                 </button>
+                                
+                                <Link href="/dashboard/user-account-dashboard">
+                                    <Image alt="profile" onClick={() => Profile()} width={500} height={500} src="/" className="w-[49px] h-[49px] rounded-full"/>
+                                </Link>
+                            </>
+
+                        ) : (
+                            <>
+                                <Link href="/Sign-in"
+                                    className="border-[1px] border-[#AB8B53] font-bold text-[18px] text-[#AB8B53] px-4 py-3 mx-7 rounded-[8px]"
+                                >
+                                    درخواست اعتبار خرید
+                                </Link>
                                 <Link href="/Login">
                                     <button className="bg-[#AB8B53] text-black font-bold text-[18px] px-4 py-3 rounded-[8px]">
                                         ورود / ثبت‌ نام
@@ -98,8 +142,8 @@ const HomeHeader = () => {
                 </div>
 
                 {/* منوی همبرگری در موبایل (فقط وقتی که کاربر لاگین نکرده باشد) */}
-                {isOpen && !login && (
-                    <div className="md:hidden fixed top-0 left-0 w-full h-full bg-white flex flex-col items-center justify-center z-40">
+                {isOpen && !profile.data.role && (
+                    <div className="md:hidden fixed top-0 left-0 w-full h-full bg-white flex flex-col items-center justify-center">
                         <button
                             className="absolute top-5 right-5 text-black"
                             onClick={() => setIsOpen(false)}
@@ -115,6 +159,12 @@ const HomeHeader = () => {
                     </div>
                 )}
             </header>
+
+            <ModalPage isOpen = { isModalOpen }>
+                <SanaRes setIsModalOpen={setIsModalOpen} />
+            </ModalPage>
+
+
 
 
         </>

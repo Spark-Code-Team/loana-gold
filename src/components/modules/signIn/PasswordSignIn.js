@@ -5,7 +5,7 @@ import PhoneLogin from "../../../../public/icons/PhoneLogin";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { checkPassword } from "@/service/auth";
-import { setCookie } from "@/utils/cookies";
+import { getCookie, setCookie } from "@/utils/cookies";
 import { useRouter } from "next/navigation";
 import { Bounce, toast } from "react-toastify";
 import { UserProfile } from "@/stores/profileStore";
@@ -24,9 +24,11 @@ const PasswordSignIn = ({ setLoginState , loginState }) => {
     });  
 
         useEffect(() => {  
-            document.cookie = `refreshToken=0; max-age=${0}`;
-            document.cookie = `accessToken=0; max-age=${0}`;
- 
+            if(getCookie('refreshToken')||getCookie('accessToken')){
+                document.cookie = `refreshToken=; max-age=${0}`;
+                document.cookie = `accessToken=; max-age=${0}`;
+            }
+
                 setInputValues(prevValues => ({  
                     ...prevValues,              
                     phoneNumber: loginState.phoneNumber, 
@@ -43,29 +45,22 @@ const PasswordSignIn = ({ setLoginState , loginState }) => {
     }; 
     
     const sendPasswordData = async () => {
-
-
         const {response , error} = await checkPassword(inputValues)
         if(response){
-            setCookie(response.data)
+            if (getCookie('refreshToken')||getCookie('accessToken')){
+                setCookie(response.data)
+            }
+            else{
+                setCookie(response.data)
+            }
             const fetchProfile = async () => {
                     const {response , error} = await Profile()
-                    if (response){
-                        const userData = response.data.user;  
-                        const profileImage = response.data.profile_img;  
-            
-            
-                        profileStore.setProfile({  
-                            user: userData,  
-                            profile_img: profileImage
-                        }); 
-
-            
+                    if (response){         
+                        profileStore.setProfile(response.data);             
                     }
                     else{
                     }}
             fetchProfile()
-// rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
             router.push('/dashboard/user-account-dashboard')
         }
         else{

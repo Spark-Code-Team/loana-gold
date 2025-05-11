@@ -1,8 +1,9 @@
-export function setCookie(jwt){
-        
+export function setCookie(jwt) {
+
     document.cookie = `refreshToken=${jwt.refresh}; max-age=${30*24*60*60}`;
     document.cookie = `accessToken=${jwt.access}; max-age=${1*24*60*60}`;
 }
+
 
 export function getCookie(name) {  
     const value = `; ${document.cookie}`;  

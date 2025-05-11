@@ -2,18 +2,18 @@ import Link from "next/link";
 import PhoneLogin from "../../../../public/icons/PhoneLogin";
 import AuthPageStruct from "./AuthPageStruct";
 import { useState } from "react";
-import { login } from "@/service/auth";
+import { sendOtp } from "@/service/auth";
 import { Bounce, toast } from "react-toastify";
 
 const SignInPhone =({ loginState, setLoginState }) =>{
 
-    const [phoneNumber, setPhoneNumber] = useState()
+    const [phoneNumber, setPhoneNumber] = useState({mobileNumber:''})
 
     const handleSendData = async () => {
-        const {response , error} = await login(phoneNumber)    
+        const {response , error} = await sendOtp(phoneNumber)    
         if (response) {
             document.cookie = `expire_time=${response.data.code_expires_at}; max-age=${2*60}`;
-            setLoginState({state:"verification", phoneNumber:phoneNumber, is_2fa:response.data.is_2fa})
+            setLoginState({state:"verification", phoneNumber:phoneNumber.mobileNumber, is_2fa:response.data.is_2fa})
         }
         else{            
             toast.error(error.response?.data.error || "مشکلی پیش آمده", { 
@@ -92,8 +92,12 @@ const SignInPhone =({ loginState, setLoginState }) =>{
                 placeholder=" شماره موبایل* "
                 type="text"
                 name="firstname"
-                onChange={(e) => {setPhoneNumber(e.target.value)}}
-                />
+                onChange={(e) => {
+                    setPhoneNumber(prev => ({
+                      ...prev,
+                      mobileNumber: e.target.value
+                    }));
+                  }}                />
         </div>
 
         <div>
@@ -128,7 +132,7 @@ const SignInPhone =({ loginState, setLoginState }) =>{
             text-xl
             md:text-base
              "
-            onClick={() => setLoginState({state:"forgetPassword", phoneNumber:phoneNumber, is_2fa:loginState.is_2fa})}
+            onClick={() => setLoginState({state:"forgetPassword", phoneNumber:phoneNumber.mobileNumber, is_2fa:loginState.is_2fa})}
             >
             فراموشی رمزعبور
             </button>
@@ -140,7 +144,7 @@ const SignInPhone =({ loginState, setLoginState }) =>{
             ثبت نام نکرده اید؟  
 
             <button
-            onClick={() => setLoginState({state:0, phoneNumber:phoneNumber, is_2fa:loginState.is_2fa})}
+            onClick={() => setLoginState({state:0, phoneNumber:phoneNumber.mobileNumber, is_2fa:loginState.is_2fa})}
             >
              <Link href="/Login">
              <p className="mr-1 text-primary">
