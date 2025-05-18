@@ -1,6 +1,7 @@
 "use client"
 import DashboardLeft from "../elements/DashboardLeft";
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
+import { transactionsList } from "@/service/finance";
 
 const transactions = [
     {
@@ -40,6 +41,23 @@ const transactions = [
   
 
 const TransactionDashboardPage = () =>{
+
+        useEffect(()=>{
+          console.log('111111')
+          const transactions = async () => {
+            console.log('222222')
+            const {response , error} = await transactionsList()
+  
+            if(response){
+              console.log(response)
+            }else{
+              console.log(error)
+            }
+          }
+          transactions()
+        }, [])
+
+
 
         const [openIndex, setOpenIndex] = useState(null);
       

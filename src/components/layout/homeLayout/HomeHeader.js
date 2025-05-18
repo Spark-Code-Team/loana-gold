@@ -9,7 +9,7 @@ import { UserProfile } from "@/stores/profileStore";
 import { useRouter } from "next/navigation";
 import ModalPage from "@/components/elements/Modals";
 import SanaRes from "@/components/modules/receivingCredit/SanaRes";
-import { purchaseRequest } from "@/service/RequestForPurchaseCredit";
+import { purchaseRequest } from "@/service/finance";
 
 const HomeHeader = () => {
 
