@@ -14,12 +14,10 @@ const Login = () => {
 
     const [ credit , setCredit ] = useState() 
     const [ userGradehistory , setUserGradeHistory ] = useState([])
-    // const [ falseInstallment , setFalseInstallment ] = useState([]) 
     const [ installment , setInstallment ] = useState();
     const [ isAccepted , setIsAccepted ] = useState(false);
     const [ isReloading , setIsReloading ] = useState(false)
     const [ openModal , setOpenModal ] = useState(0)
-    // trueInstallment
     
     const profileStore = UserProfile()
 
@@ -58,13 +56,7 @@ const Login = () => {
     useEffect(()=>{
         const getGrade = async () =>{
             const {response , error} = await validationResult()
-
-            // const acceptedItems = response.data.results.filter(p => p.is_accepted);
             setUserGradeHistory  (response.data.results);
-
-            // const notAcceptedItems = response.data.results.filter(p => !p.is_accepted);
-            // setFalseInstallment(notAcceptedItems);
-
         }
         getGrade()
     },[])
@@ -130,10 +122,86 @@ const Login = () => {
 
     return(
 
-        <div className='flex flex-col'>
+        <div className='flex flex-col w-[100%] '>
+
+        <div className=" border rounded-xl border-gray-200 h-min mx-[24px] pb-[24px] top-0 ">
+
+        <div className="w-full pr-8 font-bold text-[20px] border-b border-gray-200 p-[20px] ">تاریخچه اعتبار سنجی</div>
 
 
-            {}
+            {userGradehistory.map((p,index)=>{
+    
+                if(p.status === "completed"){
+                    if(!p.is_accepted){
+                    return( 
+                        <>
+                            <div className="w-full pr-8 font-bold mt-6">نتیجه اعتبار سنجی</div>
+
+                            <div className="w-full pr-8 mt-6  ">نتیجه اعتبار سنجی : امکان دریافت اعتبار تا {gradeCredit(p?.grade)} گرم طلا</div>
+
+                            <div className="w-full pr-8 mt-6 ">تاریخ ثبت : {gradeAchivedAt(p?.achieved_at)}</div>
+
+                            <div className="w-full pr-8 mt-6 text-red-600 ">تاریخ اعتبارسنجی تا 24 ساعت اعتبار دارد و پس از اتمام زمان دوباره باید اعتبار سنجی کنید.</div>
+
+                            <br/>  
+
+                            <button className=" 
+                                mr-6 
+                                p-[16px]
+                                bg-[#EDEDED] 
+                                rounded-xl 
+                              text-black
+                              hover:bg-primary
+                              hover:text-black
+                                text-xl
+                                md:text-base
+                                "
+                                onClick={() => {
+                                    setOpenModal(1)
+                                }}
+                                >
+                                    تایید و ادامه
+                            </button>
+                        </>
+                        
+                    )}else{
+                        return(
+                            <div className="w-full border-gray-200 border-t h-min mt-[16px] pt-[24px] px-[24px] top-0 ">
+                                <div className="w-full font-bold text-[20px] border-gray-200 mb-[12px] ">درخواست اعتبار</div>
+                                <div className='flex flex-row justify-around' >
+                                    <span className="mb-[12px] w-max ">نتیجه اعتبار سنجی: امکان دریافت اعتبار تا {gradeCredit(p.grade)} گرم طلا</span>
+                                    <span className="mb-[12px] w-max ">تاریخ درخواست: {convertToJalali(p.achieved_at)} </span>
+                                    <span className="mb-[12px] w-max ">تایید توسط شما: <span className='text-green-500' >تایید شده</span></span>
+                                </div>
+                            </div>
+                        )
+                    }
+                }
+                else if(p.status === "in_progress"){
+                    return(
+                        <>
+                            <div className="w-full pr-8 font-bold mt-6">نتیجه اعتبار سنجی: در حال پردازش</div>
+
+                            <div className="w-full pr-8 mt-6 ">تاریخ درخواست : {gradeAchivedAt(p?.achieved_at)}</div>
+
+                            <br/>
+                        </>
+                    )
+                }
+                else{
+                    return(
+                        <>
+                            <div className="w-full pr-8 font-bold mt-6">نتیجه اعتبار سنجی:<span className='text-red-600' >درخواست منقضی شده</span></div>
+
+                            <div className="w-full pr-8 mt-6 ">تاریخ درخواست : {gradeAchivedAt(p?.achieved_at)}</div>
+
+                            <br/>
+                        </>
+                    )                }
+                
+            })}
+
+            </div>
 
  
             <ModalPage isOpen={openModal == 1 ? true : false}>
@@ -555,164 +623,3 @@ const Login = () => {
 
 
 export default Login;
-
-
-
-
-
-
-
-
-
-
-{/* <div className="w-full border rounded-xl border-gray-200 h-min mx-[24px] pb-[24px] top-0 ">
-
-<div className="w-full pr-8 font-bold text-[20px] border-b border-gray-200 p-[20px] ">تاریخچه اعتبار سنجی</div>
-
-<div className="w-full pr-8 font-bold mt-6">نتیجه اعتبار سنجی</div>
-
-<div className="w-full pr-8 mt-6  ">نتیجه اعتبار سنجی : امکان دریافت اعتبار تا {gradeCredit(falseInstallment[0]?.grade)} گرم طلا</div>
-
-<div className="w-full pr-8 mt-6 ">تاریخ ثبت : {gradeAchivedAt(falseInstallment[0]?.achieved_at)}</div>
-
-<div className="w-full pr-8 mt-6 text-red-600 ">تاریخ اعتبارسنجی تا 24 ساعت اعتبار دارد و پس از اتمام زمان دوباره باید اعتبار سنجی کنید.</div>
-
-<br/>
-
-<div>
-<button className=" 
-    mr-6 
-    p-[16px]
-    bg-[#EDEDED] 
-    rounded-xl 
-    text-black
-    hover:bg-primary
-    hover:text-black
-    text-xl
-    md:text-base
-    "
-    onClick={() => {
-        setOpenModal(1)
-    }}
-    >
-        تایید و ادامه
-</button>
-
-</div>
-</div> */}
-
-
-
-{/* <div className="w-full border rounded-xl border-gray-200 h-min mx-[24px] pb-[24px] top-0 ">  
-                <div className="w-full font-bold text-[20px] border-gray-200 p-[20px] ">تاریخچه اعتبار سنجی</div>     
-        {trueInstallment.map((p,index)=>{
-        return(
-            <div className="w-full border-gray-200 border-t h-min mt-[16px] p-[24px] top-0 ">
-                <div className="w-full font-bold text-[20px] border-gray-200 mb-[12px] ">درخواست اعتبار</div>
-                <p className="mb-[12px] w-full ">نتیجه اعتبار سنجی: امکان دریافت اعتبار تا {gradeCredit(p.grade)} گرم طلا</p>
-                <p className="mb-[12px] w-full ">تاریخ درخواست: {convertToJalali(p.achieved_at)} </p>
-                <p className="mb-[12px] w-full ">تایید توسط شما: <span className='text-green-500' >تایید شده</span></p>
-            </div>)
-        })}
-    </div> */}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// { profileStore.data.grade ? 
-//     // falseInstallment.map(( p ,index ) => {
-//         <>
-//             <div className="w-full border rounded-xl border-gray-200 h-min mx-[24px] pb-[24px] top-0 ">
-
-//                 <div className="w-full pr-8 font-bold text-[20px] border-b border-gray-200 p-[20px] ">تاریخچه اعتبار سنجی</div>
-
-//                 <div className="w-full pr-8 font-bold mt-6">نتیجه اعتبار سنجی</div>
-
-//                 <div className="w-full pr-8 mt-6  ">نتیجه اعتبار سنجی : امکان دریافت اعتبار تا  گرم طلا</div>
-
-//                 <div className="w-full pr-8 mt-6 ">تاریخ ثبت : </div>
-
-//                 <div className="w-full pr-8 mt-6 text-red-600 ">تاریخ اعتبارسنجی تا 24 ساعت اعتبار دارد و پس از اتمام زمان دوباره باید اعتبار سنجی کنید.</div>
-
-//                 <br/>
-
-//                 <div>
-//                     <button className=" 
-//                         mr-6 
-//                         p-[16px]
-//                         bg-[#EDEDED] 
-//                         rounded-xl 
-//                         text-black
-//                         hover:bg-primary
-//                         hover:text-black
-//                         text-xl
-//                         md:text-base
-//                         "
-//                         onClick={() => {
-//                             setOpenModal(1)
-//                         }}
-//                         >
-//                             تایید و ادامه
-//                     </button>
-
-//                 </div>
-//                         {/* {falseInstallment.map((p,index)=>{
-//                             return(
-//                                 <div className="w-full border-t border-gray-200 h-min mt-[16px] p-[24px] top-0 ">
-//                                     <div className="w-full font-bold text-[20px] border-gray-200 mb-[12px] ">درخواست اعتبار</div>
-//                                     <p className="mb-[12px] w-full ">نتیجه اعتبار سنجی: امکان دریافت اعتبار تا {gram} گرم طلا</p>
-//                                     <p className="mb-[12px] w-full ">تاریخ درخواست:  </p>
-//                                     <p className="mb-[12px] w-full ">نتیجه اعتبار سنجی: امکان دریافت اعتبار تا {gram} گرم طلا</p>
-//                                 </div>)
-//                         })} */}
-
-
-//                 </div></>
-//     : <></>}
