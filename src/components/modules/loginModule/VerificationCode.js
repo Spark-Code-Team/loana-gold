@@ -4,11 +4,12 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getCookie } from "@/utils/cookies";
-import { loginOtp } from "@/service/auth";
+import { loginOtp, newRegister } from "@/service/auth";
 import { setCookie } from "@/utils/cookies";
 import { Bounce, toast } from "react-toastify";
+import { UserProfile } from "@/stores/profileStore";
 
-const VerificationCode = ({dynamicPhoneNumber , handleSendRegisterData , nigger }) => {
+const VerificationCode = ({dynamicPhoneNumber , handleSendRegisterData, formData, setFormData}) => {
       const [otpObj, setOtpObj] = useState({phoneNumber: dynamicPhoneNumber, otp: ''  });  
       const [expired, setExpired] = useState(false);
       const [remainingTime, setRemainingTime] = useState(0); 
@@ -45,27 +46,38 @@ const VerificationCode = ({dynamicPhoneNumber , handleSendRegisterData , nigger 
 
 
       const handleOtpChange = (e) => {  
-        const value = e.target.value; 
-        setOtpObj(prevState => ({ ...prevState, otp: value })); 
+        setFormData(last => ({...last, otp_code: e.target.value}))
       };
       
       const handleSendData = async () => {
-        const {response , error} = await loginOtp(otpObj)
-        if (response){
+        // const {response , error} = await loginOtp(otpObj)
+        // if (response){
+        //   setCookie(response.data)
+        //   router.push('/')
+
+        // }else {
+        //   toast.error(error.response.data.detail, { 
+        //           position: "bottom-right",
+        //           autoClose: 5000,
+        //           hideProgressBar: false,
+        //           closeOnClick: true,
+        //           progress: undefined,
+        //           theme: "light",
+        //           transition: Bounce,
+        //         }
+        //       ) 
+        // }
+
+        const { response, error } = await newRegister(formData)
+
+        if(response) {
           setCookie(response.data)
           router.push('/')
-
-        }else if(error) {
-          toast.error(error.response.data.detail, { 
-                  position: "bottom-right",
-                  autoClose: 5000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  progress: undefined,
-                  theme: "light",
-                  transition: Bounce,
-                }
-              ) 
+          console.log(response);
+          toast.success("ورود با موفقیت انجام شد")
+        } else {
+          console.log(error);
+              toast.error(error.response.data.detail)
         }
       }
 
@@ -155,7 +167,7 @@ const VerificationCode = ({dynamicPhoneNumber , handleSendRegisterData , nigger 
                 placeholder=""
                 type="text"
                 name="otp"  
-                value={otpObj.otp} 
+                value={formData.otp_code} 
                 onChange={handleOtpChange}
                 
                 />

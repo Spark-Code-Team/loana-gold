@@ -10,15 +10,7 @@ import { registerForm } from "@/constant/auth";
 
 
 
-const RegisterLogin = ({setloginRegisterState }) =>{
-      const [formData, setFormData] = useState({ 
-        firstName: '',  
-        lastName: '',  
-        mobileNumber: '',  
-        nationalCode: '',  
-        shebaNumber: '',  
-        bankName: ''  
-    });
+const RegisterLogin = ({setloginRegisterState, formData, setFormData}) =>{
 
     const handleChange = (e) => {  
       const { name, value } = e.target;  

@@ -128,8 +128,11 @@ const ProductsCard = () => {
               <p>{product.price}</p>
             </div>
           </div>
+
+
         </div>
         </Link>
+        
       ))}
     </div>
   );

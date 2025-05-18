@@ -5,6 +5,9 @@ import { useState } from "react";
 import { login } from "@/service/auth";
 import { otp } from "@/service/auth";
 import { setCookie } from "@/utils/cookies";
+import { Bounce, toast } from "react-toastify";
+
+
 const SignInPhone =({ loginState, setLoginState }) =>{
 
     const [phoneNumber, setPhoneNumber] = useState()
