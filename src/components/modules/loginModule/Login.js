@@ -21,8 +21,6 @@ const Login = () => {
     
     const profileStore = UserProfile()
 
-    const date = profileStore.data.pending_loan 
-
     const gradeCredit = (grade) => {
 
         if(grade == "A1" || grade == "A2" || grade == "A3") {
@@ -182,7 +180,7 @@ const Login = () => {
                         <>
                             <div className="w-full pr-8 font-bold mt-6">نتیجه اعتبار سنجی: در حال پردازش</div>
 
-                            <div className="w-full pr-8 mt-6 ">تاریخ درخواست : {gradeAchivedAt(p?.achieved_at)}</div>
+                            <div className="w-full pr-8 mt-6 ">تاریخ درخواست : {gradeAchivedAt(p?.created_at)}{ console.log(p)}</div>
 
                             <br/>
                         </>

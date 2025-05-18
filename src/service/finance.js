@@ -1,4 +1,6 @@
 import api from "@/config/api";
+import { Bounce, toast } from "react-toastify";
+
 
 export const purchaseRequest = async () => {
     try {
@@ -15,6 +17,10 @@ export const purchaseRequest = async () => {
     }
 
 }
+
+
+
+
 
 
 
@@ -82,6 +88,8 @@ export const userInstallments = async (status) => {
 
 
 
+
+
 export const creditPayment = async (id) => {
     try{
         const response = await api.post('/finance/credit-payment/',{
@@ -107,6 +115,15 @@ export const creditPayment = async (id) => {
 
 
 
+
+
+
+
+
+
+
+
+
 export const validationResult = async () =>{
     try {
         const response = await api.get('/finance/user-grades-list') 
@@ -126,3 +143,66 @@ export const validationResult = async () =>{
         
     }
 }
+
+
+
+
+
+
+
+export const transactionsList = async() =>{
+    try {
+        const response = await api.get('/finance/transactions-list') 
+        console.log('------------>',response)
+      return{response}
+    } catch (error) {
+        toast.error(error.response?.data || "مشکلی پیش آمده", { 
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          }) 
+        return{error}
+        
+    }
+}
+
+
+
+
+
+
+
+export const chargeWallet = async (amount) => {
+    try{
+        const response = await api.post('/finance/charge-wallet/', {amount})
+        console.log('------>' , response)
+        toast.success(response.data.message, { 
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          }) 
+        return{response}
+    } catch(error){
+        console.log('------>' , error)
+        toast.error(error.response?.data || "مشکلی پیش آمده", { 
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          }) 
+        return{error}
+    }
+}
+
+

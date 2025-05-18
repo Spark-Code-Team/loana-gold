@@ -1,5 +1,9 @@
+"use client"
 import DashboardLeft from "../elements/DashboardLeft";
 import Image from "next/image";
+import { chargeWallet } from "@/service/finance";
+import { useState , useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const bankImages = [
   "/images/bankimage1.png",
@@ -19,6 +23,26 @@ const amounts = [
 ];
 
 const WalletDashboardPage = () => {
+
+  const [ amount , setAmount ] = useState()
+
+  const router = useRouter()
+
+  const amountOnChange = (e) => {
+    setAmount(e.target.value)
+  }
+
+  const chargeaAccount = async () => {
+    console.log(amount)
+    const {response , error} = await chargeWallet(amount)
+    if(response){
+      console.log(response,'lllllllllllllllllllll')
+      router.push('/dashboard/user-account-dashboard')
+    }else{
+      console.log(error)
+    }
+  } 
+
   return (
     <div className="
      w-[912px] 
@@ -74,6 +98,8 @@ const WalletDashboardPage = () => {
              w-full 
              p-2
              "
+             value={amount}
+             onChange={amountOnChange}
           />
           
           <div className="flex justify-between">
@@ -117,7 +143,9 @@ const WalletDashboardPage = () => {
            rounded-xl 
            text-black 
            transition
-           ">
+           "
+           onClick={()=>chargeaAccount()}
+           >
             پرداخت
           </button>
         </div>
