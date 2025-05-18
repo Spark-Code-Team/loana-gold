@@ -215,7 +215,7 @@ const VerificationCode = ({dynamicPhoneNumber , setFormData , formData }) => {
                 placeholder=""
                 type="text"
                 name="otp"  
-                value={otpObj.otp} 
+                value={formData.otp_code} 
                 onChange={handleOtpChange}
                 
                 />

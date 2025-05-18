@@ -1,8 +1,10 @@
 import FaqPage from "@/components/templates/FaqPage";
-
 const FAQ = () => {
     return(
-       <FaqPage/>
+        <>
+        <FaqPage/>
+
+        </>
     )
 }
 export default FAQ;
