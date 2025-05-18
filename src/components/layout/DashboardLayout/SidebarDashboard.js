@@ -68,14 +68,14 @@ const SidebarDashboard = () => {
         </div>
       </div>
 
-      <aside
-        className="
+    <aside
+    className="
     w-72 
     bg-white 
     border 
     border-[#DADADA] 
     rounded-xl 
-    h-screen 
+    md:h-[800px]
     shadow-md
     "
       >
@@ -137,7 +137,7 @@ const SidebarDashboard = () => {
                 hover:text-primary 
                 rounded-lg
                 ">
-                  <a href="/dashboard/wallet-dashboard"> موجودی</a>
+                  <a href="/dashboard/goldStorage-dashboard">   طلا </a>
                 </li>
 
                 <li className="
@@ -145,11 +145,32 @@ const SidebarDashboard = () => {
                 hover:text-primary 
                 rounded-lg
                 ">
-                  <a href="/dashboard/Transaction-dashboard"> تراکنش‌ها</a>
+                  <a href="/dashboard/"> نقره </a>
+                </li>
+                <li className="
+                p-2  
+                hover:text-primary 
+                rounded-lg
+                ">
+                  <a href="/dashboard/wallet-dashboard"> موجودی نقدی </a>
                 </li>
 
               </ul>
             )}
+          </li>
+
+          <li className="
+          p-2 
+          rounded-lg 
+          cursor-pointer
+        hover:text-primary
+          ">
+            <div className="flex">
+              <InstallmentDashboard />
+              <Link href="/dashboard/Transaction-dashboard">
+              <p className="pr-2"> تراکنش‌ها  </p>
+              </Link>
+            </div>
           </li>
 
           
@@ -166,6 +187,7 @@ const SidebarDashboard = () => {
               </Link>
             </div>
           </li>
+
           
 
           
@@ -178,7 +200,7 @@ const SidebarDashboard = () => {
             <a href="/dashboard/history">
               <div className="flex">
                 <GoldDashboard />
-                <Link href="/dashboard/goldStorage-dashboard">
+                <Link href="/dashboard//gold-deals">
                 <p className="pr-2">معامله طلا</p>
                 </Link>
               </div>

@@ -1,0 +1,67 @@
+"use client";
+import { useState } from "react";
+import DashboardLeft from "../elements/DashboardLeft";
+import BuyingGold from "../modules/goldDeal/BuyingGold";
+import SellinGold from "../modules/goldDeal/SellingGold";
+
+const GoldDealPage = () =>{
+
+    const [activeTab , setactiveTab] = useState("buying");
+
+
+    return(
+        <div className="
+        w-[912px] 
+        h-full
+        border 
+        border-[#CBCED7] 
+        rounded-2xl 
+        ">
+        <DashboardLeft title=" معامله طلا " />
+
+        <div className="
+            h-12
+            w-full
+            flex
+            flex-row
+            items-center
+            mt-5
+            ">
+                <button className={`
+                w-[101]
+                h-8
+                bg-[#F6F6F6]
+                rounded-xl
+                mx-8
+                text-sm
+                font-bold
+                ${activeTab === "buyingGold "? "bg-slate-300" :"bg-gray-100"}
+                `}
+                onClick={()=>setactiveTab("buyingGold")}
+                > 
+                1خرید
+                </button>
+
+                <button className={`
+                w-[101]
+                h-8
+                bg-[#D1DDF1]
+                rounded-xl
+                md:mx-6
+                text-sm
+                font-bold
+                ${activeTab === "sellingGold" ? "bg-slate-300" :"bg-gray-100"}
+                `}
+                onClick={()=>setactiveTab("sellingGold")}
+                > 
+                2فروش
+                </button>
+
+        </div>
+
+        {activeTab === "buyingGold" ? <BuyingGold/>:<SellinGold/>}
+
+        </div>
+    )
+}
+export default GoldDealPage;

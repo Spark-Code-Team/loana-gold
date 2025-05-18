@@ -1,8 +1,8 @@
-import GoldStorageDashboardPage from "@/components/templates/GoldStorageDashboardPage";
+import CashDeliveryPage from "@/components/templates/CashDeliveryPage";
 
 const GoldStorageDashboard = () =>{
     return(
-        <GoldStorageDashboardPage/>
+        <CashDeliveryPage/>
     )
 }
 export default GoldStorageDashboard;
