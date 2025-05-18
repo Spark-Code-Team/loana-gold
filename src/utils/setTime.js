@@ -17,3 +17,13 @@ export const convertToJalali = (dateString) => {
     const jalaaliDate = toJalaali(date.getFullYear(), date.getMonth() + 1, date.getDate());
     return `${jalaaliDate.jy}/${jalaaliDate.jm}/${jalaaliDate.jd}`;
       }
+
+
+export const convertToShamsi = (dateString) => {
+    const parts = dateString?.split('/'); 
+    
+    const [year, month, day] = parts.map(part => parseInt(part, 10));
+
+    const jalaaliDate = toJalaali(year, month, day);
+    return `${jalaaliDate.jy}/${jalaaliDate.jm}/${jalaaliDate.jd}`;
+      };

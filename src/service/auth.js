@@ -11,7 +11,6 @@ export const loginOtp = async (checkOtp) => {
                 otp_code: checkOtp.otp,
                 password:checkOtp.password
         })
-
         console.log('//////////////->', response)    
         return{response}
     } catch(error){
@@ -24,11 +23,16 @@ export const loginOtp = async (checkOtp) => {
             progress: undefined,
             theme: "light",
             transition: Bounce,
-          })
-          
+          })       
         return{error}
     }
 }
+
+
+
+
+
+
 
 
 
@@ -42,11 +46,9 @@ export const setEmailPass = async (emailPass) => {
             password: emailPass.password,
             confirm_password:emailPass.confirm_password
         })
-
         console.log('//////////////->', response)    
         return{response}
     } catch(error){
-
         toast.error(error.response?.data.non_field_errors[0]|| "مشکلی پیش آمده", { 
             position: "bottom-right",
             autoClose: 5000,
@@ -63,8 +65,13 @@ export const setEmailPass = async (emailPass) => {
 
 
 
-export const changePassword = async (data) =>{
 
+
+
+
+
+
+export const changePassword = async (data) =>{
     try {
         const response = await api.post('/users/change-password/',{
             email: data.email,
@@ -75,10 +82,7 @@ export const changePassword = async (data) =>{
         }) 
       console.log('------------>',response)
       return{response}
-    } catch (error) {
-
-        
-        
+    } catch (error) {        
         // اینجا باید ارور های مختلفی دریافت کنه که کلید های مختلفی دارن ولی نمیشه
         toast.error(error.response?.data.email[0] ||
                  error.response?.data.otp_code[0] ||
@@ -103,25 +107,24 @@ export const changePassword = async (data) =>{
 
 
 
-export const validationResult = async () =>{
-    try {
-        const response = await api.post('/finance/credit-result/') 
-        console.log('------------>',response)
-      return{response}
-    } catch (error) {
-        toast.error(error.response?.data || "مشکلی پیش آمده", { 
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-          }) 
-        return{error}
-        
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -154,12 +157,19 @@ export const checkPassword = async (phonePass) =>{
 
 
 
+
+
+
+
+
+
+
+
 export const sendOtp = async (formData) => {
     try{
         const response = await api.post('/users/auth/send-otp/', {
                 phone_number: formData.mobileNumber,
         })
-
         console.log('//////////////->', response)    
         return{response}
     } catch(error){
@@ -175,6 +185,14 @@ export const sendOtp = async (formData) => {
         return{error}
     }
 }
+
+
+
+
+
+
+
+
 
 
 export const emailSendOtp = async (email) => {
@@ -203,6 +221,14 @@ export const emailSendOtp = async (email) => {
 
 
 
+
+
+
+
+
+
+
+
 export const register = async (formData) => {
         try{
             const response = await api.post('/users/auth/register/',{    
@@ -213,15 +239,12 @@ export const register = async (formData) => {
                 sheba: formData.shebaNumber,
                 bank_name: formData.bankName,
                 otp_code: formData.otp,
-                // otp_for: formData.otp_for
-            }
-            
-
-            
+            }            
         )
             console.log('//////////////->', response)
             return {response}
         }catch(error){
+            console.log(error)
             toast.error(error.response?.data.non_field_errors[0] || "مشکلی پیش آمده", { 
                 position: "bottom-right",
                 autoClose: 5000,
@@ -234,4 +257,14 @@ export const register = async (formData) => {
             return {error}
         }
 }
+
+
+
+
+
+
+
+
+
+
 
