@@ -197,14 +197,13 @@ const SidebarDashboard = () => {
           rounded-lg 
           cursor-pointer
           ">
-            <a href="/dashboard/history">
+           
               <div className="flex">
                 <GoldDashboard />
-                <Link href="/dashboard//gold-deals">
+                <Link href="/dashboard/gold-deals">
                 <p className="pr-2">معامله طلا</p>
                 </Link>
               </div>
-            </a>
           </li>
 
           <li className="
@@ -238,14 +237,14 @@ const SidebarDashboard = () => {
           cursor-pointer
           hover:text-primary
           ">
-            <a href="/logout">
+            <Link href="/logout">
               <div className="flex">
                 <OrderDashboard />
                 <Link href="/dashboard/orders-dashboard">
                 <p className="pr-2">سفارش ها</p>
                 </Link>
               </div>
-            </a>
+            </Link>
           </li>
 
           <li className="
@@ -253,14 +252,14 @@ const SidebarDashboard = () => {
           cursor-pointer
           hover:text-primary
           ">
-            <a href="/logout">
+            <Link href="/logout">
               <div className="flex">
                 <TicketDashboard />
                 <Link href="/dashboard/ticket-dashboard">
                 <p className="pr-2">ارسال تیکت پشتیبانی</p>
                 </Link>
               </div>
-            </a>
+            </Link>
           </li>
 
           <li className="
