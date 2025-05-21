@@ -1,6 +1,47 @@
+"use client";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { ThreeDots } from "react-loader-spinner";
 
 const SellinGold = () =>{
+
+    const [sellGold , setSellGold] = useState({
+        amount: "",
+        cash_amount: "",
+    });
+    
+
+    const [loading, setLoading] = useState(false);
+    
+      useEffect(() => {
+        console.log(sellGold, "55555555555555");
+        
+      }, [sellGold])
+
+
+    const SendData = async () => {
+        
+        setLoading(true);
+    
+        const { response, error } = await Dealing({
+          amount: sellGold.amount,
+          cash_amount: sellGold.cash_amount,
+        });
+    
+        setLoading(false);
+      
+        if (response) {
+          setSellGold ({cash_amount: response.data.toman 
+            , amount:response.data.gram
+          })
+          console.log(response);
+          
+        } else {
+          console.log("اشتباه", error);
+          toast.error("🤣🤣😂")
+        }
+      };
+
     return(
         <div className="
         md:w-[912px]
@@ -42,7 +83,9 @@ const SellinGold = () =>{
                 </p>
         
                 <input
-                    type="text"
+                    type="number"
+                    value={sellGold.amount}
+                    onChange={(e)=>setSellGold({amount: e.target.value , cash_amount: ""})}
                     placeholder="مقدار طلا به گرم  "
                     className="
                      focus:outline-none 
@@ -62,8 +105,11 @@ const SellinGold = () =>{
         
                 
                 <input
-                    type="text"
+                    value={sellGold.cash_amount}
+                    // disabled={buyGold.amount != ""}
+                    type="number"
                     placeholder="مبلغ دریافتی به تومان"
+                    onChange={(e)=>setSellGold({cash_amount: e.target.value , amount: ""})}
                     className="
                      focus:outline-none 
                      focus:border-[#E1E1E1] 
@@ -76,6 +122,47 @@ const SellinGold = () =>{
                      p-2
                      "
                 />
+
+                  <div className="
+                                    md:w-[848px]
+                                     w-full
+                                     md:mt-12
+                                    ">
+                                    <div  className="
+                                    md:w-[131px] 
+                                    h-[48px] 
+                                    w-[29%] 
+                                    bg-[#D2AB67] 
+                                    rounded-xl
+                                    flex
+                                    flex-col
+                                    ">
+                                       <button className="pt-2" onClick={()=> SendData()}>
+                                        محاسبه
+                                       </button>
+                                    <div className="
+                                    flex
+                                    flex-col
+                                    items-center
+                                    justify-center
+                                    ">
+                                    {loading && (
+                                      <ThreeDots
+                                      visible={true}
+                                      height="10"
+                                      width="80"
+                                      color="#ffffff"
+                                      radius="9"
+                                      ariaLabel="three-dots-loading"
+                                      wrapperStyle={{}}
+                                      wrapperClass=""
+                                    />
+                                    )}
+                                  </div>
+                       
+                
+                                  </div>
+                                  </div>
         
                 <div className="
                  md:w-[848px] 

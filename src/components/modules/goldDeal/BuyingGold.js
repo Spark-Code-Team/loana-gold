@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 const BuyingGold = () => {
 
-const [activeInput, setActiveInput] = useState(0)
+// const [activeInput, setActiveInput] = useState(0)
 
 const [buyGold, setBuyGold] = useState({
     amount: "",
