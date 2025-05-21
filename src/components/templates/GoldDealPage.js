@@ -39,7 +39,7 @@ const GoldDealPage = () =>{
                 `}
                 onClick={()=>setactiveTab("buyingGold")}
                 > 
-                1خرید
+                خرید
                 </button>
 
                 <button className={`
@@ -54,7 +54,7 @@ const GoldDealPage = () =>{
                 `}
                 onClick={()=>setactiveTab("sellingGold")}
                 > 
-                2فروش
+                فروش
                 </button>
 
         </div>

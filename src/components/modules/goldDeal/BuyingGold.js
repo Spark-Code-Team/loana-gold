@@ -1,25 +1,38 @@
 "use client";
-import { Dealing } from "@/service/Dealing";
+
+import { buy_gold, Dealing } from "@/service/Dealing";
+import { walletBalance } from "@/service/finance";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const BuyingGold = () => {
 
-// const [activeInput, setActiveInput] = useState(0)
+const [balance, setBalance] = useState()
 
 const [buyGold, setBuyGold] = useState({
     amount: "",
     cash_amount: "",
   });
 
+const router = useRouter()
+
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    console.log(buyGold, "55555555555555");
-    
-  }, [buyGold])
+    const getBalance = async () => {
+      const {response , error} = await walletBalance()
+      if(response){
+        setBalance(response.data.cash.amount)
+      }else{
+        console.log(error)
+      }
+      }
+      getBalance()
+    } , [])
+  
 
   const SendData = async () => {
     
@@ -43,7 +56,26 @@ const [buyGold, setBuyGold] = useState({
       toast.error("🤣🤣😂")
     }
   };
-  
+
+  const buy = async () => {
+    const {response , error} = await buy_gold(buyGold.amount)
+    if (response){
+      console.log(response)
+      router.push('/dashboard/Transaction-dashboard')
+    }else{
+      toast.error(error.response?.data.detail || "مشکلی پیش آمده", { 
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      }) 
+      console.log(error)
+    }
+  }
+   
 
   return (
     <div
@@ -66,7 +98,7 @@ const [buyGold, setBuyGold] = useState({
                  mr-8
                  "
         >
-          موجودی شما: 3 گرم طلا
+          موجودی شما: {balance} تومان
         </p>
       </div>
 
@@ -92,7 +124,7 @@ const [buyGold, setBuyGold] = useState({
                  md:pb-5
                  "
           >
-            فروش طلا
+            خرید طلا
           </p>
 
           <input
@@ -207,10 +239,10 @@ const [buyGold, setBuyGold] = useState({
                     bg-[#D2AB67] 
                     rounded-xl"
             onClick={()=>{
-           
+              buy()
             }}
           >
-            فروش خرید
+          خرید
           </button>
         </div>
       </div>

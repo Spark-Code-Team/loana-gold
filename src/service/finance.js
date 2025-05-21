@@ -153,7 +153,7 @@ export const validationResult = async () =>{
 export const transactionsList = async() =>{
     try {
         const response = await api.get('/finance/transactions-list') 
-        console.log('------------>',response)
+        console.log('---------|||||--->',response)
       return{response}
     } catch (error) {
         toast.error(error.response?.data || "مشکلی پیش آمده", { 
@@ -204,5 +204,38 @@ export const chargeWallet = async (amount) => {
         return{error}
     }
 }
+
+
+
+
+
+
+
+export const walletBalance = async () => {
+    try{
+        const response = await api.get('/finance/wallet/balance/')
+        console.log('------>' , response)
+
+        return{response}
+    } catch(error){
+        console.log('------>' , error)
+        toast.error(error.response?.data || "مشکلی پیش آمده", { 
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          }) 
+        return{error}
+    }
+}
+
+
+
+
+
+
 
 

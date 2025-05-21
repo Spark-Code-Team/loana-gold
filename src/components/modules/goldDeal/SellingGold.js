@@ -1,46 +1,77 @@
-"use client";
+'use client'
+
 import Image from "next/image";
+import { walletBalance } from "@/service/finance";
 import { useEffect, useState } from "react";
+import { Dealing, sell_gold } from "@/service/Dealing";
 import { ThreeDots } from "react-loader-spinner";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const SellinGold = () =>{
 
-    const [sellGold , setSellGold] = useState({
+    const [balance , setBalance] = useState()
+
+    const [sellGold, setSellGold] = useState({
         amount: "",
         cash_amount: "",
-    });
+      });
     
+      const [loading, setLoading] = useState(false);
 
-    const [loading, setLoading] = useState(false);
-    
-      useEffect(() => {
-        console.log(sellGold, "55555555555555");
-        
-      }, [sellGold])
+      const router = useRouter()
 
-
-    const SendData = async () => {
-        
-        setLoading(true);
-    
-        const { response, error } = await Dealing({
-          amount: sellGold.amount,
-          cash_amount: sellGold.cash_amount,
-        });
-    
-        setLoading(false);
-      
-        if (response) {
-          setSellGold ({cash_amount: response.data.toman 
-            , amount:response.data.gram
-          })
-          console.log(response);
-          
-        } else {
-          console.log("اشتباه", error);
-          toast.error("🤣🤣😂")
+    useEffect(()=>{
+        const getBalance = async () => {
+            const {response , error} = await walletBalance()
+            if (response) {
+                setBalance(response.data.gold.amount)
+                console.log(response)
+            }else{
+                console.log(error)
+            }
         }
-      };
+        getBalance()
+
+
+    },[])
+
+    
+  const SendData = async () => {
+    
+    setLoading(true);
+
+    const { response, error } = await Dealing({
+      amount: sellGold.amount,
+      cash_amount: sellGold.cash_amount,
+    });
+
+    setLoading(false);
+  
+    if (response) {
+      setSellGold ({cash_amount: response.data.toman 
+        , amount:response.data.gram
+      })
+      console.log(response);
+      
+    } else {
+      console.log("اشتباه", error);
+      toast.error("مشکلی پیش آمده")
+    }
+  };
+
+    const sell = async () => {
+      const {response , error} = await sell_gold(sellGold.amount)
+      if (response){
+        console.log(response)
+        router.push('/dashboard/Transaction-dashboard')
+      }else{
+        toast.error(error.response.data.error || "مشکلی پیش آمده") 
+        console.log(error)
+      }
+    }
+
+    
 
     return(
         <div className="
@@ -59,7 +90,7 @@ const SellinGold = () =>{
                  text-lg
                  mr-8
                  ">
-                    موجودی شما: 3 گرم طلا 
+                    موجودی شما: {balance} گرم طلا 
                 </p>
             </div>
         
@@ -83,21 +114,22 @@ const SellinGold = () =>{
                 </p>
         
                 <input
+                    // disabled={sellGold.cash_amount != ""}
                     type="number"
                     value={sellGold.amount}
                     onChange={(e)=>setSellGold({amount: e.target.value , cash_amount: ""})}
                     placeholder="مقدار طلا به گرم  "
                     className="
-                     focus:outline-none 
-                     focus:border-[#E1E1E1] 
-                     focus:ring-0
-                     border-[1px] 
-                     border-[#E1E1E1] 
-                     rounded-xl 
-                     md:w-[848px]
-                     w-full
-                     mb-5
-                     "
+                            focus:outline-none 
+                            focus:border-[#E1E1E1] 
+                            focus:ring-0
+                            border-[1px] 
+                            border-[#E1E1E1] 
+                            rounded-xl 
+                            md:w-[848px]
+                            w-full
+                            mb-5
+                            "
                 />
         
                 </div>
@@ -106,63 +138,62 @@ const SellinGold = () =>{
                 
                 <input
                     value={sellGold.cash_amount}
-                    // disabled={buyGold.amount != ""}
+                    // disabled={sellGold.amount != ""}
                     type="number"
                     placeholder="مبلغ دریافتی به تومان"
                     onChange={(e)=>setSellGold({cash_amount: e.target.value , amount: ""})}
                     className="
-                     focus:outline-none 
-                     focus:border-[#E1E1E1] 
-                     focus:ring-0
-                     border-[1px] 
-                     border-[#E1E1E1] 
-                     rounded-xl 
-                     md:w-[848px]
-                     w-full
-                     p-2
-                     "
-                />
+                                focus:outline-none 
+                                focus:border-[#E1E1E1] 
+                                focus:ring-0
+                                border-[1px] 
+                                border-[#E1E1E1] 
+                                rounded-xl 
+                                md:w-[848px]
+                                w-full
+                                p-2
+                                "/>
 
-                  <div className="
-                                    md:w-[848px]
-                                     w-full
-                                     md:mt-12
-                                    ">
-                                    <div  className="
-                                    md:w-[131px] 
-                                    h-[48px] 
-                                    w-[29%] 
-                                    bg-[#D2AB67] 
-                                    rounded-xl
-                                    flex
-                                    flex-col
-                                    ">
-                                       <button className="pt-2" onClick={()=> SendData()}>
-                                        محاسبه
-                                       </button>
-                                    <div className="
-                                    flex
-                                    flex-col
-                                    items-center
-                                    justify-center
-                                    ">
-                                    {loading && (
-                                      <ThreeDots
-                                      visible={true}
-                                      height="10"
-                                      width="80"
-                                      color="#ffffff"
-                                      radius="9"
-                                      ariaLabel="three-dots-loading"
-                                      wrapperStyle={{}}
-                                      wrapperClass=""
-                                    />
-                                    )}
-                                  </div>
-                       
-                
-                                  </div>
-                                  </div>
+                    <div className="
+                        md:w-[848px]
+                        w-full
+                        md:mt-12
+                        ">
+                        <div  className="
+                    md:w-[131px] 
+                    h-[48px] 
+                    w-[29%] 
+                    bg-[#D2AB67] 
+                    rounded-xl
+                    flex
+                    flex-col
+                    ">
+                        <button className="pt-2" onClick={()=> SendData()}>
+                        محاسبه
+                        </button>
+                    <div className="
+                    flex
+                    flex-col
+                    items-center
+                    justify-center
+                    ">
+                    {loading && (
+                        <ThreeDots
+                        visible={true}
+                        height="10"
+                        width="80"
+                        color="#ffffff"
+                        radius="9"
+                        ariaLabel="three-dots-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                    />
+                    )}
+                    </div>
+        
+
+                        </div>
+                    </div>
         
                 <div className="
                  md:w-[848px] 
@@ -193,7 +224,8 @@ const SellinGold = () =>{
                     h-[48px] 
                     w-[29%] 
                     bg-[#D2AB67] 
-                    rounded-xl"> 
+                    rounded-xl"
+                    onClick={()=>{sell()}}> 
                     فروش
                     </button>
                 </div>
