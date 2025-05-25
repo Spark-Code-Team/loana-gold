@@ -12,9 +12,9 @@ import { setTime } from "@/utils/setTime";
 
 
 const VerificationCode = ({dynamicPhoneNumber , setFormData , formData }) => {
-      const [otpObj, setOtpObj] = useState({phoneNumber: dynamicPhoneNumber, otp: '' });  
+      const [otpObj, setOtpObj] = useState({phoneNumber: dynamicPhoneNumber, otp: '' });
       const [expired, setExpired] = useState(false);
-      const [remainingTime, setRemainingTime] = useState(0); 
+      const [remainingTime, setRemainingTime] = useState(0);
       const router = useRouter()
       const profileStore = UserProfile()
 
@@ -109,8 +109,6 @@ const VerificationCode = ({dynamicPhoneNumber , setFormData , formData }) => {
               const {response , error} = await Profile()
               if (response){
                   profileStore.setProfile(response.data); 
-              }
-              else{
               }}
               fetchProfile()
               router.push('/')

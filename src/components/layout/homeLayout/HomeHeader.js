@@ -44,8 +44,6 @@ const HomeHeader = () => {
 
             fetchProfile()
         }
-
-
     }, [profile.data.role]);  
 
     const openModal = () => {

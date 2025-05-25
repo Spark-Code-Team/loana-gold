@@ -56,12 +56,20 @@ const PasswordSignIn = ({ setLoginState , loginState }) => {
             const fetchProfile = async () => {
                     const {response , error} = await Profile()
                     if (response){         
-                        profileStore.setProfile(response.data);             
+                        profileStore.setProfile(response.data); 
+                        console.log(response.data.role)
+                        if(response.data.role == 2){
+                            router.push('/admin/User-Account')
+                        }else if(response.data.role == 3){
+                            //اینجا پوش میکنیم به ساپورت
+                        }else{
+                            router.push('/dashboard/user-account-dashboard')
+                        }
+            
                     }
                     else{
                     }}
-            fetchProfile()
-            router.push('/dashboard/user-account-dashboard')
+            fetchProfile()  
         }
         else{
             toast.error(error.response.data.error, { 
