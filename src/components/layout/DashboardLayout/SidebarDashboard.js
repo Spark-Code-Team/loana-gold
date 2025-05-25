@@ -255,6 +255,21 @@ const SidebarDashboard = () => {
             <Link href="/logout">
               <div className="flex">
                 <TicketDashboard />
+                <Link href="/dashboard/address-dashboard">
+                <p className="pr-2"> آدرس ها </p>
+                </Link>
+              </div>
+            </Link>
+          </li>
+
+          <li className="
+          p-2
+          cursor-pointer
+          hover:text-primary
+          ">
+            <Link href="/logout">
+              <div className="flex">
+                <TicketDashboard />
                 <Link href="/dashboard/ticket-dashboard">
                 <p className="pr-2">ارسال تیکت پشتیبانی</p>
                 </Link>

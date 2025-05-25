@@ -3,6 +3,7 @@ import LeftBuying from "../modules/buying/LeftBuying";
 
 const AddressRegistrationPage = () =>{
     return(
+        
         <div className="
         flex
         flex-row
