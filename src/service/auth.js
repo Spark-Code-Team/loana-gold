@@ -193,6 +193,25 @@ export const sendOtp = async (formData) => {
 
 
 
+export const logOut = async (refreshToken) => {
+    try{
+        const response = await api.post('/users/auth/logout/', {
+            refresh_token: refreshToken
+        })
+        console.log('//////////////->', response)    
+        return{response}
+    } catch(error){
+        toast.error(error.response?.data || "مشکلی پیش آمده")       
+        return{error}
+    }
+}
+
+
+
+
+
+
+
 
 
 export const emailSendOtp = async (email) => {

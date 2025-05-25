@@ -2,7 +2,7 @@ import api from "@/config/api";
 
 export const sendTicket = async ({message , title}) => {
     try {
-        const response = await api.post('/finance/send-ticket/' , {
+        const response = await api.post('/finance/ticket/send/' , {
             message,
             title
         })
@@ -23,7 +23,7 @@ export const sendTicket = async ({message , title}) => {
 
 export const getTickets = async () => {
     try {
-        const response = await api.get('')
+        const response = await api.get('/finance/ticket/list/')
 
         console.log('res-11111111>' , response)
         return {response}

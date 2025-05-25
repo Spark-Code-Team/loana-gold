@@ -1,7 +1,10 @@
 "use client"
 import DashboardLeft from "../elements/DashboardLeft";
 import { useState ,useEffect } from "react";
-import { sendTicket } from "@/service/tickets";
+import { getTickets, sendTicket } from "@/service/tickets";
+import { convertToJalali } from "@/utils/setTime";
+import { Bounce, toast } from "react-toastify";
+
 
 const TicketDashboardPage = () =>{
 
@@ -10,11 +13,20 @@ const TicketDashboardPage = () =>{
         message:""
     })
 
-    const [ myTickets , setMyTickets ] = useState()
+    const [ allTickets , setAllTickets ] = useState()
 
     useEffect(()=>{
-        
+        const myTickets = async () => {
+            const {response , error} = await getTickets() 
+            if(response){ 
+                setAllTickets(response.data)
+            }else{
+                toast.error(error.response.data.error)}
+        }
+        myTickets()
+
     } , [])
+
 
     const snedData = async () => {
         const { response , error } = await sendTicket(ticket)
@@ -22,8 +34,7 @@ const TicketDashboardPage = () =>{
             console.log(response);
             
         }else{
-            console.log(error)
-        }
+            toast.error(error.response.data.error)}
     }
      
     return(
@@ -138,24 +149,29 @@ const TicketDashboardPage = () =>{
                     لیست تیکت ها
                     </p>
 
+                     {
+                        allTickets?.map((p , index) => {
+                            return(
+                                
                     <div className="border-[1px] p-4 m-4 rounded-lg" >
 
                     <div className="
-                    w-[800px]
-                    h-80
+                    w-full
+                    h-full
                     grid
                     grid-cols-4
                     gap-x-6
                     gap-y-4
                     py-4
                     ">
+                        
                         <td>
                         <p className="font-bold mb-[12px] ">
                             موضوع
                         </p>
                         <tr>
                         <p>
-                         کیف پول
+                            {p.title}
                         </p>
                         </tr>
                         </td>
@@ -166,7 +182,7 @@ const TicketDashboardPage = () =>{
                         </p>
                         <tr>
                         <p>
-                        با عرض سلام و خسته نباشید من دو روزه که میخوام کیف پولم رو شارژ کنم اما وارد پروسه پرداخت که میشم با پیغام خطا از سمت سامانه شما مواجه میشم، لطفا من رو راهنمایی کنید، سپاس
+                            {p.message}
                         </p>
                         </tr>
                         </td>
@@ -177,7 +193,7 @@ const TicketDashboardPage = () =>{
                         </p>
                         <tr>
                         <p>
-                        1403/02/25
+                            {convertToJalali(p.created_at)}
                         </p>
                         </tr>
                         </td>
@@ -188,20 +204,36 @@ const TicketDashboardPage = () =>{
                         </p>
                         <tr>
                         <p>
-                            پاسخ داده شده
+                                {p.replies.length == 0? 
+                                <>
+                                در انتظار پاسخ
+                                </>:<>
+                                پاسخ داده شده
+                                </> }
                         </p>
                         </tr>
                         </td>
                     </div>
+                        {p.replies.length == 0? 
+                        <>
+                        </>:<>
+                            {p.replies.map((p,index)=>{
+                                return(
+                                    <div className="border-[1px] rounded-lg m-[12px] p-[12px] ">
+                                        <p className="text-[#595959]">
+                                            متن پاسخ : {p.message}
+                                        </p>    
+                                    </div>
+                                )
+                            })}
 
-                    <div className="border-[1px] rounded-lg m-[12px] p-[12px] ">
-                        <p className="text-[#595959]">
-                        پاسخ پشتیبانی: سلام وقت بخیر مثلا پرداخت مشکل داشت و الان برطرف شده لطفا دوباره امتحان کنید
-                        </p>
-                    </div>
-
+                        </> }
                     
                     </div>
+                            )
+                        })
+                     }
+
                 
              
             </div>

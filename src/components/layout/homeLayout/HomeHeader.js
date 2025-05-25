@@ -116,9 +116,14 @@ const HomeHeader = () => {
                                     درخواست اعتبار خرید
                                 </button>
                                 
+                                {profile.data.role == 1 ? 
                                 <Link href="/dashboard/user-account-dashboard">
                                     <Image alt="profile" onClick={() => Profile()} width={500} height={500} src="/" className="w-[49px] h-[49px] rounded-full"/>
-                                </Link>
+                                    </Link> : <>{profile.data.role == 2 ? 
+                                    <Link href="/admin/User-Account">
+                                    <Image alt="profile" onClick={() => Profile()} width={500} height={500} src="/" className="w-[49px] h-[49px] rounded-full"/>
+                                </Link> : <></> }</> }
+
                             </>
 
                         ) : (

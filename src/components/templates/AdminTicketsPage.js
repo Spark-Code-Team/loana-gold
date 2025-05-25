@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { useState , useEffect } from "react";
 import Pagination from "../elements/Pagination";
 import Image from "next/image";
 import OrderSuccess from "../modules/buying/OrderSu";
@@ -7,68 +7,31 @@ import OrderUns from "../modules/buying/OrderUns";
 import Sana from "../modules/receivingCredit/Sana";
 import PhoneSana from "../modules/receivingCredit/PhoneSana";
 import SanaRes from "../modules/receivingCredit/SanaRes";
+import { getTickets } from "@/service/tickets";
+import { convertToJalali } from "@/utils/setTime";
 
 const AdminTicketPage = () =>{
 
-    const users = [
-        { 
-        id: 1,
-        problem: "  1 مشکلات فنی ", 
-        date: " 1403/12/1", 
-        description: "سلام، می‌خواهم به شما اطلاع دهم که در حین استفاده از سرویس شما، با چند مسئله فنی مواجه شده‌ام که برای من مشکلاتی ایجاد کرده است. اما با این حال، بببببببببببببببببببببببببببببببببببببببببببببببببببب می‌دانم که د. ",
-        situation: " در انتطار پاسخ",
-     },
+    const [ allTickets , setAllTickets ] = useState()
 
-     { 
-        id: 2,
-        problem: " مشکلات فنی ", 
-        date: " 1403/12/1", 
-        description: "سلام، می‌خواهم به شما اطلاع دهم که در حین استفاده از سرویس شما، با چند مسئله فنی مواجه شده‌ام که برای من مشکلاتی ایجاد کرده است. اما ب د. ",
-        situation: " در انتطار پاسخ",
-     },
-     { 
-        id: 3,
-        problem: " مشکلات فنی ", 
-        date: " 1403/12/1", 
-        description: "سلام، می‌خواهم به شما اطلاع دهم که در حین استفاده از سرویس شما، با چند مسئله فنی مواجه شده‌ام که برای من مشکلاتی ایجاد کرده است. اما د د. ",
-        situation: " در انتطار پاسخ",
-     },
-     { 
-        id: 4,
-        problem: " مشکلات فنی ", 
-        date: " 1403/12/1", 
-        description: "سلام، می‌خواهم به شما اطلاع دهم که در حین استفاده از سرویس شما، با چند مسئله فنی مواجه شده‌ام که برای من مشکلاتی ایجاد کرده است. اما با این حال،  تلاش می‌کنید تا . ",
-        situation: " در انتطار پاسخ",
-     },
-     { 
-        id: 5,
-        problem: " مشکلات فنی ", 
-        date: " 1403/12/1", 
-        description: "سلام، می‌خواهم به شما اطلاع دهم که در حین استفاده از سرویس شما، با چند مسئله فنی مواجه شده‌ام که برای من مشکلاتی ایجاد کرده است. اما با این حال،  تلاش می‌کنید تا . ",
-        situation: " در انتطار پاسخ",
-     },
-     { 
-        id: 6,
-        problem: " مشکلات فنی ", 
-        date: " 1403/12/1", 
-        description: "سلام، می‌خواهم به شما اطلاع دهم که در حین استفاده از سرویس شما، با چند مسئله فنی مواجه شده‌ام که برای من مشکلاتی ایجاد کرده است. اما با این حال،  تلاش می‌کنید تا . ",
-        situation: " در انتطار پاسخ",
-     },
-    
-      ];
 
-      const [currentPage, setCurrentPage] = useState(1);
-      const usersPerPage = 5;
-    
-      const indexOfLastUser = currentPage * usersPerPage;
-      const indexOfFirstUser = indexOfLastUser - usersPerPage;
-      const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
-      const totalPages = Math.ceil(users.length / usersPerPage);
+    useEffect(()=>{
+         const myTickets = async () => {
+             const {response , error} = await getTickets() 
+             if(response){ 
+                 setAllTickets(response.data)
+             }else{
+                 toast.error(error.response.data.error)}
+         }
+         myTickets()
+ 
+     } , [])
+
 
     return (
         <div className="
         md:w-[1016px] 
-        md:h-[1000]
+        md:h-full
         md:rounded-xl
         ">
             <div className="
@@ -111,12 +74,11 @@ const AdminTicketPage = () =>{
 
         <div className="
         md:w-[1016px]
-        md:h-[860px] 
+        md:h-full 
         md:border-[1px]
         md:rounded-xl
         md:mt-6
         ">
-
        <div className="
        md:hidden 
        flex 
@@ -135,21 +97,25 @@ const AdminTicketPage = () =>{
          ">
            <table className="md:w-full w-[375px] ">
                     <tbody>
-                        {currentUsers.map((user, index) => (
-                            <tr key={user.id} className=" flex flex-col text-sm border-b-[1px]">
-                                <td className="p-2 hidden">{index + 1}</td>
-                                <td className="p-2 ">{user.problem}</td>
-                                <td className="p-2">{user.date}</td>
+                        {allTickets?.map((p, index) => (
+                            <tr key={p.id} className=" flex flex-col text-sm border-b-[1px]">
+                                <td className="p-2 ">موضوع : {p.title}</td>
+                                <td className="p-2">تاریخ : {convertToJalali(p.created_at)}</td>
                                 <td className="
                                 p-2 
                                 md:max-w-[900px] 
                                 max-w-[350px] 
-                                truncate 
                                 overflow-hidden 
-                                whitespace-nowrap 
-                                cursor-pointer
-                                ">{user.description}</td>
-                                <td className="p-2 ">{user.situation}</td>
+                                ">
+                                متن پیام : {p.message}
+                                </td>
+                                <td className="p-2 ">
+                                وضعیت : {p.replies.length == 0? 
+                                <>
+                                در انتظار پاسخ
+                                </>:<>
+                                پاسخ داده شده
+                                </> }</td>
                             </tr>
                         ))}
                     </tbody>
@@ -157,13 +123,13 @@ const AdminTicketPage = () =>{
 
         </div>
         
-        <div className="mt-10">
+        {/* <div className="mt-10">
         <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={(page) => setCurrentPage(page)}
         />
-        </div>
+        </div> */}
        
 
 

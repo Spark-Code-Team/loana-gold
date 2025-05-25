@@ -13,6 +13,9 @@ import ErrorDashboard from "../../../../public/icons/ErrorDashboard";
 import ArrowDashboard from "../../../../public/icons/ArrowDashboard";
 import Link from "next/link";
 import { UserProfile } from "@/stores/profileStore";
+import { logOut } from "@/service/auth";
+import { getCookie } from "@/utils/cookies";
+import { useRouter } from "next/navigation";
 
 const SidebarDashboard = () => {
   const [openMenu, setOpenMenu] = useState(null);
@@ -21,7 +24,26 @@ const SidebarDashboard = () => {
     setOpenMenu(openMenu === menu ? null : menu);
   };
 
+  const router = useRouter()
+
   const profileStore = UserProfile()
+
+  const log_out = async () =>{ 
+    const {response , error} = await logOut(getCookie('refreshToken'))
+    if(response){
+      document.cookie.split(';').forEach(function(c) {
+        document.cookie = c.trim().split('=')[0] + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      });
+      document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+      document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC"; 
+      router.push("/login")
+      window.location.reload()}else{
+      console.log(error)
+      router.push("/login")
+      window.location.reload()
+      toast.error('خروج ناموفق')
+    }
+  }
 
 
   return (
@@ -267,12 +289,17 @@ const SidebarDashboard = () => {
           cursor-pointer
           hover:text-primary
           ">
-            <a href="/logout">
-              <div className="flex">
+            
+              <div className="flex"
+                   onClick={()=>{
+                    document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";  
+                    log_out()
+                  }}
+              >
                 <ErrorDashboard />
                 <p className="pr-2">خروج از حساب کاربری</p>
               </div>
-            </a>
           </li>
         </ul>
       </aside>
