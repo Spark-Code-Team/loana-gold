@@ -14,7 +14,6 @@ export default function DashboardLayoutUser({ children }){
     
     
     useEffect(() => {  
-        console.log(profileStore , '11111111111111111111')
         if(!profileStore.data.role){
             const fetchProfile = async () => {
             const {response , error} = await Profile()
