@@ -9,7 +9,7 @@ const DashboardLayout = ({children}) =>{
                 mt-28
                 flex
                 flex-row
-                justify-between relative
+                justify-between
             ">
                 <SidebarDashboard/>
                 {children}

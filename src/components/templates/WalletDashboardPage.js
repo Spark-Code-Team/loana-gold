@@ -1,5 +1,9 @@
+"use client"
 import DashboardLeft from "../elements/DashboardLeft";
 import Image from "next/image";
+import { chargeWallet, walletBalance } from "@/service/finance";
+import { useState , useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const bankImages = [
   "/images/bankimage1.png",
@@ -11,14 +15,48 @@ const bankImages = [
 ];
 
 const amounts = [
-  "500,000 تومان",
-  "1,000,000 تومان",
-  "1,500,000 تومان",
-  "5,000,000 تومان",
-  "10,000,000 تومان"
+  500000,
+  1000000,
+  1500000,
+  5000000,
+  10000000
 ];
 
 const WalletDashboardPage = () => {
+
+  const [ amount , setAmount ] = useState()
+
+  const [ balance , setBalance ] = useState()
+
+  const router = useRouter()
+
+  useEffect(()=>{
+    const getBalance = async () => {
+        const {response , error} = await walletBalance()
+        if (response) {
+            setBalance(response.data.cash.amount)
+            console.log(response)
+        }else{
+            console.log(error)
+        }}
+    getBalance()
+},[])
+
+  const amountOnChange = (e) => {
+    setAmount(e.target.value)
+  }
+
+  const chargeaAccount = async () => {
+    console.log(amount)
+    const {response , error} = await chargeWallet(amount)
+    if(response){
+      console.log(response,'lllllllllllllllllllll')
+      router.push('/dashboard/user-account-dashboard')
+    }else{
+      console.log(error)
+    }
+  } 
+
   return (
     <div className="
      w-[912px] 
@@ -40,7 +78,7 @@ const WalletDashboardPage = () => {
          text-xl 
          mr-8
          ">
-            موجودی شما: 46,000,000 تومان
+            موجودی شما: {balance} تومان
         </p>
     </div>
 
@@ -74,10 +112,13 @@ const WalletDashboardPage = () => {
              w-full 
              p-2
              "
+             value={amount}
+             onChange={amountOnChange}
           />
           
           <div className="flex justify-between">
             {amounts.map((amount, index) => (
+
               <p
                 key={index}
                 className="
@@ -88,8 +129,12 @@ const WalletDashboardPage = () => {
                  rounded-lg 
                  cursor-pointer 
                  "
+                 onClick={()=>
+                  setAmount(amount)
+                }
               >
-                {amount}
+                {amount} تومان
+                
               </p>
             ))}
           </div>
@@ -117,7 +162,9 @@ const WalletDashboardPage = () => {
            rounded-xl 
            text-black 
            transition
-           ">
+           "
+           onClick={()=>chargeaAccount()}
+           >
             پرداخت
           </button>
         </div>

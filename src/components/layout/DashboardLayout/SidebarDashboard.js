@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import UserAccountDashboard from "../../../../public/icons/UserAccountDashboard";
 import WalletDashboard from "../../../../public/icons/WalletDashboard";
@@ -12,6 +12,7 @@ import TicketDashboard from "../../../../public/icons/TicketDashboard";
 import ErrorDashboard from "../../../../public/icons/ErrorDashboard";
 import ArrowDashboard from "../../../../public/icons/ArrowDashboard";
 import Link from "next/link";
+import { UserProfile } from "@/stores/profileStore";
 
 const SidebarDashboard = () => {
   const [openMenu, setOpenMenu] = useState(null);
@@ -19,6 +20,9 @@ const SidebarDashboard = () => {
   const toggleMenu = (menu) => {
     setOpenMenu(openMenu === menu ? null : menu);
   };
+
+  const profileStore = UserProfile()
+
 
   return (
     <div className="">
@@ -34,7 +38,7 @@ const SidebarDashboard = () => {
                flex
                justify-evenly
                items-center
-               "
+          "
       >
         <Image
           src="/images/ashkan.png"
@@ -50,7 +54,7 @@ const SidebarDashboard = () => {
           mb-2
           "
           >
-            کیوروش صناعی
+            {profileStore.data.first_name} {profileStore.data.last_name}
           </h2>
 
           <p
@@ -59,19 +63,19 @@ const SidebarDashboard = () => {
           text-sm
           "
           >
-            0916******
+            {profileStore.data.phone_number}
           </p>
         </div>
       </div>
 
-      <aside
-        className="
+    <aside
+    className="
     w-72 
     bg-white 
     border 
     border-[#DADADA] 
     rounded-xl 
-    h-screen 
+    md:h-[800px]
     shadow-md
     "
       >
@@ -133,7 +137,7 @@ const SidebarDashboard = () => {
                 hover:text-primary 
                 rounded-lg
                 ">
-                  <a href="/dashboard/wallet-dashboard"> موجودی</a>
+                  <a href="/dashboard/goldStorage-dashboard">   طلا </a>
                 </li>
 
                 <li className="
@@ -141,11 +145,32 @@ const SidebarDashboard = () => {
                 hover:text-primary 
                 rounded-lg
                 ">
-                  <a href="/dashboard/Transaction-dashboard"> تراکنش‌ها</a>
+                  <a href="/dashboard/"> نقره </a>
+                </li>
+                <li className="
+                p-2  
+                hover:text-primary 
+                rounded-lg
+                ">
+                  <a href="/dashboard/wallet-dashboard"> موجودی نقدی </a>
                 </li>
 
               </ul>
             )}
+          </li>
+
+          <li className="
+          p-2 
+          rounded-lg 
+          cursor-pointer
+        hover:text-primary
+          ">
+            <div className="flex">
+              <InstallmentDashboard />
+              <Link href="/dashboard/Transaction-dashboard">
+              <p className="pr-2"> تراکنش‌ها  </p>
+              </Link>
+            </div>
           </li>
 
           
@@ -162,6 +187,7 @@ const SidebarDashboard = () => {
               </Link>
             </div>
           </li>
+
           
 
           
@@ -171,14 +197,13 @@ const SidebarDashboard = () => {
           rounded-lg 
           cursor-pointer
           ">
-            <a href="/dashboard/history">
+           
               <div className="flex">
                 <GoldDashboard />
-                <Link href="/dashboard/goldStorage-dashboard">
+                <Link href="/dashboard/gold-deals">
                 <p className="pr-2">معامله طلا</p>
                 </Link>
               </div>
-            </a>
           </li>
 
           <li className="
@@ -188,7 +213,9 @@ const SidebarDashboard = () => {
           ">
             <div className="flex">
               <HistoryDashboard />
-              <p className="pr-2">تاریخچه اعتبارسنجی</p>
+              <Link href="/dashboard/Validation-history">
+                <p className="pr-2">تاریخچه اعتبارسنجی</p>
+              </Link>
             </div>
           </li>
 
@@ -210,14 +237,14 @@ const SidebarDashboard = () => {
           cursor-pointer
           hover:text-primary
           ">
-            <a href="/logout">
+            <Link href="/logout">
               <div className="flex">
                 <OrderDashboard />
                 <Link href="/dashboard/orders-dashboard">
                 <p className="pr-2">سفارش ها</p>
                 </Link>
               </div>
-            </a>
+            </Link>
           </li>
 
           <li className="
@@ -225,14 +252,29 @@ const SidebarDashboard = () => {
           cursor-pointer
           hover:text-primary
           ">
-            <a href="/logout">
+            <Link href="/logout">
+              <div className="flex">
+                <TicketDashboard />
+                <Link href="/dashboard/address-dashboard">
+                <p className="pr-2"> آدرس ها </p>
+                </Link>
+              </div>
+            </Link>
+          </li>
+
+          <li className="
+          p-2
+          cursor-pointer
+          hover:text-primary
+          ">
+            <Link href="/logout">
               <div className="flex">
                 <TicketDashboard />
                 <Link href="/dashboard/ticket-dashboard">
                 <p className="pr-2">ارسال تیکت پشتیبانی</p>
                 </Link>
               </div>
-            </a>
+            </Link>
           </li>
 
           <li className="

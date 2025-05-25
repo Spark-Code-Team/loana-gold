@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import UpArrow from "../../../public/icons/upArrow";
 
 const FAQItem = ({ question, answer }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -12,7 +13,7 @@ const FAQItem = ({ question, answer }) => {
                 onClick={() => setIsOpen(!isOpen)}
             >
                 {question}
-                <span className={`transform transition ${isOpen ? "rotate-180" : ""}`}>⌄</span>
+                <span className={`transform transition ${isOpen ? "rotate-180" : ""}`}><UpArrow/></span>
             </button>
             <div
                 className={`overflow-hidden transition-all duration-300 ${

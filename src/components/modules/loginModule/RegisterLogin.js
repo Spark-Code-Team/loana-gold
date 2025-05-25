@@ -1,24 +1,17 @@
 "use client"
 
 import Link from "next/link";
-import { register } from "@/service/auth";
-import { useState } from "react";
-import EmailLogin from "../../../../public/icons/EmailLogin";
+import { sendOtp } from "@/service/auth";
+// import { useState } from "react";
+// import EmailLogin from "../../../../public/icons/EmailLogin";
 import PersonName from "../../../../public/icons/PersonName";
 import { Bounce, toast } from "react-toastify";
 import { registerForm } from "@/constant/auth";
 
 
 
-const RegisterLogin = ({setloginRegisterState }) =>{
-      const [formData, setFormData] = useState({ 
-        firstName: '',  
-        lastName: '',  
-        mobileNumber: '',  
-        nationalCode: '',  
-        shebaNumber: '',  
-        bankName: ''  
-    });
+const RegisterLogin = ({setFormData ,formData ,setloginRegisterState }) =>{
+
 
     const handleChange = (e) => {  
       const { name, value } = e.target;  
@@ -28,15 +21,16 @@ const RegisterLogin = ({setloginRegisterState }) =>{
       }));  
     }; 
 
-    const handleSendData = async () => {  
-      const { response, error } = await register(formData)
+    const handleSendData = async () => {       
+      
+      const { response, error } = await sendOtp(formData)
+
       if (response){
         document.cookie = `expire_time=${response.data.code_expires_at}; max-age=${2*60}`;
-        console.log(formData.mobileNumber)
         setloginRegisterState({state: 1, phone: formData.mobileNumber})
-
-      } else {
-        toast.error(error.response.data.error, { 
+        
+      } else  {
+        toast.error(error.response?.data.error, { 
                 position: "bottom-right",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -52,22 +46,22 @@ const RegisterLogin = ({setloginRegisterState }) =>{
 
     return(
         <div 
-      className="
-       md:flex flex flex-col
-       md:justify-center 
-       md:items-center 
-       md:h-screen
-       md:bg-center
-       bg-no-repeat 
-       md:bg-contain 
-       lg:bg-cover
-       md:bg-[url('/images/userdashboard.png')]
-       mt-4
-       md:mt-0
-       p-3
-       md:p-0
-       " 
-    >
+          className="
+          md:flex flex flex-col
+          md:justify-center 
+          md:items-center 
+          md:h-screen
+          md:bg-center
+          bg-no-repeat 
+          md:bg-contain 
+          lg:bg-cover
+          md:bg-[url('/images/userdashboard.png')]
+          mt-4
+          md:mt-0
+          p-3
+          md:p-0
+          " 
+        >
 
         <div className="
        bg-white
@@ -113,42 +107,40 @@ const RegisterLogin = ({setloginRegisterState }) =>{
              md:mt-10
             ">
 
-              {registerForm.map((p) => {
-                return(<>
-                  <div className="
-                                flex
-                                items-center
-                                md:w-[292px]
-                                h-12
-                                rounded-xl
-                                border-[1px]
-                                boredr-[#E1E1E1]
-                                "
-                                >
-                                <span className="mr-4">
-                                <PersonName/>
-                                </span>
-                                
-                                <input
-                                className="
-                                border-none
-                                focus:outline-none
-                                focus:ring-0
-                                focus:boredr-transparent
-                                md:w-[250px] w-80
-                                text-xl
-                                md:text-base
-                                "
-                                placeholder={p.placeholder}
-                                type={p.type}
-                                name= {p.name} 
-                                value={formData[p.name]}  
-                                onChange={handleChange} 
-                                />
-                                </div>
-                </>)
-                                
-              })}
+              {registerForm.map((p) => {  
+                  return (  
+                      <div key={p.id} className="  
+                          flex  
+                          items-center  
+                          md:w-[292px]  
+                          h-12  
+                          rounded-xl  
+                          border-[1px]  
+                          border-[#E1E1E1]  
+                      ">  
+                          <span className="mr-4">  
+                              <PersonName />  
+                          </span>  
+                          
+                          <input  
+                              className="  
+                                  border-none  
+                                  focus:outline-none  
+                                  focus:ring-0  
+                                  focus:border-transparent  
+                                  md:w-[250px] w-80  
+                                  text-xl  
+                                  md:text-base  
+                              "  
+                              placeholder={p.placeholder}  
+                              type={p.type}  
+                              name={p.name}   
+                              value={formData[p.name]}  
+                              onChange={handleChange}   
+                          />  
+                      </div>  
+                  );  
+              })}               
 
             </div>
 

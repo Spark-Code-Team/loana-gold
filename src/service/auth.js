@@ -1,23 +1,233 @@
-import Api, { api } from "@/config/api";
+import api from "@/config/api"
+import { Bounce, toast } from "react-toastify";
 
 
 
-export const login = async (phone_number) => {
-
-    try {
-        const response = await api.post("/users/auth/login/", {
-            phone_number
+export const loginOtp = async (checkOtp) => {
+    try{
+        const response = await api.post('/users/auth/login-check-otp/', {
+                phone_number: checkOtp.phoneNumber,
+                email: checkOtp.email,
+                otp_code: checkOtp.otp,
+                password:checkOtp.password
         })
-
-        return { response }
-    } catch(error) {
-        return { error }
+        console.log('//////////////->', response)    
+        return{response}
+    } catch(error){
+        toast.error(error.response?.data.non_field_errors[0]
+             || "مشکلی پیش آمده", { 
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          })       
+        return{error}
     }
 }
 
-// export const otp = async () => {
 
-// }
+
+
+
+
+
+
+
+
+
+export const setEmailPass = async (emailPass) => {
+    try{
+        const response = await api.post('/users/set-email-password/', {
+            email: emailPass.email,
+            otp_code: emailPass.otp_code,
+            password: emailPass.password,
+            confirm_password:emailPass.confirm_password
+        })
+        console.log('//////////////->', response)    
+        return{response}
+    } catch(error){
+        toast.error(error.response?.data.non_field_errors[0]|| "مشکلی پیش آمده", { 
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          })
+        return{error}
+    }
+}
+
+
+
+
+
+
+
+
+
+
+export const changePassword = async (data) =>{
+    try {
+        const response = await api.post('/users/change-password/',{
+            email: data.email,
+            otp_code: data.otp_code,
+            current_password: data.current_password,
+            new_password: data.password,
+            confirm_new_password: data.password_repeat
+        }) 
+      console.log('------------>',response)
+      return{response}
+    } catch (error) {        
+        // اینجا باید ارور های مختلفی دریافت کنه که کلید های مختلفی دارن ولی نمیشه
+        toast.error(error.response?.data.email[0] ||
+                 error.response?.data.otp_code[0] ||
+                error.response?.data.new_password[0]||
+                error.response?.data.current_password[0]||
+                error.response?.data.confirm_new_password[0]||
+                error.response?.data.non_field_errors[0]||
+                 "مشکلی پیش آمده", { 
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          })
+        return{error}
+        
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export const checkPassword = async (phonePass) =>{
+    try {
+        const response = await api.post('/users/auth/2fa-login/',{
+            phone_number: phonePass.phoneNumber,
+            password: phonePass.password
+        }) 
+        console.log(phonePass, 'i wnat to login')
+      console.log('------------>',response)
+      return{response}
+    } catch (error) {
+        toast.error(error.response?.data.detail || "مشکلی پیش آمده", { 
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          }) 
+        return{error}
+        
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+export const sendOtp = async (formData) => {
+    try{
+        const response = await api.post('/users/auth/send-otp/', {
+                phone_number: formData.mobileNumber,
+        })
+        console.log('//////////////->', response)    
+        return{response}
+    } catch(error){
+        toast.error(error.response?.data || "مشکلی پیش آمده", { 
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          })       
+        return{error}
+    }
+}
+
+
+
+
+
+
+
+
+
+
+export const emailSendOtp = async (email) => {
+    try {
+        const response = await api.post('/users/auth/send-email-otp/', {
+            email
+        })
+        console.log('//////////////->', response)    
+        return{response}
+    } catch(error){
+        toast.error(error.response?.data.email[0] || "مشکلی پیش آمده", { 
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          })
+        return{error}
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 export const register = async (formData) => {
         try{
@@ -27,12 +237,34 @@ export const register = async (formData) => {
                 first_name: formData.firstName,
                 last_name: formData.lastName,
                 sheba: formData.shebaNumber,
-                bank_name: formData.bankName
-            }
+                bank_name: formData.bankName,
+                otp_code: formData.otp,
+            }            
         )
-            
+            console.log('//////////////->', response)
             return {response}
         }catch(error){
+            console.log(error)
+            toast.error(error.response?.data.non_field_errors[0] || "مشکلی پیش آمده", { 
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+              })
             return {error}
         }
 }
+
+
+
+
+
+
+
+
+
+
+

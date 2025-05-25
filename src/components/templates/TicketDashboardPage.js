@@ -1,11 +1,35 @@
 "use client"
 import DashboardLeft from "../elements/DashboardLeft";
+import { useState ,useEffect } from "react";
+import { sendTicket } from "@/service/tickets";
 
 const TicketDashboardPage = () =>{
+
+    const [ ticket , setTicket ] = useState({
+        title:"",
+        message:""
+    })
+
+    const [ myTickets , setMyTickets ] = useState()
+
+    useEffect(()=>{
+        
+    } , [])
+
+    const snedData = async () => {
+        const { response , error } = await sendTicket(ticket)
+        if(response){
+            console.log(response);
+            
+        }else{
+            console.log(error)
+        }
+    }
+     
     return(
         <div className="
         w-[912px]
-        h-[1200px]
+        h-max
         border-[1px]
         border-[#CBCED7]
         rounded-2xl
@@ -36,7 +60,12 @@ const TicketDashboardPage = () =>{
                rounded-xl
                mx-auto 
                "
-               
+               value={ticket.title}
+               onChange={(e) => {
+                setTicket(prev => ({
+                  ...prev,
+                  title: e.target.value
+                }));}}
                />
 
             </div>
@@ -60,6 +89,12 @@ const TicketDashboardPage = () =>{
                     border-[#E1E1E1] 
                     rounded-xl
                     "
+                    value={ticket.message}
+                    onChange={(e) => {
+                     setTicket(prev => ({
+                       ...prev,
+                       message: e.target.value
+                     }));}}
                     required
                 ></textarea>
 
@@ -68,13 +103,17 @@ const TicketDashboardPage = () =>{
                 justify-end
                 ">
                 <button className="
+                hover:bg-primary
+                hover:text-[#EDEDED]
                 w-[98px]
                 h-8
                 bg-[#EDEDED]
                 rounded-xl
                 text-sm
                 text-[#7A7A7A]
-                ">
+                "
+                onClick={snedData} 
+                >
                     ارسال تیکت
                 </button>
                 </div>
@@ -85,13 +124,12 @@ const TicketDashboardPage = () =>{
 
             <div className="
             w-[848px]
-            h-[600px]
+            h-max
             rounded-lg
             border-[1px]
-            border-[#EDEDED]
+            border-[#E1E1E1] 
             mx-8
-            pr-4
-            pt-4
+            p-4
             mt-20
             ">
              
@@ -100,7 +138,7 @@ const TicketDashboardPage = () =>{
                     لیست تیکت ها
                     </p>
 
-                    <div>
+                    <div className="border-[1px] p-4 m-4 rounded-lg" >
 
                     <div className="
                     w-[800px]
@@ -109,68 +147,61 @@ const TicketDashboardPage = () =>{
                     grid-cols-4
                     gap-x-6
                     gap-y-4
-                    pt-4
+                    py-4
                     ">
-                        <p className="font-bold">
+                        <td>
+                        <p className="font-bold mb-[12px] ">
                             موضوع
                         </p>
-                        <p className="font-bold">
+                        <tr>
+                        <p>
+                         کیف پول
+                        </p>
+                        </tr>
+                        </td>
+
+                        <td>
+                        <p className="font-bold mb-[12px]">
                             متن درخواست
                         </p>
-                        <p className="font-bold">
-                            زمان
-                        </p>
-                        <p className="font-bold">
-                            وضعیت
-                        </p>
-
-                        <p>
-                        شارژ کیف پول
-                        </p>
+                        <tr>
                         <p>
                         با عرض سلام و خسته نباشید من دو روزه که میخوام کیف پولم رو شارژ کنم اما وارد پروسه پرداخت که میشم با پیغام خطا از سمت سامانه شما مواجه میشم، لطفا من رو راهنمایی کنید، سپاس
                         </p>
+                        </tr>
+                        </td>
+
+                        <td>
+                        <p className="font-bold mb-[12px]">
+                            زمان
+                        </p>
+                        <tr>
                         <p>
                         1403/02/25
                         </p>
+                        </tr>
+                        </td>
+
+                        <td>
+                        <p className="font-bold mb-[12px]">
+                            وضعیت
+                        </p>
+                        <tr>
                         <p>
                             پاسخ داده شده
                         </p>
-
+                        </tr>
+                        </td>
                     </div>
 
-                    <div className="border-b-[1px]">
+                    <div className="border-[1px] rounded-lg m-[12px] p-[12px] ">
                         <p className="text-[#595959]">
                         پاسخ پشتیبانی: سلام وقت بخیر مثلا پرداخت مشکل داشت و الان برطرف شده لطفا دوباره امتحان کنید
                         </p>
                     </div>
+
                     
-                    <div className="
-                    w-[800px]
-                    grid
-                    grid-cols-4
-                    gap-x-6
-                    gap-y-4
-                    pt-10
-                    ">
-                        <p>
-                        دریافت طلا 
-                        </p>
-                        <p>
-                        با عرض سلام و خسته نباشید من میخوام ادرس تغییر بدم برای دریافت طلا اما فیلد بسته هست نمیشه تغییر داد
-                        </p>
-                        <p>
-                        1378/08/24
-                        </p>
-                        <p>
-                            در انتظار پاسخ
-                        </p>
-
-
                     </div>
-
-                    
-                </div>
                 
              
             </div>

@@ -1,10 +1,16 @@
+'use client'
+
 import EmailDashboard from "../../../public/icons/EmailDashboard";
 import PersonDashboard from "../../../public/icons/PersonDashboard";
 import PhoneDashboard from "../../../public/icons/PhoneDashboard";
 import AdminTitle from "../elements/AdminTitle";
+import { UserProfile } from "@/stores/profileStore";
 
 
 const AdminUserAccountPage = () =>{
+
+    const profileStore = UserProfile()
+
     return(
         <div>
         
@@ -60,7 +66,7 @@ const AdminUserAccountPage = () =>{
 
             <input 
              type="text" 
-             placeholder="فرهاد" 
+             placeholder={profileStore.data.first_name} 
              className="
                 md:w-[350px] 
                 border-none
@@ -101,7 +107,7 @@ const AdminUserAccountPage = () =>{
 
             <input 
              type="text" 
-             placeholder="محمدی" 
+             placeholder={profileStore.data.last_name} 
              className="
                 md:w-[350px]
                 border-none
@@ -142,7 +148,7 @@ const AdminUserAccountPage = () =>{
 
             <input 
              type="text" 
-             placeholder="09125648523" 
+             placeholder={profileStore.data.phone_number} 
              className="
                 md:w-[350px]
                 border-none
@@ -182,7 +188,7 @@ const AdminUserAccountPage = () =>{
 
             <input 
              type="text" 
-             placeholder="001265969" 
+             placeholder={profileStore.data.national_code} 
              className="
                 md:w-[350px]
                 border-none
@@ -223,7 +229,7 @@ const AdminUserAccountPage = () =>{
 
             <input 
              type="text" 
-             placeholder="021556320241565223" 
+             placeholder={profileStore.data.sheba}  
              className="
                 md:w-[350px]
                 border-none
@@ -264,7 +270,7 @@ const AdminUserAccountPage = () =>{
 
             <input 
              type="text" 
-             placeholder="اقتصاد نوین" 
+             placeholder={profileStore.data.bank_name}  
              className="
                 md:w-[350px]
                 border-none

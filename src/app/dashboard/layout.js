@@ -1,7 +1,40 @@
+"use client"
+
 import DashboardLayout from "@/components/layout/DashboardLayout/DashboardLayout";
+import { UserProfile } from "@/stores/profileStore";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { Profile } from "@/service/profile";
 
 
 export default function DashboardLayoutUser({ children }){
+
+    const profileStore = UserProfile()
+    const router = useRouter()
+    
+    
+    useEffect(() => {  
+        console.log(profileStore , '11111111111111111111')
+        if(!profileStore.data.role){
+            const fetchProfile = async () => {
+            const {response , error} = await Profile()
+            if (response){
+                profileStore.setProfile(response.data); 
+                if(profileStore.data.role == 2){
+                    router.push('/admin/User-Account')
+                }else if(profileStore.data.role === 'support'){
+                    //اینجا پوش میکنیم به ساپورت
+                }else{
+                    router.push('/dashboard/user-account-dashboard')
+                }
+            } else {
+                router.push('/Login')
+            }
+        }
+
+            fetchProfile()
+        }},[profileStore])
+    
     return(
         <>
             <DashboardLayout>

@@ -1,7 +1,94 @@
+"use client"
+
 import AuthPageStruct from "./AuthPageStruct";
 import PhoneLogin from "../../../../public/icons/PhoneLogin";
 import Link from "next/link";
-const PasswordSignIn = ({ setLoginState }) => {
+import { useEffect, useState } from "react";
+import { checkPassword } from "@/service/auth";
+import { getCookie, setCookie } from "@/utils/cookies";
+import { useRouter } from "next/navigation";
+import { Bounce, toast } from "react-toastify";
+import { UserProfile } from "@/stores/profileStore";
+import { Profile } from "@/service/profile";
+
+
+const PasswordSignIn = ({ setLoginState , loginState }) => {
+
+    const router = useRouter()
+    const profileStore = UserProfile()
+
+
+    const [inputValues, setInputValues] = useState({  
+        phoneNumber: '',  
+        password: '',  
+    });  
+
+        useEffect(() => {  
+            if(getCookie('refreshToken')||getCookie('accessToken')){
+                document.cookie = `refreshToken=; max-age=${0}`;
+                document.cookie = `accessToken=; max-age=${0}`;
+            }
+
+                setInputValues(prevValues => ({  
+                    ...prevValues,              
+                    phoneNumber: loginState.phoneNumber, 
+                }));  
+             
+        }, []);
+
+    const handleChange = (event) => {  
+        const { name, value } = event.target;  
+        setInputValues((prevValues) => ({  
+            ...prevValues,  
+            [name]: value, 
+        }));  
+    }; 
+    
+    const sendPasswordData = async () => {
+        const {response , error} = await checkPassword(inputValues)
+        if(response){
+            if (getCookie('refreshToken')||getCookie('accessToken')){
+                setCookie(response.data)
+            }
+            else{
+                setCookie(response.data)
+            }
+            const fetchProfile = async () => {
+                    const {response , error} = await Profile()
+                    if (response){         
+                        profileStore.setProfile(response.data); 
+                        console.log(response.data.role)
+                        if(response.data.role == 2){
+                            router.push('/admin/User-Account')
+                        }else if(response.data.role == 3){
+                            //اینجا پوش میکنیم به ساپورت
+                        }else{
+                            router.push('/dashboard/user-account-dashboard')
+                        }
+            
+                    }
+                    else{
+                    }}
+            fetchProfile()  
+        }
+        else{
+            toast.error(error.response.data.error, { 
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            }
+            ) 
+        }
+
+
+    }
+
+
+
     return(
     <AuthPageStruct>
 
@@ -59,7 +146,9 @@ const PasswordSignIn = ({ setLoginState }) => {
                 "
                 placeholder="  رمزعبور "
                 type="text"
-                name="firstname"
+                name="password" 
+                value={inputValues.password}  
+                onChange={handleChange} 
                 />
                 </div>
 
@@ -75,7 +164,7 @@ const PasswordSignIn = ({ setLoginState }) => {
                  text-xl
                  md:text-lg
                  "
-                 onClick={() => setLoginState("forgetPassword")}
+                 onClick={() => sendPasswordData()}
                  >
                     ارسال کد
             </button>

@@ -1,6 +1,8 @@
 import Image from "next/image";
+import BuyingModalPage from "@/components/templates/BuyingModalPage";
 const OrderSuccess = () => {
     return(
+        <BuyingModalPage>
         <div className="
         mt-5
         w-[648px]
@@ -43,6 +45,7 @@ const OrderSuccess = () => {
             </p>
 
         </div>
+        </BuyingModalPage>
     )
 }
 export default OrderSuccess;

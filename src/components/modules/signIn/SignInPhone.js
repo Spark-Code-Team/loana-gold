@@ -2,14 +2,31 @@ import Link from "next/link";
 import PhoneLogin from "../../../../public/icons/PhoneLogin";
 import AuthPageStruct from "./AuthPageStruct";
 import { useState } from "react";
-import { otp } from "@/service/auth";
-const SignInPhone =({ setLoginState }) =>{
+import { sendOtp } from "@/service/auth";
+import { Bounce, toast } from "react-toastify";
 
-    const [phoneNumber, setPhoneNumber] = useState()
+const SignInPhone =({ loginState, setLoginState }) =>{
 
-    const handleSendData = () => {
-        console.log(phoneNumber)
-        loginOtp(phoneNumber)
+    const [phoneNumber, setPhoneNumber] = useState({mobileNumber:''})
+
+    const handleSendData = async () => {
+        const {response , error} = await sendOtp(phoneNumber)    
+        if (response) {
+            document.cookie = `expire_time=${response.data.code_expires_at}; max-age=${2*60}`;
+            setLoginState({state:"verification", phoneNumber:phoneNumber.mobileNumber, is_2fa:response.data.is_2fa})
+        }
+        else{            
+            toast.error(error.response?.data.error || "مشکلی پیش آمده", { 
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                  }
+                )         
+            }
     }
 
     return(
@@ -75,8 +92,12 @@ const SignInPhone =({ setLoginState }) =>{
                 placeholder=" شماره موبایل* "
                 type="text"
                 name="firstname"
-                onChange={(e) => {setPhoneNumber(e.target.value)}}
-                />
+                onChange={(e) => {
+                    setPhoneNumber(prev => ({
+                      ...prev,
+                      mobileNumber: e.target.value
+                    }));
+                  }}                />
         </div>
 
         <div>
@@ -92,8 +113,8 @@ const SignInPhone =({ setLoginState }) =>{
                  md:text-base
                  "
                  onClick={() => {
-                    setLoginState("verification")
                     handleSendData()
+                    
                  }}
                  >
                     ارسال کد
@@ -111,7 +132,7 @@ const SignInPhone =({ setLoginState }) =>{
             text-xl
             md:text-base
              "
-            onClick={() => setLoginState("forgetPassword")}
+            onClick={() => setLoginState({state:"forgetPassword", phoneNumber:phoneNumber.mobileNumber, is_2fa:loginState.is_2fa})}
             >
             فراموشی رمزعبور
             </button>
@@ -123,7 +144,7 @@ const SignInPhone =({ setLoginState }) =>{
             ثبت نام نکرده اید؟  
 
             <button
-            onClick={() => setLoginState(0)}
+            onClick={() => setLoginState({state:0, phoneNumber:phoneNumber.mobileNumber, is_2fa:loginState.is_2fa})}
             >
              <Link href="/Login">
              <p className="mr-1 text-primary">
