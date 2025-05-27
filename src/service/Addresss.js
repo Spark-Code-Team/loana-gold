@@ -38,11 +38,12 @@ export default Addresss;
 }
 
 
-
-
-export const AddressUpdate = async (id, data) => {
+export const AddresssUpdate = async (id, data) => {
   try {
     const response = await api.put(`/finance/address/${id}/`, data);
+
+    console.log("right در آپدیت آدرس:", response);
+
     return { response };
   } catch (error) {
     console.log("خطا در آپدیت آدرس:", error);
