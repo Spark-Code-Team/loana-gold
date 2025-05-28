@@ -9,6 +9,7 @@ import PhoneSana from "../modules/receivingCredit/PhoneSana";
 import SanaRes from "../modules/receivingCredit/SanaRes";
 import { getTickets } from "@/service/tickets";
 import { convertToJalali } from "@/utils/setTime";
+import { Bounce, toast } from "react-toastify";
 
 const AdminTicketPage = () =>{
 
@@ -95,10 +96,11 @@ const AdminTicketPage = () =>{
         <div className="
          md:flex
          ">
-           <table className="md:w-full w-[375px] ">
+           <table className="w-full ">
                     <tbody>
                         {allTickets?.map((p, index) => (
-                            <tr key={p.id} className=" flex flex-col text-sm border-b-[1px]">
+
+                            <tr key={p.id} className=" flex flex-col text-sm">
                                 <td className="p-2 ">موضوع : {p.title}</td>
                                 <td className="p-2">تاریخ : {convertToJalali(p.created_at)}</td>
                                 <td className="
@@ -107,15 +109,32 @@ const AdminTicketPage = () =>{
                                 max-w-[350px] 
                                 overflow-hidden 
                                 ">
-                                متن پیام : {p.message}
+                                متن پیام : {p.body}
                                 </td>
                                 <td className="p-2 ">
-                                وضعیت : {p.replies.length == 0? 
+                                وضعیت : {p.messages?.length == 0? 
                                 <>
                                 در انتظار پاسخ
                                 </>:<>
                                 پاسخ داده شده
                                 </> }</td>
+                                {p.messages.length>0 ? <table className="w-full ">
+                    <tbody >
+                        {p.messages?.map((p, index) => (
+                            <tr key={p.id} className=" flex flex-col text-sm m-2 rounded-xl border-[1px]">
+                                <td className="p-2">تاریخ : {convertToJalali(p.send_at)}</td>
+                                <td className="
+                                p-2 
+                                md:max-w-[900px] 
+                                max-w-[350px] 
+                                overflow-hidden 
+                                ">
+                                متن پاسخ : {p.message}
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                    </table>: <></>}
                             </tr>
                         ))}
                     </tbody>

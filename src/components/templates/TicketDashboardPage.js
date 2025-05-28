@@ -4,6 +4,9 @@ import { useState ,useEffect } from "react";
 import { getTickets, sendTicket } from "@/service/tickets";
 import { convertToJalali } from "@/utils/setTime";
 import { Bounce, toast } from "react-toastify";
+import TicketCoversation from "../modules/ticketDashboard/TicketConversation";
+import TicketConversationPage from "./TicketConversationPage";
+import Link from "next/link";
 
 
 const TicketDashboardPage = () =>{
