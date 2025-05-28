@@ -1,8 +1,13 @@
+'use client'
+
+import { useEffect, useState } from "react";
 import AuthPageStruct from "./AuthPageStruct";
 import PhoneLogin from "../../../../public/icons/PhoneLogin";
 import Link from "next/link";
+import { emailSendOtp } from "@/service/auth";
 
 const ForgetPasswordSignIn = ()=> {
+
     return (
     <AuthPageStruct>
 
@@ -33,7 +38,7 @@ const ForgetPasswordSignIn = ()=> {
         md:text-base
         text-lg
         ">
-        برای بازیابی رمز عبور شماره تماس خود را وارد کنید.
+        برای بازیابی رمز عبور آدرس ایمیل خود را وارد کنید.
         </p>
         </div>
   
@@ -64,9 +69,10 @@ const ForgetPasswordSignIn = ()=> {
                 text-xl
                 
                 "
-                placeholder=" شماره تماس "
+                placeholder=" ایمیل"
                 type="text"
-                name="firstname"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 />
                 </div>
 
@@ -81,7 +87,9 @@ const ForgetPasswordSignIn = ()=> {
                  text-[#7A7A7A]
                  md:text-base
                  text-xl
-                 ">
+                 "
+                 onClick={()=>{sendData()}}
+                 >
                      تایید و ادامه
             </button>
         </div>

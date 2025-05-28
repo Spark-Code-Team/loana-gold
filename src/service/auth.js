@@ -222,15 +222,7 @@ export const emailSendOtp = async (email) => {
         console.log('//////////////->', response)    
         return{response}
     } catch(error){
-        toast.error(error.response?.data.email[0] || "مشکلی پیش آمده", { 
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-          })
+          console.log(error)
         return{error}
     }
 
@@ -275,6 +267,36 @@ export const register = async (formData) => {
               })
             return {error}
         }
+}
+
+
+
+
+
+
+const forgetPassword = async ({email , otp_code , new_password , confirm_new_password}) => {
+
+    try {
+        const response = await api.post('/users/change-password/', {
+            email,
+            otp_code,
+            new_password,
+            confirm_new_password
+        })
+        console.log('//////////////->', response)    
+        return{response}
+    } catch(error){
+        toast.error(error.response?.data.email[0] || "مشکلی پیش آمده", { 
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          })
+        return{error}
+    }
 }
 
 

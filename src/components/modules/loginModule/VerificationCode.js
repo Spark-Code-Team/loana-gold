@@ -112,7 +112,6 @@ const VerificationCode = ({dynamicPhoneNumber , setFormData , formData }) => {
               }}
               fetchProfile()
               router.push('/')
-
         }else{
           toast.error(error.response.data.detail, { 
                   position: "bottom-right",
