@@ -1,8 +1,31 @@
 import api from "@/config/api";
 
-export const sendTicket = async ({message , title}) => {
+
+
+export const sendTicket = async ({body , title}) => {
     try {
-        const response = await api.post('/finance/ticket/send/' , {
+        const response = await api.post('/finance/send/ticket/' , {
+            body,
+            title
+        })
+
+        console.log('res-000000000>' , response)
+        return {response}
+
+    } catch (error) {
+
+
+        console.log('err-0000000000>' , error)
+        return {error}
+    }
+}
+
+
+
+
+export const sendmessage = async ({message , title}) => {
+    try {
+        const response = await api.post('/finance/send/message/' , {
             message,
             title
         })
