@@ -113,9 +113,7 @@ const VerificationCodeSignIn = ({ setLoginState , loginState }) => {
                                 }}
                           fetchProfile()
                 router.push('/')
-            }
-
-            
+            }           
 
 
         }else{

@@ -10,6 +10,7 @@ import PersonDashboard from "../../../public/icons/PersonDashboard";
 import PhoneDashboard from "../../../public/icons/PhoneDashboard";
 import AdminTitle from "../elements/AdminTitle";
 import { UserProfile } from "@/stores/profileStore";
+import { changePassword, emailSendOtp } from "@/service/auth";
 
 
 const AdminUserAccountPage = () =>{

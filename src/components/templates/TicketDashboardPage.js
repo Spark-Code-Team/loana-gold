@@ -13,9 +13,11 @@ const TicketDashboardPage = () =>{
 
     const [ ticket , setTicket ] = useState({
         title:"",
-        message:""
+        body:""
     })
 
+
+    const [reload, setReload] = useState(false)
     const [ allTickets , setAllTickets ] = useState()
 
     useEffect(()=>{
@@ -28,14 +30,14 @@ const TicketDashboardPage = () =>{
         }
         myTickets()
 
-    } , [])
+    } , [reload])
 
 
     const snedData = async () => {
         const { response , error } = await sendTicket(ticket)
         if(response){
             console.log(response);
-            
+            setReload(prev => !prev)            
         }else{
             toast.error(error.response.data.error)}
     }
@@ -103,11 +105,11 @@ const TicketDashboardPage = () =>{
                     border-[#E1E1E1] 
                     rounded-xl
                     "
-                    value={ticket.message}
+                    value={ticket.body}
                     onChange={(e) => {
                      setTicket(prev => ({
                        ...prev,
-                       message: e.target.value
+                       body: e.target.value
                      }));}}
                     required
                 ></textarea>
@@ -185,7 +187,7 @@ const TicketDashboardPage = () =>{
                         </p>
                         <tr>
                         <p>
-                            {p.message}
+                            {p.body}
                         </p>
                         </tr>
                         </td>
@@ -207,7 +209,7 @@ const TicketDashboardPage = () =>{
                         </p>
                         <tr>
                         <p>
-                                {p.replies.length == 0? 
+                                {p.messages.length == 0? 
                                 <>
                                 در انتظار پاسخ
                                 </>:<>
@@ -217,14 +219,14 @@ const TicketDashboardPage = () =>{
                         </tr>
                         </td>
                     </div>
-                        {p.replies.length == 0? 
+                        {p.messages.length == 0? 
                         <>
                         </>:<>
                             {p.replies.map((p,index)=>{
                                 return(
                                     <div className="border-[1px] rounded-lg m-[12px] p-[12px] ">
                                         <p className="text-[#595959]">
-                                            متن پاسخ : {p.message}
+                                            متن پاسخ : {p.body}
                                         </p>    
                                     </div>
                                 )

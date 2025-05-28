@@ -21,7 +21,7 @@ const ResendPasswordSignIn = () => {
         text-2xl
         font-bold
         ">
-            فراموشی رمز عبور nnnnnnnnnnnnnnnnnnnnnnnnn
+            فراموشی رمز عبور 
         </p>
 
         <p className="

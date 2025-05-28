@@ -146,7 +146,7 @@ const UserAccountDashboardPage = () => {
                 if(response){
                     profileStore.setProfileToNull()
                     router.push('/')
-                    toast.success( "رمز عبور ذخیره شد", { 
+                        toast.success( "رمز عبور ذخیره شد", { 
                         position: "bottom-right",
                         autoClose: 5000,
                         hideProgressBar: false,
