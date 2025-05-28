@@ -237,9 +237,21 @@ const TicketDashboardPage = () =>{
                         })
                      }
 
+                    
+
                 
              
             </div>
+                    <Link href="http://localhost:3000/dashboard/ticket-conversation">
+
+                    <button className="
+                     bg-red-500
+                     ">
+                        صفحه بعد
+                     </button>
+                    
+                    </Link>
+                    
 
             
 
