@@ -1,5 +1,4 @@
 import AddressesList from "../modules/addressDashboard/AddressesList";
-import AddNewAddressPage from "./AddNewAddressPage";
 
 const AddressPage = () =>{
     return(

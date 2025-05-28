@@ -22,7 +22,7 @@ const AddNewAddress = () =>{
           const { response, error } = await Addresss(data);
 
           if (response){
-toast.success("آدرس با موفقیت حذف شد ");
+            toast.success("آدرس با موفقیت حذف شد ");
             console.log("با موفقیت ثبت شد")
             setData({
                 ostan:"",
