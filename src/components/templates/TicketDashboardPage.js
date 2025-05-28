@@ -2,6 +2,9 @@
 import DashboardLeft from "../elements/DashboardLeft";
 import { useState ,useEffect } from "react";
 import { sendTicket } from "@/service/tickets";
+import TicketCoversation from "../modules/ticketDashboard/TicketConversation";
+import TicketConversationPage from "./TicketConversationPage";
+import Link from "next/link";
 
 const TicketDashboardPage = () =>{
 
@@ -199,6 +202,17 @@ const TicketDashboardPage = () =>{
                         پاسخ پشتیبانی: سلام وقت بخیر مثلا پرداخت مشکل داشت و الان برطرف شده لطفا دوباره امتحان کنید
                         </p>
                     </div>
+
+                <Link href="http://localhost:3000/dashboard/ticket-conversation">
+                <button className="
+                    bg-slate-700
+                    "
+                    >
+                        الکی
+                    </button>
+                </Link>
+                   
+                    
 
                     
                     </div>
