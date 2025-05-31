@@ -23,11 +23,11 @@ export const sendTicket = async ({body , title}) => {
 
 
 
-export const sendmessage = async ({message , title}) => {
+export const sendmessage = async ({message , ticket}) => {
     try {
         const response = await api.post('/finance/send/message/' , {
             message,
-            title
+            ticket
         })
 
         console.log('res-000000000>' , response)

@@ -1,13 +1,17 @@
+'use client'
 
+import { useEffect, useState } from "react";
 
-const TicketCoversation = () =>{
+const TicketCoversation = ({messages}) =>{
 
-
-
-
+    const [data , setData] = useState(messages)
+    useEffect(()=>{
+        setData(messages)
+    },[messages])
     return(
-       
-        <div>
+       data?.map((p,index)=>{
+        return(
+        <div key={index}>
             <div>
            
             <div className="
@@ -21,7 +25,7 @@ const TicketCoversation = () =>{
             ">
                 <div>
                     <p>
-                        موضوع تیکت: مشکلم...
+                        موضوع تیکت: {p.title}
                     </p>
                 </div>
 
@@ -39,7 +43,7 @@ const TicketCoversation = () =>{
                     
                     "
                 >
-                    سلام من مشکلم این است که..............................
+                    متن تیکت : {p.body}
                 </div>
              
             </div>
@@ -48,7 +52,9 @@ const TicketCoversation = () =>{
             </div>
        
 
-        </div>
+        </div>)
+       })
+
 
     )
 }

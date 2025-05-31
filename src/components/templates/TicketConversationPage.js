@@ -1,16 +1,15 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DashboardLeft from "../elements/DashboardLeft";
 import ComposeTicket from "../modules/ticketDashboard/ComposeTicket";
 import ResponeTicket from "../modules/ticketDashboard/ResponseTicket";
 import TicketCoversation from "../modules/ticketDashboard/TicketConversation";
-
-const TicketConversationPage = () =>{
+import { convertToJalali } from "@/utils/setTime";
+const TicketConversationPage = ({messages , setReload , ticketId}) =>{
 
     const [showCompose, setShowCompose] = useState(false);
 
-
-
+ 
     return(
         <div 
         className="
@@ -24,9 +23,9 @@ const TicketConversationPage = () =>{
              <DashboardLeft
             title="ادامه گفتگو "
             />
-                   <TicketCoversation/>
+                   <TicketCoversation messages={messages}/>
 
-                   <ResponeTicket/>
+                   <ResponeTicket messages={messages}/>
 
         <div className="
         w-full
@@ -57,11 +56,13 @@ const TicketConversationPage = () =>{
       {showCompose && (
         
         <div className="mt-6">
-          <ComposeTicket />
+          <ComposeTicket setReload={setReload} id={ticketId}/>
         </div>
       )}
 
     </div>
+
+    
   );
 };
 

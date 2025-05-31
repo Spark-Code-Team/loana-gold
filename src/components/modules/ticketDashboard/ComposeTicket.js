@@ -1,4 +1,23 @@
-const ComposeTicket = () =>{
+'use client'
+import { useState } from "react";
+import { sendmessage } from "@/service/tickets";
+
+
+const ComposeTicket = ({setReload , id}) =>{
+    
+    const [answer , setAnswer] = useState()
+
+    const sendMessage = async () =>{
+        const {response , error} = await sendmessage({
+            message: answer ,
+            ticket: id})
+        if(response){
+            setReload(prev=>!prev)
+        }else{
+            console.log(error)
+        }
+    }
+
     return(
         <div className="
             w-[848px]
@@ -16,6 +35,8 @@ const ComposeTicket = () =>{
                 border-none
                 focus:ring-0
                 "
+                onChange={(e) => setAnswer(e.target.value)}
+                value={answer}
                 placeholder="
                 متن پیام خودرا بنویسید
                 ">
@@ -30,7 +51,8 @@ const ComposeTicket = () =>{
                 rounded-xl
                 text-sm
                 text-[#7A7A7A]
-                    ">
+                    "
+                    onClick={()=>{sendMessage()}}>
                         ارسال
                     </button>
             </div>

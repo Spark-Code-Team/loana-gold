@@ -8,6 +8,9 @@ import { emailSendOtp } from "@/service/auth";
 
 const ForgetPasswordSignIn = ()=> {
 
+    const [email , setEmail] = useState()
+
+
     return (
     <AuthPageStruct>
 

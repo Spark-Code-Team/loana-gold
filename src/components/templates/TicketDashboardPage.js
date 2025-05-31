@@ -4,8 +4,6 @@ import { useState ,useEffect } from "react";
 import { getTickets, sendTicket } from "@/service/tickets";
 import { convertToJalali } from "@/utils/setTime";
 import { Bounce, toast } from "react-toastify";
-import TicketCoversation from "../modules/ticketDashboard/TicketConversation";
-import TicketConversationPage from "./TicketConversationPage";
 import Link from "next/link";
 
 
@@ -157,84 +155,74 @@ const TicketDashboardPage = () =>{
                      {
                         allTickets?.map((p , index) => {
                             return(
-                                
-                    <div className="border-[1px] p-4 m-4 rounded-lg" >
+                                <Link href={`http://localhost:3000/dashboard/ticket-conversation/${p.id}`}>   
+                                        <div key={index} className="border-[1px] p-4 m-4 rounded-lg" >
 
-                    <div className="
-                    w-full
-                    h-full
-                    grid
-                    grid-cols-4
-                    gap-x-6
-                    gap-y-4
-                    py-4
-                    ">
-                        
-                        <td>
-                        <p className="font-bold mb-[12px] ">
-                            موضوع
-                        </p>
-                        <tr>
-                        <p>
-                            {p.title}
-                        </p>
-                        </tr>
-                        </td>
+                                        <div className="
+                                        w-full
+                                        h-full
+                                        grid
+                                        grid-cols-4
+                                        gap-x-6
+                                        gap-y-4
+                                        py-4
+                                        ">
+                                            
+                                            <td>
+                                            <p className="font-bold mb-[12px] ">
+                                                موضوع
+                                            </p>
+                                            <tr>
+                                            <p>
+                                                {p.title}
+                                            </p>
+                                            </tr>
+                                            </td>
 
-                        <td>
-                        <p className="font-bold mb-[12px]">
-                            متن درخواست
-                        </p>
-                        <tr>
-                        <p>
-                            {p.body}
-                        </p>
-                        </tr>
-                        </td>
+                                            <td>
+                                            <p className="font-bold mb-[12px]">
+                                                متن درخواست
+                                            </p>
+                                            <tr>
+                                            <p>
+                                                {p.body}
+                                            </p>
+                                            </tr>
+                                            </td>
 
-                        <td>
-                        <p className="font-bold mb-[12px]">
-                            زمان
-                        </p>
-                        <tr>
-                        <p>
-                            {convertToJalali(p.created_at)}
-                        </p>
-                        </tr>
-                        </td>
+                                            <td>
+                                            <p className="font-bold mb-[12px]">
+                                                زمان
+                                            </p>
+                                            <tr>
+                                            <p>
+                                                {convertToJalali(p.created_at)}
+                                            </p>
+                                            </tr>
+                                            </td>
 
-                        <td>
-                        <p className="font-bold mb-[12px]">
-                            وضعیت
-                        </p>
-                        <tr>
-                        <p>
-                                {p.messages.length == 0? 
-                                <>
-                                در انتظار پاسخ
-                                </>:<>
-                                پاسخ داده شده
-                                </> }
-                        </p>
-                        </tr>
-                        </td>
-                    </div>
-                        {p.messages.length == 0? 
-                        <>
-                        </>:<>
-                            {p.replies.map((p,index)=>{
-                                return(
-                                    <div className="border-[1px] rounded-lg m-[12px] p-[12px] ">
-                                        <p className="text-[#595959]">
-                                            متن پاسخ : {p.body}
-                                        </p>    
-                                    </div>
-                                )
-                            })}
+                                            <td>
+                                            <p className="font-bold mb-[12px]">
+                                                وضعیت
+                                            </p>
+                                            <tr>
+                                            <p>
+                                                    {p.messages.length == 0? 
+                                                    <>
+                                                    در انتظار پاسخ
+                                                    </>:<>
+                                                    پاسخ داده شده
+                                                    </> }
+                                            </p>
+                                            </tr>
+                                            </td>
+                                        </div>
+                                            
 
-                        </> }
-                    
-                    </div>
+
+                                        </div>    
+                                </Link>
+
                             )
                         })
                      }
@@ -244,15 +232,7 @@ const TicketDashboardPage = () =>{
                 
              
             </div>
-                    <Link href="http://localhost:3000/dashboard/ticket-conversation">
 
-                    <button className="
-                     bg-red-500
-                     ">
-                        صفحه بعد
-                     </button>
-                    
-                    </Link>
                     
 
             
