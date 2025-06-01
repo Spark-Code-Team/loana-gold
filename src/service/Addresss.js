@@ -30,7 +30,7 @@ export default Addresss;
         console.log('درسته-> response',response)
         return {response}
     } catch (error) {
-        console.log('غلطه error', error)
+        console.log('error', error)
         return {error}
     }
 
@@ -55,7 +55,7 @@ export const AddresssUpdate = async (id, data) => {
 export const AddressDelete = async (id) => {
   try {
     const response = await api.delete(`/finance/address/${id}/`);
-    console.log('افرین عسلم درسته-> response',response)
+    console.log('-> response',response)
     return { response };
   } catch (error) {
     console.error("خطا در حذف آدرس:", error);

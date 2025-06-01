@@ -55,7 +55,6 @@ const SellinGold = () =>{
       console.log(response);
       
     } else {
-      console.log("اشتباه", error);
       toast.error("مشکلی پیش آمده")
     }
   };

@@ -33,7 +33,6 @@ const AddressesList = () => {
   
     if (response) {
       setReload(prev => !prev)
-      console.log('افرین عسل قشنگم درسته-> response',response)
       toast.success("آدرس با موفقیت حذف شد ");
     } else {
       console.error("خطا در حذف آدرس:", error);

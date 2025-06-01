@@ -41,15 +41,8 @@ const Login = () => {
         setIsReloading(false)
     }, [isReloading])
 
-        
-    
         const gradeAchivedAt = (date) => {
         return (convertToJalali(date))}
-
-
-        useEffect(()=>{
-            console.log(userGradehistory,99999888999999)
-        },[userGradehistory])
 
     useEffect(()=>{
         const getGrade = async () =>{
@@ -180,7 +173,7 @@ const Login = () => {
                         <>
                             <div className="w-full pr-8 font-bold mt-6">نتیجه اعتبار سنجی: در حال پردازش</div>
 
-                            <div className="w-full pr-8 mt-6 ">تاریخ درخواست : {gradeAchivedAt(p?.created_at)}{ console.log(p)}</div>
+                            <div className="w-full pr-8 mt-6 ">تاریخ درخواست : {gradeAchivedAt(p?.created_at)}</div>
 
                             <br/>
                         </>

@@ -50,7 +50,7 @@ const WalletDashboardPage = () => {
     console.log(amount)
     const {response , error} = await chargeWallet(amount)
     if(response){
-      console.log(response,'lllllllllllllllllllll')
+      console.log(response)
       router.push('/dashboard/user-account-dashboard')
     }else{
       console.log(error)

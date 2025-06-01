@@ -34,7 +34,6 @@ const AddressUpdate = ({id,setReload}) =>{
 
           if (response){
             toast.success("آدرس با موفقیت اپدیت شد ");
-            console.log("با موفقیت اپدیت شد")
             setData({
                 ostan:"",
                 shahr:"",

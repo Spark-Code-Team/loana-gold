@@ -52,7 +52,6 @@ const router = useRouter()
       console.log(response);
       
     } else {
-      console.log("اشتباه", error);
       toast.error("🤣🤣😂")
     }
   };

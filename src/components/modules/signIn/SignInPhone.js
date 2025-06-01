@@ -13,7 +13,7 @@ const SignInPhone =({ loginState, setLoginState }) =>{
         const {response , error} = await sendOtp(phoneNumber)    
         if (response) {
             document.cookie = `expire_time=${response.data.code_expires_at}; max-age=${2*60}`;
-            setLoginState({state:"verification", phoneNumber:phoneNumber.mobileNumber, is_2fa:response.data.is_2fa})
+            setLoginState(prev=>({...prev,state:"verification", phoneNumber:phoneNumber.mobileNumber, is_2fa:response.data.is_2fa}))
         }
         else{            
             toast.error(error.response?.data.error || "مشکلی پیش آمده", { 
@@ -132,7 +132,7 @@ const SignInPhone =({ loginState, setLoginState }) =>{
             text-xl
             md:text-base
              "
-            onClick={() => setLoginState({state:"forgetPassword", phoneNumber:phoneNumber.mobileNumber, is_2fa:loginState.is_2fa})}
+            onClick={() => setLoginState(prev=>({...prev,state:0, phoneNumber:phoneNumber.mobileNumber, is_2fa:loginState.is_2fa}))}
             >
             فراموشی رمزعبور
             </button>
@@ -144,7 +144,7 @@ const SignInPhone =({ loginState, setLoginState }) =>{
             ثبت نام نکرده اید؟  
 
             <button
-            onClick={() => setLoginState({state:0, phoneNumber:phoneNumber.mobileNumber, is_2fa:loginState.is_2fa})}
+            onClick={() => setLoginState(prev=>({...prev,state:0, phoneNumber:phoneNumber.mobileNumber, is_2fa:loginState.is_2fa}))}
             >
              <Link href="/Login">
              <p className="mr-1 text-primary">

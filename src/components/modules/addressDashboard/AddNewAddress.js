@@ -23,7 +23,6 @@ const AddNewAddress = () =>{
 
           if (response){
             toast.success("آدرس با موفقیت حذف شد ");
-            console.log("با موفقیت ثبت شد")
             setData({
                 ostan:"",
                 shahr:"",
@@ -202,7 +201,7 @@ const AddNewAddress = () =>{
                 border-[1px]
                 border-[#E1E1E1]
                 "
-                placeholder=" مختصاد"
+                placeholder="مختصات"
                 type="text"
                 name="firstname"
                 value={data.mokhtasad1}

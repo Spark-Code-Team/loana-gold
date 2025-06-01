@@ -57,7 +57,6 @@ const PasswordSignIn = ({ setLoginState , loginState }) => {
                     const {response , error} = await Profile()
                     if (response){         
                         profileStore.setProfile(response.data); 
-                        console.log(response.data.role)
                         if(response.data.role == 2){
                             router.push('/admin/User-Account')
                         }else if(response.data.role == 3){

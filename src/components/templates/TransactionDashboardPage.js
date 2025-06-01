@@ -25,13 +25,6 @@ const TransactionDashboardPage = () =>{
           transactions()
         }, [])
 
-
-        useEffect(()=>{
-            console.log(transaction)
-        } , [transaction])
-
-
-
         const [openIndex, setOpenIndex] = useState(null);
       
         const toggleAccordion = (index) => {
