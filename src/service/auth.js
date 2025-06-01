@@ -84,37 +84,12 @@ export const changePassword = async (data) =>{
       return{response}
     } catch (error) {        
         // اینجا باید ارور های مختلفی دریافت کنه که کلید های مختلفی دارن ولی نمیشه
-        toast.error(error.response?.data.email[0] ||
-                 error.response?.data.otp_code[0] ||
-                error.response?.data.new_password[0]||
-                error.response?.data.current_password[0]||
-                error.response?.data.confirm_new_password[0]||
-                error.response?.data.non_field_errors[0]||
-                 "مشکلی پیش آمده", { 
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-          })
+        toast.error(error.response.data.non_field_errors[0] || "مشکلی پیش آمده")
+        console.log(error)
         return{error}
         
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -185,6 +160,10 @@ export const sendOtp = async (formData) => {
         return{error}
     }
 }
+
+
+
+
 
 
 

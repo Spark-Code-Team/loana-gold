@@ -7,7 +7,7 @@ import PersonDashboard from "../../../public/icons/PersonDashboard";
 import DashboardLeft from "../elements/DashboardLeft";
 import { Profile } from "@/service/profile";
 import { getCookie } from "@/utils/cookies";
-import { changePassword, emailSendOtp, setEmailPass } from "@/service/auth";
+import { changePassword, emailSendOtp, logOut, setEmailPass } from "@/service/auth";
 import { UserProfile } from "@/stores/profileStore";
 import { getProfile } from "@/constant/profile";
 import { useRouter } from "next/navigation";
@@ -174,19 +174,22 @@ const UserAccountDashboardPage = () => {
 
         const handleSubmitChangePass = async () => {
             const {response , error} = await changePassword(changePass)
-                if(response){
-                    profileStore.setProfileToNull()
-                    router.push('/')
-                    toast.success( "رمز عبور جدید ذخیره شد", { 
-                        position: "bottom-right",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        progress: undefined,
-                        theme: "light",
-                        transition: Bounce,
-                      }
-                    ) 
+            if(response){
+                    const {response , error} = await logOut(getCookie('refreshToken'))
+                    if(response){
+                        document.cookie.split(';').forEach(function(c) {
+                        document.cookie = c.trim().split('=')[0] + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+                        });
+                        document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+                        document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC"; 
+                        router.push("/Shop")
+                        window.location.reload()}else{
+                        console.log(error)
+                        router.push("/Shop")
+                        window.location.reload()
+                        toast.error('خروج ناموفق')
+                    }
+                    toast.success( "رمز عبور جدید ذخیره شد") 
                 }
                 else{            
                     toast.error(error.response?.data.error || "مشکلی پیش آمده", { 

@@ -10,7 +10,9 @@ import PersonDashboard from "../../../public/icons/PersonDashboard";
 import PhoneDashboard from "../../../public/icons/PhoneDashboard";
 import AdminTitle from "../elements/AdminTitle";
 import { UserProfile } from "@/stores/profileStore";
-import { changePassword, emailSendOtp } from "@/service/auth";
+import { changePassword, emailSendOtp, logOut } from "@/service/auth";
+import { Bounce, toast } from "react-toastify";
+
 
 
 const AdminUserAccountPage = () =>{
@@ -169,31 +171,22 @@ const AdminUserAccountPage = () =>{
         const handleSubmitChangePass = async () => {
             const {response , error} = await changePassword(changePass)
                 if(response){
-                    profileStore.setProfileToNull()
-                    router.push('/')
-                    toast.success( "رمز عبور جدید ذخیره شد", { 
-                        position: "bottom-right",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        progress: undefined,
-                        theme: "light",
-                        transition: Bounce,
-                      }
-                    ) 
+                       const {response , error} = await logOut(getCookie('refreshToken'))
+                        if(response){
+                          document.cookie.split(';').forEach(function(c) {
+                            document.cookie = c.trim().split('=')[0] + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+                          });
+                          document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+                          document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC"; 
+                          router.push("/Shop")
+                          window.location.reload()}else{
+                          console.log(error)
+                          router.push("/Shop")
+                          window.location.reload()
+                          toast.error('خروج ناموفق')
+                        }
+                    toast.success( "رمز عبور جدید ذخیره شد") 
                 }
-                else{            
-                    toast.error(error.response?.data.error || "مشکلی پیش آمده", { 
-                            position: "bottom-right",
-                            autoClose: 5000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            progress: undefined,
-                            theme: "light",
-                            transition: Bounce,
-                          }
-                        )         
-                    }
         }
 
         const handleSendChangePassOtp = async () => {  
@@ -222,7 +215,7 @@ const AdminUserAccountPage = () =>{
 
 
     return(
-        <div>
+        <div >
         
         <div className="
          md:w-[1016px] w-[440px]

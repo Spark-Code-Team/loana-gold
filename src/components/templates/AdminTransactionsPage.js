@@ -1,89 +1,60 @@
-"use client";
-import { useState } from "react";
-import Pagination from "../elements/Pagination"; 
-import EditPrifile from "../modules/userDashboard/EditProfile";
-import EditProfileNoPic from "../modules/userDashboard/EditProfileNoPic";
+"use client"
+
+import DashboardLeft from "../elements/DashboardLeft";
+import React, { useState , useEffect } from "react";
+import { transactionsList } from "@/service/finance";
+import { convertToJalali , convertToTime } from "@/utils/setTime";
+import { Bounce, toast } from "react-toastify";
+import UpArrow from "../../../public/icons/upArrow";
+import DownArrow from "../../../public/icons/downArrow";
+
 
 const AdminTransactions = () => {
-  const users = [
-    { id: 1, name: "مهدی", title: "شارژ", typeOftransaction: "واریز", costOftransaction: "100", dateOftransaction: "1403/01/01", situation: "موفق" },
-    { id: 2, name: "سارا", title: "خرید طلا", typeOftransaction: "برداشت", costOftransaction: "200", dateOftransaction: "1403/01/02", situation: "در انتظار" },
-    { id: 3, name: "سارا", title: "خرید طلا", typeOftransaction: "برداشت", costOftransaction: "200", dateOftransaction: "1403/01/02", situation: "در انتظار" },
-    { id: 4, name: "سارا", title: "خرید طلا", typeOftransaction: "برداشت", costOftransaction: "200", dateOftransaction: "1403/01/02", situation: "در انتظار" },
-    { id: 5, name: "سارا", title: "خرید طلا", typeOftransaction: "برداشت", costOftransaction: "200", dateOftransaction: "1403/01/02", situation: "در انتظار" },
-    { id: 6, name: "سارا", title: "خرید طلا", typeOftransaction: "برداشت", costOftransaction: "200", dateOftransaction: "1403/01/02", situation: "در انتظار" },
-    { id: 7, name: "سارا", title: "خرید طلا", typeOftransaction: "برداشت", costOftransaction: "200", dateOftransaction: "1403/01/02", situation: "در انتظار" },
-    { id: 8, name: "سارا", title: "خرید طلا", typeOftransaction: "برداشت", costOftransaction: "200", dateOftransaction: "1403/01/02", situation: "در انتظار" },
-    { id: 9, name: "سارا", title: "خرید طلا", typeOftransaction: "برداشت", costOftransaction: "200", dateOftransaction: "1403/01/02", situation: "در انتظار" },
-    { id: 10, name: "سارا", title: "خرید طلا", typeOftransaction: "برداشت", costOftransaction: "200", dateOftransaction: "1403/01/02", situation: "در انتظار" },
-    { id: 11, name: "سارا", title: "خرید طلا", typeOftransaction: "برداشت", costOftransaction: "200", dateOftransaction: "1403/01/02", situation: "در انتظار" },
-    { id: 12, name: "سارا", title: "خرید طلا", typeOftransaction: "برداشت", costOftransaction: "200", dateOftransaction: "1403/01/02", situation: "در انتظار" },
-    { id: 13, name: "سارا", title: "خرید طلا", typeOftransaction: "برداشت", costOftransaction: "200", dateOftransaction: "1403/01/02", situation: "در انتظار" },
-    { id: 14, name: "سارا", title: "خرید طلا", typeOftransaction: "برداشت", costOftransaction: "200", dateOftransaction: "1403/01/02", situation: "در انتظار" },
-    { id: 15, name: "سارا", title: "خرید طلا", typeOftransaction: "برداشت", costOftransaction: "200", dateOftransaction: "1403/01/02", situation: "در انتظار" },
-    { id: 16, name: "سارا", title: "خرید طلا", typeOftransaction: "برداشت", costOftransaction: "200", dateOftransaction: "1403/01/02", situation: "در انتظار" },
-    { id: 17, name: "سارا", title: "خرید طلا", typeOftransaction: "برداشت", costOftransaction: "200", dateOftransaction: "1403/01/02", situation: "در انتظار" },
-    { id: 18, name: "سارا", title: "خرید طلا", typeOftransaction: "برداشت", costOftransaction: "200", dateOftransaction: "1403/01/02", situation: "در انتظار" },
-    { id: 19, name: "سارا", title: "خرید طلا", typeOftransaction: "برداشت", costOftransaction: "200", dateOftransaction: "1403/01/02", situation: "در انتظار" },
-    { id: 20, name: "سارا", title: "خرید طلا", typeOftransaction: "برداشت", costOftransaction: "200", dateOftransaction: "1403/01/02", situation: "در انتظار" },
 
-  ];
+  
 
-  const transactions = [
-    {
-      title: "برداشت از کیف پول نقدی",
-      amount: "9,000,000,000 تومان",
-      type: "برداشت",
-      status: "موفق",
-      time: "14:21",
-      date: "1403/27/5",
-    },
-    {
-      title: "برداشت از کیف پول نقدی",
-      amount: "9,000,000,000 تومان",
-      type: "برداشت",
-      status: "موفق",
-      time: "14:21",
-      date: "1403/27/5",
-    },
-    {
-      title: "برداشت از کیف پول نقدی",
-      amount: "9,000,000,000 تومان",
-      type: "برداشت",
-      status: "موفق",
-      time: "14:21",
-      date: "1403/27/5",
-    },
-    {
-      title: "برداشت از کیف پول نقدی",
-      amount: "9,000,000,000 تومان",
-      type: "برداشت",
-      status: "موفق",
-      time: "14:21",
-      date: "1403/27/5",
-    },
-  ];
+  const [ transaction , setTransaction ] = useState()
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const usersPerPage = 5;
+        useEffect(()=>{
+          const transactions = async () => {
+            const {response , error} = await transactionsList()
+            if(response){
+              setTransaction(response.data.results)
+            }else{
+              toast.error(error.response?.data.error || "مشکلی پیش آمده") 
+            }
+          }
+          transactions()
+        }, [])
 
-  const indexOfLastUser = currentPage * usersPerPage;
-  const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
-  const totalPages = Math.ceil(users.length / usersPerPage);
+        const [openIndex, setOpenIndex] = useState(null);
+      
+        const toggleAccordion = (index) => {
+          setOpenIndex(openIndex === index ? null : index);
+        };
 
-  return (
-   
-    
-    <div className="
-    w-[1016px] 
-    h-[1000]
-    rounded-xl
-    ">
+        const type = (type) => {
+          switch(type) {
+            case 'installment':
+              return 'پرداخت قسط'
+            case "credit":
+              return "درخواست اعتبار"
+            case "charge":
+              return "شارژ کیف پول"
+          }
+        }
+      
 
-    <div className="
-            w-[1016px]
-            h-[56px]
+    return(
+      <div className="
+               flex
+         flex-col
+         justify-center
+         items-center">
+                <div className="
+            w-full
+            h-max
+            mb-6
             md:flex
             flex-row
             justify-around
@@ -101,7 +72,7 @@ const AdminTransactions = () => {
             >فیلترها</div>
 
                 <div className="
-                border-[1px] 
+                border-x-[1px] 
                 h-[56px] 
                 w-[155px] 
                 justify-center 
@@ -128,99 +99,107 @@ const AdminTransactions = () => {
                 "> تاریخ تراکنش </div>
 
                 <div className="
-                border-[1px] 
+                border-x-[1px] 
                 h-[56px] 
                 w-[155px] 
                 flex 
                 justify-center 
                 items-center
+
                 "
                 >  وضعیت تراکنش </div>
 
-            <div className="text-[#E90000]">حدف همه فیلترها</div>
+            <div className="  
+                h-[56px] 
+                w-[155px] 
+                flex 
+                justify-center 
+                items-center 
+                text-[#E90000]">حذف همه فیلترها</div>
     </div>
-
-    <div className="
-        w-[1016px]
-        mt-6 
-        overflow-hidden 
-        rounded-xl
-        border-[1px]
-        md:block
-        hidden
+      <div className="
+         w-[912px] 
+         h-full
+         bg-white
+         border-[1px]
+         rounded-xl        
+         border-[#CBCED7]
+         flex
+         flex-col
+         justify-center
+         items-center
         ">
 
-        <table className="w-full">
-        <thead>
-          <tr>
-            <th className="p-2">#</th>
-            <th className="p-2 border-x-[1px]">نام و نام خانوادگی</th>
-            <th className="p-2">عنوان</th>
-            <th className="p-2 border-x-[1px]">نوع تراکنش</th>
-            <th className="p-2">مبلغ تراکنش</th>
-            <th className="p-2 border-x-[1px]">تاریخ تراکنش</th>
-            <th className="p-2">وضعیت</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentUsers.map((user, index) => (
-            <tr key={user.id} className="text-center border-t">
-              <td className="p-2">{indexOfFirstUser + index + 1}</td>
-              <td className="p-2 border-x-[1px]">{user.name}</td>
-              <td className="p-2">{user.title}</td>
-              <td className="p-2 border-x-[1px]">{user.typeOftransaction}</td>
-              <td className="p-2">{user.costOftransaction}</td>
-              <td className="p-2 border-x-[1px]">{user.dateOftransaction}</td>
-              <td className="p-2">{user.situation}</td>
+             <DashboardLeft
+                title="تراکنش ها"
+            />
+
+            <div className="
+            w-[848px]
+            h-full
+            mt-8
+            ">
+                <div>
+
+                <table className="w-full">
+          <thead>
+            <tr>
+              <th className="p-3 border-b-[1px] border-[#EDEDED]">نوع تراکنش</th>
+              <th className="p-3 border-b-[1px] border-[#EDEDED] border-r last:border-r-0">مبلغ</th>
+              <th className="p-3 border-b-[1px] border-[#EDEDED] border-r last:border-r-0">شناسه تراکنش</th>
+              <th className="p-3 border-b-[1px] border-[#EDEDED] border-r last:border-r-0">زمان تراکنش</th>
+              <th className="p-3 border-b-[1px] border-[#EDEDED] border-r last:border-r-0"></th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-
-    </div>
-
-
-<div className="md:hidden w-[375px] mr-2">
-
-  <p className="font-bold">تراکنش ها</p>
-
-  {transactions.map((tx, index) => (
-    <div key={index}>
-      <div className="space-y-2">
-        <p>{tx.title}</p>
-        <p>{tx.amount}</p>
-        <p>نوع تراکنش: {tx.type}</p>
+          </thead>
+          <tbody>
+            {transaction?.map((transaction, index) => (
+              <React.Fragment key={index}>
+                <tr>
+                  <td className="p-3 border-b-[1px] border-[#EDEDED]">{transaction.description}</td>
+                  <td className="p-3 border-b-[1px] border-[#EDEDED] border-r last:border-r-0">{transaction.amount}</td>
+                  <td className="p-3 border-b-[1px] border-[#EDEDED] border-r last:border-r-0">{transaction.id}</td>
+                  <td className="p-3 border-b-[1px] border-[#EDEDED] border-r last:border-r-0">{convertToJalali(transaction.created_at)}</td>
+                  <td className="p-3 border-b-[1px] border-[#EDEDED] border-r last:border-r-0 text-center">
+                    <button
+                      
+                    onClick={() => toggleAccordion(index)}>
+                      {openIndex === index ? <UpArrow/> : <DownArrow/>}
+                    </button>
+                  </td>
+                </tr>
+                {openIndex === index && (
+                 <tr className="bg-gray-50 transition-all">
+                 <td colSpan="5" className="p-4 border-[#EDEDED] rounded-lg">
+                   <div className="grid grid-cols-3 gap-4">
+                     <div>
+                       <strong>نوع پرداخت:</strong> {type(transaction.type)}
+                     </div>
+                     {/* <div>
+                       <strong>مبلغ بدهی:</strong> {transaction.debtAmount}
+                     </div> */}
+                     {/* <div>
+                       <strong>پرداخت از کارت:</strong> {transaction.cardUsed}
+                     </div> */}
+                     {/* <div>
+                       <strong>کد رهگیری:</strong> {transaction.trackingCode}
+                     </div> */}
+                     <div>
+                       <strong>زمان :</strong>{convertToTime(transaction.created_at)}
+                     </div>
+                   </div>
+                 </td>
+               </tr>
+                )}
+              </React.Fragment>
+            ))}
+          </tbody>
+        </table>
+                </div>
+            </div>
+        </div>
       </div>
-
-      <div className="
-      flex 
-      flex-row 
-      justify-between 
-      mt-2 
-      border-b-[1px]
-      border-[#E1E1E1] 
-      pb-3
-      ">
-        <p>وضعیت: {tx.status}</p>
-        <p>
-          {tx.time} {tx.date}
-        </p>
-      </div>
-    </div>
-  ))}
-</div>
-
-   
-
-    <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={(page) => setCurrentPage(page)}
-      />
-
-    </div>
-
-  );
+ 
+    )
 };
 
 export default AdminTransactions;
