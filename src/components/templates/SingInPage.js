@@ -13,17 +13,21 @@ const SignInPage = () => {
         state: "phone",
         phoneNumber: 0,
         is_2fa: false,
+        // forget pass section
+        email: '',
+        forgetPassword_otp:'',
+        password:'',
+        confirm_password:''
     });
 
     return(
-
         <>
-        {loginState.state === "phone" && <SignInPhone loginState={loginState} setLoginState={setLoginState} />}
-        {loginState.state === "verification" && <VerificationCodeSignIn loginState={loginState} setLoginState={setLoginState} />}
-        {loginState.state === "password" && <PasswordSignIn loginState={loginState} setLoginState={setLoginState} />}
-        {loginState.state === "forgetPassword" && <ForgetPasswordSignIn loginState={loginState} setLoginState={setLoginState} />}
-        {loginState.state === "resendCode" && <ResendPasswordSignIn loginState={loginState} setLoginState={setLoginState} />}
-        {loginState.state === "newPassword" && <NewPasswordSignIn loginState={loginState} setLoginState={setLoginState} />}
+            {loginState.state === "phone" && <SignInPhone loginState={loginState} setLoginState={setLoginState} />}
+            {loginState.state === "verification" && <VerificationCodeSignIn loginState={loginState} setLoginState={setLoginState} />}
+            {loginState.state === "password" && <PasswordSignIn loginState={loginState} setLoginState={setLoginState} />}
+            {loginState.state === "forgetPassword" && <ForgetPasswordSignIn loginState={loginState} setLoginState={setLoginState} />}
+            {loginState.state === "resendCode" && <ResendPasswordSignIn loginState={loginState} setLoginState={setLoginState} />}
+            {loginState.state === "newPassword" && <NewPasswordSignIn loginState={loginState} setLoginState={setLoginState} />}
         </>
 
 

@@ -4,11 +4,27 @@ import { useEffect, useState } from "react";
 import AuthPageStruct from "./AuthPageStruct";
 import PhoneLogin from "../../../../public/icons/PhoneLogin";
 import Link from "next/link";
-import { emailSendOtp } from "@/service/auth";
+import { emailSendOtp, sendForgetPassOtp } from "@/service/auth";
+import { useRouter } from "next/navigation";
+import { UserProfile } from "@/stores/profileStore";
 
-const ForgetPasswordSignIn = ()=> {
+const ForgetPasswordSignIn = ({ loginState, setLoginState })=> {
 
     const [email , setEmail] = useState()
+
+
+    const sendData = async () => {
+        const {response , error} = await sendForgetPassOtp({
+            email
+        })
+        if(response){
+            console.log(response)
+            document.cookie = `expire_time=${response.data.code_expires_at}; max-age=${2*60}`;
+            setLoginState(prev=>({...prev , state:"resendCode", email}))            
+        }else{
+            console.log(error)
+        }
+    }
 
 
     return (

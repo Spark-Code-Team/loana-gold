@@ -1,6 +1,96 @@
+'use client'
+import { useState , useEffect } from "react";
 import AuthPageStruct from "./AuthPageStruct";
+import { getCookie, setCookie } from "@/utils/cookies";
+import { setTime } from "@/utils/setTime";
+import { useRouter } from "next/navigation";
+import { UserProfile } from "@/stores/profileStore";
+import { sendForgetPassOtp } from "@/service/auth";
+import { Bounce, toast } from "react-toastify";
 
-const ResendPasswordSignIn = () => {
+
+const ResendPasswordSignIn = ({ loginState, setLoginState }) => {
+
+        const [otpObj, setOtpObj] = useState({email: loginState.email, otp: ''  });  
+        const [expired, setExpired] = useState(false);
+        const [remainingTime, setRemainingTime] = useState(0);  
+        const router = useRouter()
+        const profileStore = UserProfile()
+
+
+        
+
+    useEffect(() => {
+        const inputTime = getCookie('expire_time');   
+
+        const totalSeconds = setTime(inputTime)
+
+        setRemainingTime(totalSeconds);
+
+    
+        if (totalSeconds <= 0) {
+          setExpired(true);
+          setRemainingTime(0);
+          return;
+        }
+
+        const timer = setInterval(() => {
+          setRemainingTime((prev) => {
+            if (prev <= 1) {
+              clearInterval(timer);
+              setExpired(true);
+              return 0;
+            }
+            return prev - 1;
+          });
+        }, 1000);
+    
+        return () => clearInterval(timer); 
+      },[remainingTime , , expired]);
+
+      const turnToMinuets = (remainingTime) => {
+        let minuet ;
+        let seconds ; 
+
+        minuet = Math.floor(remainingTime/60)
+        seconds = Math.floor(remainingTime%60)
+
+        return {minuet , seconds}
+      }
+
+      const handleSendLoginAgain = async ()=>{
+        if (expired){
+          const { response, error } = await sendForgetPassOtp({ email: otpObj.email });
+              if (response) {
+                    document.cookie = `expire_time=${response.data.code_expires_at}; max-age=${2*60}`;
+                    setTime(response.data.code_expires_at) 
+                    setExpired(false)
+                }
+                else{
+                    toast.error(error.response.data.error, { 
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            progress: undefined,
+                            theme: "light",
+                            transition: Bounce,
+                        }
+                        )         
+                    }
+        }
+        
+      }
+
+
+      const handleOtpChange = (e) => {  
+        const value = e.target.value; 
+        setOtpObj(prevState => ({ ...prevState, otp: value })); 
+      };
+
+      const handleSendData = () => {
+        setLoginState(prev=>({...prev , state:"newPassword" , forgetPassword_otp:otpObj.otp}))
+      }
     return(
         
     <AuthPageStruct>
@@ -28,7 +118,7 @@ const ResendPasswordSignIn = () => {
         mt-4
         text-[#A6A6A6]
         ">
-        کد 6 رقمی ارسال شده به ایمیل کاربری را وارد کنید.
+        کد 6 رقمی ارسال شده به ایمیل {loginState.email} را وارد کنید.
         </p>
         </div>
 
@@ -57,28 +147,54 @@ const ResendPasswordSignIn = () => {
                 "
                 placeholder="  "
                 type="text"
-                name="firstname"
+                name="otp"
+                value={otpObj.otp} 
+                onChange={handleOtpChange}
                 />
                 </div>
 
                 <p className="text-[#A6A6A6]">
-                ۱:۲۰ تا ارسال مجدد کد
+                {turnToMinuets(remainingTime).minuet}:{turnToMinuets(remainingTime).seconds} تا ارسال مجدد کد
                 </p>
 
                 
-        <div>
-            <button className="
+                <div>
+              {expired ?                               
+                <button className="
+                md:w-[600px] w-[375px]
+                h-12 
+                bg-[#EDEDED] 
+                rounded-xl 
+                text-black
                 hover:bg-primary
                 hover:text-black
-                 w-[616px] 
-                 h-12 
-                 bg-[#EDEDED] 
-                 rounded-xl 
-                 text-[#7A7A7A]
-                 ">
-                     تایید و ادامه
-            </button>
-        </div>
+                text-xl
+                md:text-base
+                "
+                 onClick={() => {
+                  handleSendLoginAgain()
+                }}
+                 >
+                    ارسال مجدد کد
+                </button>:<button className="
+                md:w-[600px] w-[375px]
+                h-12 
+                bg-[#EDEDED] 
+                rounded-xl 
+                text-black
+                hover:bg-primary
+                hover:text-black
+                text-xl
+                md:text-base
+                "
+                 onClick={() => 
+                  handleSendData()
+                  }
+                 >
+                    تایید و ادامه
+                </button>}
+
+            </div>
         
         </div>
     </AuthPageStruct>

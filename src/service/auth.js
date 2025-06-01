@@ -274,27 +274,40 @@ export const register = async (formData) => {
 
 
 
-const forgetPassword = async ({email , otp_code , new_password , confirm_new_password}) => {
 
-    try {
-        const response = await api.post('/users/change-password/', {
-            email,
-            otp_code,
-            new_password,
-            confirm_new_password
+export const sendForgetPassOtp = async ({email}) => {
+    try{
+        const response = await api.post('/users/forget-password/send-otp/' , {
+            email
         })
         console.log('//////////////->', response)    
         return{response}
+
+    }catch(error){
+        return {error}
+    }
+}
+
+
+
+
+
+
+export const forgetPassword  = async ({email , otp_code , password , confirm_password}) => {
+
+    try {
+        const response = await api.post('/users/forget-password/check-otp/', {
+            email,
+            otp_code,
+            password,
+            confirm_password
+        })
+        console.log('//////////////->', response)    
+        console.log(response)
+        return{response}
     } catch(error){
-        toast.error(error.response?.data.email[0] || "مشکلی پیش آمده", { 
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-          })
+        console.log(error)
+        toast.error(error.response.data.detail)
         return{error}
     }
 }

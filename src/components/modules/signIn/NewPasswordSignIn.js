@@ -1,7 +1,35 @@
+'use client'
 
+import { useState } from "react";
 import PasswordIconSignin from "../../../../public/icons/PasswordIconSignin";
 import AuthPageStruct from "./AuthPageStruct";
-const NewPasswordSignIn = () => {
+import { forgetPassword } from "@/service/auth";
+import { Bounce, toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+
+const NewPasswordSignIn = ({ loginState, setLoginState }) => {
+
+    const router = useRouter()
+    const [pass , setPass] = useState({
+        password:'',
+        confirm_password:''
+    })
+
+    const sendData = async () => {
+        const {response , error} = await forgetPassword({
+            confirm_password:loginState.confirm_password,
+            password:loginState.password,
+            otp_code:loginState.forgetPassword_otp,
+            email:loginState.email    })
+        if(response){
+            console.log(response)
+            toast.success('پسورد با موفقیت تغییر کرد.') 
+            router.push("/Login")
+        }else{
+            toast.error(error.response.data.detail||'مشکلی پیش آمده') 
+        }
+    }
+
     return(
 
     <AuthPageStruct>
@@ -23,7 +51,7 @@ const NewPasswordSignIn = () => {
         text-2xl
         font-bold
         ">
-            فراموشی رمز عبور nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+            فراموشی رمز عبور 
         </p>
 
         <p className="
@@ -60,7 +88,12 @@ const NewPasswordSignIn = () => {
                 "
                 placeholder=" رمز عبور جدید را وارد کنید "
                 type="text"
-                name="firstname"
+                name="password"
+                value={pass.password}
+                onChange={(e)=>{
+                    setLoginState(prev=>({...prev , password:e.target.value}))
+                    setPass(prev=>({...prev , password:e.target.value}))
+                }}
                 />
             </div>
 
@@ -90,7 +123,12 @@ const NewPasswordSignIn = () => {
                 "
                 placeholder=" رمز عبور جدید را وارد کنید "
                 type="text"
-                name="firstname"
+                name="confirm_password"
+                value={pass.confirm_password}
+                onChange={(e)=>{
+                    setLoginState(prev=>({...prev , confirm_password:e.target.value}))
+                    setPass(prev=>({...prev , confirm_password:e.target.value}))
+                }}
                 />
             </div>
 
@@ -103,7 +141,9 @@ const NewPasswordSignIn = () => {
                  bg-[#EDEDED] 
                  rounded-xl 
                  text-[#7A7A7A]
-                 ">
+                 "
+                 onClick={()=>{sendData()}}
+                 >
                      تایید و ادامه
             </button>
         </div>
