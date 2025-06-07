@@ -132,7 +132,7 @@ const SignInPhone =({ loginState, setLoginState }) =>{
             text-xl
             md:text-base
              "
-            onClick={() => setLoginState(prev=>({...prev,state:0, phoneNumber:phoneNumber.mobileNumber, is_2fa:loginState.is_2fa}))}
+            onClick={() => setLoginState(prev=>({...prev,state:"forgetPassword", phoneNumber:phoneNumber.mobileNumber, is_2fa:loginState.is_2fa}))}
             >
             فراموشی رمزعبور
             </button>

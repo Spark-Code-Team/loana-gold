@@ -1,30 +1,58 @@
 "use client"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Pagination from "../elements/Pagination";
+import {  deleteUser, getAllUsers, updateUser } from "@/service/adminUsers";
 const AdminUserManagementPage = () => {
 
-    const users = [
-        { id: 1, name: "مهدی جعفرپور", balance: "۸ گرم", phone: "09158112345" },
-        { id: 2, name: "فائقه کریمی", balance: "۷.۵ گرم", phone: "09158456789" },
-        { id: 3, name: "علیرضا قاسم زاده", balance: "۵ گرم", phone: "09151234567" },
-        { id: 4, name: "سازان قانعی منفرد", balance: "۳.۲۵ گرم", phone: "09157896543" },
-        { id: 5, name: "حمید محمدی", balance: "۴ گرم", phone: "09151237654" },
-        { id: 6, name: "مهدی جعفرپور", balance: "۸ گرم", phone: "09158112345" },
-        { id: 7, name: "فائقه کریمی", balance: "۷.۵ گرم", phone: "09158456789" },
-        { id: 8, name: "علیرضا قاسم زاده", balance: "۵ گرم", phone: "09151234567" },
-        { id: 9, name: "سازان قانعی منفرد", balance: "۳.۲۵ گرم", phone: "09157896543" },
-        { id: 10, name: "حمید محمدی", balance: "۴ گرم", phone: "09151237654" },
-      ];
+  const [users , setUsers] = useState()
+  const [loading , setLoading] = useState(false)
+
+  useEffect(()=>{
+    const getUsers = async () => {
+      const {response , error} = await getAllUsers()
+        if(response){
+         setUsers(response.data)
+        }else{
+          console.log(error)
+        }
+    }
+    getUsers()
+  },[loading])
+
+
+  const deleteAccount = async (id) => {
+    const {response , error} = await deleteUser(id)
+    if(response){
+      setLoading(prev=>!prev)
+    }else{
+      console.log(error)
+    }
+  }
+
+
+
+
+  const updateAccount = async (data) => {
+    console.log(data , 'this is new log')
+    const {response ,error} = await updateUser(data)
+    if(response){
+      setLoading(prev=>!prev)
+    }else{
+      console.log(error)
+    }
+  }
+
+
 
       const [selectedUser, setSelectedUser] = useState(null);
-      const [currentPage, setCurrentPage] = useState(1);
-      const usersPerPage = 5;
+    //   const [currentPage, setCurrentPage] = useState(1);
+    //   const usersPerPage = 5;
     
-      const indexOfLastUser = currentPage * usersPerPage;
-      const indexOfFirstUser = indexOfLastUser - usersPerPage;
-      const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
-      const totalPages = Math.ceil(users.length / usersPerPage);
+    //   const indexOfLastUser = currentPage * usersPerPage;
+    //   const indexOfFirstUser = indexOfLastUser - usersPerPage;
+    //   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+    //   const totalPages = Math.ceil(users.length / usersPerPage);
 
     return(
 
@@ -96,24 +124,29 @@ const AdminUserManagementPage = () => {
                         <tr>
                             <th className="p-3">#</th>
                             <th className="p-3 border-x-[1px]">نام و نام خانوادگی</th>
-                            <th className="p-3">موجودی طلا (گرم)</th>
+                            <th className="p-3 border-x-[1px]">موجودی نقدی</th>
+                            <th className="p-3 border-x-[1px]">موجودی طلا (گرم)</th>
+                            <th className="p-3 border-x-[1px]">موجودی نقره (گرم)</th>
                             <th className="p-3 border-x-[1px]">شماره تلفن</th>
                             <th className="p-3">تنظیمات</th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-300">
-                        {currentUsers.map((user, index) => (
+                        {users?.results.map((user, index) => (
                             <tr key={user.id} className="text-center hover:bg-gray-100">
                                 <td className="p-3">{index + 1}</td>
-                                <td className="p-3 border-x-[1px]">{user.name}</td>
-                                <td className="p-3">{user.balance}</td>
-                                <td className="p-3 border-x-[1px]">{user.phone}</td>
+                                <td className="p-3 border-x-[1px]">{user.first_name} {user.last_name}</td>
+                                <td className="p-3 border-x-[1px]" >{user.cash_wallet}</td>
+                                <td className="p-3 border-x-[1px]" >{user.gold_wallet}</td>
+                                <td className="p-3 border-x-[1px]" >{user.silver_wallet}</td>
+                                <td className="p-3 border-x-[1px]">{user.phone_number}</td>
                                 <td className="p-3">
 
                                     <button className="px-2 py-1 border rounded-lg mx-1" 
                                     onClick={() => setSelectedUser(user)}>✏️</button>
 
-                                    <button className="px-2 py-1 border rounded-lg">🗑</button>
+                                    <button className="px-2 py-1 border rounded-lg"
+                                      onClick={()=>{deleteAccount(user.id)}}>🗑</button>
 
                                 </td>
                             </tr>
@@ -131,37 +164,109 @@ const AdminUserManagementPage = () => {
             bg-white 
             shadow-md 
             p-4 
-            w-80 
+            w-max
             transition-transform
              ${
           selectedUser ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         {selectedUser && (
-          <>
+          <div 
+            className="overflow-y-auto h-screen pl-5 pb-5 "
+          >
             <h2 className="mb-4 text-base">ویرایش کاربر</h2>
-            <label className="block mb-2">نام و نام خانوادگی:</label>
+
+            <label className="block mb-2">نام:</label>
             <input
               type="text"
               className="border text-base p-2 w-full mb-2"
-              value={selectedUser.name}
-              onChange={(e) => setSelectedUser({ ...selectedUser, name: e.target.value })}
+              value={selectedUser.first_name}
+              onChange={(e) => setSelectedUser({ ...selectedUser, first_name: e.target.value })}
             />
+
+            <label className="block mb-2"> نام خانوادگی:</label>
+            <input
+              type="text"
+              className="border text-base p-2 w-full mb-2"
+              value={selectedUser.last_name}
+              onChange={(e) => setSelectedUser({ ...selectedUser, last_name: e.target.value })}
+            />
+
+            <label className="block mb-2"> شماره تلفن:</label>
+            <input
+              type="number"
+              className="border text-base p-2 w-full mb-2"
+              value={selectedUser.phone_number}
+              onChange={(e) => setSelectedUser({ ...selectedUser, phone_number: e.target.value })}
+            />
+
+            <label className="block mb-2">شبا:</label>
+            <input
+              type="number"
+              className="border text-base p-2 w-full mb-2"
+              value={selectedUser.sheba}
+              onChange={(e) => setSelectedUser({ ...selectedUser, sheba: e.target.value })}
+            />
+
+            <label className="block mb-2">کد ملی:</label>
+            <input
+              type="number"
+              className="border text-base p-2 w-full mb-2"
+              value={selectedUser.national_code}
+              onChange={(e) => setSelectedUser({ ...selectedUser, national_code: e.target.value })}
+            />
+
+            <label className="block mb-2">ایمیل:</label>
+            <input
+              type="email"
+              className="border text-base p-2 w-full mb-2"
+              value={selectedUser.email}
+              onChange={(e) => setSelectedUser({ ...selectedUser, email: e.target.value })}
+            />
+
+            <label className="block mb-2">نقش کاربر:</label>
+            <input
+              type="number"
+              className="border text-base p-2 w-full mb-2"
+              value={selectedUser.role}
+              onChange={(e) => setSelectedUser({ ...selectedUser, role: e.target.value })}
+            />
+
+            <label className="block mb-2">نام بانک:</label>
+            <input
+              type="text"
+              className="border text-base p-2 w-full mb-2"
+              value={selectedUser.bank_name}
+              onChange={(e) => setSelectedUser({ ...selectedUser, bank_name: e.target.value })}
+            />
+
             <label className="block mb-2">موجودی طلا:</label>
             <input
-              type="text"
-              className="border p-2 w-full mb-2"
-              value={selectedUser.balance}
-              onChange={(e) => setSelectedUser({ ...selectedUser, balance: e.target.value })}
+              type="number"
+              className="border text-base p-2 w-full mb-2"
+              value={selectedUser.gold_wallet}
+              onChange={(e) => setSelectedUser({ ...selectedUser, gold_wallet: e.target.value })}
             />
-            <label className="block mb-2">شماره تلفن:</label>
+
+            <label className="block mb-2">موجودی نقره:</label>
             <input
-              type="text"
-              className="border-[1px] p-2 w-full mb-4"
-              value={selectedUser.phone}
-              onChange={(e) => setSelectedUser({ ...selectedUser, phone: e.target.value })}
+              type="number"
+              className="border p-2 w-full mb-2"
+              value={selectedUser.silver_wallet}
+              onChange={(e) => setSelectedUser({ ...selectedUser, silver_wallet: e.target.value })}
             />
-            <button className="bg-green-500 text-white px-4 py-2 rounded w-full">
+
+            <label className="block mb-2"> موجودی نقدی:</label>
+            <input
+              type="number"
+              className="border-[1px] p-2 w-full mb-4"
+              value={selectedUser.cash_wallet}
+              onChange={(e) => setSelectedUser({ ...selectedUser, cash_wallet: e.target.value })}
+            />
+
+            <button 
+              onClick={()=>{updateAccount(selectedUser)}}
+              className="bg-green-500 text-white px-4 py-2 rounded w-full">
               ذخیره تغییرات
             </button>
             <button
@@ -170,23 +275,23 @@ const AdminUserManagementPage = () => {
             >
               بستن
             </button>
-          </>
+          </div>
         )}
       </div>
     </div>
   
     </div>
 
-    <div className="hidden md:block">
+    {/* <div className="hidden md:block">
     <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={(page) => setCurrentPage(page)}
         />
-    </div>
+    </div> */}
 
       
-  <div>
+  {/* <div>
   {users.map((user, index) => (
     <div
       key={index}
@@ -213,7 +318,7 @@ const AdminUserManagementPage = () => {
       <p className="mt-6">موجودی طلا: {user.balance}</p>
     </div>
   ))}
-</div>
+</div> */}
 
 </div>
     )

@@ -7,26 +7,51 @@ import OrderUns from "../modules/buying/OrderUns";
 import Sana from "../modules/receivingCredit/Sana";
 import PhoneSana from "../modules/receivingCredit/PhoneSana";
 import SanaRes from "../modules/receivingCredit/SanaRes";
-import { getTickets } from "@/service/tickets";
 import { convertToJalali } from "@/utils/setTime";
-import { Bounce, toast } from "react-toastify";
+import { toast } from "react-toastify";
+import { getAllTickets, paginatedGetTickets } from "@/service/adminTickets";
+import Link from "next/link";
 
 const AdminTicketPage = () =>{
 
     const [ allTickets , setAllTickets ] = useState()
+    const [loading , setLoading] = useState(false)
 
+    //   const [currentPage, setCurrentPage] = useState(1);
+    //   const usersPerPage = 6;
+    //   const indexOfLastUser = currentPage * usersPerPage;
+    //   const indexOfFirstUser = indexOfLastUser - usersPerPage;
+    //   const currentUsers = allTickets.results.slice(indexOfFirstUser, indexOfLastUser);
+    //   const totalPages = Math.ceil(allTickets.count / usersPerPage);
 
     useEffect(()=>{
          const myTickets = async () => {
-             const {response , error} = await getTickets() 
+             const {response , error} = await getAllTickets() 
              if(response){ 
                  setAllTickets(response.data)
+                 setLoading(prev=>!prev)
              }else{
                  toast.error(error.response.data.error)}
          }
          myTickets()
  
      } , [])
+
+// این تیکه آزمایشیه و باید حذف بشه در آینده موقع قرار دادن روی سرور یا اینکه آدرس لوکال هاست زیر به آدرس سایت تغییر کنه
+     function getPathAndQueryPart(url) {
+        const urlObj = new URL(url, 'http://localhost:8000');
+        const search = urlObj.search; 
+        return search;
+      }
+
+     const onPageChange = async (url) => {
+        const {response , error} = await getAllTickets(url)
+        if(response){ 
+            setAllTickets(response.data)
+            setLoading(prev=>!prev)
+        }else{
+            toast.error(error.response.data.error)}
+     }
 
 
     return (
@@ -69,7 +94,7 @@ const AdminTicketPage = () =>{
                 items-center
                 ">تاریخ دریافت</div>
 
-                <div className="text-[#E90000]">حدف همه فیلترها</div>
+                <div className="text-[#E90000]">حذف همه فیلترها</div>
 
             </div>
 
@@ -98,54 +123,133 @@ const AdminTicketPage = () =>{
          ">
            <table className="w-full ">
                     <tbody>
-                        {allTickets?.map((p, index) => (
+                    {
+                        allTickets?.results.map((p , index) => {
+                            return(
+                                
+                                // <Link href={`http://localhost:3000/admin/ticket-conversation/${p.id}`}> 
+                                        <div key={index} className="border-[1px] p-4 m-4 rounded-lg" >
 
-                            <tr key={p.id} className=" flex flex-col text-sm">
-                                <td className="p-2 ">موضوع : {p.title}</td>
-                                <td className="p-2">تاریخ : {convertToJalali(p.created_at)}</td>
-                                <td className="
-                                p-2 
-                                md:max-w-[900px] 
-                                max-w-[350px] 
-                                overflow-hidden 
-                                ">
-                                متن پیام : {p.body}
-                                </td>
-                                <td className="p-2 ">
-                                وضعیت : {p.messages?.length == 0? 
-                                <>
-                                در انتظار پاسخ
-                                </>:<>
-                                پاسخ داده شده
-                                </> }</td>
-                                {p.messages.length>0 ? <table className="w-full ">
-                    <tbody >
-                        {p.messages?.map((p, index) => (
-                            <tr key={p.id} className=" flex flex-col text-sm m-2 rounded-xl border-[1px]">
-                                <td className="p-2">تاریخ : {convertToJalali(p.send_at)}</td>
-                                <td className="
-                                p-2 
-                                md:max-w-[900px] 
-                                max-w-[350px] 
-                                overflow-hidden 
-                                ">
-                                متن پاسخ : {p.message}
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                    </table>: <></>}
-                            </tr>
-                        ))}
+                                        <div className="
+                                        w-full
+                                        h-full
+                                        grid
+                                        grid-cols-4
+                                        gap-x-6
+                                        gap-y-4
+                                        py-4
+                                        ">
+                                            
+                                            <td>
+                                            <p className="font-bold mb-[12px] ">
+                                                موضوع
+                                            </p>
+                                            <tr>
+                                            <p>
+                                                {p.title}
+                                            </p>
+                                            </tr>
+                                            </td>
+
+                                            <td>
+                                            <p className="font-bold mb-[12px]">
+                                                متن درخواست
+                                            </p>
+                                            <tr>
+                                            <p>
+                                                {p.body}
+                                            </p>
+                                            </tr>
+                                            </td>
+
+                                            <td>
+                                            <p className="font-bold mb-[12px]">
+                                                زمان
+                                            </p>
+                                            <tr>
+                                            <p>
+                                                {convertToJalali(p.created_at)}
+                                            </p>
+                                            </tr>
+                                            </td>
+
+                                            <td>
+                                            <p className="font-bold mb-[12px]">
+                                                وضعیت
+                                            </p>
+                                            <tr>
+                                            <p>
+                                                    {p.is_closed? 
+                                                    <>
+                                                    پاسخ داده شده
+                                                    </>:
+                                                    <>
+                                                    در انتظار پاسخ
+                                                    </>}
+                                            </p>
+                                            </tr>
+                                            </td>
+                                        </div>
+                                        </div>    
+                                // </Link>
+
+                            )
+                        })
+                     }
                     </tbody>
             </table>
+
+        </div>
+
+        <div className="flex justify-center items-center gap-2 m-4">
+            {allTickets?.previous?
+                    <button
+                        onClick={() => {
+                            onPageChange(getPathAndQueryPart(allTickets.previous))
+                        }}
+                        className={`
+                           w-full 
+                           h-10 
+                           flex 
+                           items-center 
+                           justify-center 
+                           rounded-lg 
+                           border-[1px]
+                           border-primary
+                           text-primary 
+                         `}
+                       >
+                         صفحه قبلی
+                       </button>: <></>}
+
+            {allTickets?.next?
+                    <button
+                        onClick={() => {
+                            onPageChange(getPathAndQueryPart(allTickets.next))
+                        }}
+                        className={`
+                            w-full 
+                            h-10 
+                            flex 
+                            items-center 
+                            justify-center 
+                            rounded-lg 
+                            border-[1px]
+                            border-primary
+                            text-primary 
+                        `}
+                        >
+                        صفحه بعدی
+                        </button>: <></>}
+
+
 
         </div>
         
         {/* <div className="mt-10">
         <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
+        currentPage={'next'}
+        totalPages={'previous'}
         onPageChange={(page) => setCurrentPage(page)}
         />
         </div> */}
