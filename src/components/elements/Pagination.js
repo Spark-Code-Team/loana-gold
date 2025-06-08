@@ -5,7 +5,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
-    <div className="flex justify-center items-center gap-2 mt-4">
+    <div className="flex justify-center items-center gap-2 my-4">
       {pages.map((page) => (
         <button
           key={page}
@@ -20,12 +20,12 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
             border-[1px]
             border-primary
             text-primary 
-            ${page == currentPage ? " text-primary" : "bg-white "}
+            ${page == currentPage ? " text-white bg-primary" : "bg-white "}
           `}
         >
           {page}
         </button>
-      ))}
+        ))}
     </div>
   );
 };

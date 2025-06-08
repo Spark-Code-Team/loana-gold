@@ -155,7 +155,7 @@ const TicketDashboardPage = () =>{
                      {
                         allTickets?.map((p , index) => {
                             return(
-                                <Link href={`http://localhost:3000/dashboard/ticket-conversation/${p.id}`}>   
+                                <Link href={`/dashboard/ticket-conversation/${p.id}`}>   
                                         <div key={index} className="border-[1px] p-4 m-4 rounded-lg" >
 
                                         <div className="

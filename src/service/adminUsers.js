@@ -3,9 +3,9 @@ import { toast } from "react-toastify";
 
 
 
-export const getAllUsers = async () => {
+export const getAllUsers = async (params = '') => {
     try{
-        const response = await api.get('/adminpanel/users/') 
+        const response = await api.get(`/adminpanel/users/${params}`) 
         return{response}
     } catch(error){
         toast.error(error.response?.data.non_field_errors[0] || "مشکلی پیش آمده")       

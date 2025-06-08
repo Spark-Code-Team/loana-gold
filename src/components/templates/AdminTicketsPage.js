@@ -17,12 +17,12 @@ const AdminTicketPage = () =>{
     const [ allTickets , setAllTickets ] = useState()
     const [loading , setLoading] = useState(false)
 
-    //   const [currentPage, setCurrentPage] = useState(1);
-    //   const usersPerPage = 6;
-    //   const indexOfLastUser = currentPage * usersPerPage;
-    //   const indexOfFirstUser = indexOfLastUser - usersPerPage;
-    //   const currentUsers = allTickets.results.slice(indexOfFirstUser, indexOfLastUser);
-    //   const totalPages = Math.ceil(allTickets.count / usersPerPage);
+      const [currentPage, setCurrentPage] = useState(1);
+      const usersPerPage = 5;
+      const indexOfLastUser = currentPage * usersPerPage;
+      const indexOfFirstUser = indexOfLastUser - usersPerPage;
+      const currentUsers = allTickets?.results.slice(indexOfFirstUser, indexOfLastUser);
+      const totalPages = Math.ceil(allTickets?.count / usersPerPage);
 
     useEffect(()=>{
          const myTickets = async () => {
@@ -31,11 +31,16 @@ const AdminTicketPage = () =>{
                  setAllTickets(response.data)
                  setLoading(prev=>!prev)
              }else{
-                 toast.error(error.response.data.error)}
+                 toast.error(error.response?.data.error)}
          }
          myTickets()
  
      } , [])
+
+     const changePage = (pageNum) =>{ 
+        let param = `?limit=${usersPerPage}&offset=${pageNum*usersPerPage-usersPerPage}`
+        onPageChange(param)
+     }
 
 // این تیکه آزمایشیه و باید حذف بشه در آینده موقع قرار دادن روی سرور یا اینکه آدرس لوکال هاست زیر به آدرس سایت تغییر کنه
      function getPathAndQueryPart(url) {
@@ -127,7 +132,7 @@ const AdminTicketPage = () =>{
                         allTickets?.results.map((p , index) => {
                             return(
                                 
-                                // <Link href={`http://localhost:3000/admin/ticket-conversation/${p.id}`}> 
+                                <Link href={`/admin/ticket-conversation/${p.id}`}> 
                                         <div key={index} className="border-[1px] p-4 m-4 rounded-lg" >
 
                                         <div className="
@@ -181,17 +186,17 @@ const AdminTicketPage = () =>{
                                             <p>
                                                     {p.is_closed? 
                                                     <>
-                                                    پاسخ داده شده
+                                                    بسته شده
                                                     </>:
                                                     <>
-                                                    در انتظار پاسخ
+                                                    در جریان
                                                     </>}
                                             </p>
                                             </tr>
                                             </td>
                                         </div>
                                         </div>    
-                                // </Link>
+                                </Link>
 
                             )
                         })
@@ -201,58 +206,65 @@ const AdminTicketPage = () =>{
 
         </div>
 
-        <div className="flex justify-center items-center gap-2 m-4">
-            {allTickets?.previous?
+        <div className="flex justify-center items-center gap-2 mt-4">
                     <button
-                        onClick={() => {
-                            onPageChange(getPathAndQueryPart(allTickets.previous))
+                        disabled ={allTickets?.previous? false : true}
+                        onClick={async() => {
+                            await onPageChange(getPathAndQueryPart(allTickets?.previous))
+                            setCurrentPage(currentPage+1)
                         }}
                         className={`
-                           w-full 
-                           h-10 
-                           flex 
-                           items-center 
-                           justify-center 
-                           rounded-lg 
-                           border-[1px]
-                           border-primary
-                           text-primary 
-                         `}
+                            w-10 
+                            h-10
+                            flex 
+                            items-center 
+                            justify-center 
+                            rounded-lg 
+                            border-[1px]
+                            text-primary 
+                            ${allTickets?.previous? 'border-primary':'bg-gray-200'}
+                          `}
                        >
-                         صفحه قبلی
-                       </button>: <></>}
+                            {'<'}
+                        </button>
 
-            {allTickets?.next?
+
+                <div className="hidden md:block">
+                    <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={(page) => {
+                        changePage(page)
+                        setCurrentPage(page)}}
+                    />
+                </div>
+
                     <button
-                        onClick={() => {
-                            onPageChange(getPathAndQueryPart(allTickets.next))
+                        disabled ={allTickets?.next? false : true}
+                        onClick={async () => {
+                            await onPageChange(getPathAndQueryPart(allTickets?.next))
+                            setCurrentPage(currentPage+1)
                         }}
                         className={`
-                            w-full 
+                            w-10 
                             h-10 
                             flex 
                             items-center 
                             justify-center 
                             rounded-lg 
                             border-[1px]
-                            border-primary
                             text-primary 
-                        `}
+                            ${allTickets?.next? 'border-primary':'bg-gray-200'}
+                          `}
                         >
-                        صفحه بعدی
-                        </button>: <></>}
+                            {'>'}
+                        </button>
 
 
 
         </div>
         
-        {/* <div className="mt-10">
-        <Pagination
-        currentPage={'next'}
-        totalPages={'previous'}
-        onPageChange={(page) => setCurrentPage(page)}
-        />
-        </div> */}
+
        
 
 
