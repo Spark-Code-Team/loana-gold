@@ -18,7 +18,7 @@ const AdminUserManagementPage = () => {
         }
     }
     getUsers()
-  },[loading])
+  },[])
 
 
   const deleteAccount = async (id) => {
@@ -46,13 +46,38 @@ const AdminUserManagementPage = () => {
 
 
       const [selectedUser, setSelectedUser] = useState(null);
-    //   const [currentPage, setCurrentPage] = useState(1);
-    //   const usersPerPage = 5;
-    
-    //   const indexOfLastUser = currentPage * usersPerPage;
-    //   const indexOfFirstUser = indexOfLastUser - usersPerPage;
-    //   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
-    //   const totalPages = Math.ceil(users.length / usersPerPage);
+      const [currentPage, setCurrentPage] = useState(1);
+      const usersPerPage = 10;
+      const indexOfLastUser = currentPage * usersPerPage;
+      const indexOfFirstUser = indexOfLastUser - usersPerPage;
+      const currentUsers = users?.results.slice(indexOfFirstUser, indexOfLastUser);
+      const totalPages = Math.ceil(users?.count / usersPerPage);
+
+
+      const changePage = (pageNum) =>{ 
+        let param = `?limit=${usersPerPage}&offset=${pageNum*usersPerPage-usersPerPage}`
+        onPageChange(param)
+      }
+
+      // این تیکه آزمایشیه و باید حذف بشه در آینده موقع قرار دادن روی سرور یا اینکه آدرس لوکال هاست زیر به آدرس سایت تغییر کنه
+      function getPathAndQueryPart(url) {
+        const urlObj = new URL(url, 'http://localhost:8000');
+        const search = urlObj.search;
+        console.log(search , 'this is search') 
+        return search;
+      }
+
+      const onPageChange = async (url) => {
+        const {response , error} = await getAllUsers(url)
+        if(response){
+          setUsers(response.data)
+          setLoading(prev=>!prev)
+          console.log(response , 'this is what i need')
+         }else{
+           console.log(error)
+         }
+      }
+
 
     return(
 
@@ -282,13 +307,65 @@ const AdminUserManagementPage = () => {
   
     </div>
 
-    {/* <div className="hidden md:block">
-    <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={(page) => setCurrentPage(page)}
-        />
-    </div> */}
+    <div className="hidden md:block">
+        <div className="flex justify-center items-center gap-2 mt-4">
+                    <button
+                        disabled ={users?.previous? false : true}
+                        onClick={async() => {
+                            await onPageChange(getPathAndQueryPart(allTickets?.previous))
+                            setCurrentPage(currentPage+1)
+                        }}
+                        className={`
+                            w-10 
+                            h-10
+                            flex 
+                            items-center 
+                            justify-center 
+                            rounded-lg 
+                            border-[1px]
+                            text-primary 
+                            ${users?.previous? 'border-primary':'bg-gray-200'}
+                          `}
+                       >
+                            {'<'}
+                        </button>
+
+
+                <div className="hidden md:block">
+                    <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={(page) => {
+                        changePage(page)
+                        setCurrentPage(page)}}
+                    />
+                </div>
+
+                    <button
+                        disabled ={users?.next? false : true}
+                        onClick={async () => {
+                            await onPageChange(getPathAndQueryPart(allTickets?.next))
+                            setCurrentPage(currentPage+1)
+                        }}
+                        className={`
+                            w-10 
+                            h-10 
+                            flex 
+                            items-center 
+                            justify-center 
+                            rounded-lg 
+                            border-[1px]
+                            text-primary 
+                            ${users?.next? 'border-primary':'bg-gray-200'}
+                          `}
+                        >
+                            {'>'}
+                        </button>
+
+
+
+        </div>
+
 
       
   {/* <div>
@@ -320,7 +397,7 @@ const AdminUserManagementPage = () => {
   ))}
 </div> */}
 
-</div>
+</div></div>
     )
 }
 export default AdminUserManagementPage;
