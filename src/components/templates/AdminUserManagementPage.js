@@ -312,8 +312,8 @@ const AdminUserManagementPage = () => {
                     <button
                         disabled ={users?.previous? false : true}
                         onClick={async() => {
-                            await onPageChange(getPathAndQueryPart(allTickets?.previous))
-                            setCurrentPage(currentPage+1)
+                            await onPageChange(getPathAndQueryPart(users?.previous))
+                            setCurrentPage(currentPage-1)
                         }}
                         className={`
                             w-10 
@@ -344,7 +344,7 @@ const AdminUserManagementPage = () => {
                     <button
                         disabled ={users?.next? false : true}
                         onClick={async () => {
-                            await onPageChange(getPathAndQueryPart(allTickets?.next))
+                            await onPageChange(getPathAndQueryPart(users?.next))
                             setCurrentPage(currentPage+1)
                         }}
                         className={`

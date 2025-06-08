@@ -211,7 +211,7 @@ const AdminTicketPage = () =>{
                         disabled ={allTickets?.previous? false : true}
                         onClick={async() => {
                             await onPageChange(getPathAndQueryPart(allTickets?.previous))
-                            setCurrentPage(currentPage+1)
+                            setCurrentPage(currentPage-1)
                         }}
                         className={`
                             w-10 
