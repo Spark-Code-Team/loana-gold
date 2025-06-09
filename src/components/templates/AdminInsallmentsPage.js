@@ -1,176 +1,32 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Pagination from "../elements/Pagination";
+import AdminInsallmentsApi from "@/service/AdminInsallments";
+import { ThreeDots } from "react-loader-spinner";
+
+
 const AdminInsallmentsPage = () =>{
 
-    const users = [
-        { 
-        id: 1,
-        name: "مهدی جعفرپور", 
-        title: " شارژ کیف پول ", 
-        settlesInsallments: "واریز",
-        unSettlesInsallments: " 300/000/000 تومان ",
-        constInsallments: "14/12/11",
-        dateInsallments: "موفق",
-        penalty: "جریمه"
-     }, 
-     { 
-        id: 2,
-        name: "مهدی جعفرپور", 
-        title: " شارژ کیف پول ", 
-        settlesInsallments: "واریز",
-        unSettlesInsallments: " 300/000/000 تومان ",
-        constInsallments: "14/12/11",
-        dateInsallments: "موفق",
-        penalty: "جریمه"
-     }, 
-     { 
-        id: 3,
-        name: "مهدی جعفرپور", 
-        title: " شارژ کیف پول ", 
-        settlesInsallments: "واریز",
-        unSettlesInsallments: " 300/000/000 تومان ",
-        constInsallments: "14/12/11",
-        dateInsallments: "موفق",
-        penalty: "جریمه"
-     }, 
-     { 
-        id: 4,
-        name: "مهدی جعفرپور", 
-        title: " شارژ کیف پول ", 
-        settlesInsallments: "واریز",
-        unSettlesInsallments: " 300/000/000 تومان ",
-        constInsallments: "14/12/11",
-        dateInsallments: "موفق",
-        penalty: "جریمه"
-     }, 
+   
+     const [AllInsallments , setAllInsallments] = useState()
+     const [loading , setLoading] = useState(true)
 
-     { 
-        id: 5,
-        name: "مهدی جعفرپور", 
-        title: " شارژ کیف پول ", 
-        settlesInsallments: "واریز",
-        unSettlesInsallments: " 300/000/000 تومان ",
-        constInsallments: "14/12/11",
-        dateInsallments: "موفق",
-        penalty: "جریمه"
-     }, 
-     { 
-        id: 6,
-        name: "مهدی جعفرپور", 
-        title: " شارژ کیف پول ", 
-        settlesInsallments: "واریز",
-        unSettlesInsallments: " 300/000/000 تومان ",
-        constInsallments: "14/12/11",
-        dateInsallments: "موفق",
-        penalty: "جریمه"
-     }, 
-     { 
-        id: 7,
-        name: "مهدی جعفرپور", 
-        title: " شارژ کیف پول ", 
-        settlesInsallments: "واریز",
-        unSettlesInsallments: " 300/000/000 تومان ",
-        constInsallments: "14/12/11",
-        dateInsallments: "موفق",
-        penalty: "جریمه"
-     }, 
-     { 
-        id: 8,
-        name: "مهدی جعفرپور", 
-        title: " شارژ کیف پول ", 
-        settlesInsallments: "واریز",
-        unSettlesInsallments: " 300/000/000 تومان ",
-        constInsallments: "14/12/11",
-        dateInsallments: "موفق",
-        penalty: "جریمه"
-     },
+
      
-     { 
-        id: 9,
-        name: "مهدی جعفرپور", 
-        title: " شارژ کیف پول ", 
-        settlesInsallments: "واریز",
-        unSettlesInsallments: " 300/000/000 تومان ",
-        constInsallments: "14/12/11",
-        dateInsallments: "موفق",
-        penalty: "جریمه"
-     }, 
-     { 
-        id: 10,
-        name: "مهدی جعفرپور", 
-        title: " شارژ کیف پول ", 
-        settlesInsallments: "واریز",
-        unSettlesInsallments: " 300/000/000 تومان ",
-        constInsallments: "14/12/11",
-        dateInsallments: "موفق",
-        penalty: "جریمه"
-     }, 
-     { 
-        id: 11,
-        name: "مهدی جعفرپور", 
-        title: " شارژ کیف پول ", 
-        settlesInsallments: "واریز",
-        unSettlesInsallments: " 300/000/000 تومان ",
-        constInsallments: "14/12/11",
-        dateInsallments: "موفق",
-        penalty: "جریمه"
-     }, 
-     { 
-        id: 12,
-        name: "مهدی جعفرپور", 
-        title: " شارژ کیف پول ", 
-        settlesInsallments: "واریز",
-        unSettlesInsallments: " 300/000/000 تومان ",
-        constInsallments: "14/12/11",
-        dateInsallments: "موفق",
-        penalty: "جریمه"
-     }, 
-      ];
+     useEffect(()=>{
+      const InsallmentsAdminPanel = async () => {
+          const {response , error} = await AdminInsallmentsApi() 
+          if(response){ 
+           setAllInsallments(response.data.results)
+              setLoading(false)
+          }else{
+              toast.error(error.response.data.error)}
+      }
+      InsallmentsAdminPanel()
 
-      const installments = [
-         {
-           name: "محسن پورپاک",
-           amount: "900,0000,00000",
-           date: "1401/2/1",
-           paid: 3,
-           unpaid: 1,
-           penalty: "ندارد",
-         },
-         {
-           name: "محسن پورپاک",
-           amount: "900,0000,00000",
-           date: "1401/2/1",
-           paid: 3,
-           unpaid: 1,
-           penalty: "ندارد",
-         },
-         {
-           name: "محسن پورپاک",
-           amount: "900,0000,00000",
-           date: "1401/2/1",
-           paid: 3,
-           unpaid: 1,
-           penalty: "ندارد",
-         },
-         {
-            name: "محسن پورپاک",
-            amount: "900,0000,00000",
-            date: "1401/2/1",
-            paid: 3,
-            unpaid: 1,
-            penalty: "ندارد",
-          },
-       ];
+  } , [])
 
-
-      const [currentPage, setCurrentPage] = useState(1);
-      const usersPerPage = 5;
-    
-      const indexOfLastUser = currentPage * usersPerPage;
-      const indexOfFirstUser = indexOfLastUser - usersPerPage;
-      const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
-      const totalPages = Math.ceil(users.length / usersPerPage);
+   
 
     return (
         <div className="
@@ -178,41 +34,7 @@ const AdminInsallmentsPage = () =>{
         md:h-[1000]
         md:rounded-xl
         ">
-            <div className="
-            w-[843px]
-            h-[56px]
-            md:flex
-            flex-row
-            justify-around
-            border-[1px]
-            rounded-xl
-            items-center
-            hidden
-            ">
-                <div className="">فیلترها</div>
-
-                <div className="
-                border-[1px] 
-                h-[56px] 
-                w-[203px] 
-                justify-center 
-                flex 
-                items-center
-                ">مرتب سازی بر اساس</div>
-
-                <div>موضوع تیکت</div>
-
-                <div className="
-                border-[1px] 
-                h-[56px] 
-                w-[155px] 
-                flex 
-                justify-center 
-                items-center
-                ">تاریخ دریافت</div>
-
-                <div className="text-[#E90000]">حدف همه فیلترها</div>
-            </div>
+           
 
 
         <div className="
@@ -224,6 +46,25 @@ const AdminInsallmentsPage = () =>{
         hidden
         md:block
         ">
+      {loading ? (
+        <div className="
+        flex 
+        flex-col 
+        items-center 
+        justify-center 
+        h-[300px]
+        ">
+          <ThreeDots
+          visible={true}
+          height="10"
+          width="80"
+          color="#3B82F6"   
+          radius="9"
+          ariaLabel="three-dots-loading"
+          />
+        </div>
+
+      ) : (
 
            <table className="w-full">
                     <thead className="border-b-[1px]">
@@ -238,20 +79,21 @@ const AdminInsallmentsPage = () =>{
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-300">
-                        {currentUsers.map((user, index) => (
-                            <tr key={user.id} className="text-center hover:bg-gray-100">
+                        {AllInsallments.map((AdminInsallments, index) => (
+                            <tr key={AdminInsallments.id} className="text-center hover:bg-gray-100">
                                 <td className="p-3">{index + 1}</td>
-                                <td className="p-3 border-x-[1px]">{user.name}</td>
-                                <td className="p-3">{user.settlesInsallments}</td>
-                                <td className="p-3 border-x-[1px]">{user.unSettlesInsallments}</td>
-                                <td className="p-3 border-x-[1px]">{user.constInsallments}</td>
-                                <td className="p-3 border-x-[1px]">{user.dateInsallments}</td>
-                                <td className="p-3">{user.penalty}</td>
+                                <td className="p-3 border-x-[1px]">{AdminInsallments.full_name}</td>
+                                <td className="p-3">{AdminInsallments.paid_count}</td>
+                                <td className="p-3 border-x-[1px]">{AdminInsallments.unpaid_count}</td>
+                                <td className="p-3 border-x-[1px]">{AdminInsallments.amount_due}</td>
+                                <td className="p-3 border-x-[1px]">{AdminInsallments.due_date}</td>
+                                <td className="p-3">{AdminInsallments.penalty}</td>
                               
                             </tr>
                         ))}
                     </tbody>
             </table>
+        )}
 
         </div>
 
@@ -260,9 +102,9 @@ const AdminInsallmentsPage = () =>{
         md:block
         ">
          <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={(page) => setCurrentPage(page)}
+      //   currentPage={currentPage}
+      //   totalPages={totalPages}
+      //   onPageChange={(page) => setCurrentPage(page)}
         />
         </div>
 
@@ -276,7 +118,7 @@ const AdminInsallmentsPage = () =>{
             اقساط
          </p>
 
-      {installments.map((item, index) => (
+      {/* {AllInsallments.map((item, index) => (
       <div key={index} className="border-b-[1px] pb-2">
       <div>
       <p>{item.name}</p>
@@ -287,7 +129,7 @@ const AdminInsallmentsPage = () =>{
       <p>اقساط پرداخت نشده: {item.unpaid}</p>
       <p>جریمه: {item.penalty}</p>
       </div>
-      ))}
+      ))} */}
 
       </div>
 
