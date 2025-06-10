@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Pagination from "../elements/Pagination";
 import {  deleteUser, getAllUsers, updateUser } from "@/service/adminUsers";
+import Link from "next/link";
 const AdminUserManagementPage = () => {
 
   const [users , setUsers] = useState()
@@ -112,6 +113,7 @@ const AdminUserManagementPage = () => {
             </div>
 
             <div>
+              <Link href="/admin/user-registration"> 
                 <button className="
                 md:w-[156px] w-[375px]
                 h-10
@@ -130,6 +132,7 @@ const AdminUserManagementPage = () => {
                 ">
                      + ثبت کاربر جدید
                 </button>
+                </Link>
             </div>
 
     </div>
