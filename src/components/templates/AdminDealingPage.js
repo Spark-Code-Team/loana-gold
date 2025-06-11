@@ -1,143 +1,38 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Pagination from "../elements/Pagination";
+import AdminLoansApi from "@/service/AdminLoans";
+import { ThreeDots } from "react-loader-spinner";
+import { convertToJalali } from "@/utils/setTime";
 
 const AdminDealingPage = () =>{
-    
-    const userss=[
-        { 
-        id: 1,
-        name: "مهدی جعفرپور", 
-        typeOfDealing: " شارژ کیف پول ", 
-        gold: "1 گرم",
-        cost: " 300/000/000 تومان ",
-        date: "14/12/11",
-    }, 
-    { 
-        id: 2,
-        name: "مهدی جعفرپور", 
-        typeOfDealing: " شارژ کیف پول ", 
-        gold: "1 گرم",
-        cost: " 300/000/000 تومان ",
-        date: "14/12/11",
-    },
-    { 
-        id: 1,
-        name: "مهدی جعفرپور", 
-        typeOfDealing: " شارژ کیف پول ", 
-        gold: "1 گرم",
-        cost: " 300/000/000 تومان ",
-        date: "14/12/11",
-    }, 
-    { 
-        id: 2,
-        name: "مهدی جعفرپور", 
-        typeOfDealing: " شارژ کیف پول ", 
-        gold: "1 گرم",
-        cost: " 300/000/000 تومان ",
-        date: "14/12/11",
-    },
-    ]
-    const users = [
-    { 
-        id: 1,
-        name: "مهدی جعفرپور", 
-        typeOfDealing: " شارژ کیف پول ", 
-        gold: "1 گرم",
-        cost: " 300/000/000 تومان ",
-        date: "14/12/11",
-    }, 
-    { 
-        id: 2,
-        name: "مهدی جعفرپور", 
-        typeOfDealing: " شارژ کیف پول ", 
-        gold: "1 گرم",
-        cost: " 300/000/000 تومان ",
-        date: "14/12/11",
-    },
-    { 
-        id: 3,
-        name: "مهدی جعفرپور", 
-        typeOfDealing: " شارژ کیف پول ", 
-        gold: "2گرم",
-        cost: " 300/000/000 تومان ",
-        date: "14/12/11",
-    },
-    { 
-        id: 4,
-        name: "مهدی جعفرپور", 
-        typeOfDealing: " شارژ کیف پول ", 
-        gold: "3گرم",
-        cost: " 300/000/000 تومان ",
-        date: "14/12/11",
-    },
-    { 
-        id: 5,
-        name: "مهدی جعفرپور", 
-        typeOfDealing: " شارژ کیف پول ", 
-        gold: "5گرم",
-        cost: " 300/000/000 تومان ",
-        date: "14/12/11",
-    },
-    { 
-        id: 6,
-        name: "مهدی جعفرپور", 
-        typeOfDealing: " شارژ کیف پول ", 
-        gold: "8گرم",
-        cost: " 300/000/000 تومان ",
-        date: "14/12/11",
-    },
-    { 
-        id: 7,
-        name: "مهدی جعفرپور", 
-        typeOfDealing: " شارژ کیف پول ", 
-        gold: "واریز",
-        cost: " 300/000/000 تومان ",
-        date: "14/12/11",
-    },
-    { 
-        id: 8,
-        name: "مهدی جعفرپور", 
-        typeOfDealing: " شارژ کیف پول ", 
-        gold: "واریز",
-        cost: " 300/000/000 تومان ",
-        date: "14/12/11",
-    },
-    { 
-        id: 9,
-        name: "مهدی جعفرپور", 
-        typeOfDealing: " شارژ کیف پول ", 
-        gold: "واریز",
-        cost: " 300/000/000 تومان ",
-        date: "14/12/11",
-    },
-    { 
-        id: 10,
-        name: "مهدی جعفرپور", 
-        typeOfDealing: " شارژ کیف پول ", 
-        gold: "واریز",
-        cost: " 300/000/000 تومان ",
-        date: "14/12/11",
-    },
-    { 
-        id: 11,
-        name: "مهدی جعفرپور", 
-        typeOfDealing: " شارژ کیف پول ", 
-        gold: "واریز",
-        cost: " 300/000/000 تومان ",
-        date: "14/12/11",
-    },
-     
-      ];
 
-    
-  const [currentPage, setCurrentPage] = useState(1);
-  const usersPerPage = 5;
+    const [AllLoans , setAllLoans] = useState()
+    const [loading , setLoading] = useState(true)
 
-  const indexOfLastUser = currentPage * usersPerPage;
-  const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
-  const totalPages = Math.ceil(users.length / usersPerPage);
+    useEffect (()=>{
+        const LoansAdminPanel = async () => {
+            const {response , error} = await AdminLoansApi() 
+            if(response){ 
+             setAllLoans(response.data.results)
+                setLoading(false)
+            }else{
+                toast.error(error.response.data.error)}
+        }
+        LoansAdminPanel()
+    },[])
+
+    const getStatusText = (status) => {
+        switch (status?.toLowerCase()) {
+          case "in_progress":
+            return "درحال بررسی";
+          case "completed":
+            return "تمام";
+          case "cancelled":
+            return " کنسل شده ";
+        
+        }
+      };
     
     return(
         
@@ -182,7 +77,6 @@ const AdminDealingPage = () =>{
             <div className="text-[#E90000]">حدف همه فیلترها</div>
             </div>
 
-
         <div className="
         w-[1016px]
         mt-6 
@@ -192,8 +86,27 @@ const AdminDealingPage = () =>{
         hidden
         md:block
         ">
+             {loading ? (
+                    <div className="
+                    flex 
+                    flex-col 
+                    items-center 
+                    justify-center 
+                    h-[300px]
+                    ">
+                      <ThreeDots
+                      visible={true}
+                      height="10"
+                      width="80"
+                      color="#3B82F6"   
+                      radius="9"
+                      ariaLabel="three-dots-loading"
+                      />
+                    </div>
+            
+                    ) : (
 
-           <table className="w-full">
+            <table className="w-full">
                     <thead className="border-b-[1px]">
                         <tr>
                             <th className="p-3">#</th>
@@ -206,19 +119,20 @@ const AdminDealingPage = () =>{
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-300">
-                        {currentUsers.map((user, index) => (
-                            <tr key={user.id} className="text-center hover:bg-gray-100">
+                        {AllLoans.map((AllLoans, index) => (
+                            <tr key={AllLoans.id} className="text-center hover:bg-gray-100">
                                 <td className="p-3">{index + 1}</td>
-                                <td className="p-3 border-x-[1px]">{user.name}</td>
-                                <td className="p-3">{user.typeOfDealing}</td>
-                                <td className="p-3 border-x-[1px]">{user.gold}</td>
-                                <td className="p-3 border-x-[1px]">{user.cost}</td>
-                                <td className="p-3 border-x-[1px]">{user.date}</td>
+                                <td className="p-3 border-x-[1px]">{AllLoans.user}</td>
+                                <td className="p-3">{getStatusText(AllLoans.status)}</td>
+                                <td className="p-3 border-x-[1px]">{AllLoans.amount}</td>
+                                <td className="p-3 border-x-[1px]">{AllLoans.total_amount_due}</td>
+                                <td className="p-3 border-x-[1px]">{convertToJalali(AllLoans.created_at)}</td>
                               
                             </tr>
                         ))}
                     </tbody>
-                </table>
+            </table>
+                      )}
 
         </div>
        
@@ -227,9 +141,7 @@ const AdminDealingPage = () =>{
        md:block
        ">
        <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={(page) => setCurrentPage(page)}
+       
       />
        </div>
 
@@ -243,22 +155,11 @@ const AdminDealingPage = () =>{
         تاریخچه معاملات
         </p>
 
-      {userss.map((item, index) => (
-      <div key={index} className="border-b-[1px] pb-2">
-      <div>
-      <p>{item.name}</p>
-      </div>
-      <p>  نوع معامله:  {item.typeOfDealing} تومان</p>
-      <p> مقدار طلا: {item.gold}</p>
-      <p>  مبلغ:: {item.cost}</p>
-      <p>  تاریخ معامله: {item.date}</p>
-      </div>
-      ))}
 
        </div>
         
       
-        </div>
+    </div>
     )
 }
 export default AdminDealingPage;
