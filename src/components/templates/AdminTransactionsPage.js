@@ -95,9 +95,6 @@ const AdminTransactions = () => {
           }
         }
 
-        
-      
-
     return(
       <div className="
          flex

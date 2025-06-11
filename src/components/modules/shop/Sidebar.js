@@ -52,6 +52,7 @@ export default function Sidebar() {
               ">
                
             <div className="w-64">
+
               <div className="
                flex 
                items-center 
@@ -63,6 +64,7 @@ export default function Sidebar() {
                 <Coin className="w-6 h-6 ml-2" />
                 <h3>محدوده قیمت</h3>
               </div>
+              
             </div>
 
                 <div className="
