@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import ModalPage from "@/components/elements/Modals";
 import SanaRes from "@/components/modules/receivingCredit/SanaRes";
 import { purchaseRequest } from "@/service/finance";
+import { usePathname } from "next/navigation";
 
 const HomeHeader = () => {
 
@@ -17,19 +18,20 @@ const HomeHeader = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [openSidebar , setOpenSidebar] = useState(false);
 
-    const itemsSidebar = [
-        {id:1 , title:"حساب کاربری" , image:"/images/user-sidebar.png"},
-        {id:1 , title:"کیف پول" , image:"/images/kif-pul.png"},
-        {id:1 , title:"اقساط" , image:"/images/aghsat.png"},
-        {id:1 , title:"معامله طلا" , image:"/images/moamele.png"},
-        {id:1 , title:"تاریخچه اعتبارسنجی" , image:"/images/shopping.png"},
-        {id:1 , title:"ثبت محصول" , image:"/images/cart.png"},
-        {id:1 , title:"سفارش ها" , image:"/images/tarakonesh.png"},
-        {id:1 , title:"تراکنش ها" , image:"/images/help.png"},
-    ]
+    // const itemsSidebar = [
+    //     {id:1 , title:"حساب کاربری" , image:"/images/user-sidebar.png"},
+    //     {id:1 , title:"کیف پول" , image:"/images/kif-pul.png"},
+    //     {id:1 , title:"اقساط" , image:"/images/aghsat.png"},
+    //     {id:1 , title:"معامله طلا" , image:"/images/moamele.png"},
+    //     {id:1 , title:"تاریخچه اعتبارسنجی" , image:"/images/shopping.png"},
+    //     {id:1 , title:"ثبت محصول" , image:"/images/cart.png"},
+    //     {id:1 , title:"سفارش ها" , image:"/images/tarakonesh.png"},
+    //     {id:1 , title:"تراکنش ها" , image:"/images/help.png"},
+    // ]
 
     const profile = UserProfile()
     const router = useRouter()
+    const path = usePathname()
 
     useEffect(() => {  
         if(!profile.data.role){
@@ -44,6 +46,7 @@ const HomeHeader = () => {
 
             fetchProfile()
         }
+        else if (profile.data.role ==1 ){console.log(path , 'naaaaaaaaaaaaas')}
     }, [profile.data.role]);  
 
     const openModal = () => {

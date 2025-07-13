@@ -23,7 +23,7 @@ export default function DashboardLayoutUser({ children }){
                     router.push('/admin/User-Account')
                 }else if(profileStore.data.role === 'support'){
                     //اینجا پوش میکنیم به ساپورت
-                }else{
+                }else if(profileStore.data.role == 1){
                     router.push('/dashboard/user-account-dashboard')
                 }
             } else {
