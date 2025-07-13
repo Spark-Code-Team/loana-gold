@@ -8,7 +8,7 @@ import Cash from "../modules/cashDelivery/Cash";
 
 const CashDeliveryPage = () =>{
 
-    const [activeTab , setactiveTab] = useState("buyinggold");
+    const [activeTab , setactiveTab] = useState("cash");
 
 
     return(
@@ -63,7 +63,10 @@ const CashDeliveryPage = () =>{
 
         </div>
 
-        {activeTab === "delivery" ? <Delivery/> : <Cash/>}
+        {activeTab === "delivery" ? <Delivery/> : 
+        <SellinGold/>
+        // <Cash/>
+        }
 
         </div>
        

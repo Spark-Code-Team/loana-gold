@@ -6,7 +6,7 @@ import SellinGold from "../modules/goldDeal/SellingGold";
 
 const GoldDealPage = () =>{
 
-    const [activeTab , setactiveTab] = useState("buying");
+    const [activeTab , setactiveTab] = useState("buyingGold");
 
 
     return(
@@ -35,7 +35,7 @@ const GoldDealPage = () =>{
                 mx-8
                 text-sm
                 font-bold
-                ${activeTab === "buyingGold "? "bg-slate-300" :"bg-gray-100"}
+                ${activeTab === "buyingGold"? "bg-slate-300" :"bg-gray-100"}
                 `}
                 onClick={()=>setactiveTab("buyingGold")}
                 > 

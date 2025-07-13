@@ -81,11 +81,11 @@ const TransactionDashboardPage = () =>{
             {transaction?.map((transaction, index) => (
               <React.Fragment key={index}>
                 <tr>
-                  <td className="p-3 border-b-[1px] border-[#EDEDED]">{transaction.description}</td>
-                  <td className="p-3 border-b-[1px] border-[#EDEDED]">{transaction.amount}</td>
-                  <td className="p-3 border-b-[1px] border-[#EDEDED]">{transaction.id}</td>
-                  <td className="p-3 border-b-[1px] border-[#EDEDED]">{convertToJalali(transaction.created_at)}</td>
-                  <td className="p-3 border-b-[1px] border-[#EDEDED] text-center">
+                  <td className="p-3 text-center border-b-[1px] border-[#EDEDED]">{transaction.description}</td>
+                  <td className="p-3 text-center border-b-[1px] border-[#EDEDED]">{transaction.amount}</td>
+                  <td className="p-3 text-center border-b-[1px] border-[#EDEDED]">{transaction.id}</td>
+                  <td className="p-3 text-center border-b-[1px] border-[#EDEDED]">{convertToJalali(transaction.created_at)}</td>
+                  <td className="p-3 text-center border-b-[1px] border-[#EDEDED] ">
                     <button
                       
                     onClick={() => toggleAccordion(index)}>

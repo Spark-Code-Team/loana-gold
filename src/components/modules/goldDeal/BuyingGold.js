@@ -20,12 +20,15 @@ const [buyGold, setBuyGold] = useState({
 const router = useRouter()
 
   const [loading, setLoading] = useState(false);
+  const [weHaveData, setWeHaveData] = useState(false);
+
 
   useEffect(() => {
     const getBalance = async () => {
       const {response , error} = await walletBalance()
       if(response){
         setBalance(response.data.cash.amount)
+        setWeHaveData(true)
       }else{
         console.log(error)
       }
@@ -93,11 +96,27 @@ const router = useRouter()
       >
         <p
           className="
+                 pt-2
+                 flex 
+                 justify-center
+                 items-center
+                 min-h-[40px]
+                 min-w-[100px]
                  text-lg
                  mr-8
                  "
         >
-          موجودی شما: {balance} تومان
+           موجودی شما:{weHaveData?<> {balance} تومان</>:<ThreeDots
+                        visible={true}
+                        top="5"
+                        height="10"
+                        width="80"
+                        color="primary"
+                        radius="9"
+                        ariaLabel="three-dots-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                    />}
         </p>
       </div>
 
@@ -179,27 +198,31 @@ const router = useRouter()
                     flex
                     flex-col
                     ">
-                       <button className="pt-2" onClick={()=> SendData()}>
-                        محاسبه
-                       </button>
+                          <button
+                        className="pt-2 flex justify-center items-center min-h-[40px] min-w-[100px]"
+                        onClick={()=> SendData()}>
+                        {/* محاسبه */}
+                        {loading ? 
+                        <ThreeDots
+                        visible={true}
+                        top="5"
+                        height="10"
+                        width="80"
+                        color="#ffffff"
+                        radius="9"
+                        ariaLabel="three-dots-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                    />: 'محاسبه'
+                    }
+                        </button>
                     <div className="
                     flex
                     flex-col
                     items-center
                     justify-center
                     ">
-                    {loading && (
-                      <ThreeDots
-                      visible={true}
-                      height="10"
-                      width="80"
-                      color="#ffffff"
-                      radius="9"
-                      ariaLabel="three-dots-loading"
-                      wrapperStyle={{}}
-                      wrapperClass=""
-                    />
-                    )}
+
                   </div>
        
 

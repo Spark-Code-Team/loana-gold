@@ -97,13 +97,13 @@ const SidebarDashboard = () => {
     border 
     border-[#DADADA] 
     rounded-xl 
-    md:h-[800px]
+    md:h-max
     shadow-md
     "
       >
         <ul
           className="
-      pt-4
+      py-4
       px-6
       space-y-6
       "

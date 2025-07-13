@@ -17,16 +17,18 @@ const SellinGold = () =>{
         cash_amount: "",
       });
     
-      const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-      const router = useRouter()
+    const [weHaveData, setWeHaveData] = useState(false);
+
+    const router = useRouter()
 
     useEffect(()=>{
         const getBalance = async () => {
             const {response , error} = await walletBalance()
             if (response) {
                 setBalance(response.data.gold.amount)
-                console.log(response)
+                setWeHaveData(true)
             }else{
                 console.log(error)
             }
@@ -86,10 +88,26 @@ const SellinGold = () =>{
                mt-5
                ">
                 <p className="
+                 pt-2
+                 flex 
+                 justify-center
+                 items-center
+                 min-h-[40px]
+                 min-w-[100px]
                  text-lg
                  mr-8
                  ">
-                    موجودی شما: {balance} گرم طلا 
+           موجودی شما:{weHaveData?<> {balance} تومان</>:<ThreeDots
+                        visible={true}
+                        top="5"
+                        height="10"
+                        width="80"
+                        color="primary"
+                        radius="9"
+                        ariaLabel="three-dots-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                    />}
                 </p>
             </div>
         
@@ -167,18 +185,13 @@ const SellinGold = () =>{
                     flex
                     flex-col
                     ">
-                        <button className="pt-2" onClick={()=> SendData()}>
-                        محاسبه
-                        </button>
-                    <div className="
-                    flex
-                    flex-col
-                    items-center
-                    justify-center
-                    ">
-                    {loading && (
+                        <button
+                        className="pt-2 flex justify-center items-center min-h-[40px] min-w-[100px]"
+                        onClick={()=> SendData()}>
+                        {loading ? 
                         <ThreeDots
                         visible={true}
+                        top="5"
                         height="10"
                         width="80"
                         color="#ffffff"
@@ -186,8 +199,16 @@ const SellinGold = () =>{
                         ariaLabel="three-dots-loading"
                         wrapperStyle={{}}
                         wrapperClass=""
-                    />
-                    )}
+                    />: 'محاسبه'
+                    }
+                        </button>
+                    <div className="
+                    flex
+                    flex-col
+                    items-center
+                    justify-center
+                    ">
+
                     </div>
         
 
