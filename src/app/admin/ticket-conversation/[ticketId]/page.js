@@ -26,7 +26,6 @@ const AdminTicketConversation =  ({params}) => {
                 toast.error(error.response.data.error)}
         }
         myTickets()
-        console.log(params,'1231231231')
     } , [reload])
     
     

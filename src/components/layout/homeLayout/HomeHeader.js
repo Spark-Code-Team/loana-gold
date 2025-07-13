@@ -46,7 +46,6 @@ const HomeHeader = () => {
 
             fetchProfile()
         }
-        else if (profile.data.role ==1 ){console.log(path , 'naaaaaaaaaaaaas')}
     }, [profile.data.role]);  
 
     const openModal = () => {
