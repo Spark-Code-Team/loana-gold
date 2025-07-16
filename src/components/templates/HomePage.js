@@ -15,15 +15,24 @@ const HomePage = () => {
         md:w-full
         md:h-[471px]
         md:mt-16 
+        md:mb-14
         md:px-16
         md:flex
-        md:justify-between
+        md:justify-center
+        pb-14
         ">
         <OnlineCalculation/>
-        <OnlineChartt/>
+        <OnlineChartt />
         </div>
         
-        <ProcessCredit />
+        <div className="
+        md:w-full
+        md:mt-16 
+        sm:pt-7
+        ">
+            <ProcessCredit />
+        </div>
+
 
         <InstallmentPayment/>
 

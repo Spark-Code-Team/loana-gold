@@ -155,9 +155,9 @@ const TicketDashboardPage = () =>{
                     <p className="font-bold">
                     لیست تیکت ها
                     </p>
-                    {weHaveData?<>
+                    { weHaveData?<>
                         {
-                        allTickets?<>                     {
+                        allTickets.length>0?<>                     {
                             allTickets?.map((p , index) => {
                                 return(
                                     <Link href={`/dashboard/ticket-conversation/${p.id}`}>   
@@ -230,7 +230,7 @@ const TicketDashboardPage = () =>{
     
                                 )
                             })
-                         }</>:<>تیکت ثبت شده وجود ندارد</>
+                         }</>:<>تیکت ثبت شده ای وجود ندارد</>
                      }</>:<>
                 <ThreeDots
                     visible={true}

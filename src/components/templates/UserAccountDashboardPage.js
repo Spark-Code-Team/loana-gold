@@ -307,13 +307,15 @@ const UserAccountDashboardPage = () => {
             </div>
 
             <div className="
-            w-[912px]
-            h-[370px]
+            w-full
+            h-max
+
             bg-white
             border-[1px]
             rounded-xl        
             border-[#CBCED7]
-            mt-32
+            pb-7
+            mt-7
             ">
 
 

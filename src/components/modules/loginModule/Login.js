@@ -119,78 +119,80 @@ const Login = () => {
 
         <div className="w-full pr-8 font-bold text-[20px] border-b border-gray-200 p-[20px] ">تاریخچه اعتبار سنجی</div>
 
-
-            {userGradehistory.map((p,index)=>{
+            {userGradehistory.length>0?<>
+                {userGradehistory.map((p,index)=>{
     
-                if(p.status === "completed"){
-                    if(!p.is_accepted){
-                    return( 
-                        <>
-                            <div className="w-full pr-8 font-bold mt-6">نتیجه اعتبار سنجی</div>
+    if(p.status === "completed"){
+        if(!p.is_accepted){
+        return( 
+            <>
+                <div className="w-full pr-8 font-bold mt-6">نتیجه اعتبار سنجی</div>
 
-                            <div className="w-full pr-8 mt-6  ">نتیجه اعتبار سنجی : امکان دریافت اعتبار تا {gradeCredit(p?.grade)} گرم طلا</div>
+                <div className="w-full pr-8 mt-6  ">نتیجه اعتبار سنجی : امکان دریافت اعتبار تا {gradeCredit(p?.grade)} گرم طلا</div>
 
-                            <div className="w-full pr-8 mt-6 ">تاریخ ثبت : {gradeAchivedAt(p?.achieved_at)}</div>
+                <div className="w-full pr-8 mt-6 ">تاریخ ثبت : {gradeAchivedAt(p?.achieved_at)}</div>
 
-                            <div className="w-full pr-8 mt-6 text-red-600 ">تاریخ اعتبارسنجی تا 24 ساعت اعتبار دارد و پس از اتمام زمان دوباره باید اعتبار سنجی کنید.</div>
+                <div className="w-full pr-8 mt-6 text-red-600 ">تاریخ اعتبارسنجی تا 24 ساعت اعتبار دارد و پس از اتمام زمان دوباره باید اعتبار سنجی کنید.</div>
 
-                            <br/>  
+                <br/>  
 
-                            <button className=" 
-                                mr-6 
-                                p-[16px]
-                                bg-[#EDEDED] 
-                                rounded-xl 
-                              text-black
-                              hover:bg-primary
-                              hover:text-black
-                                text-xl
-                                md:text-base
-                                "
-                                onClick={() => {
-                                    setOpenModal(1)
-                                }}
-                                >
-                                    تایید و ادامه
-                            </button>
-                        </>
-                        
-                    )}else{
-                        return(
-                            <div className="w-full border-gray-200 border-t h-min mt-[16px] pt-[24px] px-[24px] top-0 ">
-                                <div className="w-full font-bold text-[20px] border-gray-200 mb-[12px] ">درخواست اعتبار</div>
-                                <div className='flex flex-row justify-around' >
-                                    <span className="mb-[12px] w-max ">نتیجه اعتبار سنجی: امکان دریافت اعتبار تا {gradeCredit(p.grade)} گرم طلا</span>
-                                    <span className="mb-[12px] w-max ">تاریخ درخواست: {convertToJalali(p.achieved_at)} </span>
-                                    <span className="mb-[12px] w-max ">تایید توسط شما: <span className='text-green-500' >تایید شده</span></span>
-                                </div>
-                            </div>
-                        )
-                    }
-                }
-                else if(p.status === "in_progress"){
-                    return(
-                        <>
-                            <div className="w-full pr-8 font-bold mt-6">نتیجه اعتبار سنجی: در حال پردازش</div>
+                <button className=" 
+                    mr-6 
+                    p-[16px]
+                    bg-[#EDEDED] 
+                    rounded-xl 
+                  text-black
+                  hover:bg-primary
+                  hover:text-black
+                    text-xl
+                    md:text-base
+                    "
+                    onClick={() => {
+                        setOpenModal(1)
+                    }}
+                    >
+                        تایید و ادامه
+                </button>
+            </>
+            
+        )}else{
+            return(
+                <div className="w-full border-gray-200 border-t h-min mt-[16px] pt-[24px] px-[24px] top-0 ">
+                    <div className="w-full font-bold text-[20px] border-gray-200 mb-[12px] ">درخواست اعتبار</div>
+                    <div className='flex flex-row justify-around' >
+                        <span className="mb-[12px] w-max ">نتیجه اعتبار سنجی: امکان دریافت اعتبار تا {gradeCredit(p.grade)} گرم طلا</span>
+                        <span className="mb-[12px] w-max ">تاریخ درخواست: {convertToJalali(p.achieved_at)} </span>
+                        <span className="mb-[12px] w-max ">تایید توسط شما: <span className='text-green-500' >تایید شده</span></span>
+                    </div>
+                </div>
+            )
+        }
+    }
+    else if(p.status === "in_progress"){
+        return(
+            <>
+                <div className="w-full pr-8 font-bold mt-6">نتیجه اعتبار سنجی: در حال پردازش</div>
 
-                            <div className="w-full pr-8 mt-6 ">تاریخ درخواست : {gradeAchivedAt(p?.created_at)}</div>
+                <div className="w-full pr-8 mt-6 ">تاریخ درخواست : {gradeAchivedAt(p?.created_at)}</div>
 
-                            <br/>
-                        </>
-                    )
-                }
-                else{
-                    return(
-                        <>
-                            <div className="w-full pr-8 font-bold mt-6">نتیجه اعتبار سنجی:<span className='text-red-600' >درخواست منقضی شده</span></div>
+                <br/>
+            </>
+        )
+    }
+    else{
+        return(
+            <>
+                <div className="w-full pr-8 font-bold mt-6">نتیجه اعتبار سنجی:<span className='text-red-600' >درخواست منقضی شده</span></div>
 
-                            <div className="w-full pr-8 mt-6 ">تاریخ درخواست : {gradeAchivedAt(p?.achieved_at)}</div>
+                <div className="w-full pr-8 mt-6 ">تاریخ درخواست : {gradeAchivedAt(p?.achieved_at)}</div>
 
-                            <br/>
-                        </>
-                    )                }
-                
-            })}
+                <br/>
+            </>
+        )                }
+    
+})}
+</>:<div className='px-[24px] pt-[24px]'>رکوردی موجود نمیباشد</div>}
+
 
             </div>
 

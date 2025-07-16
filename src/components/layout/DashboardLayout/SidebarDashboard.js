@@ -16,6 +16,7 @@ import { UserProfile } from "@/stores/profileStore";
 import { logOut } from "@/service/auth";
 import { getCookie } from "@/utils/cookies";
 import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const SidebarDashboard = () => {
   const [openMenu, setOpenMenu] = useState(null);
@@ -25,6 +26,8 @@ const SidebarDashboard = () => {
   };
 
   const router = useRouter()
+
+  const path = usePathname()
 
   const profileStore = UserProfile()
 
@@ -122,7 +125,7 @@ const SidebarDashboard = () => {
             >
               <UserAccountDashboard/>
               <Link href="/dashboard/user-account-dashboard">
-              <p className="pr-2">حساب کاربری</p>
+              <p className={`pr-2 ${path === "/dashboard/user-account-dashboard" ? "text-primary" : ""}`}>حساب کاربری</p>
               </Link>
             </div>
           </li>
@@ -159,22 +162,26 @@ const SidebarDashboard = () => {
                 hover:text-primary 
                 rounded-lg
                 ">
-                  <a href="/dashboard/goldStorage-dashboard">   طلا </a>
+                  <a href="/dashboard/goldStorage-dashboard"
+                    className={path === "/dashboard/goldStorage-dashboard" ? "text-primary" : ""}
+                  >   طلا </a>
                 </li>
 
-                <li className="
+                {/* <li className="
                 p-2  
                 hover:text-primary 
                 rounded-lg
                 ">
                   <a href="/dashboard/"> نقره </a>
-                </li>
+                </li> */}
                 <li className="
                 p-2  
                 hover:text-primary 
                 rounded-lg
                 ">
-                  <a href="/dashboard/wallet-dashboard"> موجودی نقدی </a>
+                  <a href="/dashboard/wallet-dashboard"
+                    className={path === "/dashboard/wallet-dashboard" ? "text-primary" : ""}
+                  > موجودی نقدی </a>
                 </li>
 
               </ul>
@@ -190,7 +197,7 @@ const SidebarDashboard = () => {
             <div className="flex">
               <InstallmentDashboard />
               <Link href="/dashboard/Transaction-dashboard">
-              <p className="pr-2"> تراکنش‌ها  </p>
+              <p className={`pr-2 ${path === "/dashboard/Transaction-dashboard" ? "text-primary" : ""}`} > تراکنش‌ها  </p>
               </Link>
             </div>
           </li>
@@ -205,7 +212,7 @@ const SidebarDashboard = () => {
             <div className="flex">
               <InstallmentDashboard />
               <Link href="/dashboard/installments">
-              <p className="pr-2">اقساط</p>
+              <p className={`pr-2 ${path === "/dashboard/installments" ? "text-primary" : ""}`}>اقساط</p>
               </Link>
             </div>
           </li>
@@ -223,7 +230,7 @@ const SidebarDashboard = () => {
               <div className="flex">
                 <GoldDashboard />
                 <Link href="/dashboard/gold-deals">
-                <p className="pr-2">معامله طلا</p>
+                <p className={`pr-2 ${path === "/dashboard/gold-deals" ? "text-primary" : ""}`}>معامله طلا</p>
                 </Link>
               </div>
           </li>
@@ -236,12 +243,12 @@ const SidebarDashboard = () => {
             <div className="flex">
               <HistoryDashboard />
               <Link href="/dashboard/Validation-history">
-                <p className="pr-2">تاریخچه اعتبارسنجی</p>
+                <p className={`pr-2 ${path === "/dashboard/Validation-history" ? "text-primary" : ""}`}>تاریخچه اعتبارسنجی</p>
               </Link>
             </div>
           </li>
 
-          <li className="
+          {/* <li className="
           p-2  
           hover:text-primary 
           cursor-pointer
@@ -249,10 +256,10 @@ const SidebarDashboard = () => {
             <a href="/dashboard/support">
               <div className="flex">
                 <SubmitDashboard />
-                <p className="pr-2">ثبت محصول</p>
+                <p className={`pr-2 ${path === "/dashboard/support" ? "text-primary" : ""}`}>ثبت محصول</p>
               </div>
             </a>
-          </li>
+          </li> */}
 
           <li className="
           p-2 
@@ -263,7 +270,7 @@ const SidebarDashboard = () => {
               <div className="flex">
                 <OrderDashboard />
                 <Link href="/dashboard/orders-dashboard">
-                <p className="pr-2">سفارش ها</p>
+                <p className={`pr-2 ${path === "/dashboard/orders-dashboard" ? "text-primary" : ""}`}>سفارش ها</p>
                 </Link>
               </div>
             </Link>
@@ -278,7 +285,7 @@ const SidebarDashboard = () => {
               <div className="flex">
                 <TicketDashboard />
                 <Link href="/dashboard/address-dashboard">
-                <p className="pr-2"> آدرس ها </p>
+                <p className={`pr-2 ${path === "/dashboard/address-dashboard" ? "text-primary" : ""}`}> آدرس ها </p>
                 </Link>
               </div>
             </Link>
@@ -293,7 +300,7 @@ const SidebarDashboard = () => {
               <div className="flex">
                 <TicketDashboard />
                 <Link href="/dashboard/ticket-dashboard">
-                <p className="pr-2">ارسال تیکت پشتیبانی</p>
+                <p className={`pr-2 ${path === "/dashboard/ticket-dashboard" ? "text-primary" : ""}`}>ارسال تیکت پشتیبانی</p>
                 </Link>
               </div>
             </Link>

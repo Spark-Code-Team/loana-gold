@@ -6,9 +6,9 @@ const ProcessCredit = () => {
 
       <>
 
-          <div className="w-full md:mt-14 md:mb-14 mt-14 mb-14">
+          <div className="w-full flex justify-center md:mt-14 md:mb-14 mt-14 mb-14">
 
-              <div className="md:w-[90%] w-[90%] m-auto">
+              <div className="w-full flex justify-center p-7 ">
 
                   <Image src="/images/process.png" alt="" width={1200} height={290}/>
 

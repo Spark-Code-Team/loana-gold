@@ -46,13 +46,14 @@ const Settled = () => {
     }
 
     return(
-        <div className="
+        <div className={`
         w-[912px]
         h-full
         border-[1px]
         border-[#CBCED7]
+        ${installmentStatus=="paid"&!installments?"pb-7":"pb-0"}
         rounded-2xl
-        ">
+        `}>
             <DashboardLeft
             title="اقساط"
             />
