@@ -4,22 +4,33 @@ import { useEffect, useState } from "react";
 import Pagination from "../elements/Pagination";
 import {  deleteUser, getAllUsers, updateUser } from "@/service/adminUsers";
 import Link from "next/link";
+import { ThreeDots } from "react-loader-spinner";
 const AdminUserManagementPage = () => {
 
   const [users , setUsers] = useState()
   const [loading , setLoading] = useState(false)
+  const [wehavedata , setWehavedata] = useState(false)
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentUrl , setCurrentUrl] = useState()
+  const usersPerPage = 10;
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = users?.results.slice(indexOfFirstUser, indexOfLastUser);
+  const totalPages = Math.ceil(users?.count / usersPerPage);
 
   useEffect(()=>{
     const getUsers = async () => {
-      const {response , error} = await getAllUsers()
+      const {response , error} = await getAllUsers(currentUrl)
         if(response){
          setUsers(response.data)
+         setWehavedata(true)
         }else{
           console.log(error)
         }
     }
     getUsers()
-  },[])
+  },[ loading])
 
 
   const deleteAccount = async (id) => {
@@ -45,22 +56,11 @@ const AdminUserManagementPage = () => {
   }
 
 
-
-      const [selectedUser, setSelectedUser] = useState(null);
-      const [currentPage, setCurrentPage] = useState(1);
-      const usersPerPage = 10;
-      const indexOfLastUser = currentPage * usersPerPage;
-      const indexOfFirstUser = indexOfLastUser - usersPerPage;
-      const currentUsers = users?.results.slice(indexOfFirstUser, indexOfLastUser);
-      const totalPages = Math.ceil(users?.count / usersPerPage);
-
-
       const changePage = (pageNum) =>{ 
         let param = `?limit=${usersPerPage}&offset=${pageNum*usersPerPage-usersPerPage}`
         onPageChange(param)
       }
 
-      // این تیکه آزمایشیه و باید حذف بشه در آینده موقع قرار دادن روی سرور یا اینکه آدرس لوکال هاست زیر به آدرس سایت تغییر کنه
       function getPathAndQueryPart(url) {
         const urlObj = new URL(url, 'http://localhost:8000');
         const search = urlObj.search;
@@ -69,6 +69,8 @@ const AdminUserManagementPage = () => {
       }
 
       const onPageChange = async (url) => {
+        console.log(currentUrl , currentPage , 'this is new log')
+
         const {response , error} = await getAllUsers(url)
         if(response){
           setUsers(response.data)
@@ -147,40 +149,63 @@ const AdminUserManagementPage = () => {
          md:block
         ">
 
-           <table className="md:w-full w-[375px] ">
-                    <thead className="border-b-[1px]">
-                        <tr>
-                            <th className="p-3">#</th>
-                            <th className="p-3 border-x-[1px]">نام و نام خانوادگی</th>
-                            <th className="p-3 border-x-[1px]">موجودی نقدی</th>
-                            <th className="p-3 border-x-[1px]">موجودی طلا (گرم)</th>
-                            <th className="p-3 border-x-[1px]">موجودی نقره (گرم)</th>
-                            <th className="p-3 border-x-[1px]">شماره تلفن</th>
-                            <th className="p-3">تنظیمات</th>
-                        </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-300">
-                        {users?.results.map((user, index) => (
-                            <tr key={user.id} className="text-center hover:bg-gray-100">
-                                <td className="p-3">{index + 1}</td>
-                                <td className="p-3 border-x-[1px]">{user.first_name} {user.last_name}</td>
-                                <td className="p-3 border-x-[1px]" >{user.cash_wallet}</td>
-                                <td className="p-3 border-x-[1px]" >{user.gold_wallet}</td>
-                                <td className="p-3 border-x-[1px]" >{user.silver_wallet}</td>
-                                <td className="p-3 border-x-[1px]">{user.phone_number}</td>
-                                <td className="p-3">
+          {wehavedata?
+                <>{users?
+                  <table className="md:w-full w-[375px] ">
+                  <thead className="border-b-[1px]">
+                      <tr>
+                          <th className="p-3">#</th>
+                          <th className="p-3 border-x-[1px]">نام و نام خانوادگی</th>
+                          <th className="p-3 border-x-[1px]">موجودی نقدی</th>
+                          <th className="p-3 border-x-[1px]">موجودی طلا (گرم)</th>
+                          <th className="p-3 border-x-[1px]">موجودی نقره (گرم)</th>
+                          <th className="p-3 border-x-[1px]">شماره تلفن</th>
+                          <th className="p-3">تنظیمات</th>
+                      </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-300">
+                      {users?.results.map((user, index) => (
+                          <tr key={user.id} className="text-center hover:bg-gray-100">
+                              <td className="p-3">{index + 1}</td>
+                              <td className="p-3 border-x-[1px]">{user.first_name} {user.last_name}</td>
+                              <td className="p-3 border-x-[1px]" >{user.cash_wallet}</td>
+                              <td className="p-3 border-x-[1px]" >{user.gold_wallet}</td>
+                              <td className="p-3 border-x-[1px]" >{user.silver_wallet}</td>
+                              <td className="p-3 border-x-[1px]">{user.phone_number}</td>
+                              <td className="p-3">
 
-                                    <button className="px-2 py-1 border rounded-lg mx-1" 
-                                    onClick={() => setSelectedUser(user)}>✏️</button>
+                                  <button className="px-2 py-1 border rounded-lg mx-1" 
+                                  onClick={() => setSelectedUser(user)}>✏️</button>
 
-                                    <button className="px-2 py-1 border rounded-lg"
-                                      onClick={()=>{deleteAccount(user.id)}}>🗑</button>
+                                  <button className="px-2 py-1 border rounded-lg"
+                                    onClick={()=>{deleteAccount(user.id)}}>🗑</button>
 
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                              </td>
+                          </tr>
+                      ))}
+                  </tbody>
+                  </table>
+                  :<>کاربر ثبت شده وجود ندارد</>}</>
+          
+                :                    
+                <div className="
+                flex 
+                flex-col 
+                items-center 
+                justify-center 
+                h-[300px]
+                ">
+                  <ThreeDots
+                  visible={true}
+                  height="10"
+                  width="80"
+                  color="#D2AB67"   
+                  radius="9"
+                  ariaLabel="three-dots-loading"
+                  />
+                </div>}
+
+
 
     <div className="flex">
       <div
@@ -311,7 +336,69 @@ const AdminUserManagementPage = () => {
     </div>
 
     <div className="hidden md:block">
-        <div className="flex justify-center items-center gap-2 mt-4">
+    <div className="flex justify-center items-center gap-2 mt-4">
+                    <button
+                        disabled ={users?.previous? false : true}
+                        onClick={async() => {
+                            await onPageChange(getPathAndQueryPart(users?.previous))
+                            setCurrentUrl(getPathAndQueryPart(users?.previous))
+                            setCurrentPage(currentPage-1)
+                        }}
+                        className={`
+                            w-10 
+                            h-10
+                            flex 
+                            items-center 
+                            justify-center 
+                            rounded-lg 
+                            border-[1px]
+                            text-primary 
+                            ${users?.previous? 'border-primary':'bg-gray-200'}
+                          `}
+                       >
+                            {'<'}
+                        </button>
+
+
+                <div className="hidden md:block">
+                    <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={(page) => {
+                        changePage(page)
+                        setCurrentPage(page)
+                        setCurrentUrl(`?limit=${usersPerPage}&offset=${page*usersPerPage-usersPerPage}`)}
+                    }
+                        
+                    />
+                </div>
+
+                    <button
+                        disabled ={users?.next? false : true}
+                        onClick={async () => {
+                            await onPageChange(getPathAndQueryPart(users?.next))
+                            setCurrentUrl(getPathAndQueryPart(users?.next))
+                            setCurrentPage(currentPage+1)
+                        }}
+                        className={`
+                            w-10 
+                            h-10 
+                            flex 
+                            items-center 
+                            justify-center 
+                            rounded-lg 
+                            border-[1px]
+                            text-primary 
+                            ${users?.next? 'border-primary':'bg-gray-200'}
+                          `}
+                        >
+                            {'>'}
+                        </button>
+
+
+
+        </div>
+        {/* <div className="flex justify-center items-center gap-2 mt-4">
                     <button
                         disabled ={users?.previous? false : true}
                         onClick={async() => {
@@ -367,7 +454,7 @@ const AdminUserManagementPage = () => {
 
 
 
-        </div>
+        </div> */}
 
 
       

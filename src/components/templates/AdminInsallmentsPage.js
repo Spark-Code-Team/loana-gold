@@ -58,7 +58,7 @@ const AdminInsallmentsPage = () =>{
           visible={true}
           height="10"
           width="80"
-          color="#3B82F6"   
+          color="#D2AB67"   
           radius="9"
           ariaLabel="three-dots-loading"
           />

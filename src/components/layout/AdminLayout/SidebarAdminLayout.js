@@ -15,10 +15,13 @@ import Link from "next/link";
 import { logOut } from "@/service/auth";
 import { getCookie } from "@/utils/cookies";
 import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const SidebarAdminLayout = () =>{
 
   const router = useRouter()
+
+  const path = usePathname()
 
   const log_out = async () =>{ 
     const {response , error} = await logOut(getCookie('refreshToken'))
@@ -38,14 +41,14 @@ const SidebarAdminLayout = () =>{
   }
 
     return (
-        <>
+    <>
     <div className="
     hidden
     md:block
     ">
       
     <aside className="
-    w-[184px]
+    w-full
     bg-white 
     border 
     border-[#DADADA] 
@@ -78,7 +81,7 @@ const SidebarAdminLayout = () =>{
             >
               <UserAccountDashboard/>
               <Link href="/admin/panel-ad">
-              <p className="pr-2"> پنل </p>
+              <p className={`pr-2 ${path === "/admin/panel-ad" ? "text-primary" : ""}`}> پنل </p>
               </Link>
             </div>
           </li>
@@ -94,10 +97,7 @@ const SidebarAdminLayout = () =>{
             ">
                 <UserAccountDashboard />
                 <Link href="/admin/User-Account">
-                <p className="
-                pr-2 
-                hover:text-primary
-                 "> حساب کاربری </p>
+                <p className={`pr-2 hover:text-primary ${path === "/admin/User-Account" ? "text-primary" : ""}`}> حساب کاربری </p>
                  </Link>
             </div>
         </li>
@@ -111,10 +111,7 @@ const SidebarAdminLayout = () =>{
             ">
                 <UserAccountDashboard />
                 <Link href="/admin/User-Management">
-                <p className="
-                pr-2 
-                hover:text-primary
-                 ">  مدیریت کاربران </p>
+                <p className={`pr-2 hover:text-primary ${path === "/admin/User-Management" ? "text-primary" : ""}`}>  مدیریت کاربران </p>
                  </Link>
             </div>
         </li>
@@ -134,7 +131,7 @@ const SidebarAdminLayout = () =>{
             ">
               <InstallmentDashboard />
               <Link href="/admin/insallments-ad">
-              <p className="pr-2">اقساط</p>
+              <p className={`pr-2 hover:text-primary ${path === "/admin/insallments-ad" ? "text-primary" : ""}`}>اقساط</p>
               </Link>
             </div>
           </li>
@@ -152,7 +149,7 @@ const SidebarAdminLayout = () =>{
             ">
               <HistoryDashboard />
               <Link href="/admin/Dealing-ad">
-              <p className="pr-2"> تاریخچه معاملات</p>
+              <p className={`pr-2 hover:text-primary ${path === "/admin/Dealing-ad" ? "text-primary" : ""}`}> تاریخچه معاملات</p>
               </Link>
             </div>
           </li>
@@ -174,7 +171,7 @@ const SidebarAdminLayout = () =>{
               ">
                 <GoldDashboard />
                 <Link href="/admin/transactions">
-                <p className="pr-2"> تراکنش ها </p>
+                <p className={`pr-2 hover:text-primary ${path === "/admin/transactions" ? "text-primary" : ""}`}> تراکنش ها </p>
                 </Link>
             </div>
             
@@ -194,7 +191,7 @@ const SidebarAdminLayout = () =>{
             ">
                 <TicketDashboard />
                 <Link href="/admin/tickets">
-                <p className="pr-2"> تیکت ها </p>
+                <p className={`pr-2 hover:text-primary ${path === "/admin/tickets" ? "text-primary" : ""}`}> تیکت ها </p>
                 </Link>
               </div>
           </li>

@@ -242,8 +242,8 @@ const AdminTransactions = () => {
             </div>
 
         <div className="
-         w-[912px] 
-         h-full
+         w-full
+         h-max
          bg-white
          border-[1px]
          rounded-xl        
@@ -276,7 +276,7 @@ const AdminTransactions = () => {
           visible={true}
           height="10"
           width="80"
-          color="#3B82F6"   
+          color="#D2AB67"   
           radius="9"
           ariaLabel="three-dots-loading"
           />
@@ -300,14 +300,14 @@ const AdminTransactions = () => {
             {AllTransactions?.map((AllTransactions, index) => (
               <React.Fragment key={index}>
                 <tr className="w-full">
-                  <td className="w-1/7 p-3 border-b-[1px] border-[#EDEDED]">{AllTransactions.user_full_name || "—"}</td>
-                  <td className="w-1/7 p-3 border-b-[1px] border-[#EDEDED] border-r last:border-r-0">{AllTransactions.type || "—"}</td>
-                  <td className="w-1/7 p-3 border-b-[1px] border-[#EDEDED] border-r last:border-r-0">{getTransactionType(AllTransactions.transaction_type)}</td>
-                  <td className="w-1/7 p-3 border-b-[1px] border-[#EDEDED] border-r last:border-r-0">{AllTransactions.amount}</td>
-                  <td className="w-1/7 p-3 border-b-[1px] border-[#EDEDED] border-r last:border-r-0">{AllTransactions.id}</td>
-                  <td className="w-1/7 p-3 border-b-[1px] border-[#EDEDED] border-r last:border-r-0">{convertToJalali(AllTransactions.created_at)}</td>
-                  <td className="w-1/  p-3 border-b border-[#EDEDED] border-r last:border-r-0">{getStatusText(AllTransactions.status)}</td>
-                  <td className="w-1/7 p-3 border-b-[1px] border-[#EDEDED] border-r last:border-r-0 "></td>
+                  <td className="w-1/7 p-3 border-t-[1px] border-[#EDEDED]">{AllTransactions.user_full_name || "—"}</td>
+                  <td className="w-1/7 p-3 border-t-[1px] border-[#EDEDED] border-r last:border-r-0">{AllTransactions.type || "—"}</td>
+                  <td className="w-1/7 p-3 border-t-[1px] border-[#EDEDED] border-r last:border-r-0">{getTransactionType(AllTransactions.transaction_type)}</td>
+                  <td className="w-1/7 p-3 border-t-[1px] border-[#EDEDED] border-r last:border-r-0">{AllTransactions.amount}</td>
+                  <td className="w-1/7 p-3 border-t-[1px] border-[#EDEDED] border-r last:border-r-0">{AllTransactions.id}</td>
+                  <td className="w-1/7 p-3 border-t-[1px] border-[#EDEDED] border-r last:border-r-0">{convertToJalali(AllTransactions.created_at)}</td>
+                  <td className="w-1/  p-3 border-t border-[#EDEDED] border-r last:border-r-0">{getStatusText(AllTransactions.status)}</td>
+                  <td className="w-1/7 p-3 border-t-[1px] border-[#EDEDED] border-r last:border-r-0 "></td>
                 </tr>
                 {openIndex === index && (
                  <tr className="bg-gray-50 transition-all">

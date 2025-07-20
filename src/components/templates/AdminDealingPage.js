@@ -207,7 +207,7 @@ w-[260px]
                 setDateFilter('');
                 fetchFilteredLoans();
               }}>
-            حدف همه فیلترها 
+            حذف همه فیلترها 
             </button>
             </div>
 
@@ -234,7 +234,7 @@ w-[260px]
                       visible={true}
                       height="10"
                       width="80"
-                      color="#3B82F6"   
+                      color="#D2AB67"   
                       radius="9"
                       ariaLabel="three-dots-loading"
                       />
@@ -255,7 +255,8 @@ w-[260px]
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-300">
-                        {AllLoans.map((AllLoans, index) => (
+                        {AllLoans.length>0?<>
+                          {AllLoans.map((AllLoans, index) => (
                             <tr key={AllLoans.id} className="text-center hover:bg-gray-100">
                                 <td className="p-3">{index + 1}</td>
                                 <td className="p-3 border-x-[1px]">{AllLoans.user}</td>
@@ -265,7 +266,8 @@ w-[260px]
                                 <td className="p-3 border-x-[1px]">{convertToJalali(AllLoans.created_at)}</td>
                               
                             </tr>
-                        ))}
+                        ))}</>:<div className="m-3">داده ای وجود ندارد</div>}
+                        
                     </tbody>
             </table>
                       )}
