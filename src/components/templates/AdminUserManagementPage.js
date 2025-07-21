@@ -7,13 +7,15 @@ import Link from "next/link";
 import { ThreeDots } from "react-loader-spinner";
 const AdminUserManagementPage = () => {
 
+  const [search , setSearch] = useState('')
+  const [rowCount, setRowCount] = useState(10);
   const [users , setUsers] = useState()
   const [loading , setLoading] = useState(false)
   const [wehavedata , setWehavedata] = useState(false)
   const [selectedUser, setSelectedUser] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentUrl , setCurrentUrl] = useState()
-  const usersPerPage = 10;
+  const [usersPerPage , setUsersPerPage] = useState(10);
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   const currentUsers = users?.results.slice(indexOfFirstUser, indexOfLastUser);
@@ -56,17 +58,17 @@ const AdminUserManagementPage = () => {
   }
 
 
-      const changePage = (pageNum) =>{ 
+  const changePage = (pageNum) =>{ 
         let param = `?limit=${usersPerPage}&offset=${pageNum*usersPerPage-usersPerPage}`
         onPageChange(param)
-      }
+  }
 
-      function getPathAndQueryPart(url) {
-        const urlObj = new URL(url, 'http://localhost:8000');
-        const search = urlObj.search;
-        console.log(search , 'this is search') 
-        return search;
-      }
+  function getPathAndQueryPart(url) {
+    const urlObj = new URL(url, 'http://localhost:8000');
+    const search = urlObj.search;
+    console.log(search , 'this is search') 
+    return search;
+  }
 
       const onPageChange = async (url) => {
         console.log(currentUrl , currentPage , 'this is new log')
@@ -75,11 +77,26 @@ const AdminUserManagementPage = () => {
         if(response){
           setUsers(response.data)
           setLoading(prev=>!prev)
+          setWehavedata(false)
           console.log(response , 'this is what i need')
          }else{
            console.log(error)
          }
       }
+
+      const handleInputChange = (e) => {
+        setRowCount(e.target.value);
+      };
+
+      const handleSave = () => {
+        setCurrentUrl(`?limit=${rowCount}&offset=${currentPage*rowCount-rowCount}&search=${search}`)
+        setWehavedata(false)
+        setUsersPerPage(rowCount)
+        setLoading(prev=>!prev)
+
+      };
+
+      
 
 
     return(
@@ -90,14 +107,15 @@ const AdminUserManagementPage = () => {
         md:w-[1016px] w-full
         md:h-10
         md:flex
+        mb-7
         flex-col
         md:flex-row
         md:justify-between
         md:items-center
         ">
-            <div>
+            <div className=" " > 
                 <input 
-                type="search"
+                type="text"
                 placeholder="جستجو"
                 className="
                 md:w-96 w-[375px]
@@ -111,10 +129,54 @@ const AdminUserManagementPage = () => {
                 md:mr-0
                 mr-2
                 "
+                value={search}
+                onChange={(e) => setSearch(e.target.value)} // به روزرسانی مقدار استیت با مقدار وارد شده
                 />
-            </div>
+              <button
+                type="submit"
+                onClick={()=>{handleSave()}}
+                className="md:w-[91px] md:h-[40px] w-[30%] bg-[#D2AB67] rounded-xl text-sm mr-3 
+                           transition-colors duration-400 hover:text-white hover:duration-400"
+              >
+                جست و جو
+              </button>            
+              </div>
 
-            <div>
+              <div>
+                <input
+                  type="number"
+                  min={1}
+                  placeholder="تعداد سطر در صفحه"
+                  className="
+                    md:w-max
+                    w-max
+                    h-10
+                    rounded-xl
+                    border-[#A6A6A6]
+                    focus:border-[#A6A6A6]
+                    focus:outline-none
+                    focus:ring-0
+                    focus:border-transparent
+                    md:mr-0
+                    mr-2
+                  "
+                  value={rowCount}
+                  onChange={handleInputChange}
+                />
+                <button
+                  type="button"
+                  onClick={()=>{handleSave()}}
+                  className="md:w-[91px] md:h-[40px] w-[30%] bg-[#D2AB67] rounded-xl text-sm mr-3 transition-colors duration-400 hover:text-white hover:duration-400"
+                >
+                  ذخیره
+                </button>
+              </div>
+
+
+    </div>
+
+
+    <div>
               <Link href="/admin/user-registration"> 
                 <button className="
                 md:w-[156px] w-[375px]
@@ -136,8 +198,6 @@ const AdminUserManagementPage = () => {
                 </button>
                 </Link>
             </div>
-
-    </div>
 
     <div className="
          md:w-[1016px] w-[375px]

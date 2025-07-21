@@ -16,7 +16,7 @@ const AdminTicketPage = () =>{
 
     const [ allTickets , setAllTickets ] = useState()
     const [loading , setLoading] = useState(false)
-
+    const [weHaveData , setWeHaveData] = useState(false)
       const [currentPage, setCurrentPage] = useState(1);
       const usersPerPage = 5;
       const indexOfLastUser = currentPage * usersPerPage;
@@ -30,6 +30,7 @@ const AdminTicketPage = () =>{
              if(response){ 
                  setAllTickets(response.data)
                  setLoading(prev=>!prev)
+                 setWeHaveData(true)
              }else{
                  toast.error(error.response?.data.error)}
          }
