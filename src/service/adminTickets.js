@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 
 
 export const getAllTickets = async (params = '') => {
-    console.log(params,'this is params')
     try {
         const response = await api.get(`/adminpanel/ticket/list${params}`);
         console.log(response)
@@ -15,5 +14,12 @@ export const getAllTickets = async (params = '') => {
         return { error };
     }
 };
+
+
+
+
+export const singelTicketDetail = async (params) => {
+    console.log(params)
+}
 
 
