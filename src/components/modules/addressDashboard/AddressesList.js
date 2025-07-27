@@ -35,7 +35,7 @@ const AddressesList = () => {
   
     if (response) {
       setReload(prev => !prev)
-      toast.success("آدرس با موفقیت حذف شد ");
+      toast.success("آدرس با موفقیت ثبت شد ");
     } else {
       console.error("خطا در حذف آدرس:", error);
     }

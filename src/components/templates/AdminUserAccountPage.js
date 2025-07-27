@@ -179,7 +179,8 @@ const AdminUserAccountPage = () =>{
                           document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
                           document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC"; 
                           router.push("/Shop")
-                          window.location.reload()}else{
+                          window.location.reload()
+                        }else{
                           console.log(error)
                           router.push("/Shop")
                           window.location.reload()

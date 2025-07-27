@@ -59,10 +59,12 @@ const PasswordSignIn = ({ setLoginState , loginState }) => {
                         profileStore.setProfile(response.data); 
                         if(response.data.role == 2){
                             router.push('/admin/User-Account')
+                            document.cookie = "expire_time=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
                         }else if(response.data.role == 3){
                             //اینجا پوش میکنیم به ساپورت
                         }else{
                             router.push('/dashboard/user-account-dashboard')
+                            document.cookie = "expire_time=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
                         }
             
                     }

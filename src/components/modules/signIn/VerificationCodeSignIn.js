@@ -107,7 +107,7 @@ const VerificationCodeSignIn = ({ setLoginState , loginState }) => {
                                 const {response , error} = await Profile()
                                 if (response){ 
                                     profileStore.setProfile(response.data); 
-                        
+                                    document.cookie = "expire_time=; expires=Thu, 01 Jan 1970 00:00:00 UTC";                        
                                 }
                                 else{
                                 }}
