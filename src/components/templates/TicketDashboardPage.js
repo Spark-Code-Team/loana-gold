@@ -39,7 +39,11 @@ const TicketDashboardPage = () =>{
         const { response , error } = await sendTicket(ticket)
         if(response){
             console.log(response);
-            setReload(prev => !prev)            
+            setReload(prev => !prev)
+            setTicket({
+                title:"",
+                body:""
+            })            
         }else{
             toast.error(error.response.data.error)}
     }
@@ -149,6 +153,7 @@ const TicketDashboardPage = () =>{
             mx-8
             p-4
             mt-20
+            mb-7
             ">
              
 
@@ -161,7 +166,7 @@ const TicketDashboardPage = () =>{
                             allTickets?.map((p , index) => {
                                 return(
                                     <Link href={`/dashboard/ticket-conversation/${p.id}`}>   
-                                            <div key={index} className="border-[1px] p-4 m-4 rounded-lg" >
+                                            <div key={index} className="border-[1px] hover:ring-2 hover:ring-primary hover:border-[2px]  trasition duration-300 border-box p-4 m-4 rounded-lg" >
     
                                             <div className="
                                             w-full
@@ -173,28 +178,22 @@ const TicketDashboardPage = () =>{
                                             py-4
                                             ">
                                                 
-                                                <td>
+                                                <td className="break-words p-2" >
                                                 <p className="font-bold mb-[12px] ">
                                                     موضوع
                                                 </p>
-                                                <tr>
                                                 <p>
                                                     {p.title}
                                                 </p>
-                                                </tr>
                                                 </td>
     
-                                                <td>
-                                                <p className="font-bold mb-[12px]">
-                                                    متن درخواست
-                                                </p>
-                                                <tr>
-                                                <p>
-                                                    {p.body}
-                                                </p>
-                                                </tr>
+                                                <td className="break-words p-2">
+                                                    <p className="font-bold mb-[12px]">متن درخواست</p>
+                                                    <div>
+                                                        <p>{p.body}</p>
+                                                    </div>
                                                 </td>
-    
+                                                        
                                                 <td>
                                                 <p className="font-bold mb-[12px]">
                                                     زمان

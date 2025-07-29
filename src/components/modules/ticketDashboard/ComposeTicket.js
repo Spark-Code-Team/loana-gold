@@ -13,6 +13,7 @@ const ComposeTicket = ({setReload , id}) =>{
             ticket: id})
         if(response){
             setReload(prev=>!prev)
+            setAnswer('')
         }else{
             console.log(error)
         }

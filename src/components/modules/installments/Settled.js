@@ -203,6 +203,10 @@ const Settled = () => {
                                         rounded-lg
                                         border-[1px]
                                         border-[#EDEDED]
+                                        hover:border-[2px]
+                                        hover:border-primary
+                                        transition
+                                        duration-500
                                         mx-8
                                         mt-8
                                         "

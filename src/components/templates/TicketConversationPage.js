@@ -69,7 +69,7 @@ const TicketConversationPage = ({messages , setReload , ticketId}) =>{
         
       )}
 
-<div key={'1'} className="border-[1px] p-4 m-4 rounded-lg" >
+{/* <div key={'1'} className="border-[1px] p-4 m-4 rounded-lg" >
 
 <div className="
 w-full
@@ -87,7 +87,7 @@ py-4
     </p>
     <tr>
     <p>
-        {/* {p.title} */}
+        {p.title}
     </p>
     </tr>
     </td>
@@ -98,7 +98,7 @@ py-4
     </p>
     <tr>
     <p>
-        {/* {p.body} */}
+        {p.body}
     </p>
     </tr>
     </td>
@@ -109,7 +109,7 @@ py-4
     </p>
     <tr>
     <p>
-        {/* {convertToJalali(p.created_at)} */}
+        {convertToJalali(p.created_at)}
     </p>
     </tr>
     </td>
@@ -120,18 +120,18 @@ py-4
     </p>
     <tr>
     <p>
-            {/* {p.is_closed? 
+            {p.is_closed? 
             <>
             بسته شده
             </>:
             <>
             در جریان
-            </>} */}
+            </>}
     </p>
     </tr>
     </td>
 </div>
-</div> 
+</div>  */}
 
     </div>
 

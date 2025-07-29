@@ -69,7 +69,7 @@ const TransactionDashboardPage = () =>{
             ">
                 <div>
 
-                {isLoading? <div className='mt-7' ><ThreeDots
+                {isLoading? <div className='mb-7' ><ThreeDots
                       visible={true}
                       height="10"
                       width="80"

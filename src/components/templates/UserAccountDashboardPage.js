@@ -290,7 +290,8 @@ const UserAccountDashboardPage = () => {
                         <input 
                         
                         type="text" 
-                        placeholder= {p.content}  
+                        value= {p.content}  
+                        disabled
                         className="
                             w-[350px]
                             border-none
