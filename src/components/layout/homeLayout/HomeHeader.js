@@ -9,6 +9,7 @@ import { UserProfile } from "@/stores/profileStore";
 import { useRouter } from "next/navigation";
 import ModalPage from "@/components/elements/Modals";
 import SanaRes from "@/components/modules/receivingCredit/SanaRes";
+import PayNewRequest from "@/components/modules/receivingCredit/payNewRequest";
 import { purchaseRequest } from "@/service/finance";
 import { usePathname } from "next/navigation";
 
@@ -16,19 +17,8 @@ const HomeHeader = () => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [ispayModalOpen , setIsPayModalOpen] = useState(false)
     const [openSidebar , setOpenSidebar] = useState(false);
-
-    // const itemsSidebar = [
-    //     {id:1 , title:"حساب کاربری" , image:"/images/user-sidebar.png"},
-    //     {id:1 , title:"کیف پول" , image:"/images/kif-pul.png"},
-    //     {id:1 , title:"اقساط" , image:"/images/aghsat.png"},
-    //     {id:1 , title:"معامله طلا" , image:"/images/moamele.png"},
-    //     {id:1 , title:"تاریخچه اعتبارسنجی" , image:"/images/shopping.png"},
-    //     {id:1 , title:"ثبت محصول" , image:"/images/cart.png"},
-    //     {id:1 , title:"سفارش ها" , image:"/images/tarakonesh.png"},
-    //     {id:1 , title:"تراکنش ها" , image:"/images/help.png"},
-    // ]
-
     const profile = UserProfile()
     const router = useRouter()
     const path = usePathname()
@@ -39,8 +29,6 @@ const HomeHeader = () => {
             const {response , error} = await Profile()
             if (response){
                 profile.setProfile(response.data); 
-            } else {
-                router.push('/Login')
             }
         }
 
@@ -61,16 +49,7 @@ const HomeHeader = () => {
             openModal()
         }
         else{
-            toast.error(error.response?.data.non_field_errors[0] || "مشکلی پیش آمده", { 
-                position: "bottom-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                progress: undefined,
-                theme: "light",
-                transition: Bounce,
-              }
-            ) 
+            setIsPayModalOpen(true);
         }
 
     }
@@ -167,6 +146,10 @@ const HomeHeader = () => {
 
             <ModalPage isOpen = { isModalOpen }>
                 <SanaRes setIsModalOpen={setIsModalOpen} />
+            </ModalPage>
+
+            <ModalPage isOpen = { ispayModalOpen }>
+                <PayNewRequest setIsPayModalOpen = { setIsPayModalOpen } />
             </ModalPage>
 
 

@@ -167,7 +167,7 @@ const PasswordSignIn = ({ setLoginState , loginState }) => {
                  "
                  onClick={() => sendPasswordData()}
                  >
-                    ارسال کد
+                    ورود
             </button>
         </div>
 

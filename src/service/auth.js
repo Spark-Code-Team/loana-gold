@@ -148,7 +148,7 @@ export const sendOtp = async (formData) => {
         console.log('//////////////->', response)    
         return{response}
     } catch(error){
-        toast.error(error.response?.data || "مشکلی پیش آمده", { 
+        toast.error(error.response?.message || "مشکلی پیش آمده", { 
             position: "bottom-right",
             autoClose: 5000,
             hideProgressBar: false,

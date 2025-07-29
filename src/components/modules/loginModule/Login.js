@@ -8,10 +8,12 @@ import { selectCreditAmountInstallment } from '@/service/finance';
 import { useEffect, useState } from 'react';
 import Close from '../../../../public/icons/close';
 import Image from 'next/image';
+import { ThreeDots } from 'react-loader-spinner';
 
 
 const Login = () => {
 
+    const [ isLoading , setIsLoading ] = useState(true)
     const [ credit , setCredit ] = useState() 
     const [ userGradehistory , setUserGradeHistory ] = useState([])
     const [ installment , setInstallment ] = useState();
@@ -48,6 +50,7 @@ const Login = () => {
         const getGrade = async () =>{
             const {response , error} = await validationResult()
             setUserGradeHistory  (response.data.results);
+            setIsLoading(false)
         }
         getGrade()
     },[])
@@ -119,7 +122,15 @@ const Login = () => {
 
         <div className="w-full pr-8 font-bold text-[20px] border-b border-gray-200 p-[20px] ">تاریخچه اعتبار سنجی</div>
 
-            {userGradehistory.length>0?<>
+{isLoading? <div className='mt-7' ><ThreeDots
+                      visible={true}
+                      height="10"
+                      width="80"
+                      color="#D2AB67"   
+                      radius="9"
+                      ariaLabel="three-dots-loading"
+                      /></div> : <>
+                                  {userGradehistory.length>0?<>
                 {userGradehistory.map((p,index)=>{
     
     if(p.status === "completed"){
@@ -192,6 +203,8 @@ const Login = () => {
     
 })}
 </>:<div className='px-[24px] pt-[24px]'>رکوردی موجود نمیباشد</div>}
+</> }
+
 
 
             </div>

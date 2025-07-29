@@ -8,20 +8,22 @@ import { creditPayment } from "@/service/finance";
 import { convertToShamsi } from "@/utils/setTime";
 import { userInstallments } from "@/service/finance";
 import { UserProfile } from "@/stores/profileStore";
+import { ThreeDots } from "react-loader-spinner";
 
 const Settled = () => {
+
+
     const [installmentStatus, setInstallmentStatus] = useState("paid")
     const [ installments , setInstallments] = useState([])
-
+    const [ isLoading , setIsLoading ] = useState(true)
     const profileStore = UserProfile()
 
     useEffect(()=>{
         const loadInstallment = async () => {
             const { response, error } = await userInstallments(installmentStatus);
             if (response) {
-                console.log(response);
-                
                 setInstallments(response.data)
+                setIsLoading(false)
             }
           };
         loadInstallment()
@@ -76,7 +78,9 @@ const Settled = () => {
                     text-sm
                     font-bold`
                 }
-                onClick={()=>setInstallmentStatus('unpaid')}
+                onClick={()=>{setInstallmentStatus('unpaid')
+                    setIsLoading(true)}
+                }
                 >تسویه نشده
                 </button>
 
@@ -90,12 +94,24 @@ const Settled = () => {
                     text-sm
                     font-bold`
                 }
-                onClick={()=>setInstallmentStatus('paid')}
+                onClick={()=>{setInstallmentStatus('paid')
+                    setIsLoading(true)
+                }}
                 >تسویه شده
                 </button>
 
             </div>
 
+
+            {isLoading? <div className='m-7' ><ThreeDots
+                      visible={true}
+                      height="10"
+                      width="80"
+                      color="#D2AB67"   
+                      radius="9"
+                      ariaLabel="three-dots-loading"
+                      /></div> : <>
+ 
             {
                 installments.length !== 0 ? <>
                 {installmentStatus !== 'paid' ? 
@@ -234,7 +250,7 @@ const Settled = () => {
                     }
                     </>:<div className="m-4" >
                     رکوردی موجود نمی باشد</div>
-            }
+            }</>}
 
             
 
