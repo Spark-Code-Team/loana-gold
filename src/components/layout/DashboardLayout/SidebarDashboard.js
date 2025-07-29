@@ -218,7 +218,20 @@ const SidebarDashboard = () => {
             </div>
           </li>
 
-          
+          <li className="
+          p-2  
+          hover:text-primary 
+          rounded-lg 
+          cursor-pointer
+          ">
+           
+              <div className="flex">
+                <GoldDashboard />
+                <Link href="/dashboard/buy-installment-gold">
+                <p className={`pr-2 ${path === "/dashboard/buy-installment-gold" ? "text-primary" : ""}`}>معامله طلای قسطی</p>
+                </Link>
+              </div>
+          </li>      
 
           
           <li className="
