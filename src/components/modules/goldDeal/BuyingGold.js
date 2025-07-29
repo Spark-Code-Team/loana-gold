@@ -8,7 +8,7 @@ import { ThreeDots } from "react-loader-spinner";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
-const zBuyingGold = () => {
+const BuyingGold = () => {
 
 const [balance, setBalance] = useState()
 
