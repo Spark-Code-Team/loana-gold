@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Pagination from "../elements/Pagination";
 import {  deleteUser, getAllUsers, updateUser } from "@/service/adminUsers";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ThreeDots } from "react-loader-spinner";
 const AdminUserManagementPage = () => {
 
@@ -20,6 +21,8 @@ const AdminUserManagementPage = () => {
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   const currentUsers = users?.results.slice(indexOfFirstUser, indexOfLastUser);
   const totalPages = Math.ceil(users?.count / usersPerPage);
+  const router = useRouter()
+
 
   useEffect(()=>{
     const getUsers = async () => {
@@ -89,6 +92,7 @@ const AdminUserManagementPage = () => {
       };
 
       const handleSave = () => {
+        setCurrentPage(1)
         setCurrentUrl(`?limit=${rowCount}&offset=${currentPage*rowCount-rowCount}&search=${search}`)
         setWehavedata(false)
         setUsersPerPage(rowCount)
@@ -239,6 +243,10 @@ const AdminUserManagementPage = () => {
 
                                   <button className="px-2 py-1 border rounded-lg"
                                     onClick={()=>{deleteAccount(user.id)}}>🗑</button>
+
+                                  <button className="px-2 py-1 border mx-1 rounded-lg"
+                                    onClick={()=>{router.push(`/admin/user-details/${user.id}`)}}
+                                    >جزئیات</button>
 
                               </td>
                           </tr>

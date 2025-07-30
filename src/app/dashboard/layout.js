@@ -35,6 +35,7 @@ export default function DashboardLayoutUser({ children }){
 
             fetchProfile()
         }},[profileStore])
+
     
     return(
         <>

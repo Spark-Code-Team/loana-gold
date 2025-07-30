@@ -1,6 +1,7 @@
 import AdminMainLayoutjs from "@/components/layout/AdminLayout/AdminMainLayout";
 
 const AdminLayout = ({ children }) =>{
+
     return (
         <>
         <AdminMainLayoutjs>
