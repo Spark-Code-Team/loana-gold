@@ -55,7 +55,7 @@ const router = useRouter()
       console.log(response);
       
     } else {
-      toast.error("🤣🤣😂")
+      toast.error("مشکلی پیش آمده")
     }
   };
 

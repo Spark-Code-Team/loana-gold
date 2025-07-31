@@ -43,10 +43,8 @@ export const buy_gold = async (amount) => {
       cash_amount:""
     });
     
-    console.log('/////-----///--//->' , response)
-    return { response };
+    return { response }
   } catch (error) {
-    console.log('/////-----///--//->' , error)
     return { error };
   }
 }
