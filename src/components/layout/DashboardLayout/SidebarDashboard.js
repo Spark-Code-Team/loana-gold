@@ -228,7 +228,7 @@ const SidebarDashboard = () => {
               <div className="flex">
                 <GoldDashboard />
                 <Link href="/dashboard/buy-installment-gold">
-                <p className={`pr-2 ${path === "/dashboard/buy-installment-gold" ? "text-primary" : ""}`}>معامله طلای قسطی</p>
+                <p className={`pr-2 ${path === "/dashboard/buy-installment-gold" ? "text-primary" : ""}`}>خرید طلای قسطی</p>
                 </Link>
               </div>
           </li>      

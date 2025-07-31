@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import DashboardLeft from "../elements/DashboardLeft";
-import BuyingGold from "../modules/goldDeal/BuyingGold";
-import SellinGold from "../modules/goldDeal/SellingGold";
 import { toast } from "react-toastify";
+import Image from "next/image";
+import { buy_gold } from "@/service/Dealing";
 
 
 
@@ -38,10 +38,28 @@ export default function BuyInstalmetGoldPage() {
         } else if(talaState.chash == "" && talaState.gold == "") {
             toast.error("هموز هیچ مقداری وارد نکردید")
         } else if(talaState.chash) {
-            setTalaState(last => ({...last, gold: last.chash / 7000000}))
+            setTalaState(last => ({...last, gold: (last.chash / 7000000).toFixed(3)}))
         } else {
-            const newCash =  talaState.chash * 7000000
-            setTalaState(last => ({...last, chash: newCash.toFixed(1)}))
+            setTalaState(last => ({...last, chash: talaState.gold * 7000000}))
+        }
+    }
+
+
+    const handelBuyGold = async () => {
+
+        if(talaState.gold > 10) {
+            toast.error("گرم طلا از موجوذی شما بیشتر است")
+            return
+        }
+
+        const { response, error } = await buy_gold(talaState.gold)
+
+        if(response) {
+            console.log(response)
+            toast.success("طلا با موفقیت خریداری شد")
+        } else {
+            console.log(error);
+            toast.error("مشکلی در خرید طلا پیش آمده")
         }
     }
 
@@ -53,7 +71,7 @@ export default function BuyInstalmetGoldPage() {
         border-[#CBCED7] 
         rounded-2xl 
         ">
-        <DashboardLeft title=" معامله طلا آب شده" />
+        <DashboardLeft title="خرید طلای آب شده" />
 
             <div className="
                 h-12
@@ -63,36 +81,19 @@ export default function BuyInstalmetGoldPage() {
                 items-center
                 mt-5
                 ">
-                    <button className={`
-                    w-[101]
-                    h-8
-                    bg-[#F6F6F6]
-                    rounded-xl
-                    mx-8
-                    text-sm
-                    font-bold
-                    ${activeTab === "buyingGold"? "bg-slate-300" :"bg-gray-100"}
-                    `}
-                    onClick={()=> setActiveTab("buyingGold")}
+                    <button 
+                        className="
+                            w-[101]
+                            h-8
+                            bg-[#F6F6F6]
+                            rounded-xl
+                            mx-8
+                            text-sm
+                            font-bold
+                        "
                     > 
                         خرید
                     </button>
-
-                    <button className={`
-                    w-[101]
-                    h-8
-                    bg-[#D1DDF1]
-                    rounded-xl
-                    md:mx-6
-                    text-sm
-                    font-bold
-                    ${activeTab === "sellingGold" ? "bg-slate-300" :"bg-gray-100"}
-                    `}
-                    onClick={()=> setActiveTab("sellingGold")}
-                    > 
-                        فروش
-                    </button>
-
             </div>
             
             <div
@@ -180,6 +181,47 @@ export default function BuyInstalmetGoldPage() {
                     >
                         <p>
                             محاسبه
+                        </p>
+                    </div>
+                </div>
+                <div
+                    className="
+                        md:w-[848px] 
+                        w-full 
+                        flex 
+                        gap-x-3 
+                        items-center 
+                        mt-6 
+                        md:text-base 
+                        text-sm
+                    "
+                >
+                    <Image src="/images/vector.png" alt="vector" width={26} height={18} />
+                    <p>قیمت لحظه ای خرید هر گرم طلای 18 عیار: 5,340,000 تومان</p>
+                </div>
+                <div>
+                    <div
+                        onClick={() => handelBuyGold()}
+                        className="
+                            md:w-[131px] 
+                            h-[48px] 
+                            w-[29%] 
+                            bg-[#f1ce91] 
+                            rounded-xl
+                            flex
+                            flex-col
+                            text-center
+                            items-center
+                            justify-center
+                            transition-all
+                            hover:scale-110
+                            hover:bg-[#D2AB67]
+                            cursor-pointer
+                            my-4
+                        "
+                    >
+                        <p>
+                            خرید
                         </p>
                     </div>
                 </div>
