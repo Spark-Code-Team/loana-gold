@@ -39,7 +39,7 @@ export default function GoldArtifactsPage() {
         } else if(talaState.chash == "" && talaState.gold == "") {
             toast.error("هموز هیچ مقداری وارد نکردید")
         } else if(talaState.chash) {
-            setTalaState(last => ({...last, gold: (last.chash / 7000000 - 1200000).toFixed(3)}))
+            setTalaState(last => ({...last, gold: ((last.chash - 1200000) / 7000000).toFixed(3)}))
         } else {
             setTalaState(last => ({...last, chash: talaState.gold * 7000000 + 1200000}))
         }
@@ -57,8 +57,8 @@ export default function GoldArtifactsPage() {
 
         // if(response) {
         //     console.log(response)
-            toast.success("طلا با موفقیت خریداری شد")
-            setTalaState({ chash: "", gold: ""})
+        toast.success("طلا با موفقیت خریداری شد")
+        setTalaState({ chash: "", gold: ""})
         // } else {
         //     console.log(error);
         //     toast.error("مشکلی در خرید طلا پیش آمده")

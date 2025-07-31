@@ -154,7 +154,7 @@ const InfoProduct = () => {
                     "
                     onClick={() => {
                       if(profile.data.role) {
-                        router.push("/dashboard/user-account-dashboard")
+                        router.push("/dashboard/gold-artifacts")
                       } else {
                         toast.info("برای خرید ابتدا باید ورود کنید")
                         router.push("/Sign-in")
