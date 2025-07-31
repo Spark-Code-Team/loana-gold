@@ -14,7 +14,7 @@ import { UserProfile } from "@/stores/profileStore";
 import { setTime } from "@/utils/setTime";
 
 const VerificationCodeSignIn = ({ setLoginState , loginState }) => {
-          const [otpObj, setOtpObj] = useState({phoneNumber: loginState.phoneNumber, otp: ''  });  
+          const [otpObj, setOtpObj] = useState({phoneNumber: loginState.phoneNumber, otp: loginState.otp_code  });  
           const [expired, setExpired] = useState(false);
           const [remainingTime, setRemainingTime] = useState(0);  
           const router = useRouter()

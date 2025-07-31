@@ -13,7 +13,7 @@ const SignInPhone =({ loginState, setLoginState }) =>{
         const {response , error} = await sendOtp(phoneNumber)    
         if (response) {
             document.cookie = `expire_time=${response.data.code_expires_at}; max-age=${2*60}`;
-            setLoginState(prev=>({...prev,state:"verification", phoneNumber:phoneNumber.mobileNumber, is_2fa:response.data.is_2fa}))
+            setLoginState(prev=>({...prev,state:"verification", otp_code:response.data.otp_code , phoneNumber:phoneNumber.mobileNumber, is_2fa:response.data.is_2fa}))
         }
         else{            
             toast.error(error.response?.data.error || "مشکلی پیش آمده", { 

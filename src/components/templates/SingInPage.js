@@ -17,7 +17,8 @@ const SignInPage = () => {
         email: '',
         forgetPassword_otp:'',
         password:'',
-        confirm_password:''
+        confirm_password:'',
+        otp_code: ""
     });
 
     return(
