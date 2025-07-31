@@ -7,6 +7,7 @@ import { Dealing, sell_gold } from "@/service/Dealing";
 import { ThreeDots } from "react-loader-spinner";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import HomeChart from "../homepage/OnlineChartt";
 
 const SellinGold = () =>{
 
@@ -215,22 +216,38 @@ const SellinGold = () =>{
                         </div>
                     </div>
         
-                <div className="
-                 md:w-[848px] 
-                 w-full 
-                 flex 
-                 gap-x-3 
-                 items-center 
-                 mt-6 
-                 md:text-base 
-                 text-sm
-                 ">
-                    <Image src="/images/vector.png" 
-                    alt="vector" 
-                    width={26} 
-                    height={18}
-                    />
-                    <p>قیمت لحظه ای خرید هر گرم طلای 15 عیار: 5,340,000 تومان</p>
+                <div
+                    className="
+                        md:w-[848px] 
+                        w-full 
+                        flex 
+                        flex-col
+                        gap-x-3 
+                        items-center 
+                        mt-6 
+                        md:text-base 
+                        text-sm
+                        gap-2
+                    "
+                >
+                    <div
+                        className="
+                            w-full
+                            h-full
+                            relative
+                        "
+                    >
+                        <HomeChart />
+                    </div>
+                    <div
+                        className="
+                            flex
+                            gap-2
+                        "
+                    >
+                        <Image src="/images/vector.png" alt="vector" width={26} height={18} />
+                        <p>قیمت لحظه ای خرید هر گرم طلای 18 عیار: 7,140,000 تومان</p>
+                    </div>
                 </div>
         
                 <div className="

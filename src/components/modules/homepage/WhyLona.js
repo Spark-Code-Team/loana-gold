@@ -1,10 +1,10 @@
 import Image from "next/image";
 
 const items = [
-    { id: 1, img: "/images/key.png", title: "طلای احراز شده در بانک", desc: "می‌توانید در کمتر از یک دقیقه معامله کنید." },
-    { id: 2, img: "/images/money.png", title: "امنیت معاملات", desc: "می‌توانید در کمتر از یک دقیقه معامله کنید." },
-    { id: 3, img: "/images/gold.png", title: "طلای احراز شده در بانک", desc: "می‌توانید در کمتر از یک دقیقه معامله کنید." },
-    { id: 4, img: "/images/house.png", title: "پشتیبانی در لحظه", desc: "می‌توانید در کمتر از یک دقیقه معامله کنید." }
+    { id: 1, img: "/images/key.png", title: "طلای احراز شده در بانک", desc: "" },
+    { id: 2, img: "/images/money.png", title: "امنیت معاملات", desc: "" },
+    { id: 3, img: "/images/gold.png", title: "تحویل حضوری", desc: "" },
+    { id: 4, img: "/images/house.png", title: "امکان معامله 24 ساعته", desc: "" }
 ];
 const WhyLona = () => {
     return (

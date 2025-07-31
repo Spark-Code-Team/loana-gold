@@ -9,7 +9,7 @@ import HomeChart from "../modules/homepage/OnlineChartt";
 
 
 
-export default function BuyInstalmetGoldPage() {
+export default function GoldArtifactsPage() {
 
     const [activeTab, setActiveTab] = useState("buyingGold")
     const [talaState, setTalaState] = useState({
@@ -39,29 +39,30 @@ export default function BuyInstalmetGoldPage() {
         } else if(talaState.chash == "" && talaState.gold == "") {
             toast.error("هموز هیچ مقداری وارد نکردید")
         } else if(talaState.chash) {
-            setTalaState(last => ({...last, gold: (last.chash / 7000000).toFixed(3)}))
+            setTalaState(last => ({...last, gold: (last.chash / 7000000 - 1200000).toFixed(3)}))
         } else {
-            setTalaState(last => ({...last, chash: talaState.gold * 7000000}))
+            setTalaState(last => ({...last, chash: talaState.gold * 7000000 + 1200000}))
         }
     }
 
 
     const handelBuyGold = async () => {
 
-        if(talaState.gold > 10) {
-            toast.error("گرم طلا از موجوذی شما بیشتر است")
-            return
-        }
+        // if(talaState.gold > 10) {
+        //     toast.error("گرم طلا از موجوذی شما بیشتر است")
+        //     return
+        // }
 
-        const { response, error } = await buy_gold(talaState.gold)
+        // const { response, error } = await buy_gold(talaState.gold)
 
-        if(response) {
-            console.log(response)
+        // if(response) {
+        //     console.log(response)
             toast.success("طلا با موفقیت خریداری شد")
-        } else {
-            console.log(error);
-            toast.error("مشکلی در خرید طلا پیش آمده")
-        }
+            setTalaState({ chash: "", gold: ""})
+        // } else {
+        //     console.log(error);
+        //     toast.error("مشکلی در خرید طلا پیش آمده")
+        // }
     }
 
     return (
@@ -72,7 +73,7 @@ export default function BuyInstalmetGoldPage() {
         border-[#CBCED7] 
         rounded-2xl 
         ">
-        <DashboardLeft title="خرید طلای آب شده" />
+        <DashboardLeft title="خرید قسطی مصنوعات" />
 
             <div className="
                 h-12
@@ -103,11 +104,11 @@ export default function BuyInstalmetGoldPage() {
                     mt-1
                 "
             >
-                <div>
+                {/* <div>
                     <p>
                         سقف خرید طلای آب شده: 10 گرم
                     </p>
-                </div>
+                </div> */}
                 <div
                     className="
                         my-4

@@ -1,6 +1,30 @@
+"use client"
+
+import { Profile } from "@/service/profile";
+import { UserProfile } from "@/stores/profileStore";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 
 const InfoProduct = () => {
+
+    const profile = UserProfile()
+    const router = useRouter()
+    
+    useEffect(() => {  
+        if(!profile.data.role){
+            const fetchProfile = async () => {
+            const {response , error} = await Profile()
+            if (response){
+                profile.setProfile(response.data); 
+            }
+        }
+
+            fetchProfile()
+        }
+    }, [profile.data.role]);  
+
     return(
         
         <div className="w-1/2 ">
@@ -111,15 +135,51 @@ const InfoProduct = () => {
                 </p>
                 </div>
 
-                <div>
-                <button className="
-                 bg-[#D2AB67] 
-                 rounded-lg 
-                 w-48 
-                 h-12
-                 ">
-                  افزودن به سبد خرید
-                </button>
+                <div
+                  className="
+                    flex
+                    items-center
+                    gap-4
+                  "
+                >
+                  <button 
+                    className="
+                      bg-[#f0c884]
+                      hover:bg-[#D2AB67] 
+                      rounded-lg 
+                      w-fit
+                      px-3
+                      h-12
+                      transition-all
+                    "
+                    onClick={() => {
+                      if(profile.data.role) {
+                        router.push("/dashboard/user-account-dashboard")
+                      } else {
+                        toast.info("برای خرید ابتدا باید ورود کنید")
+                        router.push("/Sign-in")
+                      }
+                    }}
+                  >
+                    خرید قسطی
+                  </button>
+                  <button 
+                    onClick={() => {
+                      toast.success("خرید شما با موفقیت انجام شد")
+                      router.push("/Shop")
+                    }}
+                    className="
+                      bg-[#f0c884]
+                      hover:bg-[#D2AB67] 
+                      rounded-lg 
+                      w-fit
+                      px-3
+                      h-12
+                      transition-all
+                    "
+                  >
+                    خرید نقدی
+                  </button>
                 </div>
             </div>
 

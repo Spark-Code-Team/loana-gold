@@ -19,7 +19,7 @@ const HomeFooter = () =>{
                             <div className="w-full md:flex md:items-center">
 
                                 <div className="md:w-1/2 w-full md:mt-0 mt-10 md:text-right text-center">
-                                    <p>ایمیل خود را ثبت کنید تا با ما در ارتباط باشید و این حرفا</p>
+                                    <p>ایمیل خود را ثبت کنید تا با ما در ارتباط باشید </p>
                                 </div>
 
                                 <div className="md:w-1/2 md:flex md:justify-end gap-x-3 w-full md:mt-0 mt-7 flex justify-between">
@@ -54,9 +54,9 @@ const HomeFooter = () =>{
 
                                     <div className="w-full md:text-right text-center text-[18px] text-[#D2AB67]">اطلاعات تماس</div>
 
-                                    <div className="w-full m-auto mt-5 md:text-right text-center">تلفن پشتیبانی : ۰۲۱۷۰۷۰۹۷۹۷</div>
-                                    <div className="w-full m-auto mt-5 md:text-right text-center">آدرس دفتر مرکزی : تهران، سعادت آباد، خیابان کاج، پلاک ۱۶</div>
-                                    <div className="w-full m-auto mt-5 md:text-right text-center">آدرس ایمیل : Drik@gmail.com</div>
+                                    <div className="w-full m-auto mt-5 md:text-right text-center">تلفن پشتیبانی : 09125143940</div>
+                                    <div className="w-full m-auto mt-5 md:text-right text-center">آدرس دفتر مرکزی : پاسداران بوستان پنجم</div>
+                                    <div className="w-full m-auto mt-5 md:text-right text-center">آدرس ایمیل : Info@daric.gold</div>
 
                                 </div>
 
