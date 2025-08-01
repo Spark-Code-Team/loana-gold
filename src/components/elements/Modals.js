@@ -19,3 +19,4 @@ const ModalPage = ({ isOpen , children}) => {
 }
 
 export default ModalPage; 
+

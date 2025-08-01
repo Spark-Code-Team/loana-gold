@@ -5,26 +5,16 @@ import Sorting from "../modules/shop/Sorting";
 
 const ShopPage = () => {
     return (
-        <div className="w-full flex justify-center gap-6">
-            <div className="w-[288px]">
-            <Sidebar/>
+        <div className="w-full flex flex-col lg:flex-row justify-center items-center lg:items-start">
+            <div className="w-full lg:w-[288px] lg:mx-0">
+                <Sidebar/>
             </div>
 
-            <div className="w-[912px]">
-            <Sorting/>
-            <ProductsCard/>
+            <div className="w-full lg:w-[912px]">
+                <Sorting/>
+                <ProductsCard/>
             </div>
-
-        
-
-        
-        
-
-
         </div>
-        
-        
-        
     )
 }
 

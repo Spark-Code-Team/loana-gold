@@ -67,8 +67,15 @@ const HomeHeader = () => {
 
                     {/* دکمه‌ی همبرگری در موبایل (اگر کاربر لاگین نکرده باشد) یا آیکون پنل کاربری */}
                     <div className="md:hidden">
-                        {profile.data.role ? (
-                            <Image alt="profile" onClick={() => Profile()} width={500} height={500} src="/" className="w-[49px] h-[49px] rounded-full"/>
+                        {profile.data.role ? (<>
+                            {profile.data.role == 1 ? 
+                                <Link href="/dashboard/user-account-dashboard">
+                                    <Image alt="profile" onClick={() => console.log(profile.data.profile_img)} width={500} height={500} src={profile.data.profile_img} className="w-[49px] h-[49px] rounded-full"/>
+                                    </Link> : <>{profile.data.role == 2 ? 
+                                    <Link href="/admin/User-Account">
+                                    <Image alt="profile" onClick={() => Profile()} width={500} height={500} src={profile.data.profile_img} className="w-[49px] h-[49px] rounded-full"/>
+                                </Link> : <></> }</> }</>
+
                         ) : (
                             <button className="text-black" onClick={() => setIsOpen(!isOpen)}>
                                 {isOpen ? "✖️" : "☰"}
@@ -79,7 +86,7 @@ const HomeHeader = () => {
                     {/* منو در دسکتاپ */}
                     <nav className="hidden md:flex items-center space-x-7 space-x-reverse">
                         <Link href="/Shop" className="text-black text-[18px]">فروشگاه</Link>
-                        <Link href="/About" className="text-black text-[18px]">درباره لونا</Link>
+                        {/* <Link href="/About" className="text-black text-[18px]">درباره لونا</Link> */}
                         <Link href="/ContactUs" className="text-black text-[18px]">تماس باما</Link>
                         <Link href="/FAQ" className="text-black text-[18px]">سوالات متداول</Link>
                     </nav>
@@ -136,7 +143,7 @@ const HomeHeader = () => {
                         </button>
                         <nav className="flex flex-col items-center space-y-6">
                             <Link href="/Shop" className="text-black text-[20px]" onClick={() => setIsOpen(false)}>فروشگاه</Link>
-                            <Link href="/About" className="text-black text-[20px]" onClick={() => setIsOpen(false)}>درباره لونا</Link>
+                            {/* <Link href="/About" className="text-black text-[20px]" onClick={() => setIsOpen(false)}>درباره لونا</Link> */}
                             <Link href="/ContactUs" className="text-black text-[20px]" onClick={() => setIsOpen(false)}>تماس باما</Link>
                             <Link href="/FAQ" className="text-black text-[20px]" onClick={() => setIsOpen(false)}>سوالات متداول</Link>
                         </nav>

@@ -78,61 +78,54 @@ const products = [
 
 const ProductsCard = () => {
   return (
-    <div className="
-     mt-10 
-     grid 
-     grid-cols-3 
-     gap-y-4 
-     justify-between
-     ">
+    <div
+      className="
+        mt-10 
+        grid 
+        grid-cols-1   /* موبایل: یک ستون */
+        sm:grid-cols-2 /* تبلت: دو ستون */
+        lg:grid-cols-3 /* دسکتاپ: سه ستون */
+        gap-4
+        justify-between
+        px-4  /* فاصله از چپ و راست که در موبایل بهتر باشه */
+      "
+    >
       {products.map((product) => (
         <Link key={product.id} href={`/product/${product.id}`} passHref>
-        <div
-          key={product.id}
-          className="
-           w-72 
-           h-[463px] 
-           rounded-lg 
-           border-[1px] 
-           border-[#DADADA]
-           ">
-          <div className="
-           flex 
-           flex-col 
-           justify-center 
-           items-center
-           ">
-            <Image
-              src={product.image}
-              alt={product.name}
-              width={256}
-              height={293}
-              className="mt-4"
-            />
-
-            <div className="w-full pr-4">
-              <p className="text-base font-bold mt-[6px]">{product.name}</p>
-              <p className="text-base text-[#3B3B3B] mt-[6px]">عیار: {product.ayar}</p>
-              <p className="text-base text-[#3B3B3B] mt-[6px]">وزن: {product.weight}</p>
-            </div>
-
-            <div className="
-             w-full 
-             flex 
-             justify-end 
-             pl-4 
-             pt-4 
-             font-bold 
-             text-base
-             ">
-              <p>{product.price}</p>
+          <div
+            className="
+              w-full            /* تا کارت پر کند عرض ستون */
+              max-w-xs          /* حداکثر عرض کارت */
+              rounded-lg 
+              border-[1px] 
+              border-[#DADADA]
+              mx-auto           /* وسط چین در ستون‌های کمتر */
+              hover:shadow-lg
+              transition-shadow
+              duration-300
+              cursor-pointer
+              h-auto            /* ارتفاع اتوماتیک */
+            "
+          >
+            <div className="flex flex-col justify-center items-center p-4">
+              <Image
+                src={product.image}
+                alt={product.name}
+                width={256}
+                height={293}
+                className="mt-4 object-contain w-full h-auto"
+              />
+              <div className="w-full pr-0 sm:pr-4 mt-4">
+                <p className="text-base font-bold">{product.name}</p>
+                <p className="text-base text-[#3B3B3B] mt-1">عیار: {product.ayar}</p>
+                <p className="text-base text-[#3B3B3B] mt-1">وزن: {product.weight}</p>
+              </div>
+              <div className="w-full flex justify-end font-bold text-base mt-4 pl-0 sm:pl-4">
+                <p>{product.price}</p>
+              </div>
             </div>
           </div>
-
-
-        </div>
         </Link>
-        
       ))}
     </div>
   );

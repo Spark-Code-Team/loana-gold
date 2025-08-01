@@ -3,6 +3,7 @@ const Sorting = () => {
         <div className="
          w-[911px] 
          mt-6 
+         md:mr-4
          h-8 
          bg-[#F9F9F9]
          rounded-xl

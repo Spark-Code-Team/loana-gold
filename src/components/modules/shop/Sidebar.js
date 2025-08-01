@@ -17,6 +17,7 @@ export default function Sidebar() {
 
     return (
         <div className="
+            m-auto
             flex 
             flex-col 
             w-72 

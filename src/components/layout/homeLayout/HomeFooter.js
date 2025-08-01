@@ -1,13 +1,37 @@
+
 "use client"
 import Image from "next/image";
 import Link from "next/link";
 import {Children, useState} from "react";
 import {log} from "next/dist/server/typescript/utils";
 import ModalPage from "@/components/templates/BuyingModalPage";
+import { UserProfile } from "@/stores/profileStore";
+import { purchaseRequest } from "@/service/finance";
+import PayNewRequest from "@/components/modules/receivingCredit/payNewRequest";
 
 const HomeFooter = () =>{
 
+    const profile = UserProfile()
     const [login , setLogin] = useState(true);
+    const [ispayModalOpen , setIsPayModalOpen] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+
+    const sendCreditRequest = async () => {
+        const { response, error } = await purchaseRequest();
+        if (response) {
+            setIsPayModalOpen(true);
+            console.log("ispayModalOpen set to true due to success response");
+        } else {
+            setIsPayModalOpen(true);
+            console.log("ispayModalOpen set to true due to error");
+        }
+    }
+
+        const openModal = () => {
+            setIsOpen(false); 
+            setIsModalOpen(true);
+        };  
 
     return(
 
@@ -19,7 +43,7 @@ const HomeFooter = () =>{
                             <div className="w-full md:flex md:items-center">
 
                                 <div className="md:w-1/2 w-full md:mt-0 mt-10 md:text-right text-center">
-                                    <p>ایمیل خود را ثبت کنید تا با ما در ارتباط باشید </p>
+                                    <p>ایمیل خود را ثبت کنید تا با ما در ارتباط باشید و این حرفا</p>
                                 </div>
 
                                 <div className="md:w-1/2 md:flex md:justify-end gap-x-3 w-full md:mt-0 mt-7 flex justify-between">
@@ -54,9 +78,9 @@ const HomeFooter = () =>{
 
                                     <div className="w-full md:text-right text-center text-[18px] text-[#D2AB67]">اطلاعات تماس</div>
 
-                                    <div className="w-full m-auto mt-5 md:text-right text-center">تلفن پشتیبانی : 09125143940</div>
-                                    <div className="w-full m-auto mt-5 md:text-right text-center">آدرس دفتر مرکزی : پاسداران بوستان پنجم</div>
-                                    <div className="w-full m-auto mt-5 md:text-right text-center">آدرس ایمیل : Info@daric.gold</div>
+                                    <div className="w-full m-auto mt-5 md:text-right text-center">تلفن پشتیبانی : ۰۲۱۷۰۷۰۹۷۹۷</div>
+                                    <div className="w-full m-auto mt-5 md:text-right text-center">آدرس دفتر مرکزی : تهران، سعادت آباد، خیابان کاج، پلاک ۱۶</div>
+                                    <div className="w-full m-auto mt-5 md:text-right text-center">آدرس ایمیل : Drik@gmail.com</div>
 
                                 </div>
 
@@ -80,11 +104,11 @@ const HomeFooter = () =>{
 
                                 <div className="md:w-[103px] w-1/2 lg:mt-0 mt-5 md:text-right text-center">
 
-                                    <div className="w-full md:text-right text-[18px] text-[#D2AB67]">درباره لونا</div>
+                                    {/* <div className="w-full md:text-right text-[18px] text-[#D2AB67]">درباره لونا</div> */}
 
-                                    <div className="w-full m-auto mt-5">
+                                    {/* <div className="w-full m-auto mt-5">
                                         <Link href="#">درباره لونا</Link>
-                                    </div>
+                                    </div> */}
 
                                     <div className="w-full m-auto mt-5">
                                         <Link href="#">تماس با ما</Link>
@@ -108,35 +132,52 @@ const HomeFooter = () =>{
 
                         <div className="md:hidden w-full flex justify-between mt-10 bg-yellow-300 fixed bottom-0 pt-2 pb-2">
 
-                            <div className="w-1/5 flex flex-wrap items-center">
+            
+                            <Link href='/Login' className="w-1/5 flex flex-wrap items-center">
 
                                 <div className="w-full flex justify-center">
                                     <Image src="/images/user.png" alt="" width={24} height={24}/>
                                 </div>
 
-                                <div className="w-full text-[10px] text-center">حساب کاربری</div>
+                                <dvi className="w-full text-[10px] text-center">
+                                    حساب  کاربری                 
+                                            </dvi>
 
-                            </div>
+                            </Link>
 
-                            <div className="w-1/5 flex flex-wrap items-center">
+                            {profile.data.role ? 
+                                <div onClick={()=>{sendCreditRequest()}} className="w-1/5 flex flex-wrap items-center">
 
-                                <div className="w-full flex justify-center">
-                                    <Image src="/images/hand.png" alt="" width={24} height={24}/>
+                                    <div className="w-full flex justify-center">
+                                        <Image src="/images/hand.png" alt="" width={24} height={24}/>
+                                    </div>
+    
+                                    <div className="w-full text-[10px] text-center">درخواست اعتبار</div>
+    
                                 </div>
+                            : <>
+                                <Link href='/Sign-in' className="w-1/5 flex flex-wrap items-center">
 
-                                <div className="w-full text-[10px] text-center">درخواست اعتبار</div>
+                                    <div className="w-full flex justify-center">
+                                        <Image src="/images/hand.png" alt="" width={24} height={24}/>
+                                    </div>
 
-                            </div>
+                                    <div className="w-full text-[10px] text-center">درخواست اعتبار</div>
 
-                            <div className="w-1/5 flex justify-center flex-wrap items-center">
+                                </Link>
+                            </> }
+
+
+
+                            <Link href='/' className="w-1/5 flex justify-center flex-wrap items-center">
 
                                 <div className="w-[45px] h-[45px] bg-[#D2AB67] flex justify-center items-center rounded-full">
                                     <Image src="/images/home.png" alt="" width={24} height={24}/>
                                 </div>
 
-                            </div>
+                            </Link>
 
-                            <div className="w-1/5 flex flex-wrap items-center">
+                            <Link href='/ContactUs' className="w-1/5 flex flex-wrap items-center">
 
                                 <div className="w-full flex justify-center">
                                     <Image src="/images/phone.png" alt="" width={24} height={24}/>
@@ -144,9 +185,9 @@ const HomeFooter = () =>{
 
                                 <div className="w-full text-[10px] text-center">تماس با ما</div>
 
-                            </div>
+                            </Link>
 
-                            <div className="w-1/5 flex flex-wrap items-center">
+                            <Link href='/FAQ' className="w-1/5 flex flex-wrap items-center">
 
                                 <div className="w-full flex justify-center">
                                     <Image src="/images/question.png" alt="" width={24} height={24}/>
@@ -154,7 +195,7 @@ const HomeFooter = () =>{
 
                                 <div className="w-full text-[10px] text-center">سوالات متداول</div>
 
-                            </div>
+                            </Link>
                         </div>
 
                         
@@ -162,6 +203,12 @@ const HomeFooter = () =>{
                     </>
                 )
             }
+
+
+            <ModalPage open={ispayModalOpen}>
+                <PayNewRequest setIsPayModalOpen={setIsPayModalOpen} />
+            </ModalPage>
+            
 
 
         </>

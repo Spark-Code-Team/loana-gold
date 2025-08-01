@@ -14,7 +14,6 @@ const PayNewRequest = ({setIsPayModalOpen}) =>{
         items-right
         space-y-4
         bg-white
-        z-50
         ">
             <div className="flex flex-row justify-between">
 
@@ -33,8 +32,8 @@ const PayNewRequest = ({setIsPayModalOpen}) =>{
 
 
             <button 
-                onClick = { () => setIsPzzayModalOpen(false) } 
-            >
+                onClick = { () => setIsPayModalOpen(false) } 
+                >
                 <Close/>
                 
             </button>
