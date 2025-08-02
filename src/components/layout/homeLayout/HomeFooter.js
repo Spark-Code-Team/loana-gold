@@ -27,7 +27,7 @@ const HomeFooter = () =>{
         else if(error.response.data.Error[0]=='هنوز گرید شما تعیین نشده است'){
             toast.error(error.response.data.Error[0])
         }
-        else if(error.response.data.Error[0]=='برای انجام درخواست اعتبار جدید باید مبلغ 50,000 تومان واریز کنید'){
+        else if(error.response.data.Error[0]=='شما هم اکنون یک درخواست اعتبار در حال بررسی دارید.'){
             toast.error(error.response.data.Error[0])
         }
         else {
