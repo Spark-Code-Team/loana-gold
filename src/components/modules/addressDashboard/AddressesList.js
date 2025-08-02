@@ -149,7 +149,7 @@ const AddressesList = () => {
 
             {showEditForm && (
             <div className=" 
-            w-[808px] 
+            w-full 
             h-[500px]
             ">
             <AddressUpdate 

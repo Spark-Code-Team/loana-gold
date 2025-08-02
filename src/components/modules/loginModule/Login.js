@@ -136,19 +136,21 @@ const Login = () => {
     if(p.status === "completed"){
         if(!p.is_accepted){
         return( 
-            <>
-                <div className="w-full pr-8 font-bold mt-6">نتیجه اعتبار سنجی</div>
+            <div className='border-b pb-2'>
+                <div className="w-full px-2 font-bold mx-1 text-right mt-6">نتیجه اعتبار سنجی</div>
 
-                <div className="w-full pr-8 mt-6  ">نتیجه اعتبار سنجی : امکان دریافت اعتبار تا {gradeCredit(p?.grade)} گرم طلا</div>
+                <div className="w-full px-2 mt-6 mx-1 text-right  ">نتیجه اعتبار سنجی : امکان دریافت اعتبار تا {gradeCredit(p?.grade)} گرم طلا</div>
 
-                <div className="w-full pr-8 mt-6 ">تاریخ ثبت : {gradeAchivedAt(p?.achieved_at)}</div>
+                <div className="w-full px-2 mt-6 mx-1 text-right ">تاریخ ثبت : {gradeAchivedAt(p?.achieved_at)}</div>
 
-                <div className="w-full pr-8 mt-6 text-red-600 ">تاریخ اعتبارسنجی تا 24 ساعت اعتبار دارد و پس از اتمام زمان دوباره باید اعتبار سنجی کنید.</div>
+                <div className="w-full px-2 mt-6 mx-1 text-right text-red-600 ">تاریخ اعتبارسنجی تا 24 ساعت اعتبار دارد و پس از اتمام زمان دوباره باید اعتبار سنجی کنید.</div>
 
                 <br/>  
 
-                <button className=" 
-                    mr-6 
+                <div className=" 
+                w-max
+                m-auto
+                md:mr-6
                     p-[16px]
                     bg-[#EDEDED] 
                     rounded-xl 
@@ -163,31 +165,40 @@ const Login = () => {
                     }}
                     >
                         تایید و ادامه
-                </button>
-            </>
+                </div>
+            </div>
             
         )}else{
             return(
-                <div className="w-full border-gray-200 border-t h-min mt-[16px] pt-[24px] px-[24px] top-0 ">
-                    <div className="w-full font-bold text-[20px] border-gray-200 mb-[12px] ">درخواست اعتبار</div>
-                    <div className='flex flex-row justify-around' >
-                        <span className="mb-[12px] w-max ">نتیجه اعتبار سنجی: امکان دریافت اعتبار تا {gradeCredit(p.grade)} گرم طلا</span>
-                        <span className="mb-[12px] w-max ">تاریخ درخواست: {convertToJalali(p.achieved_at)} </span>
-                        <span className="mb-[12px] w-max ">تایید توسط شما: <span className='text-green-500' >تایید شده</span></span>
-                    </div>
-                </div>
+<div className="w-full border-gray-200 border-b pb-2 mt-[16px] pt-[24px] px-[24px]">
+  <div className="w-full font-bold text-[20px] border-gray-200 mb-[enter text-right">
+    درخواست اعتبار
+  </div>
+  
+  <div className="flex flex-col md:flex-row md:flex-wrap md:justify-around gap-4 md:gap-0">
+    <span className="w-full md:w-auto mb-[12px] mx-1 text-right">
+      نتیجه اعتبار سنجی: امکان دریافت اعتبار تا {gradeCredit(p.grade)} گرم طلا
+    </span>
+    <span className="w-full md:w-auto mb-[12px] mx-1 text-right">
+      تاریخ درخواست: {convertToJalali(p.achieved_at)}
+    </span>
+    <span className="w-full md:w-auto mb-[12px] mx-1 text-right">
+      تایید توسط شما: <span className='text-green-500'>تایید شده</span>
+    </span>
+  </div>
+</div>
             )
         }
     }
     else if(p.status === "in_progress"){
         return(
-            <>
-                <div className="w-full pr-8 font-bold mt-6">نتیجه اعتبار سنجی: در حال پردازش</div>
+            <div className='border-b pb-2'>
+                <div className="w-full mx-2 text-right font-bold mt-6">نتیجه اعتبار سنجی: در حال پردازش</div>
 
-                <div className="w-full pr-8 mt-6 ">تاریخ درخواست : {gradeAchivedAt(p?.created_at)}</div>
+                <div className="w-full mx-2 text-right mt-6 ">تاریخ درخواست : {gradeAchivedAt(p?.created_at)}</div>
 
                 <br/>
-            </>
+            </div>
         )
     }
     else{

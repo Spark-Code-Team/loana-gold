@@ -49,7 +49,7 @@ const Settled = () => {
 
     return(
         <div className={`
-        w-[912px]
+        w-full
         h-full
         border-[1px]
         border-[#CBCED7]
@@ -67,6 +67,7 @@ const Settled = () => {
             flex-row
             items-center
             mt-5
+            mx-3
             ">
                 <button  className={
                      `
@@ -120,85 +121,82 @@ const Settled = () => {
                             installments.map((p, index) => {
                                 // نوشته شده A.S این  خط پایین از کد توسط
                                 if(p.status === "unpaid" && index == 0){
-                                    return(                            
-                                    <div key={index} className="..."> 
-                                        <div className="
-                                        w-[848px]
-                                        h- full
-                                        rounded-lg
-                                        border-[1px]
-                                        border-[#EDEDED]
-                                        m-8
-                                        ">
-                                            <div className="
-                                            pr-4
-                                            py-4
-                                            ">
-                                                <div className="flex flex-col gap-y-3">
-                                                
+                                    return (
+                                        <div key={index} className="w-full px-4 md:px-8 my-4 flex justify-center">
+                                          <div className="
+                                            w-full
+                                            md:w-[848px]
+                                            rounded-lg
+                                            border-[1px]
+                                            border-[#EDEDED]
+                                            p-4
+                                            md:p-8
+                                            shadow-sm
+                                          ">
+                                            <div className="py-4">
+                                              <div className="flex flex-col gap-y-3 text-sm md:text-base">
                                                 <p>
-                                                    {p.period == "0 از 4 قسط " ? <div>
-                                                        دوره : پیش قسط
-                                                    </div>:<div> دوره: {p.period}</div>}
+                                                  {p.period === "0 از 4 قسط " ? (
+                                                    <div>دوره : پیش قسط</div>
+                                                  ) : (
+                                                    <div>دوره: {p.period}</div>
+                                                  )}
                                                 </p>
-                
+                                      
                                                 <p>
-                                                تاریخ: {convertToShamsi(p.due_date)}
+                                                  تاریخ: {convertToShamsi(p.due_date)}
                                                 </p>
-                            
+                                      
                                                 <p>
-                                                    مبلغ قابل پرداخت: {p.amount_due}
+                                                  مبلغ قابل پرداخت: {p.amount_due}
                                                 </p>
-                            
+                                      
                                                 <p>
-                                                کل بدهی: {p.debt}
+                                                  کل بدهی: {p.debt}
                                                 </p>
-                            
+                                      
                                                 <p>
-                                                وضعیت:
-                                                <span className="text-[#be2e2e] px-1">
-                                                تسویه نشده
-                                                </span>
+                                                  وضعیت:
+                                                  <span className="text-[#be2e2e] px-1">
+                                                    تسویه نشده
+                                                  </span>
                                                 </p>
-                            
-                                                </div>
-                            
-                                                <div className="
-                                                mt-4
-                                                flex
-                                                justify-end
-                            
-                                                ">
-                                                    <button 
-                                                        onClick={()=>payinstallment(p.id)}
-                                                        className="
-                                                            w-20
-                                                            h-10
-                                                            bg-primary
-                                                            rounded-lg
-                                                            ml-5
-                                                            text-white
-                                                            ">
-                                                        پرداخت
-                                                    </button>
-                                                </div>
-                                                
+                                              </div>
+                                      
+                                              <div className="mt-4 flex justify-end">
+                                                <button
+                                                  onClick={() => payinstallment(p.id)}
+                                                  className="
+                                                    w-24
+                                                    md:w-20
+                                                    h-10
+                                                    bg-primary
+                                                    rounded-lg
+                                                    text-white
+                                                    transition
+                                                    hover:bg-primary-dark
+                                                  "
+                                                >
+                                                  پرداخت
+                                                </button>
+                                              </div>
                                             </div>
-                                        
+                                          </div>
                                         </div>
-                                    </div>
-            )
+                                      );
                                 }
                         })
                         }
-                    </>:<>
+                    </>:<div >
                        {
                             installments.map((p, index) => {
                                 if(p.status === "paid"){
                                     return (
-                                        <div key={index} className="...">
+                                        <div key={index} className=" 
+                                        w-full
+                                        m-auto
+                                        ">
                                         <div className="
-                                        w-[848px]
                                         h-full
                                         rounded-lg
                                         border-[1px]
@@ -212,8 +210,7 @@ const Settled = () => {
                                         "
                                         >
                                             <div className="
-                                            pr-4
-                                            py-4
+                                            p-4
                                             ">
                                                 <div className="flex flex-col gap-y-3">
                             
@@ -250,7 +247,7 @@ const Settled = () => {
                             })
                         
                        } 
-                    </>
+                    </div>
                     }
                     </>:<div className="m-4" >
                     رکوردی موجود نمی باشد</div>

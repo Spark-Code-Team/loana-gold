@@ -269,7 +269,7 @@ const SidebarDashboard = () => {
            
           <div className="flex">
                 <GoldDashboard />
-                <Link href="/dashboard/gold-artifacts">
+                <Link href="/Shop">
                 <p className={`pr-2 ${path === "/dashboard/gold-artifacts" ? "text-primary" : ""}`}>خرید مصنوعات قسطی</p>
                 </Link>
               </div>

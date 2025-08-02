@@ -50,11 +50,12 @@ const TicketDashboardPage = () =>{
      
     return(
         <div className="
-        w-[912px]
+        w- full
         h-max
         border-[1px]
         border-[#CBCED7]
         rounded-2xl
+        p-3
         ">
             <DashboardLeft
             title="ارسال تیکت"
@@ -72,7 +73,7 @@ const TicketDashboardPage = () =>{
                type="text"
                placeholder=" موضوع تیکت"
                className="
-               w-[848px]
+               w-full
                h-[40px]
                focus:outline-none 
                focus:border-[#E1E1E1] 
@@ -93,9 +94,8 @@ const TicketDashboardPage = () =>{
             </div>
 
             <div className="
-            w-[848px]
+            w-full
             h-[330px]
-            mx-8
             mt-4
             ">
                  <textarea
@@ -145,12 +145,11 @@ const TicketDashboardPage = () =>{
             </div>
 
             <div className="
-            w-[848px]
+            w-full
             h-max
             rounded-lg
             border-[1px]
             border-[#E1E1E1] 
-            mx-8
             p-4
             mt-20
             mb-7
@@ -160,88 +159,62 @@ const TicketDashboardPage = () =>{
                     <p className="font-bold">
                     لیست تیکت ها
                     </p>
-                    { weHaveData?<>
-                        {
-                        allTickets.length>0?<>                     {
-                            allTickets?.map((p , index) => {
-                                return(
-                                    <Link href={`/dashboard/ticket-conversation/${p.id}`}>   
-                                            <div key={index} className="border-[1px] hover:ring-2 hover:ring-primary hover:border-[2px]  trasition duration-300 border-box p-4 m-4 rounded-lg" >
-    
-                                            <div className="
-                                            w-full
-                                            h-full
-                                            grid
-                                            grid-cols-4
-                                            gap-x-6
-                                            gap-y-4
-                                            py-4
-                                            ">
-                                                
-                                                <td className="break-words p-2" >
-                                                <p className="font-bold mb-[12px] ">
-                                                    موضوع
-                                                </p>
-                                                <p>
-                                                    {p.title}
-                                                </p>
-                                                </td>
-    
-                                                <td className="break-words p-2">
-                                                    <p className="font-bold mb-[12px]">متن درخواست</p>
-                                                    <div>
-                                                        <p>{p.body}</p>
-                                                    </div>
-                                                </td>
-                                                        
-                                                <td>
-                                                <p className="font-bold mb-[12px]">
-                                                    زمان
-                                                </p>
-                                                <tr>
-                                                <p>
-                                                    {convertToJalali(p.created_at)}
-                                                </p>
-                                                </tr>
-                                                </td>
-    
-                                                <td>
-                                                <p className="font-bold mb-[12px]">
-                                                    وضعیت
-                                                </p>
-                                                <tr>
-                                                <p>
-                                                        {p.messages.length == 0? 
-                                                        <>
-                                                        در انتظار پاسخ
-                                                        </>:<>
-                                                        پاسخ داده شده
-                                                        </> }
-                                                </p>
-                                                </tr>
-                                                </td>
-                                            </div>
-                                                
-    
-    
-                                            </div>    
-                                    </Link>
-    
-                                )
-                            })
-                         }</>:<>تیکت ثبت شده ای وجود ندارد</>
-                     }</>:<>
-                <ThreeDots
-                    visible={true}
-                    top="5"
-                    height="10"
-                    width="80"
-                    color="primary"
-                    radius="9"
-                    ariaLabel="three-dots-loading"
-                    wrapperStyle={{}}
-                    wrapperClass=""
-                /></>}
+                    {weHaveData ? (
+  allTickets.length > 0 ? (
+    <>
+      {allTickets.map((p, index) => (
+        <Link href={`/dashboard/ticket-conversation/${p.id}`} key={index}>
+          <div className="border border-gray-300 hover:ring-2 hover:ring-primary transition duration-300 p-4 mb-4 rounded-lg">
+            <div
+              className="
+                grid
+                grid-cols-1
+                md:grid-cols-2
+                lg:grid-cols-4
+                gap-4
+              "
+            >
+              <div className="break-words">
+                <p className="font-bold mb-2">موضوع</p>
+                <p>{p.title}</p>
+              </div>
+
+              <div className="break-words">
+                <p className="font-bold mb-2">متن درخواست</p>
+                <p>{p.body}</p>
+              </div>
+
+              <div>
+                <p className="font-bold mb-2">زمان</p>
+                <p>{convertToJalali(p.created_at)}</p>
+              </div>
+
+              <div>
+                <p className="font-bold mb-2">وضعیت</p>
+                <p>
+                  {p.messages.length === 0 ? "در انتظار پاسخ" : "پاسخ داده شده"}
+                </p>
+              </div>
+            </div>
+          </div>
+        </Link>
+      ))}
+    </>
+  ) : (
+    <>تیکتی ثبت نشده است</>
+  )
+) : (
+  <div className="w-full flex justify-center py-10">
+    <ThreeDots
+      visible={true}
+      height="80"
+      width="80"
+      color="primary"
+      radius="9"
+      ariaLabel="three-dots-loading"
+    />
+  </div>
+)}
 
 
 

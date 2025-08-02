@@ -180,26 +180,6 @@ const AddressUpdate = ({id,setReload}) =>{
                       value={data.codeposti}
                       onChange={(e) => setData(prev => ({...prev,codeposti:e.target.value}))}
                       />
-                    {/* 
-                      <input
-                      className="
-                      focus:outline-none
-                      focus:ring-0
-                      focus:boredr-transparent
-                      md:w-[376px] w-80
-                      h-12
-                      text-xl
-                      md:text-base
-                      rounded-xl
-                      border-[1px]
-                      border-[#E1E1E1]
-                      "
-                      placeholder=" آدرس کامل را وارد کنید "
-                      type="text"
-                      name="firstname"
-                      // value={codeposti}
-                      // onChange={(e) => setData(prev => ({...prev,codeposti:e.target.value}))}
-                      /> */}
       
                       <input
                       className="
@@ -239,27 +219,7 @@ const AddressUpdate = ({id,setReload}) =>{
                       name="firstname"
                       value={data.mokhtasad2}
                       onChange={(e) => setData(prev => ({...prev,mokhtasad2:e.target.value}))}
-                      />
-      
-                      {/* <input
-                      className="
-                      focus:outline-none
-                      focus:ring-0
-                      focus:boredr-transparent
-                      md:w-[376px] w-80
-                      h-12
-                      text-xl
-                      md:text-base
-                      rounded-xl
-                      border-[1px]
-                      border-[#E1E1E1]
-                      "
-                      placeholder=" آدرس کامل را وارد کنید "
-                      type="text"
-                      name="firstname"
-                     
-                      /> */}
-      
+                      />      
                       </div>
       
                      
@@ -277,6 +237,7 @@ const AddressUpdate = ({id,setReload}) =>{
                       </div>
                   </div>
               </div>
+
     )
 }
 export default AddressUpdate;

@@ -48,6 +48,7 @@ const HomeHeader = () => {
         if (response){
             openModal()
         }
+        // else if{}
         else{
             setIsPayModalOpen(true);
         }

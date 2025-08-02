@@ -1,6 +1,17 @@
+import { creditPayment50000 } from "@/service/finance";
 import Close from "../../../../public/icons/close";
 import Image from "next/image";
 const PayNewRequest = ({setIsPayModalOpen}) =>{
+
+    const credit50000 = async () => {
+        const {response , error} = await creditPayment50000()
+                    if (response) {
+                        console.log('50000 toman paied', response)
+                        setIsPayModalOpen(false)
+                    }else{
+                        console.log(error)
+                    }
+    }
     return(
 
         <div className="
@@ -51,6 +62,7 @@ const PayNewRequest = ({setIsPayModalOpen}) =>{
 
             <div className="flex flex-row justify-between" >
             <button
+                onClick={()=>{credit50000()}}
                 className="
                 m-2
                     w-full

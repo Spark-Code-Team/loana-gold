@@ -84,7 +84,19 @@ export const userInstallments = async (status) => {
 
 
 
-
+export const creditPayment50000 = async (id) => {
+    try{
+        const response = await api.post('/finance/credit-payment/',{
+                type: "credit",
+                installment_id: id
+        })
+        console.log(response)
+        return {response};
+    } catch(error){
+        console.log(error)
+        return {error}
+    }
+}
 
 
 
