@@ -48,7 +48,12 @@ const HomeHeader = () => {
         if (response){
             openModal()
         }
-        // else if{}
+        else if(error.response.data.Error[0]=='هنوز گرید شما تعیین نشده است'){
+            toast.error(error.response.data.Error[0])
+        }
+        else if(error.response.data.Error[0]=='برای انجام درخواست اعتبار جدید باید مبلغ 50,000 تومان واریز کنید'){
+            toast.error(error.response.data.Error[0])
+        }
         else{
             setIsPayModalOpen(true);
         }

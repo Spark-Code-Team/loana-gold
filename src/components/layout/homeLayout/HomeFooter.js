@@ -8,6 +8,7 @@ import ModalPage from "@/components/templates/BuyingModalPage";
 import { UserProfile } from "@/stores/profileStore";
 import { purchaseRequest } from "@/service/finance";
 import PayNewRequest from "@/components/modules/receivingCredit/payNewRequest";
+import { toast } from "react-toastify";
 
 const HomeFooter = () =>{
 
@@ -22,9 +23,15 @@ const HomeFooter = () =>{
         if (response) {
             setIsPayModalOpen(true);
             console.log("ispayModalOpen set to true due to success response");
-        } else {
+        } 
+        else if(error.response.data.Error[0]=='هنوز گرید شما تعیین نشده است'){
+            toast.error(error.response.data.Error[0])
+        }
+        else if(error.response.data.Error[0]=='برای انجام درخواست اعتبار جدید باید مبلغ 50,000 تومان واریز کنید'){
+            toast.error(error.response.data.Error[0])
+        }
+        else {
             setIsPayModalOpen(true);
-            console.log("ispayModalOpen set to true due to error");
         }
     }
 
