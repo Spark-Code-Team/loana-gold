@@ -125,9 +125,11 @@ const router = useRouter()
         className="
                h-full 
                flex 
+               gap-2
                flex-col
                items-center
                my-5
+               px-2
                "
       >
         <div
@@ -140,7 +142,7 @@ const router = useRouter()
             className="
                  text-lg
                  text-right
-                 md:pb-5
+                 pb-5
                  "
           >
             خرید طلا
@@ -193,13 +195,14 @@ const router = useRouter()
                     <div  className="
                     md:w-[131px] 
                     h-[48px] 
-                    w-[29%] 
+                    w-full 
                     bg-[#D2AB67] 
                     rounded-xl
+                    mt-2
                     flex
                     flex-col
                     ">
-                          <button
+                        <button
                         className="pt-2 flex justify-center items-center min-h-[40px] min-w-[100px]"
                         onClick={()=> SendData()}>
                         {/* محاسبه */}
@@ -275,7 +278,7 @@ const router = useRouter()
             className="
                     md:w-[131px] 
                     h-[48px] 
-                    w-[29%] 
+                    w-full
                     bg-[#D2AB67] 
                     rounded-xl"
             onClick={()=>{

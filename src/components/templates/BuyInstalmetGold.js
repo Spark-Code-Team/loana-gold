@@ -66,11 +66,13 @@ export default function BuyInstalmetGoldPage() {
 
     return (
         <div className="
-        w-[912px] 
-        h-full
-        border 
-        border-[#CBCED7] 
-        rounded-2xl 
+            md:w-[912px] 
+            w-[90%]
+            mx-auto
+            h-full
+            border 
+            border-[#CBCED7] 
+            rounded-2xl 
         ">
         <DashboardLeft title="خرید طلای آب شده" />
 

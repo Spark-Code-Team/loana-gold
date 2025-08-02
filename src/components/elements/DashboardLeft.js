@@ -1,7 +1,7 @@
 const DashboardLeft = ({ title }) => {
     return(
         <div className="
-        w-[911px]
+        md:w-[911px]
         h-[76px]
         border-b-[1px]
         border-[#CBCED7]
@@ -10,7 +10,8 @@ const DashboardLeft = ({ title }) => {
         ">
             <p className="
             font-bold
-            text-2xl
+            md:text-2xl
+            text-xl
             pr-5
             ">
                 { title }
