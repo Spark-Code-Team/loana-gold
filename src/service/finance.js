@@ -232,6 +232,18 @@ export const walletBalance = async () => {
     }
 }
 
+export const creditResult = async () => {
+    try{
+        const response = await api.post('/finance/credit-result/')
+        console.log('------>' , response)
+
+        return{response}
+    } catch(error){
+        console.log('------>' , error) 
+        return{error}
+    }
+}
+
 
 
 
