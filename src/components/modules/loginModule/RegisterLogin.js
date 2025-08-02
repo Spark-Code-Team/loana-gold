@@ -117,6 +117,8 @@ const RegisterLogin = ({setFormData ,formData ,setloginRegisterState }) =>{
                           rounded-xl  
                           border-[1px]  
                           border-[#E1E1E1]  
+                          mb-3
+                          md:mb-0
                       ">  
                           <span className="mr-4">  
                               <PersonName />  

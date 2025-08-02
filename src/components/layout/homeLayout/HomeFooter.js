@@ -2,13 +2,14 @@
 "use client"
 import Image from "next/image";
 import Link from "next/link";
-import {Children, useState} from "react";
+import {Children, useEffect, useState} from "react";
 import {log} from "next/dist/server/typescript/utils";
 import ModalPage from "@/components/templates/BuyingModalPage";
 import { UserProfile } from "@/stores/profileStore";
 import { purchaseRequest } from "@/service/finance";
 import PayNewRequest from "@/components/modules/receivingCredit/payNewRequest";
 import { toast } from "react-toastify";
+import { Profile } from "@/service/profile";
 
 const HomeFooter = () =>{
 
@@ -17,6 +18,19 @@ const HomeFooter = () =>{
     const [ispayModalOpen , setIsPayModalOpen] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {  
+        if(!profile.data.role){
+            const fetchProfile = async () => {
+            const {response , error} = await Profile()
+            if (response){
+                profile.setProfile(response.data); 
+            }
+        }
+
+            fetchProfile()
+        }
+    }, [profile.data.role]);  
 
     const sendCreditRequest = async () => {
         const { response, error } = await purchaseRequest();
@@ -146,8 +160,18 @@ const HomeFooter = () =>{
                                 </div>
 
                                 <dvi className="w-full text-[10px] text-center">
-                                    حساب  کاربری                 
-                                            </dvi>
+                                    {
+                                        profile.data.role ? (
+                                            <p>
+                                                حساب  کاربری                 
+                                            </p>
+                                        ) : (
+                                            <p>
+                                                ثبت نام
+                                            </p>
+                                        )
+                                    }
+                                </dvi>
 
                             </Link>
 

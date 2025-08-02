@@ -12,6 +12,7 @@ import SanaRes from "@/components/modules/receivingCredit/SanaRes";
 import PayNewRequest from "@/components/modules/receivingCredit/payNewRequest";
 import { purchaseRequest } from "@/service/finance";
 import { usePathname } from "next/navigation";
+import loginImage from "../../../../public/images/user.png"
 
 const HomeHeader = () => {
 
@@ -72,21 +73,28 @@ const HomeHeader = () => {
                     </Link>
 
                     {/* دکمه‌ی همبرگری در موبایل (اگر کاربر لاگین نکرده باشد) یا آیکون پنل کاربری */}
-                    <div className="md:hidden">
-                        {profile.data.role ? (<>
+                    <div 
+                        className="
+                            md:hidden
+                            flex
+                            items-center
+                            gap-2
+                        "
+                    >
+     
                             {profile.data.role == 1 ? 
                                 <Link href="/dashboard/user-account-dashboard">
-                                    <Image alt="profile" onClick={() => console.log(profile.data.profile_img)} width={500} height={500} src={profile.data.profile_img} className="w-[49px] h-[49px] rounded-full"/>
+                                    <Image alt="profile" onClick={() => console.log(profile.data.profile_img)} width={500} height={500} src={loginImage} className="w-[29px] h-[29px] rounded-full"/>
                                     </Link> : <>{profile.data.role == 2 ? 
                                     <Link href="/admin/User-Account">
-                                    <Image alt="profile" onClick={() => Profile()} width={500} height={500} src={profile.data.profile_img} className="w-[49px] h-[49px] rounded-full"/>
-                                </Link> : <></> }</> }</>
+                                    <Image alt="profile" onClick={() => Profile()} width={500} height={500} src={loginImage} className="w-[29px] h-[29px] rounded-full"/>
+                                </Link> : <></> }</> }
 
-                        ) : (
+
                             <button className="text-black" onClick={() => setIsOpen(!isOpen)}>
                                 {isOpen ? "✖️" : "☰"}
                             </button>
-                        )}
+                        
                     </div>
 
                     {/* منو در دسکتاپ */}
@@ -112,10 +120,10 @@ const HomeHeader = () => {
                                 
                                 {profile.data.role == 1 ? 
                                 <Link href="/dashboard/user-account-dashboard">
-                                    <Image alt="profile" onClick={() => Profile()} width={500} height={500} src="/" className="w-[49px] h-[49px] rounded-full"/>
+                                    <Image alt="profile" onClick={() => Profile()} width={500} height={500} src={loginImage} className="w-[42px] h-[42px] border-4 rounded-full"/>
                                     </Link> : <>{profile.data.role == 2 ? 
                                     <Link href="/admin/User-Account">
-                                    <Image alt="profile" onClick={() => Profile()} width={500} height={500} src="/" className="w-[49px] h-[49px] rounded-full"/>
+                                    <Image alt="profile" onClick={() => Profile()} width={500} height={500} src={loginImage} className="w-[42px] h-[42px] border-4 rounded-full"/>
                                 </Link> : <></> }</> }
 
                             </>
@@ -139,7 +147,7 @@ const HomeHeader = () => {
                 </div>
 
                 {/* منوی همبرگری در موبایل (فقط وقتی که کاربر لاگین نکرده باشد) */}
-                {isOpen && !profile.data.role && (
+                {isOpen  && (
                     <div className="md:hidden fixed top-0 left-0 w-full h-full bg-white flex flex-col items-center justify-center">
                         <button
                             className="absolute top-5 right-5 text-black"
