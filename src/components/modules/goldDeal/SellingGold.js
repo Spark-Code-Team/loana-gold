@@ -98,7 +98,7 @@ const SellinGold = () =>{
                  text-lg
                  mr-8
                  ">
-           موجودی شما:{weHaveData?<> {balance} تومان</>:<ThreeDots
+           موجودی شما:{weHaveData?<> {balance} گرم طلا</>:<ThreeDots
                         visible={true}
                         top="5"
                         height="10"
@@ -117,6 +117,8 @@ const SellinGold = () =>{
                flex 
                flex-col
                items-center
+               p-4
+
                my-5
                ">
                 <div className="
@@ -178,9 +180,11 @@ const SellinGold = () =>{
                         md:mt-12
                         ">
                         <div  className="
-                    md:w-[131px] 
+                    md:w-[131px]
+                    mt-5
+                    md:mt-0 
+                    w-full
                     h-[48px] 
-                    w-[29%] 
                     bg-[#D2AB67] 
                     rounded-xl
                     flex
@@ -258,8 +262,8 @@ const SellinGold = () =>{
                 ">
                     <button className="
                     md:w-[131px] 
+                    w-full
                     h-[48px] 
-                    w-[29%] 
                     bg-[#D2AB67] 
                     rounded-xl"
                     onClick={()=>{sell()}}> 

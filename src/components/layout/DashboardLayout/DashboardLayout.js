@@ -4,15 +4,19 @@ const DashboardLayout = ({children}) =>{
     return (
         <>
             <div className="
-                w-[1224px]
-                mx-auto
-                mt-28
-                flex
-                flex-row
-                justify-between
+            w-full   
+            max-w-7xl
+            mx-auto
+            mt-7
+            flex
+            flex-col 
+            md:flex-row 
+            md:justify-between
+            gap-8       
             ">
-                <SidebarDashboard/>
-                {children}
+
+            <SidebarDashboard />
+            {children}
             </div>
         </>
     )

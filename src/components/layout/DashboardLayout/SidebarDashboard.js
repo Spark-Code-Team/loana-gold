@@ -51,7 +51,7 @@ const SidebarDashboard = () => {
 
 
   return (
-    <div className="">
+    <div className="mx-3">
       <div
         className="
                h-[116px]
@@ -59,8 +59,9 @@ const SidebarDashboard = () => {
                rounded-xl
                border-[1px]
                border-[#DADADA]
-               w-72
+               w-full
                mb-6
+               m-auto
                flex
                justify-evenly
                items-center
@@ -96,7 +97,7 @@ const SidebarDashboard = () => {
 
     <aside
     className="
-    w-72 
+    w-full
     bg-white 
     border 
     border-[#DADADA] 
@@ -108,13 +109,21 @@ const SidebarDashboard = () => {
         <ul
           className="
       py-4
-      px-6
-      space-y-6
+      px-5
+      md:space-y-6
+      space-x-4   
+      md:space-x-0
+      flex        
+      md:block   
+      overflow-x-auto     
+      whitespace-nowrap   
+      scrollbar-hide      
       "
         >
           
           <li className="
-           p-2 
+           p-2
+           ml-5 
            rounded-lg 
            cursor-pointer
             hover:text-primary
@@ -133,7 +142,7 @@ const SidebarDashboard = () => {
           
           
 
-          <li>
+          <li className="ml-5 ">
             <button
               className="
                w-full 

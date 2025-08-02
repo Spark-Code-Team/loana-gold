@@ -47,7 +47,7 @@ const TransactionDashboardPage = () =>{
 
     return(
         <div className="
-         w-[912px] 
+         w-full 
          h-full
          bg-white
          border-[1px]
@@ -58,15 +58,24 @@ const TransactionDashboardPage = () =>{
          justify-center
          items-center
         ">
-             <DashboardLeft
-                title="تراکنش ها"
-            />
+
 
             <div className="
-            w-[848px]
+            w-full
             h-full
             mt-8
-            ">
+         mx-3
+         px-3
+            ">             
+            <p className="            
+            text-2xl
+            font-bold
+            border-b-[1px]
+            pr-7
+            pb-7
+            mb-7
+            border-[#CBCED7]
+            ">تراکنش ها</p>
                 <div>
 
                 {isLoading? <div className='mb-7' ><ThreeDots
@@ -77,34 +86,37 @@ const TransactionDashboardPage = () =>{
                       radius="9"
                       ariaLabel="three-dots-loading"
                       /></div> :<>  
-                      {transaction?
-                       <table className="w-full">
-                       <thead>
-                         <tr>
-                           <th className="p-3 border-b-[1px] border-[#EDEDED]">نوع تراکنش</th>
-                           <th className="p-3 border-b-[1px] border-[#EDEDED]">مبلغ</th>
-                           <th className="p-3 border-b-[1px] border-[#EDEDED]">شناسه تراکنش</th>
-                           <th className="p-3 border-b-[1px] border-[#EDEDED]">زمان تراکنش</th>
-                           <th className="p-3 border-b-[1px] border-[#EDEDED]"></th>
-                         </tr>
-                       </thead>
-                       <tbody>
-                         {transaction.map((transaction, index) => (
-                           <React.Fragment key={index}>
-                             <tr>
-                               <td className="p-3 text-center border-b-[1px] border-[#EDEDED]">{transaction.description}</td>
-                               <td className="p-3 text-center border-b-[1px] border-[#EDEDED]">{transaction.amount}</td>
-                               <td className="p-3 text-center border-b-[1px] border-[#EDEDED]">{transaction.id}</td>
-                               <td className="p-3 text-center border-b-[1px] border-[#EDEDED]">{convertToJalali(transaction.created_at)}</td>
-                               <td className="p-3 text-center border-b-[1px] border-[#EDEDED] ">
-                                 <button
-                                   
-                                 onClick={() => toggleAccordion(index)}>
-                                   {openIndex === index ? <UpArrow/> : <DownArrow/>}
-                                 </button>
-                               </td>
-                             </tr>
-                             {openIndex === index && (
+                     <div className="overflow-x-auto">
+  {transaction.length === 0 ? (
+    <p className="text-center p-4">تراکنشی وجود ندارد</p>
+  ) : (
+    <>
+      <table className="w-full hidden md:table">
+        <thead>
+          <tr>
+            <th className="p-3 border-b-[1px] border-[#EDEDED]">نوع تراکنش</th>
+            <th className="p-3 border-b-[1px] border-[#EDEDED]">مبلغ</th>
+            <th className="p-3 border-b-[1px] border-[#EDEDED]">شناسه تراکنش</th>
+            <th className="p-3 border-b-[1px] border-[#EDEDED]">زمان تراکنش</th>
+            <th className="p-3 border-b-[1px] border-[#EDEDED]"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {transaction.map((transaction, index) => (
+            <React.Fragment key={index}>
+              <tr>
+                <td className="p-3 text-center border-b-[1px] border-[#EDEDED]">{transaction.description}</td>
+                <td className="p-3 text-center border-b-[1px] border-[#EDEDED]">{transaction.amount}</td>
+                <td className="p-3 text-center border-b-[1px] border-[#EDEDED]">{transaction.id}</td>
+                <td className="p-3 text-center border-b-[1px] border-[#EDEDED]">{convertToJalali(transaction.created_at)}</td>
+                <td className="p-3 text-center border-b-[1px] border-[#EDEDED] ">
+                  <button 
+                    onClick={() => toggleAccordion(index)}>
+                    {openIndex === index ? <UpArrow/> : <DownArrow/>}
+                  </button>
+                </td>
+              </tr>
+              {openIndex === index && (
                               <tr className="bg-gray-50 transition-all">
                               <td colSpan="5" className="p-4 border-[#EDEDED] rounded-lg">
                                 <div className="grid grid-cols-3 gap-4">
@@ -127,10 +139,27 @@ const TransactionDashboardPage = () =>{
                               </td>
                             </tr>
                              )}
-                           </React.Fragment>
-                         ))}
-                       </tbody>
-                       </table>:<>تراکنشی وجود ندارد</>}
+            </React.Fragment>
+          ))}
+        </tbody>
+      </table>
+
+      <div className="md:hidden space-y-4">
+        {transaction.map((transaction, index) => (
+          <div key={index} className="border border-[#EDEDED] rounded-lg mb-7 p-4 shadow-sm">
+            <div>
+              <p className="mb-1"><strong>مبلغ:</strong> {transaction.amount} تومان</p>
+              <p className="mb-1"><strong>شناسه تراکنش:</strong> {transaction.id}</p>
+              <p className="mb-1"><strong>زمان تراکنش:</strong> {convertToJalali(transaction.created_at)}</p>
+              <p><strong>نوع پرداخت:</strong> {type(transaction.type)}</p>
+
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
+  )}
+</div>
                       </>
                      
                             }

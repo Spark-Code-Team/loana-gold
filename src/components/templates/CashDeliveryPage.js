@@ -15,7 +15,7 @@ const CashDeliveryPage = () =>{
 
 
         <div className="
-        w-[912px] 
+        w-full 
         h-full
         border 
         border-[#CBCED7] 
