@@ -3,44 +3,78 @@ import Image from "next/image";
 
 const OrdersDashboardPage = () => {
     return(
-        <div className="
-        w-[912px]
-        h-[1017px]
-        border-[1px]
-        border-[#CBCED7]
-        rounded-2xl
-        ">
+        <div 
+            className="
+               md:w-[912px]
+               mx-auto
+               w-[90%]
+               h-[1017px]
+               border-[1px]
+               border-[#CBCED7]
+               rounded-2xl
+            "
+        >
             
              <DashboardLeft
                 title="سفارش ها"
             />
 
-            <div className="
-            w-[910px]
-            h-[45px]
-            bg-[#FAFAFA]
-            pr-6
-            ">
-             <div className="
-             py-2
-            ">
+            <div 
+               className="
+                  md:w-[910px]
+                  md:h-[45px]
+                  bg-[#FAFAFA]
+                  pr-6
+                  md:overflow-auto
+                  overflow-x-scroll
+               "
+            >
+             <div 
+               className="
+                  py-2
+                  w-full
+               "
+            >
                 <ul className="
-                flex
-                flex-row
-                gap-x-8
+                  flex
+                  items-center
+                  flex-row
+                  gap-x-8
+                  justify-around
                 ">
-                    <li className="font-bold">
+                  <li 
+                     className="
+                        font-bold
+                        min-w-max
+                        cursor-pointer
+                     "
+                  >
                         مرتب سازی
-                    </li>
-                    <li>
-                        سفارش های اخیر 
-                    </li>
-                    <li>
-                        طلا اب شده 
-                    </li>
-                    <li>
-                        طلا ساخته شده 
-                    </li>
+                  </li>
+                  <li
+                     className="
+                        min-w-max
+                        cursor-pointer
+                     "
+                  >
+                     سفارش های اخیر 
+                  </li>
+                  <li
+                     className="
+                        min-w-max
+                        cursor-pointer
+                     "
+                  >
+                     طلا اب شده 
+                  </li>
+                  <li
+                     className="
+                        min-w-max
+                        cursor-pointer
+                     "
+                  >
+                     طلا ساخته شده 
+                  </li>
                 </ul>
 
              </div>
