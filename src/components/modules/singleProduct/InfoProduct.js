@@ -108,8 +108,13 @@ const InfoProduct = () => {
           </button>
           <button
             onClick={() => {
-              toast.success("خرید شما با موفقیت انجام شد");
-              router.push("/Shop");
+              if (profile.data.role) {
+                toast.success("خرید شما با موفقیت انجام شد");
+                router.push("/Shop");
+              } else {
+                toast.info("برای خرید ابتدا باید ورود کنید");
+                router.push("/Sign-in");
+              }
             }}
             className="bg-[#f0c884] hover:bg-[#D2AB67] rounded-lg px-4 h-12 transition-all"
           >
