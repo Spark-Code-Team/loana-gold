@@ -60,48 +60,53 @@ const Settled = () => {
             title="اقساط"
             />
 
-            <div className="
-            h-12
-            w-full
-            flex
-            flex-row
-            items-center
-            mt-5
-            mx-3
-            ">
-                <button  className={
-                     `
-                    w-[101]
-                    h-8
-                  ${installmentStatus === 'paid' ? 'bg-[#F6F6F6]':'bg-[#D1DDF1]'}
-                    rounded-xl
-                    mx-8
-                    text-sm
-                    font-bold`
-                }
-                onClick={()=>{setInstallmentStatus('unpaid')
-                    setIsLoading(true)}
-                }
-                >تسویه نشده
-                </button>
+<div className="
+  h-12
+  w-full
+  flex
+  flex-row
+  items-center
+  justify-center md:justify-start
+  mt-5
+  mx-3
+">
+  <button
+    className={`
+      w-[101px]
+      h-8
+      ${installmentStatus === 'paid' ? 'bg-[#F6F6F6]' : 'bg-[#D1DDF1]'}
+      rounded-xl
+      mx-4
+      text-sm
+      font-bold
+    `}
+    onClick={() => {
+      setInstallmentStatus('unpaid');
+      setIsLoading(true);
+    }}
+  >
+    تسویه نشده
+  </button>
 
-                <button className={
-                     `
-                    w-[101]
-                    h-8
-                  ${installmentStatus === 'paid' ? 'bg-[#D1DDF1]':'bg-[#F6F6F6]'}
-                    rounded-xl
-                    mx-8
-                    text-sm
-                    font-bold`
-                }
-                onClick={()=>{setInstallmentStatus('paid')
-                    setIsLoading(true)
-                }}
-                >تسویه شده
-                </button>
+  <button
+    className={`
+      w-[101px]
+      h-8
+      ${installmentStatus === 'paid' ? 'bg-[#D1DDF1]' : 'bg-[#F6F6F6]'}
+      rounded-xl
+      mx-4
+      text-sm
+      font-bold
+    `}
+    onClick={() => {
+      setInstallmentStatus('paid');
+      setIsLoading(true);
+    }}
+  >
+    تسویه شده
+  </button>
+</div>
 
-            </div>
 
 
             {isLoading? <div className='m-7' ><ThreeDots

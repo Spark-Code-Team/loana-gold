@@ -218,248 +218,107 @@ const Login = () => {
 
 
 
-            </div>
-
- 
-            <ModalPage isOpen={openModal == 1 ? true : false}>
-                <div className="
+        </div>
+            <ModalPage isOpen={openModal == 1}>
+            <div
+                className="
                 bg-white 
-                md:w-[664px] 
-                md:p-8 
+                w-full
+                max-w-[640px]
+                p-6 
+                md:p-8
                 rounded-xl 
                 md:shadow-lg
-                ">
-
-                    <div
-                        className='
-                        flex
-                        justify-between                        
-                        '
-                        >
-                        <Image
-                                    src="/images/ticksabz.png"
-                                    alt="sabz"
-                                    width={56}
-                                    height={56}
-                                    className="
-                                    w-14
-                                    h-14
-                                    bg-[#CCF1DD]
-                                    rounded-lg
-                                    "
-                                    />
-
-                        <button 
-                                onClick={()=>{setOpenModal(0)}}
-                                className="font-bold py-2 px-4 rounded text-xl flex items-center justify-center">
-                            <Close/>
-                        </button>
-
-                    </div>
-
-
-                    <div className="
-                    w-[600px]
-                    h-[270px]
-                    justify-center
+                "
+            >
+                <div
+                className="
                     flex
-                    flex-col
-                    items-right
-                    gap-y-5
-                    
-                    ">
-                        <p className="
-                        text-2xl
-                        md:text-base
-                        ">
-                        میزان اعتبار
-                        </p>
+                    justify-between
+                    items-center
+                    mb-4
+                "
+                >
+                <Image
+                    src="/images/ticksabz.png"
+                    alt="sabz"
+                    width={56}
+                    height={56}
+                    className="
+                    w-14
+                    h-14
+                    bg-[#CCF1DD]
+                    rounded-lg
+                    "
+                />
 
-                        <p className="
-                        text-xl
-                        md:text-base
-                        text-[#A6A6A6]">
-                            میزان اعتبار خود را تا {gradeCredit(profileStore.data.grade)} گرم طلا انتخاب کنید.
-                        </p>
-
-                        <div className="
-                        flex
-                        items-center
-                        w-full
-                        h-12
-                        rounded-xl
-                        border-[1px]
-                        boredr-[#E1E1E1]
-                        "
-                        >
-                        <input
-                        className="
-                        border-none
-                        focus:outline-none
-                        focus:ring-0
-                        focus:boredr-transparent
-                        rounded-xl
-                        w-[320px]
-                        "
-                        placeholder="0.1 گرم طلا"
-                        type="text"
-                        name="credit"  
-                        onChange={handleChange}
-                        value={credit}                        
-                        />
-                        </div>
-
-
-                    <div
-                        className='
-                        flex
-                        justify-around
-                        w-[100%]
-                        gap-12
-                    '
-                    >
-                    <button className="
-                        w-full
-                        h-12 
-                        bg-[#EDEDED] 
-                        rounded-xl 
-                        text-black
-                        hover:bg-primary
-                        hover:text-black
-                        text-xl
-                        "
-                        onClick={() => {
-                            if(credit){
-                                handleSubmitCredit()
-                            }
-                        }}
-                        >
-                            تایید و ادامه
-                        </button>
-
-                        <button className="
-                        w-full
-                        h-12 
-                        rounded-xl 
-                        border
-                        border-primary
-                        text-primary
-                        text-xl
-                        "
-                        onClick={() => {
-                            setOpenModal(0)
-                        }}
-                        >
-                            انصراف
-                        </button>
-
-                    </div>
-
-                    </div>
-
-
+                <button
+                    onClick={() => {
+                    setOpenModal(0);
+                    }}
+                    className="font-bold py-2 px-4 rounded text-xl flex items-center justify-center"
+                >
+                    <Close />
+                </button>
                 </div>
-            </ModalPage>
 
-            <ModalPage isOpen={openModal == 2 ? true : false} >
-                <div className="
-                bg-white 
-                md:w-[664px] 
-                md:p-8 
-                rounded-xl 
-                md:shadow-lg
-                ">
-
-                    <div
-                        className='
-                        flex
-                        justify-between                        
-                        '
-                        >
-                        <Image
-                                    src="/images/ticksabz.png"
-                                    alt="sabz"
-                                    width={56}
-                                    height={56}
-                                    className="
-                                    w-14
-                                    h-14
-                                    bg-[#CCF1DD]
-                                    rounded-lg
-                                    "
-                                    />
-
-                        <button 
-                                onClick={()=>{setOpenModal(0)}}
-                                className="font-bold py-2 px-4 rounded text-xl flex items-center justify-center">
-                            <Close/>
-                        </button>
-
-                    </div>
-
-
-                    <div className="
-                    w-[600px]
-                    h-[270px]
-                    justify-center
+                <div
+                className="
+                    w-full
                     flex
                     flex-col
-                    items-right
-                    gap-y-5
-                    
-                    ">
-                        <p className="
-                        text-2xl
-                        md:text-base
-                        ">
-                            اقساط
-                        </p>
+                    items-start
+                    gap-y-4
+                    md:gap-y-5
+                "
+                >
+                <p className="text-xl md:text-2xl">میزان اعتبار</p>
 
-                        <p className="
-                        text-xl
-                        md:text-base
-                        text-[#A6A6A6]">
-                            تعداد اقساط خود را انتخاب کنید.
-                        </p>
+                <p className="text-sm md:text-xl text-[#A6A6A6]">
+                    میزان اعتبار خود را تا {gradeCredit(profileStore.data.grade)} گرم طلا انتخاب کنید.
+                </p>
 
-                        <div className="
-                        flex
-                        items-center
-                        w-full
-                        h-12
-                        rounded-xl
-                        border-[1px]
-                        boredr-[#E1E1E1]
-                        "
-                        >
-                        <input
-                        className="
+                <div
+                    className="
+                    flex
+                    items-center
+                    w-full
+                    h-12
+                    rounded-xl
+                    border
+                    border-[#E1E1E1]
+                    "
+                >
+                    <input
+                    className="
                         border-none
                         focus:outline-none
                         focus:ring-0
-                        focus:boredr-transparent
                         rounded-xl
                         w-full
-                        
-                        "
-                        placeholder="حداکثر 6 قسط"
-                        type="text"
-                        name="installment"  
-                        onChange={handleChangeInstallment}
-                        value={installment}                        
-                        />
-                        </div>
+                        px-4
+                    "
+                    placeholder="0.1 گرم طلا"
+                    type="text"
+                    name="credit"
+                    onChange={handleChange}
+                    value={credit}
+                    />
+                </div>
 
-
-                    <div
-                        className='
-                        flex
-                        justify-around
-                        w-[100%]
-                        gap-12
-                    '
-                    >
-                    <button className="
+                <div
+                    className="
+                    flex
+                    flex-col
+                    md:flex-row
+                    justify-between
+                    gap-3
+                    md:gap-12
+                    w-full
+                    "
+                >
+                    <button
+                    className="
                         w-full
                         h-12 
                         bg-[#EDEDED] 
@@ -468,126 +327,141 @@ const Login = () => {
                         hover:bg-primary
                         hover:text-black
                         text-xl
-                        "
-                        onClick={() => {
-                            if(installment){
-                                handleSubmitInstallment()
-                            }
-                        }}
-                        >
-                            تایید و ادامه
-                        </button>
+                    "
+                    onClick={() => {
+                        if (credit) {
+                        handleSubmitCredit();
+                        }
+                    }}
+                    >
+                    تایید و ادامه
+                    </button>
 
-                        <button className="
+                    <button
+                    className="
                         w-full
                         h-12 
                         rounded-xl 
                         border
+                        mt-3
+                        md:mt-0
+                        md:mr-3
                         border-primary
                         text-primary
                         text-xl
-                        "
-                        onClick={() => {
-                            setOpenModal(0)
-                        }}
-                        >
-                            انصراف
-                        </button>
-
-                    </div>
-
-                    </div>
-
-
-                </div>  
+                    "
+                    onClick={() => {
+                        setOpenModal(0);
+                    }}
+                    >
+                    انصراف
+                    </button>
+                </div>
+                </div>
+            </div>
             </ModalPage>
 
-            <ModalPage isOpen={openModal == 3 ? true : false}>
-                                <div className="
+
+            <ModalPage isOpen={openModal == 2}>
+            <div
+                className="
                 bg-white 
-                md:w-[664px] 
+                w-full
+                max-w-[664px]
+                p-6
                 md:p-8 
                 rounded-xl 
                 md:shadow-lg
-                ">
+                "
+            >
+                <div
+                className="
+                    flex
+                    justify-between
+                    items-center
+                    mb-4
+                "
+                >
+                <Image
+                    src="/images/ticksabz.png"
+                    alt="sabz"
+                    width={56}
+                    height={56}
+                    className="
+                    w-14
+                    h-14
+                    bg-[#CCF1DD]
+                    rounded-lg
+                    "
+                />
 
-                    <div
-                        className='
-                        flex
-                        justify-between                        
-                        '
-                        >
-                        <Image
-                                    src="/images/ticksabz.png"
-                                    alt="sabz"
-                                    width={56}
-                                    height={56}
-                                    className="
-                                    w-14
-                                    h-14
-                                    bg-[#CCF1DD]
-                                    rounded-lg
-                                    "
-                                    />
+                <button
+                    onClick={() => {
+                    setOpenModal(0);
+                    }}
+                    className="font-bold py-2 px-4 rounded text-xl flex items-center justify-center"
+                >
+                    <Close />
+                </button>
+                </div>
 
-                        <button 
-                                onClick={()=>{setOpenModal(0)}}
-                                className="font-bold py-2 px-4 rounded text-xl flex items-center justify-center">
-                            <Close/>
-                        </button>
-
-                    </div>
-
-
-                    <div className="
-                    w-[600px]
-                    h-[270px]
-                    justify-center
+                <div
+                className="
+                    w-full
                     flex
                     flex-col
-                    items-right
-                    gap-y-5
-                    
-                    ">
-                        <p className="
-                        text-3xl
-                        md:text-base
-                        ">
-                           <h2>قوانین و مقررات</h2> 
-                        </p>
+                    items-start
+                    gap-y-4
+                    md:gap-y-5
+                "
+                >
+                <p className="text-xl md:text-2xl">اقساط</p>
 
-                        <p className="
-                        text-xl
-                        md:text-base
-                        text-[#1E1E1E]">
-                            <li>در صورت دریافت اعتبار قسط اول نقدی پرداخت میشود.</li>
-                            <li>در صورت عدم پرداخت جریمه به اقصاط اضافه میشود.</li>
-                            <li>در صورت دریافت اعتبار قسط اول نقدی پرداخت میشود.</li>
-                            <li>در صورت عدم پرداخت جریمه به اقصاط اضافه میشود.</li>
-                            <li>در صورت دریافت اعتبار قسط اول نقدی پرداخت میشود.</li>
-                            <li>در صورت عدم پرداخت جریمه به اقصاط اضافه میشود.</li>
-                        </p>
+                <p className="text-sm md:text-xl text-[#A6A6A6]">
+                    تعداد اقساط خود را انتخاب کنید.
+                </p>
 
-                        <label>
-                          <input 
-                            type="checkbox"
-                            id="termsCheckbox" 
-                            onChange={handleCheckboxChange}/>
-                          شرایط و قوانین را می‌پذیرم.
-                        </label>
+                <div
+                    className="
+                    flex
+                    items-center
+                    w-full
+                    h-12
+                    rounded-xl
+                    border
+                    border-[#E1E1E1]
+                    "
+                >
+                    <input
+                    className="
+                        border-none
+                        focus:outline-none
+                        focus:ring-0
+                        rounded-xl
+                        w-full
+                        px-4
+                    "
+                    placeholder="حداکثر 6 قسط"
+                    type="text"
+                    name="installment"
+                    onChange={handleChangeInstallment}
+                    value={installment}
+                    />
+                </div>
 
-
-
-                        
-                    <div
-                        className='
-                        flex
-                        justify-around
-                        w-[100%]
-                        gap-12
-                    '
-                    >
-                    <button className="
+                <div
+                    className="
+                    flex
+                    flex-col
+                    md:flex-row
+                    justify-between
+                    gap-3
+                    md:gap-12
+                    w-full
+                    "
+                >
+                    <button
+                    className="
                         w-full
                         h-12 
                         bg-[#EDEDED] 
@@ -596,42 +470,169 @@ const Login = () => {
                         hover:bg-primary
                         hover:text-black
                         text-xl
-                        "
-                        onClick={() => {
-                            if(isAccepted){
-                                handleSubmitData()
-                            }
-                        }}
-                        >
-                            پرداخت پیش قسط
-                        </button>
+                    "
+                    onClick={() => {
+                        if (installment) {
+                        handleSubmitInstallment();
+                        }
+                    }}
+                    >
+                    تایید و ادامه
+                    </button>
 
-                        <button className="
+                    <button
+                    className="
                         w-full
                         h-12 
                         rounded-xl 
                         border
+                        mt-3
+                        md:mt-0
+                        md:mr-3
                         border-primary
                         text-primary
                         text-xl
-                        "
-                        onClick={() => {
-                            setOpenModal(0)
-                        }}
-                        >
-                            انصراف
-                        </button>
-
-                    </div>
-
-                    </div>
-
-
-                </div> 
+                    "
+                    onClick={() => {
+                        setOpenModal(0);
+                    }}
+                    >
+                    انصراف
+                    </button>
+                </div>
+                </div>
+            </div>
             </ModalPage>
 
 
+            <ModalPage isOpen={openModal == 3}>
+            <div
+                className="
+                bg-white 
+                w-full
+                max-w-[664px]
+                p-6
+                md:p-8 
+                rounded-xl 
+                md:shadow-lg
+                "
+            >
+                <div
+                className="
+                    flex
+                    justify-between
+                    items-center
+                    mb-4
+                "
+                >
+                <Image
+                    src="/images/ticksabz.png"
+                    alt="sabz"
+                    width={56}
+                    height={56}
+                    className="
+                    w-14
+                    h-14
+                    bg-[#CCF1DD]
+                    rounded-lg
+                    "
+                />
 
+                <button
+                    onClick={() => {
+                    setOpenModal(0);
+                    }}
+                    className="font-bold py-2 px-4 rounded text-xl flex items-center justify-center"
+                >
+                    <Close />
+                </button>
+                </div>
+
+                <div
+                className="
+                    w-full
+                    flex
+                    flex-col
+                    items-start
+                    gap-y-4
+                    md:gap-y-5
+                "
+                >
+                <h2 className="text-xl md:text-3xl font-semibold">قوانین و مقررات</h2>
+
+                <ul className="text-sm md:text-xl text-[#1E1E1E] list-disc pr-5 space-y-1">
+                    <li>در صورت دریافت اعتبار قسط اول نقدی پرداخت میشود.</li>
+                    <li>در صورت عدم پرداخت جریمه به اقساط اضافه میشود.</li>
+                    <li>در صورت دریافت اعتبار قسط اول نقدی پرداخت میشود.</li>
+                    <li>در صورت عدم پرداخت جریمه به اقساط اضافه میشود.</li>
+                    <li>در صورت دریافت اعتبار قسط اول نقدی پرداخت میشود.</li>
+                    <li>در صورت عدم پرداخت جریمه به اقساط اضافه میشود.</li>
+                </ul>
+
+                <label className="flex items-center gap-2 text-sm md:text-base mt-2">
+                    <input
+                    type="checkbox"
+                    id="termsCheckbox"
+                    onChange={handleCheckboxChange}
+                    />
+                    شرایط و قوانین را می‌پذیرم.
+                </label>
+
+                <div
+                    className="
+                    flex
+                    flex-col
+                    md:flex-row
+                    justify-between
+                    gap-3
+                    md:gap-12
+                    w-full
+                    mt-4
+                    "
+                >
+                    <button
+                    className="
+                        w-full
+                        h-12 
+                        bg-[#EDEDED] 
+                        rounded-xl 
+                        text-black
+                        hover:bg-primary
+                        hover:text-black
+                        text-xl
+                    "
+                    onClick={() => {
+                        if (isAccepted) {
+                        handleSubmitData();
+                        }
+                    }}
+                    >
+                    پرداخت پیش قسط
+                    </button>
+
+                    <button
+                    className="
+                        w-full
+                        h-12 
+                        rounded-xl 
+                        border
+                        mt-3
+                        md:mt-0
+                        md:mr-3
+                        border-primary
+                        text-primary
+                        text-xl
+                    "
+                    onClick={() => {
+                        setOpenModal(0);
+                    }}
+                    >
+                    انصراف
+                    </button>
+                </div>
+                </div>
+            </div>
+            </ModalPage>
         </div>
 
     )

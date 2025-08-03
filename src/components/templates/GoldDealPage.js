@@ -29,39 +29,40 @@ const GoldDealPage = () =>{
             flex
             flex-row
             items-center
+            justify-center md:justify-start
             mt-5
             ">
-                <button className={`
-                w-[101]
+            <button
+                className={`
+                w-[101px]
                 h-8
-                bg-[#F6F6F6]
                 rounded-xl
-                mx-8
+                mx-4
                 text-sm
                 font-bold
-                ${activeTab === "buyingGold"? "bg-slate-300" :"bg-gray-100"}
+                ${activeTab === "buyingGold" ? "bg-slate-300" : "bg-gray-100"}
                 `}
-                onClick={()=>setactiveTab("buyingGold")}
-                > 
+                onClick={() => setactiveTab("buyingGold")}
+            >
                 خرید
-                </button>
+            </button>
 
-                <button className={`
-                w-[101]
+            <button
+                className={`
+                w-[101px]
                 h-8
-                bg-[#D1DDF1]
                 rounded-xl
-                md:mx-6
+                mx-4 md:mx-6
                 text-sm
                 font-bold
-                ${activeTab === "sellingGold" ? "bg-slate-300" :"bg-gray-100"}
+                ${activeTab === "sellingGold" ? "bg-slate-300" : "bg-gray-100"}
                 `}
-                onClick={()=>setactiveTab("sellingGold")}
-                > 
+                onClick={() => setactiveTab("sellingGold")}
+            >
                 فروش
-                </button>
-
+            </button>
         </div>
+
 
         {activeTab === "buyingGold" ? <BuyingGold/>:<SellinGold/>}
 

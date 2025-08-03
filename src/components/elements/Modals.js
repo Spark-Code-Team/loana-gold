@@ -1,4 +1,3 @@
-
 const ModalPage = ({ isOpen , children}) => {
     return(
         <div className={`

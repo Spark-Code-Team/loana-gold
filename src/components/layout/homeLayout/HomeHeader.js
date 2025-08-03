@@ -55,6 +55,9 @@ const HomeHeader = () => {
         else if(error.response.data.Error[0]=='شما هم اکنون یک درخواست اعتبار در حال بررسی دارید.'){
             toast.error(error.response.data.Error[0])
         }
+        else if(error.response.data.Error[0]=='هنوز گرید دریافتی خود را تایید نکرده اید'){
+            toast.error(error.response.data.Error[0])
+        }
         else{
             setIsPayModalOpen(true);
         }
