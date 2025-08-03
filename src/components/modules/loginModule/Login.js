@@ -139,7 +139,7 @@ const Login = () => {
             <div className='border-b pb-2'>
                 <div className="w-full px-2 font-bold mx-1 text-right mt-6">نتیجه اعتبار سنجی</div>
 
-                <div className="w-full px-2 mt-6 mx-1 text-right  ">نتیجه اعتبار سنجی : امکان دریافت اعتبار تا {gradeCredit(p?.grade)} گرم طلا</div>
+                <div className="w-full px-2 mt-6 mx-1 text-right  ">نتیجه اعتبار سنجی : امکان دریافت اعتبار تا {p?.max_amount} گرم طلا</div>
 
                 <div className="w-full px-2 mt-6 mx-1 text-right ">تاریخ ثبت : {gradeAchivedAt(p?.achieved_at)}</div>
 
@@ -177,7 +177,7 @@ const Login = () => {
   
   <div className="flex flex-col md:flex-row md:flex-wrap md:justify-around gap-4 md:gap-0">
     <span className="w-full md:w-auto mb-[12px] mx-1 text-right">
-      نتیجه اعتبار سنجی: امکان دریافت اعتبار تا {gradeCredit(p.grade)} گرم طلا
+      نتیجه اعتبار سنجی: امکان دریافت اعتبار تا {p?.max_amount} گرم طلا
     </span>
     <span className="w-full md:w-auto mb-[12px] mx-1 text-right">
       تاریخ درخواست: {convertToJalali(p.achieved_at)}

@@ -67,7 +67,7 @@ const AddressesList = () => {
     <>
 
 
-            <div
+            {/* <div
               key={address.id}
               className="
               md:w-[808px] 
@@ -145,7 +145,94 @@ const AddressesList = () => {
               </div>
 
         
-            </div>
+            </div> */}
+            <div
+  key={address.id}
+  className="
+    w-full
+    max-w-[808px]
+    border
+    border-[#CBCBCB]
+    rounded-2xl 
+    my-2
+    px-4
+    py-6
+  "
+>
+  <div
+    className="
+      flex 
+      flex-col 
+      md:flex-row 
+      justify-center
+      items-center 
+      gap-6
+    "
+  >
+    <Image
+      src="/images/mapbuy.png"
+      alt="map"
+      width={351}
+      height={220}
+      className="w-full max-w-[351px] h-auto"
+    />
+
+    <div className="w-full max-w-[304px] leading-8 text-right">
+      <p>
+        {`${address.province}, ${address.city}, پلاک ${address.number}, واحد ${address.vahed}`}
+      </p>
+      <p className="text-[#606060]">کد پستی: {address.postal_code}</p>
+      <p className="text-[#606060] hidden">ID: {address.id}</p>
+
+      <div
+        className="
+          flex 
+          flex-col 
+          md:flex-row 
+          items-center 
+          md:justify-start 
+          gap-3
+          mt-8
+        "
+      >
+        <button
+          className="
+            border 
+            border-primary 
+            text-primary 
+            rounded-xl 
+            px-6
+            py-1.5
+            w-full 
+            md:w-auto
+            text-center
+          "
+          onClick={() => setShowEditForm((prev) => !prev)}
+        >
+          {showEditForm ? " بستن فرم ویرایش " : " ویرایش "}
+        </button>
+
+        <button
+          className="
+            border 
+            border-primary 
+            text-primary 
+            rounded-xl 
+            px-6
+            py-1.5
+            w-full 
+            md:w-auto
+            text-center
+          "
+          onClick={() => handleDelete(address.id)}
+        >
+          حذف
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
             {showEditForm && (
             <div className=" 

@@ -58,7 +58,7 @@ const HomeHeader = () => {
         else if(error.response.data.Error[0]=='هنوز گرید دریافتی خود را تایید نکرده اید'){
             toast.error(error.response.data.Error[0])
         }
-        else{
+        else if(error.response.data.Error[0]=='برای انجام درخواست اعتبار جدید باید مبلغ 50,000 تومان واریز کنید'){
             setIsPayModalOpen(true);
         }
 

@@ -262,7 +262,7 @@ const router = useRouter()
                         "
                     >
                         <Image src="/images/vector.png" alt="vector" width={26} height={18} />
-                        <p>قیمت لحظه ای خرید هر گرم طلای 18 عیار: 7,140,000 تومان</p>
+                        <p>قیمت لحظه ای خرید هر گرم طلای 18 عیار: 7,380,000 تومان</p>
                     </div>
                 </div>
 

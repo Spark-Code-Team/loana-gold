@@ -12,6 +12,7 @@ import HomeChart from "../homepage/OnlineChartt";
 const SellinGold = () =>{
 
     const [balance , setBalance] = useState()
+    const [blocked , setBlocked] = useState()
 
     const [sellGold, setSellGold] = useState({
         amount: "",
@@ -29,6 +30,7 @@ const SellinGold = () =>{
             const {response , error} = await walletBalance()
             if (response) {
                 setBalance(response.data.gold.amount)
+                setBlocked(response.data.gold.blocked_amount)
                 setWeHaveData(true)
             }else{
                 console.log(error)
@@ -88,6 +90,7 @@ const SellinGold = () =>{
                items-center 
                mt-5
                ">
+                <div>
                 <p className="
                  pt-2
                  flex 
@@ -110,6 +113,30 @@ const SellinGold = () =>{
                         wrapperClass=""
                     />}
                 </p>
+                </div>
+<div>                <p className="
+                 pt-2
+                 flex 
+                 justify-center
+                 items-center
+                 min-h-[40px]
+                 min-w-[100px]
+                 text-lg
+                 mr-8
+                 ">
+           موجودی توسیخ شده شما:{weHaveData?<> {blocked} گرم طلا</>:<ThreeDots
+                        visible={true}
+                        top="5"
+                        height="10"
+                        width="80"
+                        color="primary"
+                        radius="9"
+                        ariaLabel="three-dots-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                    />}
+                </p></div>
+
             </div>
         
             <div className="
@@ -250,7 +277,7 @@ const SellinGold = () =>{
                         "
                     >
                         <Image src="/images/vector.png" alt="vector" width={26} height={18} />
-                        <p>قیمت لحظه ای خرید هر گرم طلای 18 عیار: 7,140,000 تومان</p>
+                        <p>قیمت لحظه ای خرید هر گرم طلای 18 عیار: 7,380,000 تومان</p>
                     </div>
                 </div>
         

@@ -66,7 +66,7 @@ const OnlineCalculation = () => {
 
                     <div className="w-full flex gap-x-3 items-center mt-6 md:text-base text-sm">
                         <Image src="/images/vector.png" alt="" width={26} height={18}/>
-                        <p>قیمت لحظه ای خرید هر گرم طلای 15 عیار: 5,340,000 تومان</p>
+                        <p>قیمت لحظه ای خرید هر گرم طلای 15 عیار: 7,380,000 تومان</p>
                     </div>
 
                     <div className="md:w-full md:mt-14 w-full mt-12">

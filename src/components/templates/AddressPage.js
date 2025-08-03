@@ -4,7 +4,8 @@ const AddressPage = () =>{
     return(
       <div className="
       w-full
-      pr-16
+      md:pr-16
+      px-4
       ">
       <AddressesList/> 
       </div>

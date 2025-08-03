@@ -42,13 +42,15 @@ const AddNewAddress = () =>{
        
         <div className="
         flex
-        flex-row
+        md:flex-row
+        flex-col
         mt-2
         mb-40
         ">
 
             <div className="
-            w-[808px]
+            md:w-[808px]
+            w-full
             h-[829px]
             ">
                 <p>
@@ -56,14 +58,18 @@ const AddNewAddress = () =>{
                 </p>
                 
                 <div className="
-                w-[808px]
-                h-[350px]
+                md:w-[808px]
+                w-full
+                h-max
+                py-2
                 rounded-xl
                 border-[1px]
                 border-[#DADADA]
                 mt-4
                 grid
-                grid-cols-2
+                grid-cols-1
+                gap-2
+                md:grid-cols-2
                 place-items-center
                 items-center
                 ">
@@ -188,45 +194,44 @@ const AddNewAddress = () =>{
                 // onChange={(e) => setData(prev => ({...prev,codeposti:e.target.value}))}
                 /> */}
 
-                <input
-                className="
-                focus:outline-none
-                focus:ring-0
-                focus:boredr-transparent
-                md:w-[376px] w-80
-                h-12
-                text-xl
-                md:text-base
-                rounded-xl
-                border-[1px]
-                border-[#E1E1E1]
-                "
-                placeholder="مختصات"
-                type="text"
-                name="firstname"
-                value={data.mokhtasad1}
-                onChange={(e) => setData(prev => ({...prev,mokhtasad1:e.target.value}))}
-                />
+<input
+    className="
+    md:w-[376px] w-80
+    h-12
+    text-xl
+    md:text-base
+    rounded-xl
+    border-[1px]
+    border-[#E1E1E1]
+    "
+    placeholder="عرض جغرافیایی"
+    type="text"
+    name="firstname"
+    value={data.mokhtasad1}
+    onChange={(e) => {
+        const val = e.target.value;
+        // فقط اجازه وارد کردن 0 تا 3 رقم عدد صحیح
+        if (/^\d{0,3}$/.test(val)) {
+            setData(prev => ({ ...prev, mokhtasad1: val }));
+        }
+    }}
+    pattern="\d{3}"
+/>
 
-                <input
-                className="
-                focus:outline-none
-                focus:ring-0
-                focus:boredr-transparent
-                md:w-[376px] w-80
-                h-12
-                text-xl
-                md:text-base
-                rounded-xl
-                border-[1px]
-                border-[#E1E1E1]
-                "
-                placeholder=" mokhtasat2"
-                type="text"
-                name="firstname"
-                value={data.mokhtasad2}
-                onChange={(e) => setData(prev => ({...prev,mokhtasad2:e.target.value}))}
-                />
+<input
+    className="md:w-[376px] w-80 h-12 text-xl md:text-base rounded-xl border-[1px] border-[#E1E1E1]"
+    placeholder="طول جغرافیایی"
+    type="text"
+    name="firstname"
+    value={data.mokhtasad2}
+    onChange={(e) => {
+        const val = e.target.value;
+        if (/^\d{0,3}$/.test(val)) {  // تنها اجازه می‌دهد صفر تا سه رقم وارد شود
+            setData(prev => ({ ...prev, mokhtasad2: val }));
+        }
+    }}
+    pattern="\d{3}"
+/>
 
                 {/* <input
                 className="
@@ -260,7 +265,8 @@ const AddNewAddress = () =>{
 
                 <div className="mt-8">
                     <button className="
-                    w-[808px]
+                    md:w-[808px]
+                    w-full
                     h-12
                     bg-primary
                     rounded-xl
