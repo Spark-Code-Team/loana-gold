@@ -124,7 +124,7 @@ const SellinGold = () =>{
                  text-lg
                  mr-8
                  ">
-           موجودی توسیخ شده شما:{weHaveData?<> {blocked} گرم طلا</>:<ThreeDots
+           موجودی توثیق شده شما:{weHaveData?<> {blocked} گرم طلا</>:<ThreeDots
                         visible={true}
                         top="5"
                         height="10"
